@@ -1,0 +1,39 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Biological Applications of Generating Functions
+    numbered: True
+    chapters:
+    - file: notebooks/GaltonWatson/GaltWat
+      sections:
+      - file: notebooks/GaltonWatson/GaltWatExtinct
+      - file: notebooks/GaltonWatson/GaltWatDiff
+      - file: notebooks/GaltonWatson/GaltWatExtinctByGen
+      - file: notebooks/GaltonWatson/GaltWatSizeOverTime
+      - file: notebooks/GaltonWatson/GaltWatTotalSize
+  - caption: Mathematical Properties of Generating Functions
+    numbered: True
+    chapters:
+    - file: notebooks/BasicGenFxn/GenFxns
+      sections: 
+      - file: notebooks/BasicGenFxn/GenFxnsParadigm
+      - file: notebooks/BasicGenFxn/GenFxnsExamples
+      - file: notebooks/BasicGenFxn/GenFxnsDiff
+      - file: notebooks/BasicGenFxn/GenFxnsAdd
+      - file: notebooks/BasicGenFxn/GenFxnsMult
+      - file: notebooks/BasicGenFxn/GenFxnsComp
+      - file: notebooks/BasicGenFxn/GenFxnsProperties
+      
+      
+      
+      
+      
+      
+    
+    
+    #- file: notebooks/BasicGenFxn/GenFxnsPartFrac
+    #- file: notebooks/BasicGenFxn/PGFIntro
+
