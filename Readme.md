@@ -10,6 +10,13 @@ Their purpose is to introduce students to
 - basic concepts of birth death processes, primarily related to invasive biological systems (infectious disease, invasive species, cancer, within-host pathogens)
 - Applications of PGFs to the study of birth-death processes
 
+Currently, these notes consist of one chapter on "Galton-Watson" processes and one chapter on properties of PGFs.  To read it, you will need to alternate between the two chapters.
+
+I will add more chapters with other biological applications.  I may yet reorder the sections so that the mathematics and the applications alternate, rather than keeping them separate but forcing the reader to alternate between chapters.
+
+The notes are available at
+ https://joel-miller-lab.github.io/AMSI2026_PGF/
+ 
 ## Author
 Joel C Miller
 joel.miller@latrobe.edu.au
