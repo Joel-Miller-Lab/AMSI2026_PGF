@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.5. Differentiation and the Galton Watson Process &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.4. Differentiation and the Galton Watson Process &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/GaltonWatson/GaltWatDiff';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.6. Extinction probability over time" href="GaltWatExtinctByGen.html" />
+    <link rel="next" title="1.5. Extinction probability over time" href="GaltWatExtinctByGen.html" />
     <link rel="prev" title="1.3. Extinction of a Galton-Watson Process" href="GaltWatExtinct.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -192,10 +192,9 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="GaltWat.html">1. The Galton-Watson Process</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GaltWatSimulation.html">1.2. Simulation of a Galton-Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GaltWatExtinct.html">1.3. Extinction of a Galton-Watson Process</a></li>
-
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.5. Differentiation and the Galton Watson Process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GaltWatExtinctByGen.html">1.6. Extinction probability over time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GaltWatSizeOverTime.html">1.7. Size Distribution at successive times</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.4. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GaltWatExtinctByGen.html">1.5. Extinction probability over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GaltWatSizeOverTime.html">1.6. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">2. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -412,7 +411,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.5.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.4.1. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -425,7 +424,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="differentiation-and-the-galton-watson-process">
-<h1><span class="section-number">1.5. </span>Differentiation and the Galton Watson Process<a class="headerlink" href="#differentiation-and-the-galton-watson-process" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">1.4. </span>Differentiation and the Galton Watson Process<a class="headerlink" href="#differentiation-and-the-galton-watson-process" title="Link to this heading">#</a></h1>
 <p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html#sec-genfxnsdiff"><span class="std std-numref">Section 3.3</span></a> prior to reading this section.</p>
 <p>Consider A Galton-Watson process.  Let <span class="math notranslate nohighlight">\(\mu(x)\)</span> be the PGF of the offspring distribution. We have learned that the extinction probability <span class="math notranslate nohighlight">\(\alpha\)</span> is a solution to the equation <span class="math notranslate nohighlight">\(x = \mu(x)\)</span>.</p>
 <p>In the plots given in  <a class="reference internal" href="GaltWatExtinct.html#sec-galtwatextinct"><span class="std std-numref">Section 1.3</span></a>, we saw two solutions to <span class="math notranslate nohighlight">\(x=\mu(x)\)</span>.  One was between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> and another was equal to <span class="math notranslate nohighlight">\(1\)</span>.  We will learn later that if there is a solution <span class="math notranslate nohighlight">\(x_0\)</span> with <span class="math notranslate nohighlight">\(x_0 = \mu(x_0)\)</span> and <span class="math notranslate nohighlight">\(0\leq x_0 &lt;1\)</span>, that will be the correct solution for <span class="math notranslate nohighlight">\(\alpha\)</span>.  Otherwise, <span class="math notranslate nohighlight">\(\alpha=1\)</span> will be the correct solution.</p>
@@ -481,7 +480,7 @@ document.write(`
 </div><p>In the case of long-term persistence, we typically see exponential growth.</p>
 <p>As presented, the theorem did not address <span class="math notranslate nohighlight">\(\mu'(1)=1\)</span>.  It is possible to handle this possibility.  We need to separate it into two cases: <span class="math notranslate nohighlight">\(\mu(x)=x\)</span> and <span class="math notranslate nohighlight">\(\mu(x) \neq x\)</span>. If <span class="math notranslate nohighlight">\(\mu(x)=x\)</span>, then long-term persistence is guaranteed.  If <span class="math notranslate nohighlight">\(\mu'(1)=1\)</span> and <span class="math notranslate nohighlight">\(\mu(x) \neq x\)</span>, then extinction is guaranteed (but it may take a very long time).</p>
 <section id="self-test">
-<h2><span class="section-number">1.5.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.4.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Explain why <span class="math notranslate nohighlight">\(\mu(0)=0\)</span> is equivalent to <span class="math notranslate nohighlight">\(p_0=0\)</span>.  If <span class="math notranslate nohighlight">\(p_0=0\)</span>, explain why long-term persistence of a Galton-Watson process is guaranteed.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(\mu(x)\)</span> is a PGF and <span class="math notranslate nohighlight">\(\mu'(1)=1\)</span> and <span class="math notranslate nohighlight">\(\mu(x)\)</span> is not the function <span class="math notranslate nohighlight">\(y=x\)</span>, explain why <span class="math notranslate nohighlight">\(\mu'(x)&lt;1\)</span> for any <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\((0,1)\)</span>.  Repeat the argument in the text to explain why <span class="math notranslate nohighlight">\(\alpha=1\)</span> is the only possible solution for the long-term extinction probability.</p></li>
@@ -533,7 +532,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.6. </span>Extinction probability over time</p>
+        <p class="prev-next-title"><span class="section-number">1.5. </span>Extinction probability over time</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -553,7 +552,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.5.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.4.1. Self-test</a></li>
 </ul>
   </nav></div>
 

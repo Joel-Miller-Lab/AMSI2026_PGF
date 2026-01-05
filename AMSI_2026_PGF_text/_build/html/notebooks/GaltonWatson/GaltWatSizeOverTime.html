@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.7. Size Distribution at successive times &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.6. Size Distribution at successive times &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="2. Infectious Diseases" href="../InfDis/InfDisIntro.html" />
-    <link rel="prev" title="1.6. Extinction probability over time" href="GaltWatExtinctByGen.html" />
+    <link rel="prev" title="1.5. Extinction probability over time" href="GaltWatExtinctByGen.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -192,10 +192,9 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="GaltWat.html">1. The Galton-Watson Process</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GaltWatSimulation.html">1.2. Simulation of a Galton-Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GaltWatExtinct.html">1.3. Extinction of a Galton-Watson Process</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="GaltWatDiff.html">1.5. Differentiation and the Galton Watson Process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GaltWatExtinctByGen.html">1.6. Extinction probability over time</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.7. Size Distribution at successive times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GaltWatDiff.html">1.4. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GaltWatExtinctByGen.html">1.5. Extinction probability over time</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.6. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">2. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -412,8 +411,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size-of-a-galton-watson-process-at-generation-g">1.7.1. Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.7.2. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size-of-a-galton-watson-process-at-generation-g">1.6.1. Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.6.2. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -426,7 +425,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="size-distribution-at-successive-times">
-<h1><span class="section-number">1.7. </span>Size Distribution at successive times<a class="headerlink" href="#size-distribution-at-successive-times" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">1.6. </span>Size Distribution at successive times<a class="headerlink" href="#size-distribution-at-successive-times" title="Link to this heading">#</a></h1>
 <p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html#sec-genfxnlinearcomb"><span class="std std-numref">Section 3.4</span></a>, <a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html#sec-genfxnmult"><span class="std std-numref">Section 3.5</span></a>, and <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#sec-genfxncomp"><span class="std std-numref">Section 3.6</span></a> before reading this section.</p>
 <p>The major result we rely on in thiss section is that if <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> are both PGFs, then <span class="math notranslate nohighlight">\(\psi(x) = \mu_1(\mu_2(x))\)</span> is the PGF for the following process:
 First we choose <span class="math notranslate nohighlight">\(k\)</span> from the distribution of <span class="math notranslate nohighlight">\(\mu_1\)</span>.  Then we choose <span class="math notranslate nohighlight">\(k\)</span> numbers from the distribution of <span class="math notranslate nohighlight">\(\mu_2\)</span> and add them together.</p>
@@ -464,7 +463,7 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
 </figcaption>
 </figure>
 <section id="expected-size-of-a-galton-watson-process-at-generation-g">
-<h2><span class="section-number">1.7.1. </span>Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span><a class="headerlink" href="#expected-size-of-a-galton-watson-process-at-generation-g" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.6.1. </span>Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span><a class="headerlink" href="#expected-size-of-a-galton-watson-process-at-generation-g" title="Link to this heading">#</a></h2>
 <p>We have seen that the size of a Galton Watson process at generation <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(X_g\)</span> has PGF <span class="math notranslate nohighlight">\(\mu^{(g)}(x) = \mu(\mu^{(g-1)}(x))\)</span>.  The average size at generation <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}[X_g]\)</span> is given for <span class="math notranslate nohighlight">\(g&gt;1\)</span> by</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -488,7 +487,7 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
 </div><p>The proof is given as an exercise.</p>
 </section>
 <section id="self-test">
-<h2><span class="section-number">1.7.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.6.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Use <a class="reference internal" href="#theorem-GW-size-by-generation">Theorem 1.3</a> to show that the probability of extinction after <span class="math notranslate nohighlight">\(g\)</span> generations is <span class="math notranslate nohighlight">\(\mu^{(g)}(0)\)</span>.</p></li>
 <li><p>Use proof by induction to show that the expected size of generation <span class="math notranslate nohighlight">\(g\)</span> is <span class="math notranslate nohighlight">\([\mu'(1)]^g\)</span>.</p></li>
@@ -534,7 +533,7 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.6. </span>Extinction probability over time</p>
+        <p class="prev-next-title"><span class="section-number">1.5. </span>Extinction probability over time</p>
       </div>
     </a>
     <a class="right-next"
@@ -562,8 +561,8 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size-of-a-galton-watson-process-at-generation-g">1.7.1. Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.7.2. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size-of-a-galton-watson-process-at-generation-g">1.6.1. Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.6.2. Self-test</a></li>
 </ul>
   </nav></div>
 
