@@ -8,7 +8,7 @@ parts:
     numbered: False 
     chapters:
     - file: notebooks/Prerequisites
-    - file: notebooks/theorems
+    - file: theorems
 
   - caption: Biological Applications of Generating Functions
     numbered: True

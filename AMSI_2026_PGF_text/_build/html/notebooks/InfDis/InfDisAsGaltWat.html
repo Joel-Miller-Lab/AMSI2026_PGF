@@ -185,7 +185,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theorems.html">List of Theorems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
 <ul class="current nav bd-sidenav">
@@ -413,6 +413,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-for-infectious-disease-models">2.2.1. Consequences for infectious disease models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">2.2.2. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -428,28 +429,32 @@ document.write(`
 <h1><span class="section-number">2.2. </span>Early Outbreak Stage and Galton-Watson Processes<a class="headerlink" href="#early-outbreak-stage-and-galton-watson-processes" title="Link to this heading">#</a></h1>
 <p>In the infinite population limit of a well-mixed population, starting from a single infected individual, we can assume that every transmission (at every generation) goes to a previously uninfected recipient.  Thus every transmission causes an infection, regardless of whether it is an SIS or SIR disease.  The SIS and SIR diseases are mathematically indistinguishable in this case, and the number of infections caused by each individual is chosen independently from the offspring distribution.</p>
 <div class="proof theorem admonition" id="InfDisGaltWat">
-<p class="admonition-title"><span class="caption-number">Theorem 2.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 2.1 </span> (Early stages of infectious-disease outbreaks are Galton-Watson Processes)</p>
 <section class="theorem-content" id="proof-content">
 <p>If:</p>
 <ul class="simple">
 <li><p>an infectious disease outbreak begins with a single infected individual (the <em>index case</em> ) counted as generation <span class="math notranslate nohighlight">\(0\)</span>,</p></li>
-<li><p>the infections are separated by generation so that those infected by generation <span class="math notranslate nohighlight">\(g\)</span> are considered to be in generation <span class="math notranslate nohighlight">\(g\)</span>,</p></li>
+<li><p>the infections are separated by generation so that those infected by generation <span class="math notranslate nohighlight">\(g\)</span> are considered to be in generation <span class="math notranslate nohighlight">\(g+1\)</span>,</p></li>
 <li><p>the number of transmissions caused by each infected individual is independent of all others and has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p></li>
 <li><p>the population is large enough that every transmission goes to a new never-before infected individual,</p></li>
 </ul>
 <p>Then the number of infections at generation <span class="math notranslate nohighlight">\(g\)</span> forms a Galton-Watson process with offspring distribution <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  If we generate edges from infector to infectee, we get a Galton-Watson tree.</p>
 </section>
-</div><p>To prove this, we show that the definition of a Galton-Watson process <a class="reference internal" href="../GaltonWatson/GaltWat.html#def-GaltonWatson">Definition 1.1</a> is satisfied.</p>
-<p>We must show that the number of infections <span class="math notranslate nohighlight">\(X_g\)</span> in generation <span class="math notranslate nohighlight">\(g\)</span> is a sequence of random numbers <span class="math notranslate nohighlight">\(\{X_g\}_{g \in \mathbb{N}}\)</span> such that <span class="math notranslate nohighlight">\(X_0=1\)</span> and <span class="math notranslate nohighlight">\(X_{g+1} = \sum_{j=1}^{X_g} k_{j,g}\)</span> where each <span class="math notranslate nohighlight">\(k_{j,g}\)</span> is chosen independently from the offspring distribution.</p>
-<ul class="simple">
-<li><p>The fact that <span class="math notranslate nohighlight">\(X_0=1\)</span> follows from the assumption of a single index case.</p></li>
-<li><p>For each of the <span class="math notranslate nohighlight">\(X_g\)</span> infected individuals in generation <span class="math notranslate nohighlight">\(g\)</span>, the number of transmissions caused is chosen independently from the offspring distribution.  Thus <span class="math notranslate nohighlight">\(X_{g+1} = \sum_{j=1}^{X_g} k_{j,g}\)</span> where <span class="math notranslate nohighlight">\(k_{j,g}\)</span> is chosen independently from the offspring distribution.</p></li>
-</ul>
-<p>Thus the definition of a Galton-Watson process is satisfied.  The connection to a Galton-Watson tree is straightforward.</p>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To prove this, we create a tree with the infected individuals as nodes.  The index case the root and for any individual, the recipients of transmissions from it are its offspring.  The resulting tree satisfies the definition of a Galton-Watson tree, at least until a non-negligible proportion of the population has been infected.</p>
+</div>
 <section id="consequences-for-infectious-disease-models">
 <h2><span class="section-number">2.2.1. </span>Consequences for infectious disease models<a class="headerlink" href="#consequences-for-infectious-disease-models" title="Link to this heading">#</a></h2>
 <p>As a result, if we model infection in a large well-mixed population starting from a single index case, we immediately inherit results about Galton-Watson processes.</p>
 <p>…</p>
+</section>
+<section id="self-test">
+<h2><span class="section-number">2.2.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Explain why the assumptions of a Galton-Watson process break down if the population is small enough or if the number infected become large enough.</p></li>
+<li><p>Given an infectious disease offspring distribution with PGF <span class="math notranslate nohighlight">\(\mu(x) = (3+2x^2)/5\)</span> that is introduced by a single infection into a large population.  Prove whether large epidemics are possible or not by referring to results on Galton-Watson processes.</p></li>
+<li><p>Given an infectious disease with offspring distribution PGF <span class="math notranslate nohighlight">\(\mu(x) = (1-p) + p x^2\)</span>.  Find the probability of an epidemic if a single individual becomes infected in a large population, as a function of <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+</ol>
 </section>
 </section>
 
@@ -518,6 +523,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-for-infectious-disease-models">2.2.1. Consequences for infectious disease models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">2.2.2. Self-test</a></li>
 </ul>
   </nav></div>
 

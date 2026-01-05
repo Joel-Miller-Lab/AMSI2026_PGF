@@ -43,9 +43,6 @@ parse:
 sphinx:
   extra_extensions:
     - sphinx_proof
-    - prf_listof
-  local_extensions:
-    prf_listof: .
   config:
     bibtex_reference_style: author_year
 

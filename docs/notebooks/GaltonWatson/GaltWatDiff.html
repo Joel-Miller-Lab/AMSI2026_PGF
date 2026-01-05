@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -185,7 +185,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theorems.html">List of Theorems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
 <ul class="current nav bd-sidenav">
@@ -469,7 +469,7 @@ document.write(`
 <p>Thus we see that if <span class="math notranslate nohighlight">\(\mu'(1)&lt;1\)</span> then extinction is guaranteed (<span class="math notranslate nohighlight">\(\alpha=1\)</span> is the only solution), while if <span class="math notranslate nohighlight">\(\mu'(1)&gt;1\)</span>, there is a solution <span class="math notranslate nohighlight">\(0\leq \alpha&lt;1\)</span> which means that extinction is not guaranteed.</p>
 <p>As we have noted above, <span class="math notranslate nohighlight">\(\mu'(1)\)</span> is the average of the distribution, that is the expected number of offspring.  So extinction is guaranteed if the average number of offspring is less than <span class="math notranslate nohighlight">\(1\)</span>, but if the expected number is greater than <span class="math notranslate nohighlight">\(1\)</span>, then long-term persistence is possible.</p>
 <p>We have proven a Theorem:</p>
-<div class="proof theorem admonition" id="theorem-0">
+<div class="proof theorem admonition" id="thm-GWExtinctThresh">
 <p class="admonition-title"><span class="caption-number">Theorem 1.2 </span> (Galton-Watson extinction threshold)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given a Galton-Watson process whose offspring distribution has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>:</p>

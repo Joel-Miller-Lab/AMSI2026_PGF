@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="1.2. Simulation of a Galton-Watson Process" href="GaltWatSimulation.html" />
-    <link rel="prev" title="List of Theorems" href="../theorems.html" />
+    <link rel="prev" title="List of Theorems" href="../../theorems.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -185,7 +185,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../theorems.html">List of Theorems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
 <ul class="current nav bd-sidenav">
@@ -465,21 +465,22 @@ document.write(`
 <section class="definition-content" id="proof-content">
 <p>Consider the directed tree formed from a given offspring distribution by the following process:</p>
 <ul class="simple">
-<li><p>Create a single node labelled <span class="math notranslate nohighlight">\(u_{0,1}\)</span> and set <span class="math notranslate nohighlight">\(X_0=1\)</span>.</p></li>
+<li><p>Create a single node,  labelled <span class="math notranslate nohighlight">\(u_{0,1}\)</span> and set <span class="math notranslate nohighlight">\(X_0=1\)</span>.</p></li>
 <li><p>Choose <span class="math notranslate nohighlight">\(k_{0,1}\)</span> from the offspring distribution, and create nodes <span class="math notranslate nohighlight">\(u_{1,1}, u_{1,2}, \ldots, u_{1,k_{0,1}}\)</span>, with a directed edge from <span class="math notranslate nohighlight">\(u_{0,1}\)</span> to each of these nodes.  Set <span class="math notranslate nohighlight">\(X_1 = k_{0,1}\)</span>.</p></li>
 <li><p>Construct the remaining tree iteratively for each <span class="math notranslate nohighlight">\(g \geq 1\)</span> by assigning each node <span class="math notranslate nohighlight">\(u_{g,j}\)</span> a number <span class="math notranslate nohighlight">\(k_{g,j}\)</span> chosen from the offspring distribution.  Define <span class="math notranslate nohighlight">\(n_j = \sum_{\ell=0}^j k_{g,\ell}\)</span>.  Then create the nodes <span class="math notranslate nohighlight">\(u_{g+1,n_{j-1}+1}, u_{g+1,n+1}, \ldots, u_{g+1, n_j}\)</span> with an edge from <span class="math notranslate nohighlight">\(u_{g,j}\)</span> to each of them.  Set <span class="math notranslate nohighlight">\(X_{g+1} = \sum_{j=1}^{X_{g}} k_{g,j}\)</span>.</p></li>
 </ul>
 </section>
 </div><p>The resulting tree may be infinite.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 1.3 </span> (Offspring, descendent, parent, ancestor, generation)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1.3 </span> (Offspring, descendent, parent, ancestor, root, generation)</p>
 <section class="definition-content" id="proof-content">
 <ul class="simple">
-<li><p>The nodes that <span class="math notranslate nohighlight">\(u_{g,j}\)</span> points to are referred to as its <em>offspring</em>.</p></li>
-<li><p>The nodes that are reachable from <span class="math notranslate nohighlight">\(u_{g,j}\)</span> following the edge directions are its <em>descendents</em>.</p></li>
+<li><p>The nodes that <span class="math notranslate nohighlight">\(u_{g,j}\)</span> points to are referred to as its <strong>offspring</strong>.</p></li>
+<li><p>The nodes that are reachable from <span class="math notranslate nohighlight">\(u_{g,j}\)</span> following the edge directions are its <strong>descendents</strong>.</p></li>
 <li><p>For <span class="math notranslate nohighlight">\(g&gt;0\)</span>, the node that has an edge to <span class="math notranslate nohighlight">\(u_{g,j}\)</span> is its <em>parent</em>.</p></li>
-<li><p>The nodes that are reachable from <span class="math notranslate nohighlight">\(u_{g,j}\)</span> following edges in reversed order are its <em>ancestors</em>.</p></li>
-<li><p>The number of edges in the path from <span class="math notranslate nohighlight">\(u_{0,1}\)</span> to <span class="math notranslate nohighlight">\(u_{g,j}\)</span> is <span class="math notranslate nohighlight">\(g\)</span>, known as the <em>generation</em> of <span class="math notranslate nohighlight">\(u_{g,j}\)</span>.</p></li>
+<li><p>The nodes that are reachable from <span class="math notranslate nohighlight">\(u_{g,j}\)</span> following edges in reversed order are its <strong>ancestors</strong>.</p></li>
+<li><p>The node <span class="math notranslate nohighlight">\(u_{0,1}\)</span> is called the <strong>root</strong>.</p></li>
+<li><p>The number of edges in the path from <span class="math notranslate nohighlight">\(u_{0,1}\)</span> to <span class="math notranslate nohighlight">\(u_{g,j}\)</span> is <span class="math notranslate nohighlight">\(g\)</span>, known as the <strong>generation</strong> of <span class="math notranslate nohighlight">\(u_{g,j}\)</span>.</p></li>
 </ul>
 </section>
 </div><div class="proof theorem admonition" id="thm-GWTisGWP">
@@ -487,7 +488,16 @@ document.write(`
 <section class="theorem-content" id="proof-content">
 <p>Given a Galton-Watson tree, the sequence of numbers <span class="math notranslate nohighlight">\(\{X_g\}\)</span>, where <span class="math notranslate nohighlight">\(X_g\)</span> is the number of nodes in generation <span class="math notranslate nohighlight">\(g\)</span>, forms a Galton-Watson process.  Similarly, every Galton-Watson process can be represented by a Galton-Watson tree.</p>
 </section>
-</div></section>
+</div><p>To prove this, we show that the definition of a Galton-Watson process <a class="reference internal" href="#def-GaltonWatson">Definition 1.1</a> is satisfied.</p>
+<p>We must show that the number of nodes <span class="math notranslate nohighlight">\(X_g\)</span> in generation <span class="math notranslate nohighlight">\(g\)</span> is a sequence of random numbers <span class="math notranslate nohighlight">\(\{X_g\}_{g \in \mathbb{N}}\)</span> such that <span class="math notranslate nohighlight">\(X_0=1\)</span> and <span class="math notranslate nohighlight">\(X_{g+1} = \sum_{j=1}^{X_g} k_{j,g}\)</span> where each <span class="math notranslate nohighlight">\(k_{j,g}\)</span> is chosen independently from the offspring distribution.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. - The fact that <span class="math notranslate nohighlight">\(X_0=1\)</span> follows from the assumption of a single root.</p>
+<ul class="simple">
+<li><p>For each of the <span class="math notranslate nohighlight">\(X_g\)</span> infected nodes in generation <span class="math notranslate nohighlight">\(g\)</span>, the number of offspring is chosen independently from the offspring distribution.  Thus <span class="math notranslate nohighlight">\(X_{g+1} = \sum_{j=1}^{X_g} k_{j,g}\)</span> where <span class="math notranslate nohighlight">\(k_{j,g}\)</span> is chosen independently from the offspring distribution.</p></li>
+</ul>
+<p>Thus the definition of a Galton-Watson process is satisfied.</p>
+</div>
+</section>
 <section id="applications-of-the-galton-watson-process">
 <span id="sec-galtwatapps"></span><h3><span class="section-number">1.1.2. </span>Applications of the Galton-Watson Process<a class="headerlink" href="#applications-of-the-galton-watson-process" title="Link to this heading">#</a></h3>
 <p>Although the focus on family names is perhaps frivolous, there are many other important scenarios that are mathematically equivalent.  For example:</p>
@@ -550,7 +560,7 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../theorems.html"
+       href="../../theorems.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
