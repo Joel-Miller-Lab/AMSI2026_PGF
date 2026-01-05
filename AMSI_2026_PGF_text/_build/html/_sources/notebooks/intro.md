@@ -9,12 +9,6 @@ I've decided not to do this (at least for now).  I am placing the mathematical p
 This is still an early draft of the text, so it is reasonably likely that I will change my mind and rewrite the text to alternate between PGF properties and biological applications.  This may depend on what happens as I write  later chapters.
 
 
-# List of theorems
-
-~~~{prf:listof} theorem
-:sort:
-~~~
-
 # Table of Contents
 ```{tableofcontents}
 ```

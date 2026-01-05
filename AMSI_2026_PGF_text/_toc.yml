@@ -4,6 +4,12 @@
 format: jb-book
 root: notebooks/intro
 parts:
+  - caption: Foreword
+    numbered: False 
+    chapters:
+    - file: notebooks/Prerequisites
+    - file: notebooks/Theorems
+
   - caption: Biological Applications of Generating Functions
     numbered: True
     chapters:

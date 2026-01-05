@@ -182,7 +182,12 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Theorems.html">List of Theorems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="GaltWat.html">1. The Galton-Watson Process</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GaltWatSimulation.html">1.2. Simulation of a Galton-Watson Process</a></li>
@@ -266,7 +271,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -283,7 +288,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebooks/GaltonWatson/GaltWatExtinctByGen.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/GaltonWatson/GaltWatExtinctByGen.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,10 +419,12 @@ document.write(`
 <p>In <a class="reference internal" href="GaltWatExtinct.html#sec-galtwatextinct"><span class="std std-numref">Section 1.3</span></a>, we showed that the probability <span class="math notranslate nohighlight">\(\alpha\)</span> of extinction of a Galton-Watson Process is a solution to the equation <span class="math notranslate nohighlight">\(x = \mu(x)\)</span>.  However, we saw that sometimes there are two solutions in <span class="math notranslate nohighlight">\([0,1]\)</span>, so identifying which is the correct solution may not be obvious.</p>
 <p>To find the correct solution, we calculate <span class="math notranslate nohighlight">\(\alpha_g\)</span>, the probability that it is extinct by generation <span class="math notranslate nohighlight">\(g\)</span>.  We assume one inividual exists in generation <span class="math notranslate nohighlight">\(g=0\)</span>, and thus <span class="math notranslate nohighlight">\(\alpha_0=0\)</span>.  In order for it to go extinct by generation <span class="math notranslate nohighlight">\(g=1\)</span>, the initial infected individual must infect no-one, so <span class="math notranslate nohighlight">\(\alpha_1 = p_0 = \mu(0)\)</span>.</p>
 <p>For <span class="math notranslate nohighlight">\(g&gt;1\)</span>, we follow a very similar argument to our initial argument that showed <span class="math notranslate nohighlight">\(\alpha = \mu(\alpha)\)</span>.  The probability that the process goes extinct by generation <span class="math notranslate nohighlight">\(g\)</span> is equal to the probability that all direct offspring of the initial individual spark their own Galton-Watson Process that is extinct within <span class="math notranslate nohighlight">\(g-1\)</span> generations.</p>
-<div class="highlight-figure notranslate"><div class="highlight"><pre><span></span>
-Add IMAGE 
-</pre></div>
-</div>
+<figure class="align-default" id="id1">
+<img alt="../../_images/UnderConstruction.png" src="../../_images/UnderConstruction.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Add IMAGE</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Much as when we calculated the extinction probability, we see that</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}

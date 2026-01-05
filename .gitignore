@@ -1,0 +1,4 @@
+# relevant to jupyter books:
+_build
+*.log
+
