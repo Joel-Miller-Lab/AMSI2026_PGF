@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.4. SIR outbreak sizes in small populations &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisSmallPop';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Generating Functions" href="../BasicGenFxn/GenFxns.html" />
+    <link rel="prev" title="2.3. Distribution of Total Sizes of Extinct Disease Outbreaks" href="InfDisSizeDist.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Probability Generating Functions and Biological Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../GaltonWatson/GaltWat.html">1. The Galton-Watson Process</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSimulation.html">1.2. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">1.3. Extinction of a Galton-Watson Process</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">1.5. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">1.6. Extinction probability over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">1.7. Size Distribution at successive times</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">2. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">2.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">2.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.4. SIR outbreak sizes in small populations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">3. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">3.1. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">3.2. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">3.3. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">3.4. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">3.5. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">3.6. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">3.7. Properties of Generating functions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebooks/InfDis/InfDisSmallPop.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/InfDis/InfDisSmallPop.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SIR outbreak sizes in small populations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">2.4.1. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">2.4.2. Conversion to a directed graph.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">2.4.3. Partitioning the network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">2.4.4. Building the equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">2.4.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">2.4.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">2.4.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">2.4.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">2.4.5. Full equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">2.4.6. Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">2.4.7. Extension</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sir-outbreak-sizes-in-small-populations">
+<h1><span class="section-number">2.4. </span>SIR outbreak sizes in small populations<a class="headerlink" href="#sir-outbreak-sizes-in-small-populations" title="Link to this heading">#</a></h1>
+<p><strong>This section is still under construction</strong></p>
+<p>Now we consider an SIR disease spreading in a small population of <span class="math notranslate nohighlight">\(N\)</span> individuals where <span class="math notranslate nohighlight">\(N\)</span> is not large enough that we can assume each transmission goes to a new recipient.  The assumptions leading to a Galton-Watson process break down in this limit.  However, perhaps remarkably PGFs still play a role in the calculation of the outbreak size distribution.</p>
+<section id="setup">
+<h2><span class="section-number">2.4.1. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>We will use <span class="math notranslate nohighlight">\(k\)</span> to be the total number of transmissions an individual causes.  We assume that <span class="math notranslate nohighlight">\(k\)</span> is chosen independently from the “offspring distribution” which has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
+<p>We assume that each time an individual transmits, the recipient is chosen randomly from the remainder of the population uniformly at random and with replacement (so <span class="math notranslate nohighlight">\(u\)</span> may transmit to <span class="math notranslate nohighlight">\(v\)</span> multiple times, but <span class="math notranslate nohighlight">\(u\)</span> cannot transmit to itself).</p>
+<p>We define <span class="math notranslate nohighlight">\(q_k\)</span> to be the probability that exactly <span class="math notranslate nohighlight">\(k\)</span> individuals are infected, including the index case.</p>
+<p>We will number the individuals <span class="math notranslate nohighlight">\(u_1, u_2, u_3, \ldots, u_N\)</span>.  We can assume without loss of generality that infection is introduced in <span class="math notranslate nohighlight">\(u_1\)</span>.</p>
+</section>
+<section id="conversion-to-a-directed-graph">
+<h2><span class="section-number">2.4.2. </span>Conversion to a directed graph.<a class="headerlink" href="#conversion-to-a-directed-graph" title="Link to this heading">#</a></h2>
+<figure class="align-right" id="fates">
+<a class="reference internal image-reference" href="../../_images/Fates.png"><img alt="../../_images/Fates.png" src="../../_images/Fates.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">The Fates</span><a class="headerlink" href="#fates" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Usually when we simulate infectious disease spread, we assume that who an individual transmits to is not determined until after becoming infected.  However, it will be useful for us to adopt a fatalistic interpretation.  Prior to disease introduction, for every <span class="math notranslate nohighlight">\(u_i\)</span> it is pre-determined who <span class="math notranslate nohighlight">\(u_i\)</span> would transmit to if ever infected.</p>
+<p>This fatalistic approach produces identical outcomes to the usual approach(otherwise, it would be possible to tell if all decisions are pre-determined or if humans have free will, resolving many philosophical discussions).  However, it comes with the benefit that we can represent the information in a directed network and then study properties of that network.</p>
+<p>Prior to an outbreak we determine how many transmiisions <span class="math notranslate nohighlight">\(u_i\)</span> will cause and who will receive these.  We generate a directed graph with nodes <span class="math notranslate nohighlight">\(u_1, \ldots, u_N\)</span> where an edge from <span class="math notranslate nohighlight">\(u_i\)</span> to <span class="math notranslate nohighlight">\(u_j\)</span> represents the fact that <span class="math notranslate nohighlight">\(u_i\)</span> will transmit to <span class="math notranslate nohighlight">\(u_j\)</span> if <span class="math notranslate nohighlight">\(u_i\)</span> is ever infected.  If <span class="math notranslate nohighlight">\(u_j\)</span> is susceptible when this happens then <span class="math notranslate nohighlight">\(u_j\)</span> will become infected.  Note that an edge from <span class="math notranslate nohighlight">\(u_i\)</span> to <span class="math notranslate nohighlight">\(u_j\)</span> exists independently of whether there is an edge from <span class="math notranslate nohighlight">\(u_j\)</span> to <span class="math notranslate nohighlight">\(u_i\)</span>.</p>
+<p><strong>Note to Self Draw a directed graph — Give network a name</strong></p>
+<p>The nodes that are eventually infected if <span class="math notranslate nohighlight">\(u_1\)</span> is the index case are the nodes that can be reached by following the directed edges in the network.</p>
+<div class="proof definition admonition" id="def-OutComponent">
+<p class="admonition-title"><span class="caption-number">Definition 2.2 </span> (Outcomponent)</p>
+<section class="definition-content" id="proof-content">
+<p>Given a directed network <span class="math notranslate nohighlight">\(G\)</span> and a node <span class="math notranslate nohighlight">\(u\)</span>, the <strong>out-component</strong> of <span class="math notranslate nohighlight">\(u\)</span> is the set of nodes that can be reached from <span class="math notranslate nohighlight">\(u\)</span> by following the edges of the network in the assigned direction (including <span class="math notranslate nohighlight">\(u\)</span>).</p>
+<p>Given a directed network <span class="math notranslate nohighlight">\(G\)</span> and a set of nodes <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span>, the <strong>out-component</strong> of <span class="math notranslate nohighlight">\(X\)</span> is the set of nodes that can be reached from any node in <span class="math notranslate nohighlight">\(X\)</span> following the edges of the network in the assigned direction (including nodes in <span class="math notranslate nohighlight">\(X\)</span>).</p>
+</section>
+</div></section>
+<section id="partitioning-the-network">
+<h2><span class="section-number">2.4.3. </span>Partitioning the network<a class="headerlink" href="#partitioning-the-network" title="Link to this heading">#</a></h2>
+<p>An important step in our calculations will be determining the probability that the nodes <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span> have no edges to <span class="math notranslate nohighlight">\(u_{M+1}, \ldots, u_N\)</span> in the directed network (we do not care if there are edges in the opposite direction).  In other words, the out-component of <span class="math notranslate nohighlight">\(X\)</span> is just <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p><strong>draw picture</strong></p>
+<p>First we calculate the probability that all edges from a node <span class="math notranslate nohighlight">\(u_j \in X\)</span> reach only within <span class="math notranslate nohighlight">\(X\)</span>.  recall that <span class="math notranslate nohighlight">\(X\)</span> has <span class="math notranslate nohighlight">\(M-1\)</span> nodes other than <span class="math notranslate nohighlight">\(u_j\)</span>), so the probability a single edge from <span class="math notranslate nohighlight">\(u_j\)</span> remains within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\((M-1)/(N-1)\)</span>.  So the probability that all edges from <span class="math notranslate nohighlight">\(u_j\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\mu\left(\frac{M-1}{N-1}\right) = p_0 + p_1 \frac{M-1}{N-1} + p_2 \left( \frac{M-1}{N-1}\right)^2 + p_3 \left( \frac{M-1}{M-1}\right)^3 + \cdots
+\]</div>
+<p>The probability that edges from any node in <span class="math notranslate nohighlight">\(X\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(\left[\mu\left( \frac{M-1}{N-1}\right)\right]^M\)</span>.</p>
+<p>Now we will look for another way to calculate this, in terms of the probabilities of outbreak sizes (or equivalently out-component sizes).</p>
+</section>
+<section id="building-the-equations">
+<h2><span class="section-number">2.4.4. </span>Building the equations<a class="headerlink" href="#building-the-equations" title="Link to this heading">#</a></h2>
+<p>We will start by looking at the probability the outbreak affects <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(2\)</span>, or <span class="math notranslate nohighlight">\(3\)</span> nodes before we start to build up to larger numbers.</p>
+<p>We assume that <span class="math notranslate nohighlight">\(u_1\)</span> is the initial infection (without loss of generality).  We are looking for its out-component sizes.</p>
+<section id="the-probability-of-a-1-node-outbreak">
+<h3><span class="section-number">2.4.4.1. </span>The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-1-node-outbreak" title="Link to this heading">#</a></h3>
+<p>The probability that <span class="math notranslate nohighlight">\(u_1\)</span> does not transmit to anyone is <span class="math notranslate nohighlight">\(\mu(0)\)</span>.  This is <span class="math notranslate nohighlight">\(q_1\)</span>, the probability of an outbreak of size <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ q_1 = \mu(0)\]</div>
+</section>
+<section id="the-probability-of-a-2-node-outbreak">
+<h3><span class="section-number">2.4.4.2. </span>The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-2-node-outbreak" title="Link to this heading">#</a></h3>
+<p>To calculate the probability of an outbreak of size <span class="math notranslate nohighlight">\(2\)</span> starting from node <span class="math notranslate nohighlight">\(u_1\)</span>, we’ll take an indirect route.  We will directly calculate the probability that <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> have no edges to <span class="math notranslate nohighlight">\(u_3, \ldots, u_N\)</span> and then we’ll calculate this same probability in terms of <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span>.</p>
+<ul class="simple">
+<li><p>First we recall that the probability all transmissions involving nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> reach only within nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> is <span class="math notranslate nohighlight">\(\mu(1/(N-1))^2\)</span>.</p></li>
+<li><p>Next we recall that the probability that only node <span class="math notranslate nohighlight">\(1\)</span> gets infected is <span class="math notranslate nohighlight">\(q_1\)</span>.  The joint probability that node <span class="math notranslate nohighlight">\(u_1\)</span> gets infected and node <span class="math notranslate nohighlight">\(u_2\)</span> has no edges to nodes <span class="math notranslate nohighlight">\(u_3, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\(q_1 \mu(1/(N-1))\)</span>.</p></li>
+<li><p>Next, the probability that only node <span class="math notranslate nohighlight">\(u_1\)</span> and node <span class="math notranslate nohighlight">\(u_2\)</span> get infected is the probability of an outbreak of size <span class="math notranslate nohighlight">\(2\)</span> times the probability that the other node is <span class="math notranslate nohighlight">\(u_2\)</span> given that the outbreak has size <span class="math notranslate nohighlight">\(2\)</span>.  This is <span class="math notranslate nohighlight">\(q_2 (1/(N-1))\)</span>.</p></li>
+</ul>
+<p>Putting these together the probability the outbreak is confined entirely within nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> is <span class="math notranslate nohighlight">\(\mu(1/(N-1))^2\)</span>, but it is also <span class="math notranslate nohighlight">\(q_1\mu(1/(N-1)) + q_2 (1/(N-1))\)</span>.  So once we know <span class="math notranslate nohighlight">\(q_1\)</span> we can solve for <span class="math notranslate nohighlight">\(q_2\)</span> from the equation</p>
+<div class="math notranslate nohighlight">
+\[q_1\mu(1/N-1) + q_2 \frac{1}{N-1} = \mu(1/(N-1))^2\]</div>
+</section>
+<section id="the-probability-of-a-3-node-outbreak">
+<h3><span class="section-number">2.4.4.3. </span>The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-3-node-outbreak" title="Link to this heading">#</a></h3>
+<p>To calculate the probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak, we follow the method for <span class="math notranslate nohighlight">\(2\)</span>-nodes.  We calculate the probability that <span class="math notranslate nohighlight">\(X=\{u_1, u_2, u_3\}\)</span> has no edges to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> directly and then recalculate it in terms of <span class="math notranslate nohighlight">\(q_1\)</span>, <span class="math notranslate nohighlight">\(q_2\)</span>, and <span class="math notranslate nohighlight">\(q_3\)</span>.</p>
+<ul class="simple">
+<li><p>The probability of no edges from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\([\mu(2/(N-1))]^3\)</span></p></li>
+<li><p>The probability that only <span class="math notranslate nohighlight">\(u_1\)</span> gets infected is <span class="math notranslate nohighlight">\(q_1\)</span>.  The joint probability that only <span class="math notranslate nohighlight">\(u_1\)</span> gets infected and the other two nodes in <span class="math notranslate nohighlight">\(X\)</span> also have no edges to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\(q_1 [\mu(2/N-1)]^2\)</span>.</p></li>
+<li><p>The probability that only <span class="math notranslate nohighlight">\(u_1\)</span> and one of <span class="math notranslate nohighlight">\(u_2\)</span> and <span class="math notranslate nohighlight">\(u_3\)</span> get infected is <span class="math notranslate nohighlight">\(q_2 \frac{\binom{2}{1}}{\binom{N-1}{1}}\)</span> That is, there are <span class="math notranslate nohighlight">\(\binom{2}{1}\)</span> ways to choose <span class="math notranslate nohighlight">\(1\)</span> node from <span class="math notranslate nohighlight">\(u_2\)</span> and <span class="math notranslate nohighlight">\(u_3\)</span> while there are a total of <span class="math notranslate nohighlight">\(\binom{N-1}{1}\)</span> ways to choose one other node from the entire network.  So the probability the second node is <span class="math notranslate nohighlight">\(u_2\)</span> or <span class="math notranslate nohighlight">\(u_3\)</span> is <span class="math notranslate nohighlight">\(\frac{\binom{2}{1}}{\binom{N-1}{1}}\)</span>.  The probability that the other node also does not have edges to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\(\mu(2/(N-1))\)</span>.  So the total probability of an outbreak of size <span class="math notranslate nohighlight">\(2\)</span> contained within <span class="math notranslate nohighlight">\(X\)</span> and no other edges out of <span class="math notranslate nohighlight">\(X\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+q_2 \frac{\binom{2}{1}}{\binom{N-1}{1}} \mu\left(\frac{2}{N-1}\right)
+\]</div>
+<ul class="simple">
+<li><p>The probability that only <span class="math notranslate nohighlight">\(u_1\)</span>, <span class="math notranslate nohighlight">\(u_2\)</span>, and <span class="math notranslate nohighlight">\(u_3\)</span> get infected is <span class="math notranslate nohighlight">\(q_3/\binom{N-1}{2}\)</span>.</p></li>
+</ul>
+<p>Putting these together</p>
+<div class="math notranslate nohighlight">
+\[
+\left [\mu\left(\frac{2}{N-1}\right)\right]^3 = q_1 \left[\mu\left(\frac{2}{N-1}\right)\right]^2 + q_2 \frac{\binom{2}{1}}{\binom{N-1}{1}} \mu\left(\frac{2}{N-1}\right) + q_3 \frac{1}{\binom{N-1}{2}}
+\]</div>
+</section>
+<section id="the-probability-of-an-m-node-outbreak">
+<h3><span class="section-number">2.4.4.4. </span>The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.<a class="headerlink" href="#the-probability-of-an-m-node-outbreak" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The probability of no edges from <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span> to <span class="math notranslate nohighlight">\(u_{M+1}, \ldots, u_N\)</span> is
+<span class="math notranslate nohighlight">\(\left[\mu\left(\frac{M-1}{N-1}\right)\right]^M\)</span>.</p></li>
+<li><p>The probability an outbreak starting from <span class="math notranslate nohighlight">\(u_1\)</span> is of size <span class="math notranslate nohighlight">\(k\)</span> and contained entirely within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(q_k \frac{\binom{M-1}{k-1}}{\binom{N-1}{k-1}}\)</span>. The probability that the other <span class="math notranslate nohighlight">\(M-k\)</span> nodes have no edges to <span class="math notranslate nohighlight">\(q_{M+1}, \ldots, q_N\)</span> is  <span class="math notranslate nohighlight">\(\left[\mu\left(\frac{M-1}{N-1}\right)\right]^{M-k}\)</span></p></li>
+</ul>
+<p>So we have</p>
+<div class="math notranslate nohighlight">
+\[
+\left[\mu\left(\frac{M-1}{N-1}\right)\right]^M = \sum_{k=1}^M q_k \frac{\binom{M-1}{k-1}}{\binom{N-1}{k-1}} \left[\mu\left(\frac{M-1}{N-1}\right)\right]^{M-k}
+\]</div>
+<p>Rearranging:</p>
+<div class="math notranslate nohighlight">
+\[
+1 = \sum_{k=1}^M c_{M,k} q_k
+\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+c_{M,k} &amp;= \left[\mu\left(\frac{M-1}{N-1}\right)\right]^{-k} \frac{\binom{M-1}{k-1}}{\binom{N-1}{k-1}}\\
+ &amp;= \left[\mu\left(\frac{M-1}{N-1}\right)\right]^{-k} \prod_{j=1}^{k-1} \frac{M-j}{N-j}
+\end{align*}\]</div>
+</section>
+</section>
+<section id="full-equations">
+<h2><span class="section-number">2.4.5. </span>Full equations<a class="headerlink" href="#full-equations" title="Link to this heading">#</a></h2>
+<p>Taking <span class="math notranslate nohighlight">\(M=1, \ldots, N\)</span> we arrive at the system</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1 &amp;= c_{1,1} q_1\\
+1 &amp;= c_{2,1} q_1 + c_{2,2} q_2\\
+1 &amp;= c_{3,1} q_1 + c_{3,2} q_2 + c_{3,3} q_3\\
+&amp;\vdots \\
+1 &amp;= c_{1,N} q_1 + c_{2,N} q_2 + \cdots + c_{N,N} q_N
+\end{align*}\]</div>
+<p>which can be written as the matrix equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+c_{1,1} &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+c_{1,2} &amp; c_{2,2} &amp; 0 &amp; \ddots &amp; 0\\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp;\vdots\\
+c_{N,1} &amp; c_{N,2} &amp; c_{N,3} &amp; \cdots &amp; c_{N,N}
+\end{pmatrix}
+\begin{pmatrix}
+q_1\\
+q_2\\
+q_3\\
+\vdots\\
+q_N
+\end{pmatrix}
+= \begin{pmatrix}
+1\\
+1\\
+\vdots\\
+1
+\end{pmatrix}
+\end{split}\]</div>
+</section>
+<section id="examples">
+<h2><span class="section-number">2.4.6. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+</section>
+<section id="extension">
+<h2><span class="section-number">2.4.7. </span>Extension<a class="headerlink" href="#extension" title="Link to this heading">#</a></h2>
+<p>For fixed <span class="math notranslate nohighlight">\(M\)</span>, as <span class="math notranslate nohighlight">\(N\)</span> gets large, <span class="math notranslate nohighlight">\(q_M\)</span> must converge to the result of previous section.  I’ve looked at it, but haven’t managed to find a direct proof.  I would particuarly like to be able to estimate the magnitue of the error</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\InfDis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="InfDisSizeDist.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.3. </span>Distribution of Total Sizes of Extinct Disease Outbreaks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../BasicGenFxn/GenFxns.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Generating Functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">2.4.1. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">2.4.2. Conversion to a directed graph.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">2.4.3. Partitioning the network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">2.4.4. Building the equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">2.4.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">2.4.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">2.4.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">2.4.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">2.4.5. Full equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">2.4.6. Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">2.4.7. Extension</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Joel C. Miller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
