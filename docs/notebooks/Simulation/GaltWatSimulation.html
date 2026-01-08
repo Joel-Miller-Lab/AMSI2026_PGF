@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.1. Simulation of a Galton-Watson Process &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Simulation/GaltWatSimulation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="4. Computer Simulation" href="SimulationIntro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Probability Generating Functions and Biological Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.1. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.2. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.3. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.4. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.5. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.6. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.7. Properties of Generating functions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../GaltonWatson/GaltWat.html">2. The Galton-Watson Process</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">3. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">3.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">3.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">3.4. SIR outbreak sizes in small populations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="SimulationIntro.html">4. Computer Simulation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.1. Simulation of a Galton-Watson Process</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Simulation/GaltWatSimulation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/Simulation/GaltWatSimulation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Simulation of a Galton-Watson Process</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.1.1. Self-test</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="simulation-of-a-galton-watson-process">
+<h1><span class="section-number">4.1. </span>Simulation of a Galton-Watson Process<a class="headerlink" href="#simulation-of-a-galton-watson-process" title="Link to this heading">#</a></h1>
+<p>This section introduces python code to perform a Galton-Watson epidemic simulation.</p>
+<p>We will spend time in class learning enough python in order to understand this section.  It is not essential to understand this section before moving on in the text.  It may seem intimidating, but if you look at the code, you will see that most of the code is just “comments” explaining how the methods work.</p>
+<p>The code below assumes the existence of a method <code class="docutils literal notranslate"><span class="pre">OffspringDist</span></code> which will generate a number from the offspring distribution.  We give some examples of such methods below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">OffspringDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulate a Galton–Watson branching process.</span>
+
+<span class="sd">    This function simulates a discrete-time branching process in which</span>
+<span class="sd">    each individual in generation g independently produces a random</span>
+<span class="sd">    number of offspring according to a specified offspring distribution.</span>
+<span class="sd">    The process starts with a single individual in generation 0 and</span>
+<span class="sd">    evolves forward for a fixed number of generations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    OffspringDist : callable</span>
+<span class="sd">        A function (or other callable) with no arguments that returns</span>
+<span class="sd">        a non-negative integer representing the number of offspring</span>
+<span class="sd">        produced by a single individual. Each call is assumed to be</span>
+<span class="sd">        independent and identically distributed.</span>
+<span class="sd">    num_generations : int, optional (default=10)</span>
+<span class="sd">        The number of generations to simulate. The simulation produces</span>
+<span class="sd">        population sizes for generations g = 0, 1, ..., num_generations.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Xlist : numpy array of int</span>
+<span class="sd">        A numpy array of length num_generations + 1, where Xlist[g] is the</span>
+<span class="sd">        population size in generation g. In particular, Xlist[0] = 1</span>
+<span class="sd">        corresponds to the initial population size.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - This is a *single realisation* of the Galton–Watson process.</span>
+<span class="sd">      Repeated calls to this function are required to estimate</span>
+<span class="sd">      extinction probabilities or other statistical properties.</span>
+<span class="sd">    - If the population reaches zero at some generation g, all</span>
+<span class="sd">      subsequent generations will also have population size zero.</span>
+<span class="sd">    - The offspring distribution is assumed to be time-homogeneous</span>
+<span class="sd">      (the same for all generations and individuals).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Xlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_generations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># array to hold population sizes</span>
+    <span class="n">Xlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#set the initial X_0 = 1</span>
+    <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_generations</span><span class="p">):</span> <span class="c1">#gen = 0, 1, ..., num_generations-1</span>
+        <span class="n">X_current</span> <span class="o">=</span> <span class="n">Xlist</span><span class="p">[</span><span class="n">gen</span><span class="p">]</span>   <span class="c1"># Current population size X_g</span>
+        <span class="n">X_next</span> <span class="o">=</span> <span class="mi">0</span>               <span class="c1"># Initialize X_{g+1}</span>
+
+        <span class="c1"># Each individual in generation g produces offspring independently</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_current</span><span class="p">):</span>
+            <span class="n">offspring</span> <span class="o">=</span> <span class="n">OffspringDist</span><span class="p">()</span>
+            <span class="n">X_next</span> <span class="o">+=</span> <span class="n">offspring</span>
+
+        <span class="c1"># Append the population size of the next generation</span>
+        <span class="n">Xlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_next</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Xlist</span>
+ 
+</pre></div>
+</div>
+</div>
+</div>
+<p>For now, we’ll work with two very simple offspring distributions:</p>
+<ul class="simple">
+<li><p>the flip of a fair 50-50 coin, counting <code class="docutils literal notranslate"><span class="pre">tails</span></code> as <span class="math notranslate nohighlight">\(0\)</span> and <code class="docutils literal notranslate"><span class="pre">heads</span></code> as <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+<li><p>the roll of a standard die numbered <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(6\)</span>.</p></li>
+</ul>
+<p>Before introducing this, we’ll introduce a <code class="docutils literal notranslate"><span class="pre">python</span></code> function that is useful for stochastic simulations.  In the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> package (which is for numerical calculations), there is a set of <code class="docutils literal notranslate"><span class="pre">random</span></code> functions.  One of them is <code class="docutils literal notranslate"><span class="pre">randint</span></code>.  If we call <code class="docutils literal notranslate"><span class="pre">randint(a,b)</span></code> where <code class="docutils literal notranslate"><span class="pre">a&lt;b</span></code> and both <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are integers, then it will return a random integer chosen unifromly from: <span class="math notranslate nohighlight">\(a, a+1, a+2, \ldots, b-1\)</span>.  The range includes <span class="math notranslate nohighlight">\(a\)</span> but not <span class="math notranslate nohighlight">\(b\)</span>.  We will use this to create functions that correspond to a coin flip or a die roll.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1">#the standard &quot;shorthand&quot; for numpy is &#39;np&#39;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">CoinFlip</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulates the number of offspring from a fair coin flip.</span>
+<span class="sd">    Returns 1 if heads and 0 if tails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1">#returns either 0 or 1  (does not include 2)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">DieRoll</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulates the number of offspring from a fair six-sided die roll.</span>
+<span class="sd">    Returns an integer from 1 to 6.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>  <span class="c1">#returns an integer from 1 to 6 (does not include 7)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s do some simulations.  First, we’ll do 10 simulations with the coin flip, up to 10 generations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">Xlist</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">CoinFlip</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xlist</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Generation $g$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X_g$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/84d3bb635c96a027dd518956873fccf4061eb396b50a49d15e5e7f8ed5d0a642.png" src="../../_images/84d3bb635c96a027dd518956873fccf4061eb396b50a49d15e5e7f8ed5d0a642.png" />
+</div>
+</div>
+<p>Although there are <span class="math notranslate nohighlight">\(10\)</span> simulations, only a few are visible.  They lie on top of each other.  Extinction occurs once the first <code class="docutils literal notranslate"><span class="pre">tails</span></code> appears.  About half of the simulations are expected to be <code class="docutils literal notranslate"><span class="pre">tails</span></code> first.  Of the remaining half, about half get a <code class="docutils literal notranslate"><span class="pre">heads</span></code> and then <code class="docutils literal notranslate"><span class="pre">tails</span></code>.  Of the remaining quarter, similar patterns continue.  As soon as the first tails occurs, the process stops.</p>
+<p>Now we’ll try the die roll.  Notice that extinction is not possible (why? - convince yourself before continuing).  The numbers will grow rather fast, so we’ll look at both logarithmic and linear scales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">Xlist</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">DieRoll</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xlist</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Xlist</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Generation $g$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X_g$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Generation $g$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X_g$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e01e8a5983d10f699444f021c4b146af689e8bf9e009dd70faa707f72fb9b00e.png" src="../../_images/e01e8a5983d10f699444f021c4b146af689e8bf9e009dd70faa707f72fb9b00e.png" />
+<img alt="../../_images/6dc4bdf1b90c940fe203bcf38bf0c01868cc0c12e1955ab1f7f3654018a79171.png" src="../../_images/6dc4bdf1b90c940fe203bcf38bf0c01868cc0c12e1955ab1f7f3654018a79171.png" />
+</div>
+</div>
+<p>Notice that at early times, things are relatively random, but at later times we seem to have parallel straight lines in the logarithmic plot.  We’ll learn more about this later, but we can see that the early random details are important and have long-term effects, but once the size is pretty large, further random effects are not significant.</p>
+<p>As our final example, we’ll do a case where with probability <span class="math notranslate nohighlight">\(1/3\)</span> we’ll flip the coin and with probability <span class="math notranslate nohighlight">\(2/3\)</span> we’ll roll the die.  Here extinction is possible.  We’ll run more simulations to increase the chance of seeing extinction.</p>
+<p>We will use the function <code class="docutils literal notranslate"><span class="pre">rand</span></code> which produces a random number uniformly between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.  With probability <span class="math notranslate nohighlight">\(1/3\)</span> it is less than <span class="math notranslate nohighlight">\(1/3\)</span>, so if the random number is less than <span class="math notranslate nohighlight">\(1/3\)</span>, we’ll flip a coin, otherwise we’ll roll the die.</p>
+<p>We will add some steps to the code to count how many simulations are extinct by generation <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mixedDist</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Offspring distribution for a Galton–Watson branching process made up of a mixture of two distributions.</span>
+
+<span class="sd">    This function randomly selects which offspring distribution to use</span>
+<span class="sd">    for a given individual:</span>
+<span class="sd">      - With probability 1/3, it draws offspring from CoinFlip()</span>
+<span class="sd">      - With probability 2/3, it draws offspring from DieRoll()</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        The number of offspring produced by a single individual,</span>
+<span class="sd">        as determined by the selected distribution.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">CoinFlip</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DieRoll</span><span class="p">()</span>
+
+
+<span class="c1"># Number of generations to simulate (generations 0 through num_gens)</span>
+<span class="n">num_gens</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Number of independent Galton–Watson simulations to run</span>
+<span class="n">num_sims</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Array to store the number of simulations that are extinct</span>
+<span class="c1"># at each generation g = 0, 1, ..., num_gens</span>
+<span class="n">extinction_count_by_gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">num_gens</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Run multiple independent simulations</span>
+<span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_sims</span><span class="p">):</span>
+    <span class="c1"># Simulate a single Galton–Watson process using the mixed distribution</span>
+    <span class="c1"># Xlist[g] is the population size in generation g</span>
+    <span class="n">Xlist</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">mixedDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="n">num_gens</span><span class="p">)</span>
+
+    <span class="c1"># Check for extinction (population size = 0) at each generation</span>
+    <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_gens</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Xlist</span><span class="p">[</span><span class="n">gen</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">extinction_count_by_gen</span><span class="p">[</span><span class="n">gen</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Plot the population size by generation on a linear scale</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xlist</span><span class="p">)</span>
+
+    <span class="c1"># Plot the population size by generation on a logarithmic y-scale</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Xlist</span><span class="p">)</span>
+
+<span class="c1"># Label the linear-scale plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Generation $g$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X_g$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Label the log-scale plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Generation $g$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X_g$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the proportion of simulations extinct by each generation</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">extinction_count_by_gen</span> <span class="o">/</span> <span class="n">num_sims</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Generation $g$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Proportion of simulations extinct&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/783d81b111cd30fafccb6c18e95b387a51f192241e4b6b178b02fbe8ea9ea75f.png" src="../../_images/783d81b111cd30fafccb6c18e95b387a51f192241e4b6b178b02fbe8ea9ea75f.png" />
+<img alt="../../_images/9c918f000a2a996fff41b4515cff2778c43abe8bde48074f12e1609a6b62c3ed.png" src="../../_images/9c918f000a2a996fff41b4515cff2778c43abe8bde48074f12e1609a6b62c3ed.png" />
+<img alt="../../_images/366c468d7598bc8a9f75af2b99aaec023f99816b7bb9a502d13d51f4d5d80e68.png" src="../../_images/366c468d7598bc8a9f75af2b99aaec023f99816b7bb9a502d13d51f4d5d80e68.png" />
+</div>
+</div>
+<section id="self-test">
+<h2><span class="section-number">4.1.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Read over the Galton-Watson process simulation code.  Once you feel you understand it, rewrite the method, without using any AI autocomplete functions or reading of the code provided.  The variable names can be different.  In principle, if you know python well, you may be able to “refactor” the code in another way if you wish.  Any time you write a new piece of code, you should test to make sure it works in cases you understand well.  So we’ll do some testing.</p>
+<ol class="arabic simple">
+<li><p>If your attempt does not work, review the code, and identify the error and repeat until you have running code</p></li>
+<li><p>Run the provided code for the coin flip for <span class="math notranslate nohighlight">\(1000\)</span> simulations up to 10 generations to get <span class="math notranslate nohighlight">\(X_g\)</span>.</p></li>
+<li><p>Verify in your stochastic simulations that <span class="math notranslate nohighlight">\(X_g \in \{0,1\}\)</span> and that <span class="math notranslate nohighlight">\(P(X_g=1) \approx 0.5^g\)</span>.</p></li>
+<li><p>Explain why the combined number of heads in all <span class="math notranslate nohighlight">\(1000\)</span> simulations should be about <span class="math notranslate nohighlight">\(1000\)</span> (Hint: how many heads do you expect in the first generation?  How many in the second? etc.)  Check that you see this in the simulation.</p></li>
+</ol>
+</li>
+<li><p>Now consider the DieRoll distribution.  We will compare your method with the provided method to ensure that they are consistent:</p>
+<ol class="arabic simple">
+<li><p>Run a large number of simulations up to generation <span class="math notranslate nohighlight">\(2\)</span> to calculate <span class="math notranslate nohighlight">\(X_2\)</span> using the DieRoll method.  Plot a histogram of <span class="math notranslate nohighlight">\(X_2\)</span>.  (you will probably need to look up documentation for the Python histogram methods - an AI program may be the most efficient way to learn the right way to implement the histogram.).</p></li>
+<li><p>Repeat with the provided code.</p></li>
+<li><p>Compare the distribution of <span class="math notranslate nohighlight">\(X_2\)</span> as calculated by your code and by the provided code.  Verify by eye that they are similar.</p></li>
+</ol>
+</li>
+<li><p>Create a new offspring distribution producing <span class="math notranslate nohighlight">\(0, 1, 2, 3\)</span> with equal probabilities.  Run 1000 simulations with this distribution up to generation <span class="math notranslate nohighlight">\(2\)</span>.  For reference consider the function <span class="math notranslate nohighlight">\(\mu(x) = (1 + x + x^2 + x^3)/4\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Based on your simulations, estimate the probability <span class="math notranslate nohighlight">\(\alpha_1\)</span> that <span class="math notranslate nohighlight">\(X_1=0\)</span>.  That is find <span class="math notranslate nohighlight">\(\alpha_1 = \mathbb{P}(X_1=0)\)</span> based on your simulations.  Compare with <span class="math notranslate nohighlight">\(\mu(0)\)</span>.  Can you explain why these should be similar?</p></li>
+<li><p>Estimate the probability <span class="math notranslate nohighlight">\(\alpha_2 = \mathbb{P}(X_2=0)\)</span>.  Compare with <span class="math notranslate nohighlight">\(\mu(\mu(0))\)</span>.</p></li>
+<li><p><em>Challenge</em>: Can you explain why <span class="math notranslate nohighlight">\(\alpha_2 \approx \mu(\mu(0))\)</span> (we will study this in detail later)?  (hint - what is the probability that <span class="math notranslate nohighlight">\(X_1=j\)</span> and that there is extinction at generation <span class="math notranslate nohighlight">\(2\)</span> given <span class="math notranslate nohighlight">\(X_1=j\)</span>?)</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\Simulation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="SimulationIntro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Computer Simulation</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.1.1. Self-test</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Joel C. Miller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

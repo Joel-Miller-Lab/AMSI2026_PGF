@@ -47,7 +47,7 @@ $$
 
 If:
 - an infectious disease outbreak begins with a single infected individual (the *index case* ) counted as generation $0$, 
-- the infections are separated by generation so that those infected by generation $g$ are considered to be in generation $g$,
+- the infections are separated by generation so that those infected by generation $g$ are considered to be in generation $g+1$,
 - the number of transmissions caused by each infected individual is independent of all others and has PGF $\mu(x)$.
 - the population is large enough that every transmission goes to a new never-before infected individual,
 
