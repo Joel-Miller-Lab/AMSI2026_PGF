@@ -530,7 +530,7 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <a class="reference internal image-reference" href="../../_images/BFSvsDFS.png"><img alt="../../_images/BFSvsDFS.png" src="../../_images/BFSvsDFS.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).  The depth-first search yields a Łukasiewicz word of <span class="math notranslate nohighlight">\(\mathcal{S}= (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</span><a class="headerlink" href="#fig-bfs" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).  The depth-first search yields a Łukasiewicz word <span class="math notranslate nohighlight">\(\mathcal{S}= (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</span><a class="headerlink" href="#fig-bfs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -540,60 +540,59 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <div class="proof algorithm admonition" id="alg-GWTReconstruct">
 <p class="admonition-title"><span class="caption-number">Algorithm 3.2 </span> (Inverting the Depth-First search)</p>
 <section class="algorithm-content" id="proof-content">
-<p>Given a Łukasiewicz word of length <span class="math notranslate nohighlight">\(j\)</span>, place <span class="math notranslate nohighlight">\(j\)</span> nodes around a ring labelled clockwise with the sequence (which position of the ring it starts at is unimportant)</p>
-<p>We repeat the following steps as long as there are non-zero labels:</p>
+<p>We begin with a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers of length <span class="math notranslate nohighlight">\(j\)</span>, summing to <span class="math notranslate nohighlight">\(j-1\)</span>.  We place <span class="math notranslate nohighlight">\(j\)</span> nodes around a ring.  Starting with the top node, label the nodes clockwise with the entries <span class="math notranslate nohighlight">\(s_1, s_2, \ldots, s_j\)</span>.</p>
+<p>We repeat the following steps as long as there are nodes with non-zero labels:</p>
 <ul class="simple">
-<li><p>Consider all nodes node <span class="math notranslate nohighlight">\(w\)</span> with a nonzero label <span class="math notranslate nohighlight">\(s_w\)</span> that are immediately followed, in the clockwise direction, by one or more nodes with a label of <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
-<li><p>Place an edge from <span class="math notranslate nohighlight">\(w\)</span> to the nodes immediately following it that are labelled with <span class="math notranslate nohighlight">\(0\)</span>, up to the first <span class="math notranslate nohighlight">\(s_w\)</span> of them if there are that many.</p></li>
-<li><p>Reduce the label for <span class="math notranslate nohighlight">\(w\)</span> by the number of edges added and remove its new offspring from further consideration.</p></li>
+<li><p>Consider each node <span class="math notranslate nohighlight">\(w\)</span> with a nonzero label <span class="math notranslate nohighlight">\(x_w\)</span> that is immediately followed, in the clockwise direction, by one or more nodes with a label of <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>Place an edge from <span class="math notranslate nohighlight">\(w\)</span> to the nodes immediately following it that are labelled with <span class="math notranslate nohighlight">\(0\)</span>, up to the first <span class="math notranslate nohighlight">\(x_w\)</span> of them if there are that many.</p></li>
+<li><p>Reduce the label <span class="math notranslate nohighlight">\(x_w\)</span> by the number of edges added.  Remove the nodes that were made offspring of <span class="math notranslate nohighlight">\(w\)</span> from further consideration.</p></li>
 </ul>
-<p>The result is a directed tree whose root is the node corresponding to the first position of the Łukasiewicz word.</p>
+<p>The result is a directed tree.  <em>If</em> the original sequence is a Łukasiewicz word, then the root is at the top (corresponding to the first entry of the sequence) and the resulting tree is the original tree.</p>
 </section>
-</div><p>We first illustrate the algorithm with an example.</p>
-<div class="proof example admonition" id="ex-GWTReconstruct">
-<p class="admonition-title"><span class="caption-number">Example 3.3 </span> (Reconstructing the Galton-Watson tree)</p>
-<section class="example-content" id="proof-content">
-<p>Given the length-9 sequence <span class="math notranslate nohighlight">\(3, 0, 2, 2, 0, 0, 0, 1, 0\)</span>, we follow <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> in <a class="reference internal" href="#fig-reconstructdfs"><span class="std std-numref">Fig. 3.3</span></a>.  The result is a tree of the same shape as the original tree, with the root being the node where the sequence began on the ring.</p>
-<p>Notice that if we perform a cyclic permutation of the original sequence, say using <span class="math notranslate nohighlight">\(2, 2, 0, 0, 0, 1, 0 ,3, 0\)</span>, the reconstruction process would be unaltered and produce the same tree.</p>
-<figure class="align-default" id="fig-reconstructdfs">
-<a class="reference internal image-reference" href="../../_images/ReconstructDFS.png"><img alt="../../_images/ReconstructDFS.png" src="../../_images/ReconstructDFS.png" style="width: 600px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Reconstructing the Galton-Watson tree from the Łukasiewicz word.  The panels of the initial and final steps are highlighted.  In each panel, the ring described in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> is shown along with an illustration of the current status of the reconstruction. The final reconstructed tree shown at the bottom.  The final tree has the same shape as the original tree.</span><a class="headerlink" href="#fig-reconstructdfs" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-</div><p>In the example we saw that this process generates the original tree.</p>
-<p>Now we show that if a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers sums to <span class="math notranslate nohighlight">\(j-1\)</span> then applying this process must generate a rooted directed tree:</p>
-<ul class="simple">
-<li><p>We are guaranteed at each step that the number of nodes in the ring is one more than the sum of their labels, so until only one node remains, we can find a  node with nonzero label followed by a node with label <span class="math notranslate nohighlight">\(0\)</span>.  This guarantees the process continues until only one node remains.</p></li>
-<li><p>The method of adding edges guarantees that at each step, when a node has label <span class="math notranslate nohighlight">\(0\)</span>, it is either isolated, or it is the root of a directed tree made up of nodes that have been removed from the ring.</p></li>
-</ul>
-<p>The end result is a directed tree whose root is the final node left in the ring.</p>
-<p>This leads us to one version of the Cycle Lemma:</p>
-<div class="proof lemma admonition" id="lemma-CycleLemma">
-<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (Cycle Lemma)</p>
-<section class="lemma-content" id="proof-content">
-<p>Given a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span>, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.</p>
-</section>
-</div><p>First let’s make clear what a cyclic permutation is:</p>
+</div><p>We have a brief aside to define a cyclic permutation:</p>
 <div class="proof definition admonition" id="definition-CyclicPerm">
 <p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Cyclic Permutation)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span>, the cyclic permutations are:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-&amp;(s_1, s_3, \ldots, s_j)\\
+&amp;(s_1, s_2, \ldots, s_j)\\
+&amp;(s_2, s_3, \ldots, s_j, s_1)\\
 &amp;(s_3, s_4, \ldots, s_j, s_1, s_2)\\
 &amp; \vdots\\
 &amp; (s_j, s_1, s_2, \ldots, s_{j-1})
 \end{align*}\]</div>
 </section>
-</div><p>Now we can prove the Cycle Lemma.</p>
-<div class="proof admonition" id="proof">
+</div><p>If we take a cyclic permutation of a Łukasiewicz word in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a>, then the algorithm starts with a rotation of the same ring as for the Łukasiewicz word.  Since the algorithm steps are unaffected by rotations, the end result is a tree with the same shape as the original tree, but with the root position altered due to the rotation.  We see this in the example below:</p>
+<div class="proof example admonition" id="ex-GWTReconstruct">
+<p class="admonition-title"><span class="caption-number">Example 3.3 </span> (Constructing a tree from a cyclically permuted Łukasiewicz word.)</p>
+<section class="example-content" id="proof-content">
+<p>Consider the length-9 sequence <span class="math notranslate nohighlight">\((2, 0, 0, 0, 1, 0, 3, 0, 2)\)</span>, which is a cyclic permutation of the Łukasiewicz word <span class="math notranslate nohighlight">\((3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  If we follow <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> in <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">fig-ReconstructDFS</span></code>, the result is a tree.  However, the root corresponds to the position at which the Łukasiewicz word would begin.</p>
+<figure class="align-default" id="fig-reconstructdfs">
+<a class="reference internal image-reference" href="../../_images/ReconstructDFS.png"><img alt="../../_images/ReconstructDFS.png" src="../../_images/ReconstructDFS.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Reconstructing the rotated Galton-Watson tree from a cyclically permuted Łukasiewicz word.  The panels of the initial and final steps are highlighted.  In each panel, the ring described in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> is shown along with an illustration of the current status of the reconstruction. The final reconstructed tree shown at the bottom.  The final tree has the same shape as the original tree.</span><a class="headerlink" href="#fig-reconstructdfs" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</div><p>In the example we saw <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> construct the original tree, with a cyclic rotation.  Was this a lucky example, or does it always happen?</p>
+<p>Now we show that it is guaranteed that if a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers sums to <span class="math notranslate nohighlight">\(j-1\)</span> then applying this process must generate a rooted directed tree:</p>
+<ul class="simple">
+<li><p>We are guaranteed at each step that the number of nodes in the ring is one more than the sum of their labels, so until only one node remains, we can find a  node with nonzero label followed by a node with label <span class="math notranslate nohighlight">\(0\)</span>.  This guarantees the process continues until only one node remains.</p></li>
+<li><p>The method of adding edges guarantees that at each step, when a node has label <span class="math notranslate nohighlight">\(0\)</span>, it is either isolated, or it is the root of a directed tree made up of nodes that have been removed from the ring.</p></li>
+</ul>
+<p>The end result is a directed tree whose root is the final node left in the ring.   A cyclic permutation of the sequence simply rotates the labels in the ring, which causes a corresponding cyclic permutation of the nodes in the final tree.</p>
+<p>This leads us to one version of the Cycle Lemma:</p>
+<div class="proof lemma admonition" id="lemma-CycleLemma">
+<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (Cycle Lemma)</p>
+<section class="lemma-content" id="proof-content">
+<p>Given a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span>, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.</p>
+</section>
+</div><div class="proof admonition" id="proof">
 <p>Proof. Consider a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers that sumes to <span class="math notranslate nohighlight">\(j-1\)</span>.<br />
-If we use any cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a>, we end up with the same tree.</p>
-<p>Only one of the cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> starts with the root of the tree.  Hence exactly one cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a Łukasiewicz word.</p>
+If we use any cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a>, we end up with the same tree because the algorithm will proceed as before on the rotated ring.</p>
+<p>Only one of the cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> will put the root at the top of the ring.  Hence exactly one cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a Łukasiewicz word.</p>
 </div>
 </section>
 <section id="completing-the-proof">
@@ -609,7 +608,8 @@ If we use any cyclic permutation of <span class="math notranslate nohighlight">\
 <section id="self-test">
 <h2><span class="section-number">3.3.6. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>The proof did not fully explain why <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> recovers the original tree.  Plausibly we could take a Łukasiewicz word from a tree, and then the reconstruction method might create a tree whose Łukasiewicz word is a cyclic permutation of the original.  We will use induction to show the process works.</p>
+<li><p>Show the steps of <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> using the Łukasiewicz word <span class="math notranslate nohighlight">\((3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</p></li>
+<li><p>The proof did not fully explain why <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> recovers the original tree.  Plausibly we could take a Łukasiewicz word from a tree, and the reconstruction method might create a tree whose Łukasiewicz word is a cyclic permutation of the original.  We will use induction to show the process works.  For this proof it is easier to work with a modified version of the algorithm in which each step adds just one edge.</p>
 <ol class="arabic simple">
 <li><p>Consider the Łukasiewicz word with <span class="math notranslate nohighlight">\(j=1\)</span>: <span class="math notranslate nohighlight">\(\mathcal{S}=0\)</span>.  Show that only one Galton-Watson tree corresponds to this word.</p></li>
 <li><p>Now consider a Łukasiewicz word of  length <span class="math notranslate nohighlight">\(j+1\)</span> for <span class="math notranslate nohighlight">\(j \geq 1\)</span>.  Explain why if a node <span class="math notranslate nohighlight">\(v\)</span> with label zero immediately follows a node <span class="math notranslate nohighlight">\(w\)</span> with a non-zero label in the original Łukasiewicz word, then <span class="math notranslate nohighlight">\(w\)</span> must be the parent of <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
