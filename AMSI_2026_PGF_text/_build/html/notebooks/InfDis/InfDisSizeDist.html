@@ -464,14 +464,15 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 \]</div>
 <p><strong>Do simulations and show fit</strong></p>
 </section>
-</div><p>When I first saw this theorem, I read a few proofs.  There were a few I didn’t understand because they assumed I knew some concepts that I didn’t, or they were based in a lot of symbols and manipulations which I couldn’t re-interpret visually.  As I think very visually, I struggled to follow these.  Specifically, the <span class="math notranslate nohighlight">\(1/j\)</span> prefactor caused much confusion.  I developed the proof below that (in my opinion) very elegantly explains the <span class="math notranslate nohighlight">\(1/j\)</span>.  I expect that it is already known, it’s just not in the places that I looked.</p>
-<p>This is one of the most remarkable theorems I have seen and (again in my opinion) it has one of the most beautiful proofs I know.  I hope I can do justice to that proof below.</p>
+</div><p>When I first saw this theorem, I read a few proofs.  There were a few I didn’t understand because they assumed I knew some concepts that I didn’t, or they were based in a lot of symbols and manipulations which I couldn’t re-interpret visually.  As I think very visually, I struggled to follow these.  Specifically, the <span class="math notranslate nohighlight">\(1/j\)</span> prefactor caused much confusion.  A well-known result in probability theory, the “Cycle Lemma” provides the result, but I did not find a proof that I felt I fully understood.</p>
+<p>I developed the proof below that (in my opinion) very elegantly explains the <span class="math notranslate nohighlight">\(1/j\)</span>.  I expect that this proof is already known, it’s just not in the places that I looked.</p>
+<p>This is one of the most remarkable theorems I have seen.  I hope I can do justice to that proof below.</p>
 <p>First, I’ll try to set the stage for the thought process that yielded this proof.  How might we approach proving this theorem?  Let’s start down the path to proving this result.  We’ll run into an obstacle and then backtrack a bit to modify the approach at which point the proof will be more simple.</p>
 <figure class="align-default" id="fig-gwt">
 <a class="reference internal image-reference" href="../../_images/GWT.png"><img alt="../../_images/GWT.png" src="../../_images/GWT.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">A sample Galton-Watson tree with <span class="math notranslate nohighlight">\(j=9\)</span> nodes.  There are <span class="math notranslate nohighlight">\(8\)</span> edges.  The number of offspring, listed in order by node indices are <span class="math notranslate nohighlight">\((3,0,2,1,2,0,0,0,0)\)</span>.  The probability of observing exactly this tree is <span class="math notranslate nohighlight">\(p_3p_2^2p_1P_0^5\)</span>.</span><a class="headerlink" href="#fig-gwt" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">A sample Galton-Watson tree with <span class="math notranslate nohighlight">\(j=9\)</span> nodes.  There are <span class="math notranslate nohighlight">\(8\)</span> edges.  The number of offspring, listed in order by node indices are <span class="math notranslate nohighlight">\((3,0,2,1,2,0,0,0,0)\)</span>.  The probability of observing exactly this tree is <span class="math notranslate nohighlight">\(p_3p_2^2p_1p_0^5\)</span>.</span><a class="headerlink" href="#fig-gwt" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We will initially consider the nodes in their “natural” order: <span class="math notranslate nohighlight">\(u_{0,1}, \:u_{1,1}, \ldots, u_{1,X_1}, \: u_{2,1}, \ldots, u_{2,X_2}, \: \ldots\)</span>.  Then we create the sequence <span class="math notranslate nohighlight">\(k_{0,1}, \: k_{1,1}, \ldots, k_{1,X_1}, \: \ldots\)</span>, which we reindex as <span class="math notranslate nohighlight">\(k_1, k_2, \ldots\)</span>.</p>
@@ -491,7 +492,7 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <section id="switching-to-a-depth-first-search-of-the-nodes">
 <h2><span class="section-number">3.3.2. </span>Switching to a depth-first search of the nodes<a class="headerlink" href="#switching-to-a-depth-first-search-of-the-nodes" title="Link to this heading">#</a></h2>
 <p>However, I was never able to come up with what I considered to be a simple proof showing that no subsequence <span class="math notranslate nohighlight">\(k_1, \ldots, k_\ell\)</span> sums to <span class="math notranslate nohighlight">\(\ell-1\)</span>.  Many proofs of <a class="reference internal" href="#theorem-TotalSizeDist">Theorem 3.2</a> that I read were based on this idea, but I always struggled with it.  Instead, let’s back up a bit and construct a different proof.  Rather than using the “obvious” ordering of the nodes, we’ll use a different ordering.</p>
-<p>The ordering we had above,  <span class="math notranslate nohighlight">\(u_{0,1},\; u_{1,1}, \ldots, u_{1,X_1}, \; u_{2,1}, \ldots, u_{2,X_2}, \; \ldots\)</span> is called <em>breadth-first search</em> because it covers the breadth of each generation before going “deeper” (to the next generation).  Now we will switch to a <em>depth-first search</em> in which we completely explore the depth of one branch before moving on to the next.</p>
+<p>The ordering we had above, <span class="math notranslate nohighlight">\(u_{0,1},\; u_{1,1}, \ldots, u_{1,X_1}, \; u_{2,1}, \ldots, u_{2,X_2}, \; \ldots\)</span> is called <em>breadth-first search</em> because it covers the breadth of each generation before going “deeper” (to the next generation).  Now we will switch to a <em>depth-first search</em> in which we completely explore the depth of one branch before moving on to the next.</p>
 <p>We can think of this by analogy to the “line of succession” rules for European monarchies.  The king’s sons (and their sons) would have priority over the king’s brothers who in turn have priority over the king’s uncles.  Only once there are no heirs left along one branch would the next branch be considered.</p>
 <div class="proof algorithm admonition" id="alg-DFS">
 <p class="admonition-title"><span class="caption-number">Algorithm 3.1 </span> (Depth-first search)</p>
@@ -516,14 +517,14 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 </div><div class="proof example admonition" id="ex-DFS">
 <p class="admonition-title"><span class="caption-number">Example 3.2 </span> (Depth-first search)</p>
 <section class="example-content" id="proof-content">
-<p>A <em>depth first search</em> on the <span class="math notranslate nohighlight">\(j=9\)</span> node Galton-Watson tree in <a class="reference internal" href="#fig-gwt"><span class="std std-numref">Fig. 3.1</span></a> produces the node order <span class="math notranslate nohighlight">\(u_{0,1}, u_{1,1}, u_{1,2}, u{2,1}, u_{3,1}, u_{3,2}, u_{2,2}, u_{1,3}, u_{2,3}\)</span>, which produces the Łukasiewicz word: <span class="math notranslate nohighlight">\(\mathcal{S} = 3, 0, 2, 2, 0, 0, 0, 1, 0\)</span>.  As expected the sum of these is <span class="math notranslate nohighlight">\(8=j-1\)</span>.</p>
+<p>A <em>depth first search</em> on the <span class="math notranslate nohighlight">\(j=9\)</span> node Galton-Watson tree in <a class="reference internal" href="#fig-gwt"><span class="std std-numref">Fig. 3.1</span></a> produces the node order <span class="math notranslate nohighlight">\(u_{0,1}, u_{1,1}, u_{1,2}, u{2,1}, u_{3,1}, u_{3,2}, u_{2,2}, u_{1,3}, u_{2,3}\)</span>, which produces the Łukasiewicz word: <span class="math notranslate nohighlight">\(\mathcal{S} = (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  As expected the sum of these is <span class="math notranslate nohighlight">\(8=j-1\)</span>.</p>
 </section>
 </div><p>A comparison of a depth-first search and a breadth-first search is shown in  <a class="reference internal" href="#fig-bfs"><span class="std std-numref">Fig. 3.2</span></a>:</p>
 <figure class="align-default" id="fig-bfs">
 <a class="reference internal image-reference" href="../../_images/BFSvsDFS.png"><img alt="../../_images/BFSvsDFS.png" src="../../_images/BFSvsDFS.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).</span><a class="headerlink" href="#fig-bfs" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).  The depth-first search yields a Łukasiewicz word of <span class="math notranslate nohighlight">\(\mathcal{S}= (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</span><a class="headerlink" href="#fig-bfs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>As long as the offspring of each node are ordered, the Depth-First search always produces the same Łukasiewicz word and the process is invertible: given a Łukasiewicz word, we can recover the tree that produced it.</p>
@@ -560,14 +561,43 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <li><p>The method of adding edges guarantees that at each step, when a node has label <span class="math notranslate nohighlight">\(0\)</span>, it is either isolated, or it is the root of a directed tree made up of nodes that have been removed from the ring.</p></li>
 </ul>
 <p>The end result is a directed tree whose root is the final node left in the ring.</p>
-<p>If we use any cyclic permutation of a sequence summing to <span class="math notranslate nohighlight">\(j-1\)</span>, the cyclic symmetry of the ring in the algorithm guarantees we will get the same tree, but the index corresponding to the root will shift.  Thus although each cyclic permutation has the same probability as a sequence of <span class="math notranslate nohighlight">\(j\)</span> numbers, only one of them has the root at the start.  Thus only one is a Łukasiewicz word.  So taking all of the sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span>, their combined probability is <span class="math notranslate nohighlight">\(j\)</span> times the probability of all of the Łukasiewicz words, that is, <span class="math notranslate nohighlight">\(j\)</span> times the probability that a Galton-Watson tree has <span class="math notranslate nohighlight">\(j\)</span> nodes.</p>
-<p>Since the combined probability of sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span> is the coefficient, <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>, of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in <span class="math notranslate nohighlight">\([\mu(x)]^j\)</span> we have:</p>
+<p>This leads us to one version of the Cycle Lemma:</p>
+<div class="proof lemma admonition" id="lemma-CycleLemma">
+<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (Cycle Lemma)</p>
+<section class="lemma-content" id="proof-content">
+<p>Given a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span>, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.</p>
+</section>
+</div><p>First let’s make clear what a cyclic permutation is:</p>
+<div class="proof definition admonition" id="definition-CyclicPerm">
+<p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Cyclic Permutation)</p>
+<section class="definition-content" id="proof-content">
+<p>Given a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span>, the cyclic permutations are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;(s_1, s_3, \ldots, s_j)\\
+&amp;(s_3, s_4, \ldots, s_j, s_1, s_2)\\
+&amp; \vdots\\
+&amp; (s_j, s_1, s_2, \ldots, s_{j-1})
+\end{align*}\]</div>
+</section>
+</div><p>Now we can prove the Cycle Lemma.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Consider a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers that sumes to <span class="math notranslate nohighlight">\(j-1\)</span>.<br />
+If we use any cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a>, we end up with the same tree.</p>
+<p>Only one of the cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> starts with the root of the tree.  Hence exactly one cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a Łukasiewicz word.</p>
+</div>
+<p>Armed with this lemma, we are almost done.  We note:</p>
+<ul class="simple">
+<li><p>First: the probability a sequence of <span class="math notranslate nohighlight">\(j\)</span> numbers chosen from the offspring distribution sum to <span class="math notranslate nohighlight">\(j-1\)</span> is <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>.</p></li>
+<li><p>Next: we observe that given <span class="math notranslate nohighlight">\(j\)</span> values chosen from the offspring distribution, all of its <span class="math notranslate nohighlight">\(j\)</span> cyclic permutations have the same probability.  Combined with the Cycle Lemma, we conclude that if the values sum to <span class="math notranslate nohighlight">\(j-1\)</span>, the probability that the sequence is a Łukasiewicz word is <span class="math notranslate nohighlight">\(1/j\)</span>.</p></li>
+</ul>
+<p>Combining these, the probability that it sums to <span class="math notranslate nohighlight">\(j-1\)</span> and is a Łukasiewicz word is <span class="math notranslate nohighlight">\(\frac{1}{j} p_{j-1}^{(j)}\)</span>.  Thus we have proven:</p>
 <p><em>The probability a Galton-Watson process ends with total size <span class="math notranslate nohighlight">\(\sum X_g = j\)</span> is equal to <span class="math notranslate nohighlight">\(\frac{1}{j} p_{j-1}^{(j)}\)</span> where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span> is the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in <span class="math notranslate nohighlight">\([\mu(x)]^j\)</span>.</em></p>
 </section>
 <section id="self-test">
 <h2><span class="section-number">3.3.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>The proof did not fully explain why the reconstruction method recovers the original tree.  Plausibly we could take a Łukasiewicz word from a tree, and then the reconstruction method might create a tree whose Łukasiewicz word is a cyclic permutation of the original.  We will use induction to show the process works.</p>
+<li><p>The proof did not fully explain why <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> recovers the original tree.  Plausibly we could take a Łukasiewicz word from a tree, and then the reconstruction method might create a tree whose Łukasiewicz word is a cyclic permutation of the original.  We will use induction to show the process works.</p>
 <ol class="arabic simple">
 <li><p>Consider the Łukasiewicz word with <span class="math notranslate nohighlight">\(j=1\)</span>: <span class="math notranslate nohighlight">\(\mathcal{S}=0\)</span>.  Show that only one Galton-Watson tree corresponds to this word.</p></li>
 <li><p>Now consider a Łukasiewicz word of  length <span class="math notranslate nohighlight">\(j+1\)</span> for <span class="math notranslate nohighlight">\(j \geq 1\)</span>.  Explain why if a node <span class="math notranslate nohighlight">\(v\)</span> with label zero immediately follows a node <span class="math notranslate nohighlight">\(w\)</span> with a non-zero label in the original Łukasiewicz word, then <span class="math notranslate nohighlight">\(w\)</span> must be the parent of <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
@@ -575,6 +605,7 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <li><p>Use induction to show that the remaining tree is unique and explain why the original tree must be unique.</p></li>
 </ol>
 </li>
+<li><p>The discussion of <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> stated that we are guaranteed that at each step the number of nodes under consideration in the ring is one more than the sum of their labels.  Explain why adding an edge in the algorithm preserves this relation.</p></li>
 </ol>
 </section>
 </section>
