@@ -457,7 +457,7 @@ document.write(`
 \]</div>
 <p>Let’s look at an example before we do the general case.</p>
 <div class="proof example admonition" id="example-CashMachine">
-<p class="admonition-title"><span class="caption-number">Example 1.21 </span> (Cash machine PGF)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.22 </span> (Cash machine PGF)</p>
 <section class="example-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mu_1(x) = \sum_{k=0}^\infty p_k x^k\)</span> be the PGF for the number of customers who come to a cash machine during a day and <span class="math notranslate nohighlight">\(\mu_2(x)= \sum_{m=0}^\infty q_m x^m\)</span> be the PGF for the amount of money a random customer withdraws.  What would be the PGF for the total amount of money withdrawn from the cash machine during a day?</p>
 <p>Let’s first think through separate cases based on <span class="math notranslate nohighlight">\(k\)</span>, how many customers arrive.  We’ll find the PGF assuming that <span class="math notranslate nohighlight">\(k\)</span> is known.  Then we’ll combine the PGFs for each possible <span class="math notranslate nohighlight">\(k\)</span> into a complete PGF.   Given <span class="math notranslate nohighlight">\(k\)</span>, we know that the PGF of the amount withdrawn is <span class="math notranslate nohighlight">\(\xi_k(x)=[\mu_2(x)]^k\)</span> by <a class="reference internal" href="GenFxnsMult.html#cor-PGFPower">Corollary 1.1</a>.</p>
@@ -486,7 +486,7 @@ document.write(`
 </section>
 </div><p>We illustrate this in the following example in which <span class="math notranslate nohighlight">\(\mu_1(x)=\mu_2(x)\)</span>:</p>
 <div class="proof example admonition" id="example-InfectiousDice">
-<p class="admonition-title"><span class="caption-number">Example 1.22 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 1.23 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider one person who rolls a single standard six-sided die with PGF <span class="math notranslate nohighlight">\(\mu(x) = (x+x^2+ \cdots + x^6)/6\)</span>.  Let <span class="math notranslate nohighlight">\(k\)</span> be the resulting random number.</p>
 <p>Then <span class="math notranslate nohighlight">\(k\)</span> individuals are chosen from the population, each of whom rolls a six-sided die.  Add their results together to get <span class="math notranslate nohighlight">\(n\)</span>.  The PGF for <span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(\psi(x)=\mu(\mu(x))\)</span>.</p>
@@ -496,16 +496,16 @@ document.write(`
 <a class="reference internal image-reference" href="../../_images/InfectiousDice.png"><img alt="../../_images/InfectiousDice.png" src="../../_images/InfectiousDice.png" style="width: 600px; height: 450px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">If we roll one die to choose the random number <span class="math notranslate nohighlight">\(k\)</span> and then sum the rolls of <span class="math notranslate nohighlight">\(k\)</span> dice to get <span class="math notranslate nohighlight">\(n\)</span>, then the PGF of the final sum is <span class="math notranslate nohighlight">\(\mu(\mu(x))\)</span>, illustrating <a class="reference internal" href="#example-InfectiousDice">Example 1.22</a>.</span><a class="headerlink" href="#fig-infectiousdice" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">If we roll one die to choose the random number <span class="math notranslate nohighlight">\(k\)</span> and then sum the rolls of <span class="math notranslate nohighlight">\(k\)</span> dice to get <span class="math notranslate nohighlight">\(n\)</span>, then the PGF of the final sum is <span class="math notranslate nohighlight">\(\mu(\mu(x))\)</span>, illustrating <a class="reference internal" href="#example-InfectiousDice">Example 1.23</a>.</span><a class="headerlink" href="#fig-infectiousdice" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="self-test">
 <h2><span class="section-number">1.8.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Consider the dice rolling in <a class="reference internal" href="#example-InfectiousDice">Example 1.22</a>.  Set <span class="math notranslate nohighlight">\(X_0=1\)</span>.  For <span class="math notranslate nohighlight">\(g=1, 2, 3\)</span>, find <span class="math notranslate nohighlight">\(X_g\)</span> by having <span class="math notranslate nohighlight">\(X_{g-1}\)</span> individuals each roll a die and setting <span class="math notranslate nohighlight">\(X_g\)</span> to be the sum.</p>
+<li><p>Consider the dice rolling in <a class="reference internal" href="#example-InfectiousDice">Example 1.23</a>.  Set <span class="math notranslate nohighlight">\(X_0=1\)</span>.  For <span class="math notranslate nohighlight">\(g=1, 2, 3\)</span>, find <span class="math notranslate nohighlight">\(X_g\)</span> by having <span class="math notranslate nohighlight">\(X_{g-1}\)</span> individuals each roll a die and setting <span class="math notranslate nohighlight">\(X_g\)</span> to be the sum.</p>
 <ol class="arabic simple">
 <li><p>Show that the PGF of <span class="math notranslate nohighlight">\(X_1\)</span> is <span class="math notranslate nohighlight">\(\psi(x)\)</span> where <span class="math notranslate nohighlight">\(\psi(x)\)</span> is the PGF of a single die.</p></li>
-<li><p>Explain why the PGF of <span class="math notranslate nohighlight">\(X_2\)</span> is <span class="math notranslate nohighlight">\(\psi(\psi(x))\)</span>.  [hint: <a class="reference internal" href="#example-InfectiousDice">Example 1.22</a> should be helpful for this.]</p></li>
+<li><p>Explain why the PGF of <span class="math notranslate nohighlight">\(X_2\)</span> is <span class="math notranslate nohighlight">\(\psi(\psi(x))\)</span>.  [hint: <a class="reference internal" href="#example-InfectiousDice">Example 1.23</a> should be helpful for this.]</p></li>
 <li><p>What is the PGF of <span class="math notranslate nohighlight">\(X_3\)</span>?</p></li>
 </ol>
 </li>

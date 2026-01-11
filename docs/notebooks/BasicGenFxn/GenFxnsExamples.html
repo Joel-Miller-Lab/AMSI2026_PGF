@@ -469,15 +469,29 @@ f_N(x)(1-x) &amp;= f_N(x) - x f_N(x)\\
 \binom{N}{k} = \begin{cases} \frac{N!}{k!(N-k)!} &amp; k=0, \ldots, N\\
 0 &amp; k&lt;0 \text{ or } k&gt;N
 \end{cases}
-The generating function\end{split}\]</div>
-<p>f(x) = \binom{N}{0}x^0 + \binom{N}{1}x^1 + \cdots = \sum_k \binom{N}{k} x^k
-$$
-is</p>
+\end{split}\]</div>
+<p>The generating function</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \binom{N}{0}x^0 + \binom{N}{1}x^1 + \cdots = \sum_k \binom{N}{k} x^k
+\]</div>
+<p>is</p>
 <div class="math notranslate nohighlight">
 \[f(x) = (1+x)^N\]</div>
 </section>
+</div><div class="proof example admonition" id="example-BinExp">
+<p class="admonition-title"><span class="caption-number">Example 1.3 </span> (Binomial Expansion)</p>
+<section class="example-content" id="proof-content">
+<p>Consider <span class="math notranslate nohighlight">\((1+x)^r\)</span> where <span class="math notranslate nohighlight">\(r\)</span> may not be an integer.  Then</p>
+<div class="math notranslate nohighlight">
+\[
+(1+x)^r = 1 + rx + \frac{r(r-1)}{2!} x^2 + \frac{r(r-1)(r-2)}{3!}x^3 + \cdots + \frac{r(r-1)\cdots(r-n+1)}{n!} x^n + \cdots
+\]</div>
+<p>So the generating function of
+<span class="math notranslate nohighlight">\(1, r, r(r-1)/2, r(r-1)(r-2)/3!, \ldots\)</span> is <span class="math notranslate nohighlight">\((1+x)^r\)</span>.</p>
+</section>
 </div><div class="proof example admonition" id="ex-fibonacci_fxn">
-<p class="admonition-title"><span class="caption-number">Example 1.3 </span> (The Fibonacci sequence)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.4 </span> (The Fibonacci sequence)</p>
 <section class="example-content" id="proof-content">
 <p>Consider the Fibonacci sequence defined by <span class="math notranslate nohighlight">\(F_0=0\)</span>, <span class="math notranslate nohighlight">\(F_1 = 1\)</span> and <span class="math notranslate nohighlight">\(F_{n} = F_{n-1}+ F_{n-2}\)</span> for <span class="math notranslate nohighlight">\(n \geq 2\)</span>.  Given this sequence of numbers, we can define the generating function of the Fibonacci sequence:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -509,8 +523,8 @@ f(x) ( 1- x - x^2) &amp;= x\\
 <section id="probability-generating-functions">
 <h2><span class="section-number">1.3.1. </span>Probability Generating Functions<a class="headerlink" href="#probability-generating-functions" title="Link to this heading">#</a></h2>
 <p>We now look specifically at a few probability generating functions.</p>
-<div class="proof example admonition" id="example-4">
-<p class="admonition-title"><span class="caption-number">Example 1.4 </span> (Flipping a fair coin)</p>
+<div class="proof example admonition" id="example-5">
+<p class="admonition-title"><span class="caption-number">Example 1.5 </span> (Flipping a fair coin)</p>
 <section class="example-content" id="proof-content">
 <p>Consider a fair coin.  We will set <span class="math notranslate nohighlight">\(n\)</span> to be the number of heads from a single flip.  Then <span class="math notranslate nohighlight">\(p_0 =1/2\)</span> and <span class="math notranslate nohighlight">\(p_1 = 1/2\)</span> and <span class="math notranslate nohighlight">\(p_n = 0\)</span> for <span class="math notranslate nohighlight">\(n\geq 2\)</span>.</p>
 <p>Because this is a probabiity distribution for <span class="math notranslate nohighlight">\(0,1\)</span>, the resulting generating function is a <strong>probability generating function (PGF)</strong>:</p>
@@ -519,8 +533,8 @@ f(x) ( 1- x - x^2) &amp;= x\\
 \mu(x) = \frac{1+x}{2}
 \]</div>
 </section>
-</div><div class="proof example admonition" id="example-5">
-<p class="admonition-title"><span class="caption-number">Example 1.5 </span> (Flipping a weighted coin)</p>
+</div><div class="proof example admonition" id="example-6">
+<p class="admonition-title"><span class="caption-number">Example 1.6 </span> (Flipping a weighted coin)</p>
 <section class="example-content" id="proof-content">
 <p>Now consider a coin with probaibility <span class="math notranslate nohighlight">\(p_H\)</span> of heads and <span class="math notranslate nohighlight">\(1-p_H\)</span> of tails.  Again, we count the number of heads, so <span class="math notranslate nohighlight">\(p_0=1-p_H\)</span> and <span class="math notranslate nohighlight">\(p_1 = p_H\)</span></p>
 <p>Then the PGF is</p>
@@ -529,8 +543,8 @@ f(x) ( 1- x - x^2) &amp;= x\\
 \mu(x) = (1-p_H) + p_H x
 \]</div>
 </section>
-</div><div class="proof example admonition" id="example-6">
-<p class="admonition-title"><span class="caption-number">Example 1.6 </span> (6-sided dice)</p>
+</div><div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 1.7 </span> (6-sided dice)</p>
 <section class="example-content" id="proof-content">
 <p>Consider the probability of rolling a <span class="math notranslate nohighlight">\(k\)</span> with a typical 6-sided die, for which <span class="math notranslate nohighlight">\(p_k = 1/6\)</span> for <span class="math notranslate nohighlight">\(k=1, 2, \ldots, 6\)</span>.</p>
 <p>The PGF is:</p>
@@ -545,7 +559,7 @@ f(x) ( 1- x - x^2) &amp;= x\\
 <h2><span class="section-number">1.3.2. </span>Some standard PGFs<a class="headerlink" href="#some-standard-pgfs" title="Link to this heading">#</a></h2>
 <p>We look at a few common probability distributions and derive their PGFs.</p>
 <div class="proof example admonition" id="example-BinomPGF">
-<p class="admonition-title"><span class="caption-number">Example 1.7 </span> (Binomial Distribution)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.8 </span> (Binomial Distribution)</p>
 <section class="example-content" id="proof-content">
 <p>The binomial distribution is the distribution of the number of successes out of <span class="math notranslate nohighlight">\(N\)</span> trials if each trial has probability <span class="math notranslate nohighlight">\(p\)</span> of success independently of the others.  We can think of this as the number of heads from <span class="math notranslate nohighlight">\(N\)</span> flips of a (possibly weighted) coin with probability <span class="math notranslate nohighlight">\(p\)</span> of heads.</p>
 <p>Consider <span class="math notranslate nohighlight">\(N\)</span> trials, each with success probability <span class="math notranslate nohighlight">\(p\)</span>.
@@ -564,7 +578,7 @@ The probability of <span class="math notranslate nohighlight">\(k\)</span> succe
 <p>Notice that the PGF for the number of heads in <span class="math notranslate nohighlight">\(N\)</span> flips <span class="math notranslate nohighlight">\(\mu_N(x)\)</span> is the PGF <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> for a single flip raised to the <span class="math notranslate nohighlight">\(N\)</span>th power:  <span class="math notranslate nohighlight">\(\mu_N(x) = \mu_1(x)^N\)</span>.  We will learn later why this happens.</p>
 </section>
 </div><div class="proof example admonition" id="example-GeomPGF">
-<p class="admonition-title"><span class="caption-number">Example 1.8 </span> (Geometric Distribution)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.9 </span> (Geometric Distribution)</p>
 <section class="example-content" id="proof-content">
 <p>The geometric distribution is the number of flips  of a (possibly weighted) coin needed until the first heads.  If the first flip is heads, we count that as <span class="math notranslate nohighlight">\(1\)</span> (some people use a different definition and count just the number of tails before the first head, which would start at <span class="math notranslate nohighlight">\(0\)</span>).  The version we use is the version provided by <code class="docutils literal notranslate"><span class="pre">python</span></code>’s <code class="docutils literal notranslate"><span class="pre">numpy</span></code> package.</p>
 <p>The probability of exactly <span class="math notranslate nohighlight">\(k\)</span> trials is <span class="math notranslate nohighlight">\((1-p)^{k-1} p\)</span>.  So the PGF is</p>
@@ -576,7 +590,7 @@ The probability of <span class="math notranslate nohighlight">\(k\)</span> succe
 \end{align*}\]</div>
 </section>
 </div><div class="proof example admonition" id="example-PoissonPGF">
-<p class="admonition-title"><span class="caption-number">Example 1.9 </span> (Poisson Distribution)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.10 </span> (Poisson Distribution)</p>
 <section class="example-content" id="proof-content">
 <p>The Poisson distribution can be thought of as the limiting behavior of the Binomial Distribution in the case that <span class="math notranslate nohighlight">\(N \to \infty\)</span> while <span class="math notranslate nohighlight">\(pN \to \lambda\)</span>.  In this case, the probability of a given <span class="math notranslate nohighlight">\(k\)</span> is <span class="math notranslate nohighlight">\(\lambda^k e^{-\lambda}/k!\)</span>.  So</p>
 <div class="amsmath math notranslate nohighlight">
@@ -588,7 +602,7 @@ The probability of <span class="math notranslate nohighlight">\(k\)</span> succe
 \end{align*}\]</div>
 </section>
 </div><div class="proof example admonition" id="example-NegBinPGF">
-<p class="admonition-title"><span class="caption-number">Example 1.10 </span> (Negative Binomial Distribution)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.11 </span> (Negative Binomial Distribution)</p>
 <section class="example-content" id="proof-content">
 <p>The Negative Binomial Distribution can be described in a similar way to the Geometric Distribution.  Assuming that the success probability is <span class="math notranslate nohighlight">\(p\)</span>, the number of <em>failures</em> that occur before <span class="math notranslate nohighlight">\(r\)</span> successes has a Negative Binomial Distribution.  Note that unlike the Geometric Distribution, here we are not counting successes.  The reason for this inconsistency is because <code class="docutils literal notranslate"><span class="pre">python</span></code>’s <code class="docutils literal notranslate"><span class="pre">numpy</span></code> package uses this version.</p>
 <p>The probablity of <span class="math notranslate nohighlight">\(N\)</span> failures before the <span class="math notranslate nohighlight">\(r\)</span>’th success can be calculated by finding the probability that the <span class="math notranslate nohighlight">\(N+r\)</span>th trial is a success, and the first <span class="math notranslate nohighlight">\(N+r-1\)</span> trials have <span class="math notranslate nohighlight">\(N\)</span> failures and <span class="math notranslate nohighlight">\(r-1\)</span> successes.  This is</p>
@@ -651,7 +665,7 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
 <li><p>Now we will replace <span class="math notranslate nohighlight">\(f(x)\)</span> by the fraction <span class="math notranslate nohighlight">\(1/(1-x)\)</span>.  For the values of <span class="math notranslate nohighlight">\(c_1, c_2, a_1, a_2\)</span> found previously use Algebra to verify (for <span class="math notranslate nohighlight">\(x \neq 1\)</span>) <span class="math notranslate nohighlight">\(\frac{c_1 x^{a_1} + c_2 x^{a_2}}{1-x}= \mu(x)\)</span>.  That is, confirm that <span class="math notranslate nohighlight">\(c_1 x^{a_1} + c_2 x^{a_2} = (1-x) \mu(x)\)</span>.</p></li>
 </ol>
 </li>
-<li><p>Consider the generating function <span class="math notranslate nohighlight">\(f(x) = x/ (1-x-x^2)\)</span> of the Fibonacci sequence given in <a class="reference internal" href="#ex-fibonacci_fxn">Example 1.3</a>.</p>
+<li><p>Consider the generating function <span class="math notranslate nohighlight">\(f(x) = x/ (1-x-x^2)\)</span> of the Fibonacci sequence given in <a class="reference internal" href="#ex-fibonacci_fxn">Example 1.4</a>.</p>
 <ol class="arabic simple">
 <li><p>Using a calculator/computer find <span class="math notranslate nohighlight">\(f(0.1)\)</span> to 15 digits and <span class="math notranslate nohighlight">\(f(0.01)\)</span> to 30 digits.</p></li>
 <li><p>Explain what you see.</p></li>

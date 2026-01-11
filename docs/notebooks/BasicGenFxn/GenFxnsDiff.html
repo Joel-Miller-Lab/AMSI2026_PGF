@@ -447,7 +447,7 @@ f'(x) = c_1 + 2c_2 x + 3c_3 x^2 + \cdots = \sum_{n=0}^\infty (n+1) c_{n+1} x^n
 \]</div>
 <p>So differentiating corresponds to multiplying the coefficient of <span class="math notranslate nohighlight">\(x^n\)</span> by <span class="math notranslate nohighlight">\(n\)</span> and reducing the power of <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(1\)</span>.  In terms of the corresponding sequence of numbers, we multiply the <span class="math notranslate nohighlight">\(n\)</span>th number by <span class="math notranslate nohighlight">\(n\)</span> and shift the indices so that it becomes the <span class="math notranslate nohighlight">\(n-1\)</span>st number.</p>
 <div class="proof example admonition" id="example-DiffPoissonClothesLine">
-<p class="admonition-title"><span class="caption-number">Example 1.14 </span> (Differentiation of a Poisson distribution PGF)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.15 </span> (Differentiation of a Poisson distribution PGF)</p>
 <section class="example-content" id="proof-content">
 <p>Consider the PGF of a Poisson distribution with mean <span class="math notranslate nohighlight">\(2\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -476,7 +476,7 @@ f'(x) = c_1 + 2c_2 x + 3c_3 x^2 + \cdots = \sum_{n=0}^\infty (n+1) c_{n+1} x^n
 x f'(x) = 0c_0 + 1 c_1 x + 2 c_2 x^2 + \cdots= \sum_{n=0}^\infty n c_n x^n 
 \]</div>
 <div class="proof example admonition" id="example-xddxPoissonClothesLine">
-<p class="admonition-title"><span class="caption-number">Example 1.15 </span> (Differentiation of a Poisson distribution PGF)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.16 </span> (Differentiation of a Poisson distribution PGF)</p>
 <section class="example-content" id="proof-content">
 <p>If we start with the derivative of the PGF of a Poisson distribution with mean <span class="math notranslate nohighlight">\(2\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -506,7 +506,7 @@ x f'(x) = 0c_0 + 1 c_1 x + 2 c_2 x^2 + \cdots= \sum_{n=0}^\infty n c_n x^n
 x \partial_x f(x) = x f'(x) = \sum n c_n x^n
 \]</div>
 <div class="proof example admonition" id="example-xddxPoissonBag">
-<p class="admonition-title"><span class="caption-number">Example 1.16 </span> (<span class="math notranslate nohighlight">\(x \partial_x\)</span> of the Poisson Distribution PGF)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.17 </span> (<span class="math notranslate nohighlight">\(x \partial_x\)</span> of the Poisson Distribution PGF)</p>
 <section class="example-content" id="proof-content">
 <p>Consider the PGF of the Poisson Distribution of mean 2:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -538,7 +538,7 @@ x \partial_x \mu_x &amp;= x \frac{d}{dx} e^{2(x-1)}\\
 (x \partial_x)^k f(x) = x \partial_x (x \partial_x)^{k-1} f(x) = \sum n^k c_n x^n 
 \]</div>
 <div class="proof example admonition" id="example-3">
-<p class="admonition-title"><span class="caption-number">Example 1.17 </span> (The sequence <span class="math notranslate nohighlight">\(0^k, 1^k, 2^k, \ldots\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.18 </span> (The sequence <span class="math notranslate nohighlight">\(0^k, 1^k, 2^k, \ldots\)</span>)</p>
 <section class="example-content" id="proof-content">
 <p>Consider the generating function</p>
 <div class="math notranslate nohighlight">
@@ -562,7 +562,7 @@ A_1(x) &amp;= \sum_{n=0}^\infty nx^n\\
 <p>To find each successive <span class="math notranslate nohighlight">\(A_k(x)\)</span> we repeat this with <span class="math notranslate nohighlight">\(A_k(x) = x \partial_x A_{k-1}(x) = (x \partial_x)^k \frac{1}{1-x}\)</span>.</p>
 </section>
 </div><div class="proof example admonition" id="example-CombIdent">
-<p class="admonition-title"><span class="caption-number">Example 1.18 </span> (Calculating a Combinatorial Identity)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.19 </span> (Calculating a Combinatorial Identity)</p>
 <section class="example-content" id="proof-content">
 <p>Consider the question:
 <em>What is the sum <span class="math notranslate nohighlight">\(\sum_{n=0}^N n^2 \binom{N}{n}\)</span>?</em></p>
