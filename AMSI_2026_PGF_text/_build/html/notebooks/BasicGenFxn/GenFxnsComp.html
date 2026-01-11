@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.6. Composition of PGFs &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.8. Composition of PGFs &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxnsComp';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.7. Properties of Generating functions" href="GenFxnsProperties.html" />
-    <link rel="prev" title="1.5. Multiplication of Generating Functions" href="GenFxnsMult.html" />
+    <link rel="next" title="1.9. Properties of Generating functions" href="GenFxnsProperties.html" />
+    <link rel="prev" title="1.7. Multiplication of Generating Functions" href="GenFxnsMult.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,12 +191,14 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="GenFxns.html">1. Generating Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.2. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.3. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.4. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsMult.html">1.5. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.6. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.7. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.2. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.8. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -414,7 +416,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.6.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.8.1. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -427,7 +429,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="composition-of-pgfs">
-<span id="sec-genfxncomp"></span><h1><span class="section-number">1.6. </span>Composition of PGFs<a class="headerlink" href="#composition-of-pgfs" title="Link to this heading">#</a></h1>
+<span id="sec-genfxncomp"></span><h1><span class="section-number">1.8. </span>Composition of PGFs<a class="headerlink" href="#composition-of-pgfs" title="Link to this heading">#</a></h1>
 <p>In this section, we focus just on PGFs.  Given two PGFs, we would like to know how to interpret <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span>.</p>
 <p>We have learned the following facts for PGFs:</p>
 <ul>
@@ -455,7 +457,7 @@ document.write(`
 \]</div>
 <p>Let’s look at an example before we do the general case.</p>
 <div class="proof example admonition" id="example-CashMachine">
-<p class="admonition-title"><span class="caption-number">Example 1.18 </span> (Cash machine PGF)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.21 </span> (Cash machine PGF)</p>
 <section class="example-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mu_1(x) = \sum_{k=0}^\infty p_k x^k\)</span> be the PGF for the number of customers who come to a cash machine during a day and <span class="math notranslate nohighlight">\(\mu_2(x)= \sum_{m=0}^\infty q_m x^m\)</span> be the PGF for the amount of money a random customer withdraws.  What would be the PGF for the total amount of money withdrawn from the cash machine during a day?</p>
 <p>Let’s first think through separate cases based on <span class="math notranslate nohighlight">\(k\)</span>, how many customers arrive.  We’ll find the PGF assuming that <span class="math notranslate nohighlight">\(k\)</span> is known.  Then we’ll combine the PGFs for each possible <span class="math notranslate nohighlight">\(k\)</span> into a complete PGF.   Given <span class="math notranslate nohighlight">\(k\)</span>, we know that the PGF of the amount withdrawn is <span class="math notranslate nohighlight">\(\xi_k(x)=[\mu_2(x)]^k\)</span> by <a class="reference internal" href="GenFxnsMult.html#cor-PGFPower">Corollary 1.1</a>.</p>
@@ -484,7 +486,7 @@ document.write(`
 </section>
 </div><p>We illustrate this in the following example in which <span class="math notranslate nohighlight">\(\mu_1(x)=\mu_2(x)\)</span>:</p>
 <div class="proof example admonition" id="example-InfectiousDice">
-<p class="admonition-title"><span class="caption-number">Example 1.19 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 1.22 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider one person who rolls a single standard six-sided die with PGF <span class="math notranslate nohighlight">\(\mu(x) = (x+x^2+ \cdots + x^6)/6\)</span>.  Let <span class="math notranslate nohighlight">\(k\)</span> be the resulting random number.</p>
 <p>Then <span class="math notranslate nohighlight">\(k\)</span> individuals are chosen from the population, each of whom rolls a six-sided die.  Add their results together to get <span class="math notranslate nohighlight">\(n\)</span>.  The PGF for <span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(\psi(x)=\mu(\mu(x))\)</span>.</p>
@@ -494,16 +496,16 @@ document.write(`
 <a class="reference internal image-reference" href="../../_images/InfectiousDice.png"><img alt="../../_images/InfectiousDice.png" src="../../_images/InfectiousDice.png" style="width: 600px; height: 450px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">If we roll one die to choose the random number <span class="math notranslate nohighlight">\(k\)</span> and then sum the rolls of <span class="math notranslate nohighlight">\(k\)</span> dice to get <span class="math notranslate nohighlight">\(n\)</span>, then the PGF of the final sum is <span class="math notranslate nohighlight">\(\mu(\mu(x))\)</span>, illustrating <a class="reference internal" href="#example-InfectiousDice">Example 1.19</a>.</span><a class="headerlink" href="#fig-infectiousdice" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">If we roll one die to choose the random number <span class="math notranslate nohighlight">\(k\)</span> and then sum the rolls of <span class="math notranslate nohighlight">\(k\)</span> dice to get <span class="math notranslate nohighlight">\(n\)</span>, then the PGF of the final sum is <span class="math notranslate nohighlight">\(\mu(\mu(x))\)</span>, illustrating <a class="reference internal" href="#example-InfectiousDice">Example 1.22</a>.</span><a class="headerlink" href="#fig-infectiousdice" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="self-test">
-<h2><span class="section-number">1.6.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.8.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Consider the dice rolling in <a class="reference internal" href="#example-InfectiousDice">Example 1.19</a>.  Set <span class="math notranslate nohighlight">\(X_0=1\)</span>.  For <span class="math notranslate nohighlight">\(g=1, 2, 3\)</span>, find <span class="math notranslate nohighlight">\(X_g\)</span> by having <span class="math notranslate nohighlight">\(X_{g-1}\)</span> individuals each roll a die and setting <span class="math notranslate nohighlight">\(X_g\)</span> to be the sum.</p>
+<li><p>Consider the dice rolling in <a class="reference internal" href="#example-InfectiousDice">Example 1.22</a>.  Set <span class="math notranslate nohighlight">\(X_0=1\)</span>.  For <span class="math notranslate nohighlight">\(g=1, 2, 3\)</span>, find <span class="math notranslate nohighlight">\(X_g\)</span> by having <span class="math notranslate nohighlight">\(X_{g-1}\)</span> individuals each roll a die and setting <span class="math notranslate nohighlight">\(X_g\)</span> to be the sum.</p>
 <ol class="arabic simple">
 <li><p>Show that the PGF of <span class="math notranslate nohighlight">\(X_1\)</span> is <span class="math notranslate nohighlight">\(\psi(x)\)</span> where <span class="math notranslate nohighlight">\(\psi(x)\)</span> is the PGF of a single die.</p></li>
-<li><p>Explain why the PGF of <span class="math notranslate nohighlight">\(X_2\)</span> is <span class="math notranslate nohighlight">\(\psi(\psi(x))\)</span>.  [hint: <a class="reference internal" href="#example-InfectiousDice">Example 1.19</a> should be helpful for this.]</p></li>
+<li><p>Explain why the PGF of <span class="math notranslate nohighlight">\(X_2\)</span> is <span class="math notranslate nohighlight">\(\psi(\psi(x))\)</span>.  [hint: <a class="reference internal" href="#example-InfectiousDice">Example 1.22</a> should be helpful for this.]</p></li>
 <li><p>What is the PGF of <span class="math notranslate nohighlight">\(X_3\)</span>?</p></li>
 </ol>
 </li>
@@ -548,7 +550,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.5. </span>Multiplication of Generating Functions</p>
+        <p class="prev-next-title"><span class="section-number">1.7. </span>Multiplication of Generating Functions</p>
       </div>
     </a>
     <a class="right-next"
@@ -556,7 +558,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.7. </span>Properties of Generating functions</p>
+        <p class="prev-next-title"><span class="section-number">1.9. </span>Properties of Generating functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -576,7 +578,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.6.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.8.1. Self-test</a></li>
 </ul>
   </nav></div>
 

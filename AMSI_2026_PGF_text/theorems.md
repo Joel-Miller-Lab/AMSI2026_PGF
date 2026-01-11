@@ -52,7 +52,7 @@ and it corresponds to the probability distribution of the sum $n_1 + n_2 + \cdot
 :::{admonition} Statement
 :class: dropdown
 
-Given a PGF $\mu(x)$, if we perform $k$ draws from its distribution, the PGF for the sum of all $k$ draws is $[\mu(x)]^k$.
+Given a PGF $\mu(x)$, if we perform $k$ draws from its distribution, the PGF for the sum of all $k$ draws is $\mu(x)^k$.
 :::
 
 ## {prf:ref}`thm-GWTisGWP` — Galton-Watson trees are Galton-Watson processes.
@@ -114,7 +114,15 @@ Then the number of infections at generation $g$ forms a Galton-Watson process wi
 
 Given a Galton-Watson Process whose offspring distribution PGF is $\mu(x)$, the probability that the process terminates after a finite cumulative count of exactly $\sum_{g=0}^\infty X_g = j$ is given by 
 
-$$ \mathbb{P}(j=\sum X_g) = \frac{1}{j} p_{j-1}^{(j)}$$ 
+$$ \mathbb{P}\left(j=\sum X_g\right) = \frac{1}{j} p_{j-1}^{(j)}$$ 
 
-where $p_{j-1}^{(j)}$ denotes the coefficient of $x^{j-1}$ in  $[\mu(x)]^j$.
+where $p_{j-1}^{(j)}= [x^{j-1}]\left(\mu(x)^j\right)$ denotes the coefficient of $x^{j-1}$ in  $\mu(x)^j$.
+:::
+
+## {prf:ref}`lemma-CycleLemma` — Cycle Lemma
+
+:::{admonition} Statement
+:class: dropdown
+
+Given a sequence of $j$ non-negative integers summing to $j-1$, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.
 :::

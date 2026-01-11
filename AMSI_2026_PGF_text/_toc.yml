@@ -15,7 +15,9 @@ parts:
     - file: notebooks/BasicGenFxn/GenFxns
       sections: 
       - file: notebooks/BasicGenFxn/GenFxnsParadigm
+      - file: notebooks/BasicGenFxn/GenFxnsNotation
       - file: notebooks/BasicGenFxn/GenFxnsExamples
+      - file: notebooks/BasicGenFxn/GenFxnsProveIdent
       - file: notebooks/BasicGenFxn/GenFxnsDiff
       - file: notebooks/BasicGenFxn/GenFxnsAdd
       - file: notebooks/BasicGenFxn/GenFxnsMult

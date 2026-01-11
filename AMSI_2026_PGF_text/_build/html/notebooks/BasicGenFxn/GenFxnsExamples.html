@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.2. Generating Function Examples &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.3. Generating Function Examples &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxnsExamples';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.3. Differentiation of Generating Functions" href="GenFxnsDiff.html" />
-    <link rel="prev" title="1.1. A paradigm change" href="GenFxnsParadigm.html" />
+    <link rel="next" title="1.4. Using Generating Functions to Prove Identities" href="GenFxnsProveIdent.html" />
+    <link rel="prev" title="1.2. Some notation" href="GenFxnsNotation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,12 +191,14 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="GenFxns.html">1. Generating Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.3. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.4. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsMult.html">1.5. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsComp.html">1.6. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.7. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.2. Some notation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.3. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsComp.html">1.8. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -414,9 +416,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-generating-functions">1.2.1. Probability Generating Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-standard-pgfs">1.2.2. Some standard PGFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.2.3. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-generating-functions">1.3.1. Probability Generating Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-standard-pgfs">1.3.2. Some standard PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.3.3. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -429,7 +431,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="generating-function-examples">
-<span id="sec-genfxnsexamples"></span><h1><span class="section-number">1.2. </span>Generating Function Examples<a class="headerlink" href="#generating-function-examples" title="Link to this heading">#</a></h1>
+<span id="sec-genfxnsexamples"></span><h1><span class="section-number">1.3. </span>Generating Function Examples<a class="headerlink" href="#generating-function-examples" title="Link to this heading">#</a></h1>
 <div class="proof example admonition" id="example-0">
 <p class="admonition-title"><span class="caption-number">Example 1.1 </span> (Geometric Sequences)</p>
 <section class="example-content" id="proof-content">
@@ -461,12 +463,16 @@ f_N(x)(1-x) &amp;= f_N(x) - x f_N(x)\\
 <div class="proof example admonition" id="ex-BinomCoeff">
 <p class="admonition-title"><span class="caption-number">Example 1.2 </span> (The Binomial Coefficients)</p>
 <section class="example-content" id="proof-content">
-<p>Consider the numbers <span class="math notranslate nohighlight">\(C_{N,k} = \binom{N}{k}\)</span> for fixed <span class="math notranslate nohighlight">\(N\)</span>.  Then the generating function</p>
+<p>Consider the binomial coefficients for a fixed integer <span class="math notranslate nohighlight">\(N\)</span> and integer values of <span class="math notranslate nohighlight">\(k\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-f(x) = C_{N,0} x^0 + C_{N,1}x^1 + \cdots = \sum_{k=0}^N C_{N,k} x^k
-\]</div>
-<p>is</p>
+\[\begin{split}
+\binom{N}{k} = \begin{cases} \frac{N!}{k!(N-k)!} &amp; k=0, \ldots, N\\
+0 &amp; k&lt;0 \text{ or } k&gt;N
+\end{cases}
+The generating function\end{split}\]</div>
+<p>f(x) = \binom{N}{0}x^0 + \binom{N}{1}x^1 + \cdots = \sum_k \binom{N}{k} x^k
+$$
+is</p>
 <div class="math notranslate nohighlight">
 \[f(x) = (1+x)^N\]</div>
 </section>
@@ -501,7 +507,7 @@ f(x) ( 1- x - x^2) &amp;= x\\
 </section>
 </div><p>The self-test will use the generating function of the Fibonacci sequence to derive a formula for each term.</p>
 <section id="probability-generating-functions">
-<h2><span class="section-number">1.2.1. </span>Probability Generating Functions<a class="headerlink" href="#probability-generating-functions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.3.1. </span>Probability Generating Functions<a class="headerlink" href="#probability-generating-functions" title="Link to this heading">#</a></h2>
 <p>We now look specifically at a few probability generating functions.</p>
 <div class="proof example admonition" id="example-4">
 <p class="admonition-title"><span class="caption-number">Example 1.4 </span> (Flipping a fair coin)</p>
@@ -536,7 +542,7 @@ f(x) ( 1- x - x^2) &amp;= x\\
 </section>
 </div></section>
 <section id="some-standard-pgfs">
-<h2><span class="section-number">1.2.2. </span>Some standard PGFs<a class="headerlink" href="#some-standard-pgfs" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.3.2. </span>Some standard PGFs<a class="headerlink" href="#some-standard-pgfs" title="Link to this heading">#</a></h2>
 <p>We look at a few common probability distributions and derive their PGFs.</p>
 <div class="proof example admonition" id="example-BinomPGF">
 <p class="admonition-title"><span class="caption-number">Example 1.7 </span> (Binomial Distribution)</p>
@@ -621,8 +627,8 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
 </section>
 </div></section>
 <section id="self-test">
-<h2><span class="section-number">1.2.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
-<ol class="arabic">
+<h2><span class="section-number">1.3.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
 <li><p>Consider the sequence <span class="math notranslate nohighlight">\(A, Ar, Ar^2, \ldots\)</span>.</p>
 <ol class="arabic simple">
 <li><p>Write down the generating function of this sequence in expanded form.</p></li>
@@ -645,24 +651,11 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
 <li><p>Now we will replace <span class="math notranslate nohighlight">\(f(x)\)</span> by the fraction <span class="math notranslate nohighlight">\(1/(1-x)\)</span>.  For the values of <span class="math notranslate nohighlight">\(c_1, c_2, a_1, a_2\)</span> found previously use Algebra to verify (for <span class="math notranslate nohighlight">\(x \neq 1\)</span>) <span class="math notranslate nohighlight">\(\frac{c_1 x^{a_1} + c_2 x^{a_2}}{1-x}= \mu(x)\)</span>.  That is, confirm that <span class="math notranslate nohighlight">\(c_1 x^{a_1} + c_2 x^{a_2} = (1-x) \mu(x)\)</span>.</p></li>
 </ol>
 </li>
-<li><p>Consider the generating function of the Fibonacci sequence given in <a class="reference internal" href="#ex-fibonacci_fxn">Example 1.3</a>.</p>
+<li><p>Consider the generating function <span class="math notranslate nohighlight">\(f(x) = x/ (1-x-x^2)\)</span> of the Fibonacci sequence given in <a class="reference internal" href="#ex-fibonacci_fxn">Example 1.3</a>.</p>
 <ol class="arabic simple">
-<li><p>Using a calculator find <span class="math notranslate nohighlight">\(f(0.1)\)</span> to 15 digits and <span class="math notranslate nohighlight">\(f(0.01)\)</span> to 30 digits.  Explain what you see.  Can you say what <span class="math notranslate nohighlight">\(f(0.001)\)</span> is to 45 digits without a calculator?</p></li>
-<li><p>Verify that</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[f(x) = \frac{1}{\sqrt{5}} \left( \frac{1}{1-\phi x} - \frac{1}{1-\psi x}\right)
-   \]</div>
-<p>where <span class="math notranslate nohighlight">\(\phi = (1+\sqrt{5})/2\)</span> and <span class="math notranslate nohighlight">\(\psi = (1-\sqrt{5})/2\)</span></p>
-<ol class="arabic simple" start="3">
-<li><p>Expand the two fractions above into power series using Question 1.</p></li>
-<li><p>Write down the formula for the <span class="math notranslate nohighlight">\(n\)</span>th Fibonacci number.</p></li>
-</ol>
-</li>
-<li><p>Consider the identity <span class="math notranslate nohighlight">\((1+x)^m (1+x)^{n} = (1+x)^{m+n}\)</span>.</p>
-<ol class="arabic simple">
-<li><p>Find the coefficient of <span class="math notranslate nohighlight">\(x^2\)</span> on the left hand side and right hand side.  Use this to prove  <span class="math notranslate nohighlight">\(\binom{m}{0}\binom{n}{2} + \binom{m}{1}\binom{n}{1} + \binom{m}{2}\binom{n}{0} = \binom{m+n}{2}\)</span>.</p></li>
-<li><p>By looking at the coefficient of <span class="math notranslate nohighlight">\(x^k\)</span>, show that <span class="math notranslate nohighlight">\(\binom{m+n}{k} = \sum_{r=0}^k \binom{m}{r} \binom{n}{k-r}\)</span> (Vandermonde’s Identity).</p></li>
+<li><p>Using a calculator/computer find <span class="math notranslate nohighlight">\(f(0.1)\)</span> to 15 digits and <span class="math notranslate nohighlight">\(f(0.01)\)</span> to 30 digits.</p></li>
+<li><p>Explain what you see.</p></li>
+<li><p>Can you say what <span class="math notranslate nohighlight">\(f(0.001)\)</span> is to 45 digits without any automated calculations?</p></li>
 </ol>
 </li>
 </ol>
@@ -700,20 +693,20 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="GenFxnsParadigm.html"
+       href="GenFxnsNotation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.1. </span>A paradigm change</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>Some notation</p>
       </div>
     </a>
     <a class="right-next"
-       href="GenFxnsDiff.html"
+       href="GenFxnsProveIdent.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.3. </span>Differentiation of Generating Functions</p>
+        <p class="prev-next-title"><span class="section-number">1.4. </span>Using Generating Functions to Prove Identities</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -733,9 +726,9 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-generating-functions">1.2.1. Probability Generating Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-standard-pgfs">1.2.2. Some standard PGFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.2.3. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-generating-functions">1.3.1. Probability Generating Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-standard-pgfs">1.3.2. Some standard PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.3.3. Self-test</a></li>
 </ul>
   </nav></div>
 
