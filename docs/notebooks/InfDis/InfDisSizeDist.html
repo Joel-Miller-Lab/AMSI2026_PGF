@@ -191,12 +191,14 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.2. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.3. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.4. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.5. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.6. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.7. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.2. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.8. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -444,7 +446,7 @@ document.write(`
 <p>Given a Galton-Watson Process whose offspring distribution PGF is <span class="math notranslate nohighlight">\(\mu(x)\)</span>, the probability that the process terminates after a finite cumulative count of exactly <span class="math notranslate nohighlight">\(\sum_{g=0}^\infty X_g = j\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[ \mathbb{P}\left(j=\sum X_g\right) = \frac{1}{j} p_{j-1}^{(j)}\]</div>
-<p>where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span> denotes the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in  <span class="math notranslate nohighlight">\([\mu(x)]^j\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}= [x^{j-1}]\left(\mu(x)^j\right)\)</span> denotes the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in  <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.</p>
 </section>
 </div><div class="proof example admonition" id="example-GeomTotalSize">
 <p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Size distribution with a geometric offspring distribution)</p>
@@ -454,7 +456,7 @@ document.write(`
 \[
 \mathbb{P}(\text{size}=j) = \frac{1}{j}p_{j-1}^{(j)}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span> is the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in <span class="math notranslate nohighlight">\([\mu(x)]^j = \left( \frac{p}{1-(1-p)x}\right)^j\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)} = [x^{j-1}]\left(\mu(x)^j\right) = \left( \frac{p}{1-(1-p)x}\right)^j\)</span></p>
 <p>This is the PGF for a negative binomial distribution.  The Taylor Series expansion of <span class="math notranslate nohighlight">\(\left( \frac{p}{1-(1-p)x}\right)^j\)</span> is known, and the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -491,7 +493,7 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <p>If <span class="math notranslate nohighlight">\(k_1, k_2, \ldots, k_j\)</span> corresponds to a <span class="math notranslate nohighlight">\(j\)</span>-node Galton-Watson tree, then that correspondence is unique: the same node ordering rule will always yield the same sequence <span class="math notranslate nohighlight">\(k_1, \ldots, k_j\)</span> and given the sequence we can reconstruct the original tree.  Thus the probability that a Galton-Watson tree has <span class="math notranslate nohighlight">\(j\)</span> nodes is equal to the combined probabilities of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences <span class="math notranslate nohighlight">\(k_1, \ldots, k_j\)</span> that correspond to <span class="math notranslate nohighlight">\(j\)</span>-node Galton-Watson trees.</p>
 <p>To complete the proof, we “just” need to characterize all of the allowable sequences and calculate their combined probability.  To characterize them, we need to identify relevant constraints on the sequences, as not all length-<span class="math notranslate nohighlight">\(j\)</span> sequences correspond to <span class="math notranslate nohighlight">\(j\)</span>-node trees.</p>
 <p>One constraint is that if the Galton-Watson tree has exactly <span class="math notranslate nohighlight">\(j\)</span> nodes, then <span class="math notranslate nohighlight">\(j-1\)</span> of them have exactly one parent and the other has no parent.  So a Galton-Watson tree having exactly <span class="math notranslate nohighlight">\(j\)</span> nodes would require that the sum of the number of offspring of all <span class="math notranslate nohighlight">\(j\)</span> nodes is <span class="math notranslate nohighlight">\(j-1\)</span>.  Thus <span class="math notranslate nohighlight">\(\sum_{i=1}^j k_i = j-1\)</span>.</p>
-<p>Recall that <span class="math notranslate nohighlight">\([\mu(x)]^j\)</span> is the PGF for the sum <span class="math notranslate nohighlight">\(\sum_{i=1}^j k_i\)</span>.  Thus <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>, the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in <span class="math notranslate nohighlight">\([\mu(x)]^j\)</span> is the probability that <span class="math notranslate nohighlight">\(j\)</span> numbers would sum to <span class="math notranslate nohighlight">\(j-1\)</span>. So we can see that the probability that a tree would have exactly <span class="math notranslate nohighlight">\(j\)</span> nodes would likely be related to <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>.  However, we haven’t yet explained where the <span class="math notranslate nohighlight">\(1/j\)</span> prefactor comes from.  Indeed, we might (incorrectly, as I initially did) expect the probability a Galton-Watson tree has exactly <span class="math notranslate nohighlight">\(j\)</span> nodes should equal <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>.</p>
+<p>Recall that <span class="math notranslate nohighlight">\(\mu(x)^j\)</span> is the PGF for the sum <span class="math notranslate nohighlight">\(\sum_{i=1}^j k_i\)</span>.  Thus <span class="math notranslate nohighlight">\(p_{j-1}^{(j)} =[x^{j-1}]\left(\mu(x)^j\right)\)</span> is the probability that <span class="math notranslate nohighlight">\(j\)</span> numbers would sum to <span class="math notranslate nohighlight">\(j-1\)</span>. So we can see that the probability that a tree would have exactly <span class="math notranslate nohighlight">\(j\)</span> nodes would likely be related to <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>.  However, we haven’t yet explained where the <span class="math notranslate nohighlight">\(1/j\)</span> prefactor comes from.  Indeed, we might (incorrectly, as I initially did) expect the probability a Galton-Watson tree has exactly <span class="math notranslate nohighlight">\(j\)</span> nodes should equal <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>.</p>
 <p>There is still another constraint that we need to handle.  To see it, let us imagine that <span class="math notranslate nohighlight">\(j=2\)</span>.  If the first node has zero offspring and the second has one offspring, have we created a Galton-Watson tree with exactly <span class="math notranslate nohighlight">\(j=2\)</span> nodes?  No. If the first node has no offspring then the tree is already complete – there is no second node.  On the other hand if the first node has one offspring and the second has none, then we do have a Galton-Watson tree with <span class="math notranslate nohighlight">\(2\)</span> nodes. So only half of the length-<span class="math notranslate nohighlight">\(2\)</span> sequences of <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> that add up to <span class="math notranslate nohighlight">\(1\)</span> correspond to a valid Galton-Watson process.</p>
 <p>So in addition to requiring that the number of offspring sum to <span class="math notranslate nohighlight">\(j-1\)</span>, there is a constraint on the order.  Under the formulation so far, that constraint is that no subsequence <span class="math notranslate nohighlight">\((k_1, \ldots, k_\ell)\)</span> for <span class="math notranslate nohighlight">\(\ell&lt;j\)</span> sums to <span class="math notranslate nohighlight">\(\ell-1\)</span> as this would mean that the Galton-Watson tree terminates after <span class="math notranslate nohighlight">\(\ell\)</span> nodes.</p>
 </section>
@@ -523,14 +525,14 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 </div><div class="proof example admonition" id="ex-DFS">
 <p class="admonition-title"><span class="caption-number">Example 3.2 </span> (Depth-first search)</p>
 <section class="example-content" id="proof-content">
-<p>A <em>depth first search</em> on the <span class="math notranslate nohighlight">\(j=9\)</span> node Galton-Watson tree in <a class="reference internal" href="#fig-gwt"><span class="std std-numref">Fig. 3.1</span></a> produces the node order <span class="math notranslate nohighlight">\(u_{0,1}, u_{1,1}, u_{1,2}, u{2,1}, u_{3,1}, u_{3,2}, u_{2,2}, u_{1,3}, u_{2,3}\)</span>, which produces the Łukasiewicz word: <span class="math notranslate nohighlight">\(\mathcal{S} = (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  As expected the sum of these is <span class="math notranslate nohighlight">\(8=j-1\)</span>.</p>
+<p>A <em>depth first search</em> on the same <span class="math notranslate nohighlight">\(j=9\)</span> node Galton-Watson tree in <a class="reference internal" href="#fig-gwt"><span class="std std-numref">Fig. 3.1</span></a> is shown in <a class="reference internal" href="#fig-bfsvsdfs"><span class="std std-numref">Fig. 3.2</span></a>.  It produces the node order <span class="math notranslate nohighlight">\(u_{0,1}, u_{1,1}, u_{1,2}, u{2,1}, u_{3,1}, u_{3,2}, u_{2,2}, u_{1,3}, u_{2,3}\)</span>, which yields the Łukasiewicz word: <span class="math notranslate nohighlight">\(\mathcal{S} = (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  As expected the sum of these is <span class="math notranslate nohighlight">\(8=j-1\)</span>.</p>
 </section>
-</div><p>A comparison of a depth-first search and a breadth-first search is shown in  <a class="reference internal" href="#fig-bfs"><span class="std std-numref">Fig. 3.2</span></a>:</p>
-<figure class="align-default" id="fig-bfs">
+</div><p>A comparison of a depth-first search and a breadth-first search is illustrated in  <a class="reference internal" href="#fig-bfsvsdfs"><span class="std std-numref">Fig. 3.2</span></a>:</p>
+<figure class="align-default" id="fig-bfsvsdfs">
 <a class="reference internal image-reference" href="../../_images/BFSvsDFS.png"><img alt="../../_images/BFSvsDFS.png" src="../../_images/BFSvsDFS.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).  The depth-first search yields a Łukasiewicz word <span class="math notranslate nohighlight">\(\mathcal{S}= (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</span><a class="headerlink" href="#fig-bfs" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).  The depth-first search yields a Łukasiewicz word <span class="math notranslate nohighlight">\(\mathcal{S}= (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</span><a class="headerlink" href="#fig-bfsvsdfs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -540,20 +542,22 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <div class="proof algorithm admonition" id="alg-GWTReconstruct">
 <p class="admonition-title"><span class="caption-number">Algorithm 3.2 </span> (Inverting the Depth-First search)</p>
 <section class="algorithm-content" id="proof-content">
-<p>We begin with a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers of length <span class="math notranslate nohighlight">\(j\)</span>, summing to <span class="math notranslate nohighlight">\(j-1\)</span>.  We place <span class="math notranslate nohighlight">\(j\)</span> nodes around a ring.  Starting with the top node, label the nodes clockwise with the entries <span class="math notranslate nohighlight">\(s_1, s_2, \ldots, s_j\)</span>.</p>
+<p>We begin with a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers of length <span class="math notranslate nohighlight">\(j\)</span>, summing to <span class="math notranslate nohighlight">\(j-1\)</span>.  We place <span class="math notranslate nohighlight">\(j\)</span> nodes around a ring.  Starting with the top node, label the nodes clockwise with the numerical values <span class="math notranslate nohighlight">\(s_1, s_2, \ldots, s_j\)</span>, representing the number of offspring that we must assign each.</p>
+<p>We will iteratively process the nodes, assigning a parent to a node only once we have identified all of its children.</p>
 <p>We repeat the following steps as long as there are nodes with non-zero labels:</p>
 <ul class="simple">
 <li><p>Consider each node <span class="math notranslate nohighlight">\(w\)</span> with a nonzero label <span class="math notranslate nohighlight">\(x_w\)</span> that is immediately followed, in the clockwise direction, by one or more nodes with a label of <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
 <li><p>Place an edge from <span class="math notranslate nohighlight">\(w\)</span> to the nodes immediately following it that are labelled with <span class="math notranslate nohighlight">\(0\)</span>, up to the first <span class="math notranslate nohighlight">\(x_w\)</span> of them if there are that many.</p></li>
-<li><p>Reduce the label <span class="math notranslate nohighlight">\(x_w\)</span> by the number of edges added.  Remove the nodes that were made offspring of <span class="math notranslate nohighlight">\(w\)</span> from further consideration.</p></li>
+<li><p>Remove the nodes that are now offspring of <span class="math notranslate nohighlight">\(w\)</span> from further consideration.</p></li>
+<li><p>Reduce the label <span class="math notranslate nohighlight">\(x_w\)</span> by the number of edges added, so that it represents the number of offspring that still need to be assigned to <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
 </ul>
-<p>The result is a directed tree.  <em>If</em> the original sequence is a Łukasiewicz word, then the root is at the top (corresponding to the first entry of the sequence) and the resulting tree is the original tree.</p>
+<p>The result is a directed tree.  <em>If</em> the original sequence <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a Łukasiewicz word, then the root is at the top (corresponding to the first entry of the sequence) and the resulting tree is the original tree.</p>
 </section>
-</div><p>We have a brief aside to define a cyclic permutation:</p>
+</div><p>We take a brief aside to define a cyclic permutation:</p>
 <div class="proof definition admonition" id="definition-CyclicPerm">
 <p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Cyclic Permutation)</p>
 <section class="definition-content" id="proof-content">
-<p>Given a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span>, the cyclic permutations are:</p>
+<p>Given a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span>, the <span class="math notranslate nohighlight">\(j\)</span> cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 &amp;(s_1, s_2, \ldots, s_j)\\
@@ -580,9 +584,9 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <p>Now we show that it is guaranteed that if a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers sums to <span class="math notranslate nohighlight">\(j-1\)</span> then applying this process must generate a rooted directed tree:</p>
 <ul class="simple">
 <li><p>We are guaranteed at each step that the number of nodes in the ring is one more than the sum of their labels, so until only one node remains, we can find a  node with nonzero label followed by a node with label <span class="math notranslate nohighlight">\(0\)</span>.  This guarantees the process continues until only one node remains.</p></li>
-<li><p>The method of adding edges guarantees that at each step, when a node has label <span class="math notranslate nohighlight">\(0\)</span>, it is either isolated, or it is the root of a directed tree made up of nodes that have been removed from the ring.</p></li>
+<li><p>The method of adding edges guarantees that at each step, when a node has label <span class="math notranslate nohighlight">\(0\)</span>, it is either isolated, or it is the root of a directed tree made up of nodes that have been removed from the ring.  No node can get multiple parents, nor can a node’s descendent become its parent.</p></li>
 </ul>
-<p>The end result is a directed tree whose root is the final node left in the ring.   A cyclic permutation of the sequence simply rotates the labels in the ring, which causes a corresponding cyclic permutation of the nodes in the final tree.</p>
+<p>Thus the end result is a directed tree whose root is the final node left in the ring.   A cyclic permutation of the sequence simply rotates the labels in the ring, which causes a corresponding cyclic permutation of the nodes in the final tree. Exactly one permutation will move the root to the top of the ring.</p>
 <p>This leads us to one version of the Cycle Lemma:</p>
 <div class="proof lemma admonition" id="lemma-CycleLemma">
 <p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (Cycle Lemma)</p>
@@ -592,7 +596,7 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 </div><div class="proof admonition" id="proof">
 <p>Proof. Consider a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers that sumes to <span class="math notranslate nohighlight">\(j-1\)</span>.<br />
 If we use any cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a>, we end up with the same tree because the algorithm will proceed as before on the rotated ring.</p>
-<p>Only one of the cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> will put the root at the top of the ring.  Hence exactly one cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a Łukasiewicz word.</p>
+<p>Exactly one of the cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> places the root at the top of the ring.  Hence exactly one cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a Łukasiewicz word.</p>
 </div>
 </section>
 <section id="completing-the-proof">
@@ -602,8 +606,8 @@ If we use any cyclic permutation of <span class="math notranslate nohighlight">\
 <li><p>First: the probability a sequence of <span class="math notranslate nohighlight">\(j\)</span> numbers chosen from the offspring distribution sum to <span class="math notranslate nohighlight">\(j-1\)</span> is <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>.</p></li>
 <li><p>Next: we observe that given <span class="math notranslate nohighlight">\(j\)</span> values chosen from the offspring distribution, all of its <span class="math notranslate nohighlight">\(j\)</span> cyclic permutations have the same probability.  Combined with the Cycle Lemma, we conclude that if the values sum to <span class="math notranslate nohighlight">\(j-1\)</span>, the probability that the sequence is a Łukasiewicz word is <span class="math notranslate nohighlight">\(1/j\)</span>.</p></li>
 </ul>
-<p>Combining these, the probability that it sums to <span class="math notranslate nohighlight">\(j-1\)</span> and is a Łukasiewicz word is <span class="math notranslate nohighlight">\(\frac{1}{j} p_{j-1}^{(j)}\)</span>.  Thus we have proven:</p>
-<p><em>The probability a Galton-Watson process ends with total size <span class="math notranslate nohighlight">\(\sum X_g = j\)</span> is equal to <span class="math notranslate nohighlight">\(\frac{1}{j} p_{j-1}^{(j)}\)</span> where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span> is the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in <span class="math notranslate nohighlight">\([\mu(x)]^j\)</span>.</em></p>
+<p>Combining these, the probability that the sequence sums to <span class="math notranslate nohighlight">\(j-1\)</span> and is a Łukasiewicz word is <span class="math notranslate nohighlight">\(\frac{1}{j} p_{j-1}^{(j)}\)</span>.  Thus we have proven:</p>
+<p><em>The probability a Galton-Watson process ends with total size <span class="math notranslate nohighlight">\(\sum X_g = j\)</span> is equal to <span class="math notranslate nohighlight">\(\frac{1}{j} p_{j-1}^{(j)}\)</span> where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}=[x^{j-1}]\left(\mu(x)^j\right)\)</span>.</em></p>
 </section>
 <section id="self-test">
 <h2><span class="section-number">3.3.6. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>

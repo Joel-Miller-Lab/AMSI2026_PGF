@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Generating Functions — example applications &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.2. Some notation &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -58,9 +58,13 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxnsExApps';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxnsNotation';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.3. Generating Function Examples" href="GenFxnsExamples.html" />
+    <link rel="prev" title="1.1. A paradigm change" href="GenFxnsParadigm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +127,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -186,10 +188,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="GenFxns.html">1. Generating Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.2. Some notation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. Some notation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
@@ -290,7 +292,7 @@
       
       
       
-      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/BasicGenFxn/GenFxnsExApps.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/BasicGenFxn/GenFxnsNotation.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -320,7 +322,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/BasicGenFxn/GenFxnsExApps.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/BasicGenFxn/GenFxnsNotation.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -402,7 +404,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Generating Functions — example applications</h1>
+    <h1>Some notation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,8 +418,63 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="generating-functions-example-applications">
-<h1>Generating Functions — example applications<a class="headerlink" href="#generating-functions-example-applications" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="some-notation">
+<h1><span class="section-number">1.2. </span>Some notation<a class="headerlink" href="#some-notation" title="Link to this heading">#</a></h1>
+<p>There are a few pieces of notation that we will try to use consistently.  There is potential for confusion as in other branches of mathematics some of this notation would have a different interpretation.</p>
+<ul>
+<li><p>We will use the Latin alphabet for Ordinary Generating Functions and the Greek alphabet for Probability Generating Functions.</p></li>
+<li><p>We will frequently need to reference the coefficient of a particular power of <span class="math notranslate nohighlight">\(x\)</span> in the series expansion of <span class="math notranslate nohighlight">\(f(x)\)</span>.  For this, we will use</p>
+<div class="math notranslate nohighlight">
+\[
+  [x^n]f(x)
+  \]</div>
+</li>
+</ul>
+<p>For example if <span class="math notranslate nohighlight">\(f(x)=(1+x)^2=1+2x+x^2\)</span>, then <span class="math notranslate nohighlight">\([x]f(x) = 2\)</span>.</p>
+<ul class="simple">
+<li><p>Function composition will occur frequently.  We will adopt a notation that is often used for differentiation in other areas of mathematics.  Given the function <span class="math notranslate nohighlight">\(f(x)\)</span>, the function <span class="math notranslate nohighlight">\(f^{(2)}(x)\)</span> is <span class="math notranslate nohighlight">\(f(f(x))\)</span>.  More generally</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[f^{(n+1)}(x) = f(f^{(n)}(x))\]</div>
+<ul class="simple">
+<li><p>Multiplication of functions will also occur frequently.  We use <span class="math notranslate nohighlight">\(f(x)^2\)</span> to represent <span class="math notranslate nohighlight">\(f(x)f(x)\)</span>.  More generally</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[f(x)^{n+1} = f(x)f(x)^n\]</div>
+<ul class="simple">
+<li><p>Derivatives occur often.  Usually we will use the standard notation <span class="math notranslate nohighlight">\(\frac{d^n}{dx^n}f(x)\)</span> to denote the <span class="math notranslate nohighlight">\(n\)</span>th derivative, and if <span class="math notranslate nohighlight">\(n\)</span> is small we will often write <span class="math notranslate nohighlight">\(f''(x)\)</span>, but never <span class="math notranslate nohighlight">\(f^{(n)}(x)\)</span> as this is reserved for function composition.</p></li>
+<li><p>We are often interested in <span class="math notranslate nohighlight">\(xf'(x)\)</span>.  We will use the notation <span class="math notranslate nohighlight">\(x \partial_x f(x)\)</span> to denote <span class="math notranslate nohighlight">\(x f'(x)\)</span> and</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[(x \partial_x)^{n+1} f(x)= x \partial_x (x\partial_x)^n f(x)\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Notation</p></th>
+<th class="head"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f(x), g(x), \ldots\)</span></p></td>
+<td><p>Ordinary Generating Functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mu(x), \psi(x), \ldots\)</span></p></td>
+<td><p>Probability Generating Functions</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\([x^n]f(x)\)</span>, <span class="math notranslate nohighlight">\([x^n]\mu(x)\)</span></p></td>
+<td><p>The coefficient of <span class="math notranslate nohighlight">\(x^n\)</span> in the series expansion of <span class="math notranslate nohighlight">\(f(x)\)</span> or <span class="math notranslate nohighlight">\(\mu(x)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f^{(n)}(x)\)</span>, <span class="math notranslate nohighlight">\(\mu^{(n)}(x)\)</span></p></td>
+<td><p>function composition: <span class="math notranslate nohighlight">\(f(f(f(\cdots f(x) \cdots)))\)</span> or <span class="math notranslate nohighlight">\(\mu(\mu(\mu(\cdots \mu(x)\cdots)))\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f(x)^n\)</span>, <span class="math notranslate nohighlight">\(\mu(x)^n\)</span></p></td>
+<td><p>function multiplication: <span class="math notranslate nohighlight">\(f(x)f(x)\cdots f(x)\)</span> or <span class="math notranslate nohighlight">\(\mu(x)\mu(x)\cdots \mu(x)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\((x \partial_x)^n f(x)\)</span>, <span class="math notranslate nohighlight">\((x \partial_x)^n \mu(x)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(x\frac{d}{dx}\left(x \frac{d}{dx}\left(\cdots x\frac{d}{dx} f(x)\cdots\right)\right)\)</span> or <span class="math notranslate nohighlight">\(x\frac{d}{dx}\left(x \frac{d}{dx}\left(\cdots x\frac{d}{dx} \mu(x)\cdots\right)\right)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -450,6 +507,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="GenFxnsParadigm.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.1. </span>A paradigm change</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="GenFxnsExamples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Generating Function Examples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

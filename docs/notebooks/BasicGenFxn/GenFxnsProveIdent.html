@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Generating Functions &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.4. Using Generating Functions to Prove Identities &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -60,11 +60,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxns';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxnsProveIdent';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.1. A paradigm change" href="GenFxnsParadigm.html" />
-    <link rel="prev" title="List of Theorems" href="../../theorems.html" />
+    <link rel="next" title="1.5. Differentiation of Generating Functions" href="GenFxnsDiff.html" />
+    <link rel="prev" title="1.3. Generating Function Examples" href="GenFxnsExamples.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -189,11 +189,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">1. Generating Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="GenFxns.html">1. Generating Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsParadigm.html">1.1. A paradigm change</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.2. Some notation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.4. Using Generating Functions to Prove Identities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
@@ -292,7 +292,7 @@
       
       
       
-      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/BasicGenFxn/GenFxns.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/BasicGenFxn/GenFxnsProveIdent.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +322,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/BasicGenFxn/GenFxns.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/BasicGenFxn/GenFxnsProveIdent.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -393,7 +393,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -404,11 +406,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Generating Functions</h1>
+    <h1>Using Generating Functions to Prove Identities</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-fractions">1.4.1. Partial Fractions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-expansions">1.4.2. Binomial Expansions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snake-oil">1.4.3. Snake Oil</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -418,18 +430,224 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="generating-functions">
-<h1><span class="section-number">1. </span>Generating Functions<a class="headerlink" href="#generating-functions" title="Link to this heading">#</a></h1>
-<p>In this unit, we will study how probability generating functions (PGFs) can be used in biological contexts.  This requires learning</p>
-<ul class="simple">
-<li><p>the mathematical theory of PGFs,</p></li>
-<li><p>how to convert the biological applications into the mathematical language of PGFs, and</p></li>
-<li><p>how to interpret the mathematical results in terms of the biological applications.</p></li>
-</ul>
-<p>This has created a conundrum for me as I write these notes.  Pedagogically, I believe it is best to teach the material so that the application and the relevant mathematical theory are taught at the same time.  But should I write these notes in that order, or should I keep the mathematical theory and the applications separate?  I have finally decided to separate the material so that when we get into later applications it is easier to find the mathematical results in one place.</p>
-<p>So this chapter is structured as a self-contained reference to probability generating functions, focusing on those results which we need in our applications.  The main material of the subject begins in <a class="reference internal" href="../GaltonWatson/GaltWat.html#sec-galtwatsonintro"><span class="std std-numref">Chapter 2</span></a>, with frequent references back to this material, and guidance about what sections of this chapter to read simultaneously.</p>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="using-generating-functions-to-prove-identities">
+<h1><span class="section-number">1.4. </span>Using Generating Functions to Prove Identities<a class="headerlink" href="#using-generating-functions-to-prove-identities" title="Link to this heading">#</a></h1>
+<p>A wide variety of combinatorial identities can be proven using generating functions.  Without their help, we would typically rely on proof by induction and some messy Algebra.</p>
+<p>This section is for illustrative purposes only.  We won’t rely on it for our main applications, but it gives an impressive introduction to the power of the generating function side of the Taylor Series interpretation.  As Yoda warned, <em>if once you start down this path, forever will it dominate your proofs, seem amateur to you induction will.</em></p>
+<p>The typical approach is to take a generating function whose coefficients are the combinatorial quantity of interest.  Then use algebraic steps or other methods to simplify the generating function so that the we can find its Taylor Series in a different way.  Then by matching coefficients we arrive at a new identity.</p>
+<section id="partial-fractions">
+<h2><span class="section-number">1.4.1. </span>Partial Fractions<a class="headerlink" href="#partial-fractions" title="Link to this heading">#</a></h2>
+<div class="proof example admonition" id="example-0">
+<p class="admonition-title"><span class="caption-number">Example 1.11 </span></p>
+<section class="example-content" id="proof-content">
+<p>Consider the function</p>
+<div class="math notranslate nohighlight">
+\[ f(x) = 0 + x + x^2 + 2 x^3 + 3 x^4 + 5x^5 + \cdots\]</div>
+<p>for which <span class="math notranslate nohighlight">\([x^n]f(x) = F_n\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>’th Fibonacci number.  We saw in <a class="reference internal" href="GenFxnsExamples.html#ex-fibonacci_fxn">Example 1.3</a> that</p>
+<div class="math notranslate nohighlight">
+\[f(x) = x/(1-x-x^2)\]</div>
+<p>The quadratic formula shows us that the denominator factors as <span class="math notranslate nohighlight">\(-(x+\phi)(x+\psi)\)</span> where <span class="math notranslate nohighlight">\(\phi = (1+\sqrt{5})/2\)</span> and <span class="math notranslate nohighlight">\(\psi= (1-\sqrt{5})/2\)</span>.</p>
+<p>If we knew <span class="math notranslate nohighlight">\(f(x)\)</span> in a partial-fractions-like expansion <span class="math notranslate nohighlight">\(c_1/(1-ax) + c_2/(1-bx)\)</span>, then we would be able to use the rule for a geometric series to write out the coefficients of <span class="math notranslate nohighlight">\(f(x)\)</span> explicitly.  We will convert the factors in the denominator to resemble <span class="math notranslate nohighlight">\(1-ax\)</span>.  Since</p>
+<div class="math notranslate nohighlight">
+\[\phi \psi = -1\]</div>
+<p>the denoimator is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+-(x+\phi)(x+\psi) &amp;= \phi\psi(x+\phi)(x+\psi)\\
+                  &amp;= (\psi x - 1)(\phi x -1)\\
+                &amp;= (1-\psi x)(1-\phi x)
+\end{align*}\]</div>
+<p>We now expand <span class="math notranslate nohighlight">\(f(x)\)</span> in partial fractions.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{x}{1-x-x^2} &amp;= \frac{x}{(1 - \psi x )(1-\phi x)}\\
+&amp;= \frac{A}{1-\psi x} + \frac{B}{1-\phi x}\\
+\Rightarrow x &amp;= A(1-\phi x) + B(1-\psi x)
+\end{align*}\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(x= 1/\phi\)</span> gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1/\phi &amp;= 0A + B(1-\psi/\phi)\\
+1&amp;=B(\phi-\psi)\\
+\frac{1}{\phi-\psi}&amp;=B\\
+\frac{1}{\sqrt{5}} &amp;=B
+\end{align*}\]</div>
+<p>and using similar steps after setting <span class="math notranslate nohighlight">\(x = 1/\psi \)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[
+A = -\frac{1}{\sqrt{5}}
+\]</div>
+<p>So</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(x) &amp;= \frac{1}{\sqrt{5}} \left( \frac{1}{1-\phi x} - \frac{1}{1-\psi x}\right)\\
+&amp;= \frac{1}{\sqrt{5}} \left( (1 + \phi x + \phi^2x^2+\cdots) - (1 + \psi + \psi^2 x^2 + \cdots)\right)\\
+&amp;= \frac{1-1}{\sqrt{5}} + \frac{\phi-\psi}{\sqrt{5}}x^1 + \frac{\phi^2-\psi^2}{\sqrt{5}}x^2 + \cdot + \frac{\phi^n-\psi^n}{\sqrt{5}} x^n + \cdots
+\end{align*}\]</div>
+<p>So <span class="math notranslate nohighlight">\([x^n]f(x) = \frac{\phi^n - \psi^n}{\sqrt{5}}\)</span>, but it also equals <span class="math notranslate nohighlight">\(F_n\)</span>.  Hence we have proven</p>
+<div class="math notranslate nohighlight">
+\[
+F_n = \frac{\phi^n-\psi^n}{\sqrt{5}}
+\]</div>
+</section>
+</div></section>
+<section id="binomial-expansions">
+<h2><span class="section-number">1.4.2. </span>Binomial Expansions<a class="headerlink" href="#binomial-expansions" title="Link to this heading">#</a></h2>
+<p>Binomial coefficients often arise in combinatorial identities.</p>
+<div class="proof example admonition" id="example-Vandermonde">
+<p class="admonition-title"><span class="caption-number">Example 1.12 </span> (Vandermonde’s Identity)</p>
+<section class="example-content" id="proof-content">
+<p>Consider the identity</p>
+<div class="math notranslate nohighlight">
+\[
+(1+x)^{m+n}=(1+x)^m(1+x)^n
+\]</div>
+<p>We expand both sides:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\binom{m+n}{0} +&amp; \binom{m+n}{1} x + \binom{m+n}{2}x^2 + \cdots + \binom{m+n}{m+n} x^{m+n}\\
+ =&amp; \left( \binom{m}{0} + \binom{m}{1} x + \cdots + \binom{m}{m} x^m\right)\left( \binom{n}{0} + \binom{n}{1} x + \cdots + \binom{n}{n} x^n\right)\\
+ =&amp; \binom{m}{0}\binom{n}{0}\\
+ &amp;  + \left(\binom{m}{1}\binom{n}{0} + \binom{m}{0}\binom{n}{1}\right)x \\
+ &amp; + \left(\binom{m}{2}\binom{n}{0} + \binom{m}{1}\binom{n}{1} +\binom{m}{0}\binom{n}{2}\right)x^2
+ \\&amp; + \cdots \\
+ =&amp; \sum_{k=0}^\infty \sum_{r=0}^k \binom{m}{r}\binom{n}{k-r} x^k
+\end{align*}\]</div>
+<p>if <span class="math notranslate nohighlight">\(k&gt;m+n\)</span> then the right hand side turns out to be <span class="math notranslate nohighlight">\(0\)</span>.  For <span class="math notranslate nohighlight">\(k \leq m+n\)</span>, we can match coefficients of <span class="math notranslate nohighlight">\(x^k\)</span> and conclude</p>
+<div class="math notranslate nohighlight">
+\[
+\binom{m+n}{k} = \sum_{r=0}^k \binom{m}{r} \binom{n}{k-r}
+\]</div>
+</section>
+</div><div class="proof remark admonition" id="remark-2">
+<p class="admonition-title"><span class="caption-number">Remark 1.6 </span> (The product <span class="math notranslate nohighlight">\((1+x)^m(1+x)^n\)</span>)</p>
+<section class="remark-content" id="proof-content">
+<p>To help illustrate the product <span class="math notranslate nohighlight">\(\left( \binom{m}{0} + \binom{m}{1} x + \cdots + \binom{m}{m} x^m\right)\left( \binom{n}{0} + \binom{n}{1} x + \cdots + \binom{n}{n} x^n\right)\)</span> we use a table:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{m}{0}}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{m}{1}x}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{m}{2}x^2}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{m}{3}x^3}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{m}{4}x^4}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{m}{5}x^5}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\cdots\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{n}{0}}\)</span></p></td>
+<td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{0}\binom{n}{0}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{1}\binom{n}{0}x\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{2}\binom{n}{0}x^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{3}\binom{n}{0}x^3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{4}\binom{n}{0}x^4\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{5}\binom{n}{0}x^5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\cdots\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{n}{1}x}\)</span></p></td>
+<td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{0}\binom{n}{1}x\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{1}\binom{n}{1}x^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{2}\binom{n}{1}x^3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{3}\binom{n}{1}x^4\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{4}\binom{n}{1}x^5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{5}\binom{n}{1}x^6\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\cdots\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{n}{2}x^2}\)</span></p></td>
+<td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{0}\binom{n}{2}x^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{1}\binom{n}{2}x^3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{2}\binom{n}{2}x^4\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{3}\binom{n}{2}x^5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{4}\binom{n}{2}x^6\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{5}\binom{n}{2}x^7\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\cdots\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{n}{3}x^3}\)</span></p></td>
+<td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{0}\binom{n}{3}x^3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{1}\binom{n}{3}x^4\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{2}\binom{n}{3}x^5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{3}\binom{n}{3}x^6\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{4}\binom{n}{3}x^7\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{5}\binom{n}{3}x^8\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\cdots\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\color{blue}{\binom{n}{4}x^4}\)</span></p></td>
+<td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{0}\binom{n}{4}x^4\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{1}\binom{n}{4}x^5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{2}\binom{n}{4}x^6\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{3}\binom{n}{4}x^7\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{4}\binom{n}{4}x^8\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{m}{5}\binom{n}{4}x^9\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\cdots\)</span></p></td>
+</tr>
+</tbody>
+</table>
 </div>
+<p>The terms with the same power of <span class="math notranslate nohighlight">\(x\)</span> appear on diagonals.</p>
+</section>
+</div></section>
+<section id="snake-oil">
+<h2><span class="section-number">1.4.3. </span>Snake Oil<a class="headerlink" href="#snake-oil" title="Link to this heading">#</a></h2>
+<p>The following method is referred to as “snake oil” by Wilf due to switching of the order of summation.  We first remind ourselves that <span class="math notranslate nohighlight">\(\binom{N}{M} =0\)</span> if <span class="math notranslate nohighlight">\(M&lt;0\)</span> or <span class="math notranslate nohighlight">\(M&gt;N\)</span> and <span class="math notranslate nohighlight">\(\binom{0}{0}=1\)</span>.</p>
+<div class="proof example admonition" id="example-SnakeOil1">
+<p class="admonition-title"><span class="caption-number">Example 1.13 </span> (Snake oil)</p>
+<section class="example-content" id="proof-content">
+<p>Consider the sum</p>
+<div class="math notranslate nohighlight">
+\[
+S_n=\sum_{k \geq 0} \binom{k}{n-k}
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(n=0, 1, \ldots\)</span>.</p>
+<p>We write</p>
+<div class="math notranslate nohighlight">
+\[
+g(x) = \sum_{n=0}^\infty S_n x^n
+\]</div>
+<p>Then rearranging and switching the order of summations:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+g(x) &amp;= \sum_{n=0}^\infty \sum_{k=0}^\infty \binom{k}{n-k} x^n\\
+&amp;= \sum_{k=0}^\infty \sum_{n=0}^\infty \binom{k}{n-k} x^n\\
+&amp;= \sum_{k=0}^\infty x^k\sum_{n=0}^\infty \binom{k}{n-k} x^{n-k}\\
+&amp;= \sum_{k=0}^\infty x^k\sum_{n=k}^\infty \binom{k}{n-k} x^{n-k}\\
+&amp;= \sum_{k=0}^\infty x^k\sum_{r=0}^\infty \binom{k}{r} x^{r}\\
+&amp;= \sum_{k=0}^\infty x^k(1+x)^k\\
+&amp;= \sum_{k=0}^\infty(x+x^2)^k\\
+&amp;= \frac{1}{1-x-x^2}
+\end{align*}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(g(x)\)</span> is <span class="math notranslate nohighlight">\(1/x\)</span> times the generating function of the Fibonacci sequence that we have seen in previous examples.  Setting <span class="math notranslate nohighlight">\(f(x)=x g(x)\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = F_0 + F_1 x + \cdots + F_n x_n + \cdots \]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = 0 + S_0x + \cdots +  S_{n-1} x^n +\cdots \]</div>
+<p>So the <span class="math notranslate nohighlight">\(n\)</span>th Fibonacci number is given by</p>
+<div class="math notranslate nohighlight">
+\[
+F_n = S_{n-1}=\sum_{k \geq 0} \binom{k}{n-1-k}
+\]</div>
+<p>(using the convention that <span class="math notranslate nohighlight">\(F_0=0\)</span> and <span class="math notranslate nohighlight">\(F_1=1\)</span>)</p>
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -463,20 +681,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../theorems.html"
+       href="GenFxnsExamples.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">List of Theorems</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Generating Function Examples</p>
       </div>
     </a>
     <a class="right-next"
-       href="GenFxnsParadigm.html"
+       href="GenFxnsDiff.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.1. </span>A paradigm change</p>
+        <p class="prev-next-title"><span class="section-number">1.5. </span>Differentiation of Generating Functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -486,6 +704,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-fractions">1.4.1. Partial Fractions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-expansions">1.4.2. Binomial Expansions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snake-oil">1.4.3. Snake Oil</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
