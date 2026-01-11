@@ -433,8 +433,9 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="using-generating-functions-to-prove-identities">
 <h1><span class="section-number">1.4. </span>Using Generating Functions to Prove Identities<a class="headerlink" href="#using-generating-functions-to-prove-identities" title="Link to this heading">#</a></h1>
 <p>A wide variety of combinatorial identities can be proven using generating functions.  Without their help, we would typically rely on proof by induction and some messy Algebra.</p>
-<p>This section is for illustrative purposes only.  We won’t rely on it for our main applications, but it gives an impressive introduction to the power of the generating function side of the Taylor Series interpretation.  As Yoda warned, <em>if once you start down this path, forever will it dominate your proofs, seem amateur to you induction will.</em></p>
-<p>The typical approach is to take a generating function whose coefficients are the combinatorial quantity of interest.  Then use algebraic steps or other methods to simplify the generating function so that the we can find its Taylor Series in a different way.  Then by matching coefficients we arrive at a new identity.</p>
+<p>This section is for illustrative purposes only.  We won’t rely on it for our main applications, but it gives an impressive introduction to the power of the generating function side of the Taylor Series interpretation.  As Yoda warned, <em>if once you start down this path, forever will it dominate your proofs, seem amateur to you induction will.</em>
+If you find yourself drawn to these methods, then a good reference to learn more is Herbert S. Wilf’s book <em>generatingfunctionology</em>.</p>
+<p>The typical approach is to take a generating function whose coefficients are the combinatorial quantities of interest.  Then use algebraic steps or other methods to rewrite the generating function so that the we can find its Taylor Series in a different way.  Then by matching coefficients we arrive at a new identity.</p>
 <section id="partial-fractions">
 <h2><span class="section-number">1.4.1. </span>Partial Fractions<a class="headerlink" href="#partial-fractions" title="Link to this heading">#</a></h2>
 <div class="proof example admonition" id="example-0">
@@ -600,7 +601,7 @@ F_n = \frac{\phi^n-\psi^n}{\sqrt{5}}
 </tbody>
 </table>
 </div>
-<p>Each cell gives the product of the terms at the boundaries.  Summing all of these together gives the product <span class="math notranslate nohighlight">\((1=x)^m(1+x)^n\)</span>.  The terms with the same power of <span class="math notranslate nohighlight">\(x\)</span> appear on diagonals, where <span class="math notranslate nohighlight">\(m+n\)</span> has a constant value.</p>
+<p>Each cell gives the product of the terms at the boundaries.  Summing all of these together gives the product <span class="math notranslate nohighlight">\((1=x)^m(1+x)^n\)</span>.  The terms with the same power of <span class="math notranslate nohighlight">\(x\)</span> appear on diagonals.</p>
 </section>
 </div></section>
 <section id="snake-oil">

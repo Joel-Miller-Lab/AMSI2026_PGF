@@ -436,7 +436,7 @@ document.write(`
 \[
 f(x) = c_0 + c_1 x + c_2 x^2 + \cdots
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(c_0 = f(0)\)</span>, <span class="math notranslate nohighlight">\(c_1 = f'(0)\)</span>, <span class="math notranslate nohighlight">\(c_2 = f''(0)/2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(c_n = f^{(n)}(0)/n!, \ldots\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(c_0 = f(0)\)</span>,    <span class="math notranslate nohighlight">\(c_1 = f'(0)\)</span>,    <span class="math notranslate nohighlight">\(c_2 = f''(0)/2\)</span>,   <span class="math notranslate nohighlight">\(\ldots\)</span>,   <span class="math notranslate nohighlight">\(c_n = f^{(n)}(0)/n!\)</span>,   <span class="math notranslate nohighlight">\(\ldots\)</span>.</p>
 <p>Usually when we think about a function <span class="math notranslate nohighlight">\(f(x)\)</span>, we are interested in the values it produces for a given input <span class="math notranslate nohighlight">\(x\)</span>.  If asked to visualize a function <span class="math notranslate nohighlight">\(y = (1 + x^2)/2\)</span>, many of us will think of the parabola plotted below.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -462,7 +462,7 @@ f(x) = c_0 + c_1 x + c_2 x^2 + \cdots
 <img alt="../../_images/76df880d1a2f50038aa17bd49143c1906bdfd65cee337688cf1bf681c62204c9.png" src="../../_images/76df880d1a2f50038aa17bd49143c1906bdfd65cee337688cf1bf681c62204c9.png" />
 </div>
 </div>
-<p>Very few of us would instead think of the sequence of numbers: <span class="math notranslate nohighlight">\(c_0=1/2\)</span>, <span class="math notranslate nohighlight">\(c_1=0\)</span>, <span class="math notranslate nohighlight">\(c_2=1/2\)</span>, <span class="math notranslate nohighlight">\(c_3=0\)</span>, <span class="math notranslate nohighlight">\(c_4=0\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>.</p>
+<p>Very few of us would instead think of the sequence of numbers: <span class="math notranslate nohighlight">\(c_0=1/2\)</span>,   <span class="math notranslate nohighlight">\(c_1=0\)</span>,   <span class="math notranslate nohighlight">\(c_2=1/2\)</span>,   <span class="math notranslate nohighlight">\(c_3=0\)</span>,   <span class="math notranslate nohighlight">\(c_4=0\)</span>,   <span class="math notranslate nohighlight">\(\ldots\)</span>.</p>
 <div class="proof remark admonition" id="remark-fxn2TS">
 <p class="admonition-title"><span class="caption-number">Remark 1.1 </span> (Function and Taylor Series: the usual approach)</p>
 <section class="remark-content" id="proof-content">
@@ -488,9 +488,9 @@ f(x) = \sum_{n=0}^\infty c_n x^n
 <p>is the <strong>Generating Function</strong> of the sequence.</p>
 </section>
 </div><p>Sometimes we will call this an <strong>Ordinary Generating Function</strong> or <strong>OGF</strong>.</p>
-<p>Our goal in creating a generating function is to apply tools we learn in other areas of mathematics to the function in order to learn properties of the sequence and the process that creates that sequence.</p>
-<p>There are many special cases  of generating functions.
-We will discover later that when the coefficients come from a probability distribution of non-negative integers the operations of adding, multiplying, and composing generating functions correspond to properties related to reproduction.  This motivates the study of a special kind of generating function:</p>
+<p>Our goal in creating a generating function is to apply tools we learn in other areas of mathematics (addition, multiplication, differentiation, composition, etc) to the function in order to learn properties of the sequence and the process that creates that sequence.</p>
+<p>There are many special classes  of generating functions.
+We will discover later that when the coefficients come from a probability distribution of non-negative integers the operations of adding, multiplying, differentiating, and composing generating functions correspond to properties related to reproduction.  This motivates the study of a special kind of generating function:</p>
 <div class="proof definition admonition" id="defn-PGF">
 <p class="admonition-title"><span class="caption-number">Definition 1.2 </span> (Probability Generating Function)</p>
 <section class="definition-content" id="proof-content">
