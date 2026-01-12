@@ -190,15 +190,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.2. Some notation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.8. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -430,11 +430,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="differentiation-and-the-galton-watson-process">
 <h1><span class="section-number">2.3. </span>Differentiation and the Galton Watson Process<a class="headerlink" href="#differentiation-and-the-galton-watson-process" title="Link to this heading">#</a></h1>
-<p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html#sec-genfxnsdiff"><span class="std std-numref">Section 1.5</span></a> prior to reading this section.</p>
+<p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html#sec-genfxnsdiff"><span class="std std-numref">Section 1.6</span></a> prior to reading this section.</p>
 <p>Consider A Galton-Watson process.  Let <span class="math notranslate nohighlight">\(\mu(x)\)</span> be the PGF of the offspring distribution. We have learned that the extinction probability <span class="math notranslate nohighlight">\(\alpha\)</span> is a solution to the equation <span class="math notranslate nohighlight">\(x = \mu(x)\)</span>.</p>
 <p>In the plots given in  <a class="reference internal" href="GaltWatExtinct.html#sec-galtwatextinct"><span class="std std-numref">Section 2.2</span></a>, we saw two solutions to <span class="math notranslate nohighlight">\(x=\mu(x)\)</span>.  One was between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> and another was equal to <span class="math notranslate nohighlight">\(1\)</span>.  We will learn later that if there is a solution <span class="math notranslate nohighlight">\(x_0\)</span> with <span class="math notranslate nohighlight">\(x_0 = \mu(x_0)\)</span> and <span class="math notranslate nohighlight">\(0\leq x_0 &lt;1\)</span>, that will be the correct solution for <span class="math notranslate nohighlight">\(\alpha\)</span>.  Otherwise, <span class="math notranslate nohighlight">\(\alpha=1\)</span> will be the correct solution.</p>
 <p>For now, we’ll try to find conditions for which there is guaranteed to be a solution <span class="math notranslate nohighlight">\(0 \leq \alpha &lt;1\)</span>  and for which there no such solution.  This will determine whether <span class="math notranslate nohighlight">\(\alpha=1\)</span> in which case extinction is guaranteed or <span class="math notranslate nohighlight">\(\alpha&lt;1\)</span> in which case long-term persistence is possible.</p>
-<p>Intuitively, we might expect that extinction is guaranteed if the expected number of offspring is less than <span class="math notranslate nohighlight">\(1\)</span>.  Our results about the moments of <span class="math notranslate nohighlight">\(\mu(x)\)</span> in <a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html#sec-genfxnsdiff"><span class="std std-numref">Section 1.5</span></a> show that the expected number of offspring is <span class="math notranslate nohighlight">\(\mu'(1)\)</span>.  This observation provides us a mathematical handle that we can use to produce a rigorous proof verifying our expection.</p>
+<p>Intuitively, we might expect that extinction is guaranteed if the expected number of offspring is less than <span class="math notranslate nohighlight">\(1\)</span>.  Our results about the moments of <span class="math notranslate nohighlight">\(\mu(x)\)</span> in <a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html#sec-genfxnsdiff"><span class="std std-numref">Section 1.6</span></a> show that the expected number of offspring is <span class="math notranslate nohighlight">\(\mu'(1)\)</span>.  This observation provides us a mathematical handle that we can use to produce a rigorous proof verifying our expection.</p>
 <p>Before attempting the proof, we plot the line <span class="math notranslate nohighlight">\(y=x\)</span> and the curves <span class="math notranslate nohighlight">\(y = \mu_\lambda(x)\)</span> for a Poisson distribution with mean <span class="math notranslate nohighlight">\(\lambda\)</span> to strengthen our intuition.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">

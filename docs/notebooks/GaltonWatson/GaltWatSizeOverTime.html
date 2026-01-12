@@ -190,15 +190,16 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.2. Some notation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.8. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -431,20 +432,26 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="size-distribution-at-successive-times">
 <h1><span class="section-number">2.5. </span>Size Distribution at successive times<a class="headerlink" href="#size-distribution-at-successive-times" title="Link to this heading">#</a></h1>
-<p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html#sec-genfxnlinearcomb"><span class="std std-numref">Section 1.6</span></a>, <a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html#sec-genfxnmult"><span class="std std-numref">Section 1.7</span></a>, and <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#sec-genfxncomp"><span class="std std-numref">Section 1.8</span></a> before reading this section.</p>
-<p>The major result we rely on in thiss section is that if <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> are both PGFs, then <span class="math notranslate nohighlight">\(\psi(x) = \mu_1(\mu_2(x))\)</span> is the PGF for the following process:
+<p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html#sec-genfxnlinearcomb"><span class="std std-numref">Section 1.7</span></a>, <a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html#sec-genfxnmult"><span class="std std-numref">Section 1.8</span></a>, and <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#sec-genfxncomp"><span class="std std-numref">Section 1.9</span></a> before reading this section.</p>
+<p>The major result we rely on in this section is that if <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> are both PGFs, then <span class="math notranslate nohighlight">\(\psi(x) = \mu_1(\mu_2(x))\)</span> is the PGF for the following process:
 First we choose <span class="math notranslate nohighlight">\(k\)</span> from the distribution of <span class="math notranslate nohighlight">\(\mu_1\)</span>.  Then we choose <span class="math notranslate nohighlight">\(k\)</span> numbers from the distribution of <span class="math notranslate nohighlight">\(\mu_2\)</span> and add them together.</p>
-<p>This can be used to prove the following theorem:</p>
+<p>We will define <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> to be the PGF of the distribution of <span class="math notranslate nohighlight">\(X_g\)</span>, the total size<a class="footnote-reference brackets" href="#phifootnote" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> at generation <span class="math notranslate nohighlight">\(g\)</span>.  We are interested in how to calculate <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>.  Based on our above observations we have the following theorem:</p>
 <div class="proof theorem admonition" id="theorem-GW-size-by-generation">
 <p class="admonition-title"><span class="caption-number">Theorem 2.3 </span> (Galton-Watson sizes at later generations)</p>
 <section class="theorem-content" id="proof-content">
-<p>If <span class="math notranslate nohighlight">\(\mu(x)\)</span> is the PGF of the offspring distribution of a Galton-Watson process, then the distribution of sizes at generation <span class="math notranslate nohighlight">\(g\)</span> has PGF <span class="math notranslate nohighlight">\(\mu^{(g)}(x)\)</span> where <span class="math notranslate nohighlight">\(\mu^{(0)}(x) = x\)</span> and <span class="math notranslate nohighlight">\(\mu^{(g)}(x) = \mu^{(g-1)}(\mu(x)) = \mu(\mu^{(g-1)}(x))\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\mu(x)\)</span> is the PGF of the offspring distribution of a Galton-Watson process, then <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>, the PGF of the distribution of <span class="math notranslate nohighlight">\(X_g\)</span> satisfies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_0(x) &amp;= x\\
+\Phi_{g+1}(x) &amp;= \mu(\Phi_g(x)) \quad g&gt;0
+\end{align*}\]</div>
+<p>that is, <span class="math notranslate nohighlight">\(\Phi_0(x) = x\)</span>,   <span class="math notranslate nohighlight">\(\Phi_1(x)=\mu(x)\)</span>,   <span class="math notranslate nohighlight">\(\Phi_2(x)=\mu(\mu(x))\)</span>,   <span class="math notranslate nohighlight">\(\cdots\)</span>,    <span class="math notranslate nohighlight">\(\Phi_g(x) = \mu^{(g)}(x) = \mu(\mu(\mu(\cdots \mu(x)\cdots)))\)</span>.</p>
 </section>
 </div><p>We will give two proofs of this theorem.  At first glance the difference between the two proofs appears trivial.  However, later when we will look at continuous-time variations of the Galton-Watson process the two methods will lead to very different equations.</p>
 <div class="proof admonition" id="proof">
 <p>Proof. Forward Proof</p>
-<p>We use induction on the generation <span class="math notranslate nohighlight">\(g\)</span>.  At the base case, <span class="math notranslate nohighlight">\(g=0\)</span>, we know that <span class="math notranslate nohighlight">\(X_0=1\)</span>, so <span class="math notranslate nohighlight">\(\mu^{(0)}(x)=x\)</span>.</p>
-<p>For the inductive step, we know that the distribution of <span class="math notranslate nohighlight">\(X_{g-1}\)</span> is <span class="math notranslate nohighlight">\(\mu^{(g-1)}(x)\)</span>.  By the definition of the Galton-Watson process, <span class="math notranslate nohighlight">\(X_g\)</span> is found by choosing <span class="math notranslate nohighlight">\(X_{g-1}\)</span> numbers from the offspring distribution and adding them together.  So the PGF of the distribution of <span class="math notranslate nohighlight">\(X_g\)</span> is <span class="math notranslate nohighlight">\(\mu^{(g-1)}(\mu(x))\)</span>.</p>
+<p>We use induction on the generation <span class="math notranslate nohighlight">\(g\)</span>.  At the base case, <span class="math notranslate nohighlight">\(g=0\)</span>, we know that <span class="math notranslate nohighlight">\(X_0=1\)</span>, so <span class="math notranslate nohighlight">\(\mathbb{P}[X_0=1]=1\)</span> and thuas <span class="math notranslate nohighlight">\(\Phi_0(x)=1x^1\)</span>.</p>
+<p>For the inductive step, we know that the distribution of <span class="math notranslate nohighlight">\(X_{g}\)</span> is <span class="math notranslate nohighlight">\(\Phi_{g}(x)\)</span>.  By the definition of the Galton-Watson process, <span class="math notranslate nohighlight">\(X_{g+1}\)</span> is found by choosing <span class="math notranslate nohighlight">\(X_{g}\)</span> numbers from the offspring distribution and adding them together.  So the PGF of the distribution of <span class="math notranslate nohighlight">\(X_{g+1}\)</span> is <span class="math notranslate nohighlight">\(\Phi_{g+1}(x) = \Phi_{g}(\mu(x)) = \mu^{(g+1)}(x) = \mu(\Phi_g(x))\)</span>,   <span class="math notranslate nohighlight">\(\ldots\)</span>.</p>
 </div>
 <figure class="align-default" id="forwarddistribution">
 <a class="reference internal image-reference" href="../../_images/UnderConstruction.png"><img alt="../../_images/UnderConstruction.png" src="../../_images/UnderConstruction.png" style="width: 600px; height: 450px;" />
@@ -456,9 +463,9 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
 <p>We now show an equivalent proof:</p>
 <div class="proof admonition" id="proof">
 <p>Proof. Backward Proof</p>
-<p>We again use induction on the generation <span class="math notranslate nohighlight">\(g\)</span>.  At the base case, <span class="math notranslate nohighlight">\(g=0\)</span>, we know that <span class="math notranslate nohighlight">\(X_0=1\)</span>, so <span class="math notranslate nohighlight">\(\mu^{(0)}(x)=x\)</span>.</p>
-<p>For the inductive step, we know that the distribution of <span class="math notranslate nohighlight">\(X_{g-1}\)</span> is <span class="math notranslate nohighlight">\(\mu^{(g-1)}(x)\)</span>.  We know that chain of descendents from each individual in generation <span class="math notranslate nohighlight">\(1\)</span> can be thought of as the start of its own Galton-Watson process, and the number of individuals at generation <span class="math notranslate nohighlight">\(g-1\)</span> from each of the generation <span class="math notranslate nohighlight">\(1\)</span> individuals is <span class="math notranslate nohighlight">\(\mu^{(g-1)}(x)\)</span>.</p>
-<p>Since the number of individuals at generation <span class="math notranslate nohighlight">\(1\)</span> has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span> and the number of descendents after <span class="math notranslate nohighlight">\(g-1\)</span> from each of these has PGF <span class="math notranslate nohighlight">\(\mu^{(g-1)}(x)\)</span>, we conclude that the size distribution at generation <span class="math notranslate nohighlight">\(g\)</span> has PGF <span class="math notranslate nohighlight">\(\mu^{(g)}(x)\)</span>.</p>
+<p>We again use induction on the generation <span class="math notranslate nohighlight">\(g\)</span>.  At the base case, <span class="math notranslate nohighlight">\(g=0\)</span>, we again know that <span class="math notranslate nohighlight">\(X_0=1\)</span>, so as before, <span class="math notranslate nohighlight">\(\Phi_0(x)=x\)</span>.</p>
+<p>For the inductive step, we know that the distribution of <span class="math notranslate nohighlight">\(X_{g}\)</span> is <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>.  We know that chain of descendents from each individual in generation <span class="math notranslate nohighlight">\(1\)</span> can be thought of as the start of its own Galton-Watson process, and the number of individuals at generation <span class="math notranslate nohighlight">\(g\)</span> from each of the generation <span class="math notranslate nohighlight">\(1\)</span> individuals is <span class="math notranslate nohighlight">\(\mu(\Phi_g(x))\)</span>.</p>
+<p>Since the number of individuals at generation <span class="math notranslate nohighlight">\(1\)</span> has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span> and the number of descendents after <span class="math notranslate nohighlight">\(g\)</span> from each of these has PGF <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>, we conclude that the size distribution at generation <span class="math notranslate nohighlight">\(g\)</span> has PGF <span class="math notranslate nohighlight">\(\Phi_{g+1} = \mu(\Phi_g(x))\)</span>.</p>
 </div>
 <figure class="align-default" id="backwarddistribution">
 <a class="reference internal image-reference" href="../../_images/UnderConstruction.png"><img alt="../../_images/UnderConstruction.png" src="../../_images/UnderConstruction.png" style="width: 600px; height: 450px;" />
@@ -469,14 +476,14 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
 </figure>
 <section id="expected-size-of-a-galton-watson-process-at-generation-g">
 <h2><span class="section-number">2.5.1. </span>Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span><a class="headerlink" href="#expected-size-of-a-galton-watson-process-at-generation-g" title="Link to this heading">#</a></h2>
-<p>We have seen that the size of a Galton Watson process at generation <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(X_g\)</span> has PGF <span class="math notranslate nohighlight">\(\mu^{(g)}(x) = \mu(\mu^{(g-1)}(x))\)</span>.  The average size at generation <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}[X_g]\)</span> is given for <span class="math notranslate nohighlight">\(g&gt;1\)</span> by</p>
+<p>We have seen that the size of a Galton Watson process at generation <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(X_g\)</span> has PGF <span class="math notranslate nohighlight">\(\Phi_{g}(x) = \mu(\Phi_{g-1}(x))\)</span>.  The average size at generation <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}[X_g]\)</span> is given for <span class="math notranslate nohighlight">\(g&gt;1\)</span> by</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\mathbb{E}[X_g] &amp;= \left [\frac{\partial}{\partial x} \mu^{(g)}(x) \right|_{x=1}\\
-   &amp;= \left [\frac{\partial}{\partial x} \mu(\mu^{(g-1)}(x)) \right|_{x=1}\\
-   &amp;= \left[ \mu'(\mu^{(g-1)}(x)) \frac{\partial }{\partial x} \mu^{(g-1)}(x)\right|_{x=1}\\
-   &amp;= \mu'(\mu^{(g)}(1)) \left[\mu^{(g-1)}(x)\right|_{x=1}\\
-   &amp;= \mu'(1) \left[\mu^{(g-1)}(x)\right|_{x=1}\\
+\mathbb{E}[X_g] &amp;= \left [\frac{\partial}{\partial x} \Phi_g(x) \right|_{x=1}\\
+   &amp;= \left [\frac{\partial}{\partial x} \mu(\Phi_{g-1}(x)) \right|_{x=1}\\
+   &amp;= \left[ \mu'(\Phi_{g-1}(x)) \frac{\partial }{\partial x} \Phi_{g-1}(x)\right|_{x=1}\\
+   &amp;= \mu'(\Phi_g(1)) \left[\frac{\partial }{\partial x}\Phi_{g-1}(x)\right|_{x=1}\\
+   &amp;= \mu'(1) \left[\frac{\partial }{\partial x}\Phi_{g-1}(x)\right|_{x=1}\\
    &amp;= \mu'(1) \mathbb{E}[X_{g-1}]
 \end{align*}\]</div>
 <p>The fact that <span class="math notranslate nohighlight">\(\mathbb{E}[X_g]\)</span> can be written in terms of <span class="math notranslate nohighlight">\(\mathbb{E}[X_{g-1}]\)</span> strongly suggests an inductive proof of the following theorem is possible:</p>
@@ -494,11 +501,18 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
 <section id="self-test">
 <h2><span class="section-number">2.5.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Use <a class="reference internal" href="#theorem-GW-size-by-generation">Theorem 2.3</a> to show that the probability of extinction after <span class="math notranslate nohighlight">\(g\)</span> generations is <span class="math notranslate nohighlight">\(\mu^{(g)}(0)\)</span>.</p></li>
+<li><p>Use <a class="reference internal" href="#theorem-GW-size-by-generation">Theorem 2.3</a> to show that the probability of extinction after <span class="math notranslate nohighlight">\(g\)</span> generations is <span class="math notranslate nohighlight">\(\Phi_g(0) = \mu^{(g)}(0)\)</span>.</p></li>
 <li><p>Use proof by induction to show that the expected size of generation <span class="math notranslate nohighlight">\(g\)</span> is <span class="math notranslate nohighlight">\([\mu'(1)]^g\)</span>.</p></li>
 <li><p>Using the two previous answers, what is the expected size of Galton-Watson processes that are not extinct by generation <span class="math notranslate nohighlight">\(g\)</span>?</p></li>
 <li></li>
 </ol>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="phifootnote" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>In Lecture 1, I used the notation <span class="math notranslate nohighlight">\(\mu_g(x)\)</span> for this, but in hindsight I should have used <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> to be consistent with previous work</p>
+</aside>
+</aside>
 </section>
 </section>
 

@@ -190,15 +190,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.2. Some notation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.8. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -430,7 +430,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="extinction-of-a-galton-watson-process">
 <span id="sec-galtwatextinct"></span><h1><span class="section-number">2.2. </span>Extinction of a Galton-Watson Process<a class="headerlink" href="#extinction-of-a-galton-watson-process" title="Link to this heading">#</a></h1>
-<p>(please read <a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html#sec-genfxnsparadigm"><span class="std std-numref">Section 1.1</span></a> and <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#sec-genfxnsexamples"><span class="std std-numref">Section 1.3</span></a> in parallel with this section)</p>
+<p>(please read <a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html#sec-genfxnsparadigm"><span class="std std-numref">Section 1.2</span></a> and <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#sec-genfxnsexamples"><span class="std std-numref">Section 1.4</span></a> in parallel with this section)</p>
 <p>In almost all applications of the Galton-Watson process, one of the main questions we want to answer is whether it goes extinct or not, <em>e.g.</em>:</p>
 <ul class="simple">
 <li><p>will a new cancer cell become a tumor?</p></li>
@@ -501,7 +501,7 @@ In other words,  <span class="math notranslate nohighlight">\(\alpha = \sum_{k=0
 <li><p>Each time it reproduces, it has a probability <span class="math notranslate nohighlight">\(p\)</span> of dying before reproducing again and <span class="math notranslate nohighlight">\(1-p\)</span> of producing a single offspring.</p></li>
 </ul>
 <p>This species has been accidentally introduced into Melbourne, and we would like to know the probability that it will persist long term.</p>
-<p>The lifecycle for this species is similar to the definition of a geometric distribution, where “success” is death and “failure” is a reproduction event.  The probability generating function for a Geometric Distribution is given in <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-GeomPGF">Example 1.8</a>: <span class="math notranslate nohighlight">\(\mu(x)= \frac{px}{1-(1-p)x}\)</span>.  However, that distribution counts the success as well as the failures, so this corresponds to one more than the number of offspring produced here.</p>
+<p>The lifecycle for this species is similar to the definition of a geometric distribution, where “success” is death and “failure” is a reproduction event.  The probability generating function for a Geometric Distribution is given in <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-GeomPGF">Example 1.9</a>: <span class="math notranslate nohighlight">\(\mu(x)= \frac{px}{1-(1-p)x}\)</span>.  However, that distribution counts the success as well as the failures, so this corresponds to one more than the number of offspring produced here.</p>
 <p>To remove the death from our count, we use <span class="math notranslate nohighlight">\(\hat{\mu}(x) = \frac{1}{x} \mu(x) = \frac{p}{1-(1-p)x}\)</span>.  The extinction probability <span class="math notranslate nohighlight">\(\alpha\)</span> must solve <span class="math notranslate nohighlight">\(x = \hat{\mu}(x)\)</span>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
