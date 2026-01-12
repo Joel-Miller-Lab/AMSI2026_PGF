@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.7. Multiplication of Generating Functions &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.8. Multiplication of Generating Functions &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxnsMult';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.8. Composition of PGFs" href="GenFxnsComp.html" />
-    <link rel="prev" title="1.6. Linear Combinations of Generating Functions" href="GenFxnsAdd.html" />
+    <link rel="next" title="1.9. Composition of PGFs" href="GenFxnsComp.html" />
+    <link rel="prev" title="1.7. Linear Combinations of Generating Functions" href="GenFxnsAdd.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,15 +190,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="GenFxns.html">1. Generating Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsParadigm.html">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.2. Some notation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.7. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsComp.html">1.8. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,15 +416,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-sums-of-a-sequence">1.7.1. Partial sums of a sequence</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-probability">1.7.1.1. Cumulative probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-sums-of-a-sequence">1.8.1. Partial sums of a sequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-probability">1.8.1.1. Cumulative probability</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-pgfs">1.7.2. Multiplication of PGFs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#powers-of-pgfs">1.7.2.1. Powers of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-pgfs">1.8.2. Multiplication of PGFs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#powers-of-pgfs">1.8.2.1. Powers of PGFs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.7.3. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.8.3. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -437,7 +437,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="multiplication-of-generating-functions">
-<span id="sec-genfxnmult"></span><h1><span class="section-number">1.7. </span>Multiplication of Generating Functions<a class="headerlink" href="#multiplication-of-generating-functions" title="Link to this heading">#</a></h1>
+<span id="sec-genfxnmult"></span><h1><span class="section-number">1.8. </span>Multiplication of Generating Functions<a class="headerlink" href="#multiplication-of-generating-functions" title="Link to this heading">#</a></h1>
 <p>We’ll see that there are several uses for multiplication of two generating functions.  First, we’ll look at the sequence of numbers that results from multiplying two generating functions together and then we’ll look at some applications.</p>
 <p>Let’s assume we have two generating functions:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -534,7 +534,7 @@ f(x) g(x) = \sum_{n=0}^\infty \left(x^n\sum_{k=0}^n f_kg_{n-k}\right)
 f(x) g(x) = f_0 g_0 + (f_1 g_0 + f_0 g_1) x + (f_2 g_0 + f_1 g_1 + f_0 g_2) x^2 + \cdots
 \]</div>
 <section id="partial-sums-of-a-sequence">
-<h2><span class="section-number">1.7.1. </span>Partial sums of a sequence<a class="headerlink" href="#partial-sums-of-a-sequence" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.8.1. </span>Partial sums of a sequence<a class="headerlink" href="#partial-sums-of-a-sequence" title="Link to this heading">#</a></h2>
 <p>An important special case occurs when <span class="math notranslate nohighlight">\(f(x) = 1 + x + x^2 + \cdots = \frac{1}{1-x}\)</span>.  Then</p>
 <div class="math notranslate nohighlight">
 \[
@@ -559,7 +559,7 @@ s_n = \sum_{i=0}^n c_i
 <p>have generating function <span class="math notranslate nohighlight">\(\frac{f(x)}{1-x}\)</span></p>
 </section>
 </div><section id="cumulative-probability">
-<h3><span class="section-number">1.7.1.1. </span>Cumulative probability<a class="headerlink" href="#cumulative-probability" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.8.1.1. </span>Cumulative probability<a class="headerlink" href="#cumulative-probability" title="Link to this heading">#</a></h3>
 <p>It follows quickly from <a class="reference internal" href="#thm-partialsums">Theorem 1.2</a> that given a probability distribution with probabilities <span class="math notranslate nohighlight">\(p_0\)</span>, <span class="math notranslate nohighlight">\(p_1\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span> whose probability generating function is <span class="math notranslate nohighlight">\(\mu(x)\)</span>, the probability that a random number chosen from the distribution is less than or equal to <span class="math notranslate nohighlight">\(n\)</span> has generating function</p>
 <div class="math notranslate nohighlight">
 \[
@@ -569,7 +569,7 @@ g(x) = \frac{\mu(x)}{1-x} = p_0 + (p_0+p_1)x + (p_0+p_1+p_2)x^2 + \cdots
 </section>
 </section>
 <section id="multiplication-of-pgfs">
-<h2><span class="section-number">1.7.2. </span>Multiplication of PGFs<a class="headerlink" href="#multiplication-of-pgfs" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.8.2. </span>Multiplication of PGFs<a class="headerlink" href="#multiplication-of-pgfs" title="Link to this heading">#</a></h2>
 <p>The product of two PGFs will be particularly important to us.</p>
 <p>Consider two PGFs, <span class="math notranslate nohighlight">\(\mu_1(x) = \sum p_i x^i\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x) = \sum q_j x^j\)</span>.  Then <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> is the PGF of the probability distribution for which (non-negative) integer <span class="math notranslate nohighlight">\(i\)</span> occurs with probability <span class="math notranslate nohighlight">\(p_i\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> is the PGF for the distribution for which the probability of <span class="math notranslate nohighlight">\(j\)</span> is <span class="math notranslate nohighlight">\(q_j\)</span>.</p>
 <p>We will build a table giving the possible sums if we choose <span class="math notranslate nohighlight">\(i\)</span> from one distribution <span class="math notranslate nohighlight">\(j\)</span> from the other and the probability of choosing <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>.  It will resemble the table above.  The cells at the edges have two entries: the probability of each integer from the corresponding distribution and the value of the integer.  Each interior cell also has two entries, the probability that a particular pair <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> occurs and the sum <span class="math notranslate nohighlight">\(i+j\)</span>.</p>
@@ -665,7 +665,7 @@ g(x) = \frac{\mu(x)}{1-x} = p_0 + (p_0+p_1)x + (p_0+p_1+p_2)x^2 + \cdots
 and it corresponds to the probability distribution of the sum <span class="math notranslate nohighlight">\(n_1 + n_2 + \cdots + n_k\)</span> where each <span class="math notranslate nohighlight">\(n_i\)</span> comes from the distribution whose PGF is <span class="math notranslate nohighlight">\(\mu_i(x)\)</span>.</p>
 </section>
 </div><section id="powers-of-pgfs">
-<h3><span class="section-number">1.7.2.1. </span>Powers of PGFs<a class="headerlink" href="#powers-of-pgfs" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.8.2.1. </span>Powers of PGFs<a class="headerlink" href="#powers-of-pgfs" title="Link to this heading">#</a></h3>
 <p>A corollary of <a class="reference internal" href="#thmPGFprod">Theorem 1.3</a> is</p>
 <div class="proof corollary admonition" id="cor-PGFPower">
 <p class="admonition-title"><span class="caption-number">Corollary 1.1 </span> (Sum of repeated draws)</p>
@@ -744,7 +744,7 @@ From these observations, we conclude that the factors <span class="math notransl
 </div></section>
 </section>
 <section id="self-test">
-<h2><span class="section-number">1.7.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.8.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><p>We will verify the identity <span class="math notranslate nohighlight">\(F_{n+2}-1 = \sum_{i=0}^n F_i\)</span> for partial sums of the Fibonnaci sequence. Let <span class="math notranslate nohighlight">\(f(x) = F_0 + F_1 x + \cdots\)</span> which we have shown equals <span class="math notranslate nohighlight">\(x/(1-x-x^2)\)</span>.</p>
 <ol class="arabic">
@@ -825,7 +825,7 @@ From these observations, we conclude that the factors <span class="math notransl
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.6. </span>Linear Combinations of Generating Functions</p>
+        <p class="prev-next-title"><span class="section-number">1.7. </span>Linear Combinations of Generating Functions</p>
       </div>
     </a>
     <a class="right-next"
@@ -833,7 +833,7 @@ From these observations, we conclude that the factors <span class="math notransl
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.8. </span>Composition of PGFs</p>
+        <p class="prev-next-title"><span class="section-number">1.9. </span>Composition of PGFs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -853,15 +853,15 @@ From these observations, we conclude that the factors <span class="math notransl
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-sums-of-a-sequence">1.7.1. Partial sums of a sequence</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-probability">1.7.1.1. Cumulative probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-sums-of-a-sequence">1.8.1. Partial sums of a sequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-probability">1.8.1.1. Cumulative probability</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-pgfs">1.7.2. Multiplication of PGFs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#powers-of-pgfs">1.7.2.1. Powers of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-of-pgfs">1.8.2. Multiplication of PGFs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#powers-of-pgfs">1.8.2.1. Powers of PGFs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.7.3. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.8.3. Self-test</a></li>
 </ul>
   </nav></div>
 

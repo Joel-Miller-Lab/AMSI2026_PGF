@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.1. A paradigm change &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>1.2. A paradigm change &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/BasicGenFxn/GenFxnsParadigm';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.2. Some notation" href="GenFxnsNotation.html" />
+    <link rel="next" title="1.3. Some notation" href="GenFxnsNotation.html" />
     <link rel="prev" title="1. Generating Functions" href="GenFxns.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,15 +190,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="GenFxns.html">1. Generating Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.1. A paradigm change</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.2. Some notation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.3. Generating Function Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.4. Using Generating Functions to Prove Identities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.5. Differentiation of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.6. Linear Combinations of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsMult.html">1.7. Multiplication of Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsComp.html">1.8. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.9. Properties of Generating functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,8 +416,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">1.1.1. Definitions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-famous-quotes">1.1.2. Two famous quotes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">1.2.1. Definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-famous-quotes">1.2.2. Two famous quotes</a></li>
 </ul>
             </nav>
         </div>
@@ -430,7 +430,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="a-paradigm-change">
-<span id="sec-genfxnsparadigm"></span><h1><span class="section-number">1.1. </span>A paradigm change<a class="headerlink" href="#a-paradigm-change" title="Link to this heading">#</a></h1>
+<span id="sec-genfxnsparadigm"></span><h1><span class="section-number">1.2. </span>A paradigm change<a class="headerlink" href="#a-paradigm-change" title="Link to this heading">#</a></h1>
 <p>Most functions that we encounter in our mathematical training are smooth and infinitely differentiable.  In this case, they have a Taylor Series:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -475,7 +475,7 @@ f(x) = c_0 + c_1 x + c_2 x^2 + \cdots
 <p>In the paradigm we will use, the sequence of coefficients of the Taylor Series is the ``concrete object’’ we want to study.  The values of the function and the shape of the graph are mostly useful for what they tell us about the sequence.</p>
 </section>
 </div><section id="definitions">
-<h2><span class="section-number">1.1.1. </span>Definitions<a class="headerlink" href="#definitions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.2.1. </span>Definitions<a class="headerlink" href="#definitions" title="Link to this heading">#</a></h2>
 <p>Our focus on the sequence of coefficients of a function’s Taylor Series expansion motivates the following definition:</p>
 <div class="proof definition admonition" id="defn-GenFxn">
 <p class="admonition-title"><span class="caption-number">Definition 1.1 </span> (Generating Function)</p>
@@ -511,7 +511,7 @@ and many related quantities of interest.</p></li>
 </ul>
 </section>
 <section id="two-famous-quotes">
-<h2><span class="section-number">1.1.2. </span>Two famous quotes<a class="headerlink" href="#two-famous-quotes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.2.2. </span>Two famous quotes<a class="headerlink" href="#two-famous-quotes" title="Link to this heading">#</a></h2>
 <p>To illustrate some of the ideas underlying how we use generating functions, here are two famous quotes about them, illustrated using the Taylor Series <span class="math notranslate nohighlight">\(e^x = 1 + x + \frac{1}{2} x^2 + \frac{1}{6}x^3 + \cdots\)</span>, the generating function for the sequence <span class="math notranslate nohighlight">\(c_n = \frac{1}{n!}\)</span>:</p>
 <p><em>“A generating function is a clothesline on which we hang up a sequence of numbers for display.”</em>  H. Wilf</p>
 <figure class="align-default" id="fig-clothesline">
@@ -577,7 +577,7 @@ and many related quantities of interest.</p></li>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.2. </span>Some notation</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Some notation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -597,8 +597,8 @@ and many related quantities of interest.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">1.1.1. Definitions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-famous-quotes">1.1.2. Two famous quotes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">1.2.1. Definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-famous-quotes">1.2.2. Two famous quotes</a></li>
 </ul>
   </nav></div>
 
