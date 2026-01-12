@@ -6,7 +6,6 @@ I have spent a lot of time thinking about the structure of this book.  The goal 
 
 I've decided not to do this (at least for now).  I am placing the mathematical properties in a separate part of the book from the biological applications. However, I will recommend an order for the reading which will move between the two parts.  The Biological Application sections will reference which of the mathematical sections you are expected to have read.
 
-This is still an early draft of the text, so it is reasonably likely that I will change my mind and rewrite the text to alternate between PGF properties and biological applications.  This may depend on what happens as I write  later chapters.
 
 
 # Table of Contents
