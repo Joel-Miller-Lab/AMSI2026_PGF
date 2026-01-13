@@ -418,7 +418,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size-of-a-galton-watson-process-at-generation-g">2.5.1. Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">2.5.2. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-x-g">2.5.2. Distribution of <span class="math notranslate nohighlight">\(X_g\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">2.5.3. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -498,13 +499,26 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
 </section>
 </div><p>The proof is given as an exercise.</p>
 </section>
+<section id="distribution-of-x-g">
+<h2><span class="section-number">2.5.2. </span>Distribution of <span class="math notranslate nohighlight">\(X_g\)</span><a class="headerlink" href="#distribution-of-x-g" title="Link to this heading">#</a></h2>
+<p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html#sec-genfxncoeffcalc"><span class="std std-numref">Section 1.10</span></a> before reading this subsection.</p>
+<p>For each generation <span class="math notranslate nohighlight">\(g\)</span>, our formulas above give us a way to construct <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>, the PGF of <span class="math notranslate nohighlight">\(X_g\)</span>.  However, we will often want to know the individual coefficients <span class="math notranslate nohighlight">\(p_{g,k}\)</span> of
+<span class="math notranslate nohighlight">\(\Phi_g(x) = \sum_k p_{g,k}x^k\)</span>.</p>
+<p>We can find <span class="math notranslate nohighlight">\(\Phi_0(x)= x\)</span> and <span class="math notranslate nohighlight">\(\Phi_1(x) = \mu(x)\)</span> fairly easily.  To find <span class="math notranslate nohighlight">\(\Phi_2(x) = \mu(\Phi_1(x))\)</span>, it may be tempting to plug in the series expansion for <span class="math notranslate nohighlight">\(\Phi_1(x)\)</span> into the expansion for <span class="math notranslate nohighlight">\(\mu(x)\)</span> and track what happens to the coefficients.  However, this can be computationally expensive (both in terms of memory and number of calculations).</p>
+<p>In <a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html#sec-genfxncoeffcalc"><span class="std std-numref">Section 1.10</span></a> we see that an alternative method to calculate the coefficients of <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> is through a Cauchy integral:</p>
+<div class="math notranslate nohighlight">
+\[
+p_{g,k} = \frac{1}{2\pi}\int_{0}^{2\pi} \Phi_g(e^{i\theta})e^{-ik\theta}\,d\theta 
+\]</div>
+<p>We can do this numerically by setting <span class="math notranslate nohighlight">\(\theta_m = 2\pi m/M\)</span> for <span class="math notranslate nohighlight">\(m=0, 1, \ldots, M-1\)</span> for some large value of <span class="math notranslate nohighlight">\(M\)</span>, and then using Riemann integration to perform the integral.</p>
+</section>
 <section id="self-test">
-<h2><span class="section-number">2.5.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.5.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Use <a class="reference internal" href="#theorem-GW-size-by-generation">Theorem 2.3</a> to show that the probability of extinction after <span class="math notranslate nohighlight">\(g\)</span> generations is <span class="math notranslate nohighlight">\(\Phi_g(0) = \mu^{(g)}(0)\)</span>.</p></li>
-<li><p>Use proof by induction to show that the expected size of generation <span class="math notranslate nohighlight">\(g\)</span> is <span class="math notranslate nohighlight">\([\mu'(1)]^g\)</span>.</p></li>
+<li><p>Use proof by induction to show that the expected size of generation <span class="math notranslate nohighlight">\(g\)</span> is <span class="math notranslate nohighlight">\(\mu'(1)^g\)</span>.  That is, prove that <span class="math notranslate nohighlight">\(\phi_g'(1) = \mu'(1)^g\)</span>.</p></li>
 <li><p>Using the two previous answers, what is the expected size of Galton-Watson processes that are not extinct by generation <span class="math notranslate nohighlight">\(g\)</span>?</p></li>
-<li></li>
+<li><p><strong>this quesiton is incomplete</strong> Use a case with <span class="math notranslate nohighlight">\(\mu'(1)=1\)</span> and explore size distribution on logscale.</p></li>
 </ol>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
@@ -581,7 +595,8 @@ First we choose <span class="math notranslate nohighlight">\(k\)</span> from the
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size-of-a-galton-watson-process-at-generation-g">2.5.1. Expected size of a Galton-Watson Process at generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">2.5.2. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-x-g">2.5.2. Distribution of <span class="math notranslate nohighlight">\(X_g\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">2.5.3. Self-test</a></li>
 </ul>
   </nav></div>
 

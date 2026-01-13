@@ -420,10 +420,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-calculation">1.10.1. Symbolic calculation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-calculation">1.10.2. Vectorized calculation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-integration">1.10.3. Cauchy Integration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternate-view-of-integral">1.10.3.1. Alternate view of integral.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternate-view-of-cauchy-integral">1.10.3.1. Alternate view of Cauchy integral.</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-comments">1.10.4. Additional comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.10.5. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -436,7 +437,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numerical-calculation-of-pgf-coefficients">
-<h1><span class="section-number">1.10. </span>Numerical Calculation of PGF coefficients<a class="headerlink" href="#numerical-calculation-of-pgf-coefficients" title="Link to this heading">#</a></h1>
+<span id="sec-genfxncoeffcalc"></span><h1><span class="section-number">1.10. </span>Numerical Calculation of PGF coefficients<a class="headerlink" href="#numerical-calculation-of-pgf-coefficients" title="Link to this heading">#</a></h1>
 <p>There are times when we may want to find coefficients of a generating function, but we do not have an analytic function.  One scenario where this might occur would be where we know <span class="math notranslate nohighlight">\(\mu(x)\)</span> but we want to find the coefficients of <span class="math notranslate nohighlight">\(\Phi_g(x) = \mu^{(g)}(x)\)</span>.</p>
 <section id="symbolic-calculation">
 <h2><span class="section-number">1.10.1. </span>Symbolic calculation<a class="headerlink" href="#symbolic-calculation" title="Link to this heading">#</a></h2>
@@ -611,8 +612,8 @@ If you haven’t taken Complex Analysis, don’t worry, we’ll rewrite the inte
 <p>This last integral is the integral we are going to do.</p>
 <p>A few asides - The function <span class="math notranslate nohighlight">\(\Phi_g(e^{i\theta})\)</span> is sometimes called the “Characterstic Function” of the distribution corresponding to <span class="math notranslate nohighlight">\(\Phi_g\)</span>.  It is also the Fourier Transform of the discrete sequence <span class="math notranslate nohighlight">\(p_{g,0}\)</span>, <span class="math notranslate nohighlight">\(p_{g,1}\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>.  This last point is useful because there are well-established rapid methods to compute and invert the Fourier Transform of a distribution (the Fast Fourier Transform, (FFT)).  We will be able to use the FFT to calculate this integral faster than we can do it by hand.</p>
 <p>Now let’s look at this integral from the perspective of someone who hasn’t taken Complex Analysis and learned about residues.</p>
-<section id="alternate-view-of-integral">
-<h3><span class="section-number">1.10.3.1. </span>Alternate view of integral.<a class="headerlink" href="#alternate-view-of-integral" title="Link to this heading">#</a></h3>
+<section id="alternate-view-of-cauchy-integral">
+<h3><span class="section-number">1.10.3.1. </span>Alternate view of Cauchy integral.<a class="headerlink" href="#alternate-view-of-cauchy-integral" title="Link to this heading">#</a></h3>
 <p>We’d like to understand why this integral finds <span class="math notranslate nohighlight">\(p_{g,k}\)</span> without relying on Complex Analysis.</p>
 <p>The fact that <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> is a PGF guarantees that <span class="math notranslate nohighlight">\(|\Phi_g(z)|\)</span> converges and its magnitude is at most <span class="math notranslate nohighlight">\(\Phi_g(1)=1\)</span> everywhere on the unit circle.  This means we can do the following steps with the integral.</p>
 <div class="amsmath math notranslate nohighlight">
@@ -632,7 +633,7 @@ If you haven’t taken Complex Analysis, don’t worry, we’ll rewrite the inte
 &amp;= p_{g,k}
 \end{align*}\]</div>
 <p>So seemingly miraculously, multiplying by <span class="math notranslate nohighlight">\(e^{-ik\theta}\)</span> and integrating allows us to pick out the <span class="math notranslate nohighlight">\(k\)</span>-th coefficient.  If you’ve used Fourier Series before, this is the method for calculating the coefficients (for the complex case).</p>
-<p>The code in the cell below calculates <span class="math notranslate nohighlight">\(\Phi_g(z)\)</span> at a bunch of points on the unit circle, by starting with <span class="math notranslate nohighlight">\(\Phi_0(z)\)</span> at <span class="math notranslate nohighlight">\(e^{2i\pi n/N}\)</span> for a large value of <span class="math notranslate nohighlight">\(N\)</span>.  Then it iteratively finds <span class="math notranslate nohighlight">\(\Phi_{g+1}(z) = \mu(\Phi_g(z))\)</span> at those points.  Once it’s calculated up to the desired <span class="math notranslate nohighlight">\(g\)</span>, it can use a Riemann sum to calculate the integral above to find a desired coefficient.  However, since the FFT is designed to work with values like these, it can also use the more efficient FFT methods to calculate all of the coefficients at once.  By default it uses the FFT speed-up.</p>
+<p>The code in the cell below calculates <span class="math notranslate nohighlight">\(\Phi_g(z)\)</span> at a bunch of points on the unit circle, by starting with <span class="math notranslate nohighlight">\(\Phi_0(z)\)</span> at <span class="math notranslate nohighlight">\(e^{2i\pi m/N}\)</span> for a large value of <span class="math notranslate nohighlight">\(M\)</span>.  Then it iteratively finds <span class="math notranslate nohighlight">\(\Phi_{g+1}(z) = \mu(\Phi_g(z))\)</span> at those points.  Once it’s calculated up to the desired <span class="math notranslate nohighlight">\(g\)</span>, it can use a Riemann sum to calculate the integral above to find a desired coefficient.  However, since the FFT is designed to work with values like these, it can also use the more efficient FFT methods to calculate all of the coefficients at once.  By default it uses the FFT speed-up.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -894,6 +895,16 @@ If you haven’t taken Complex Analysis, don’t worry, we’ll rewrite the inte
 <section id="additional-comments">
 <h2><span class="section-number">1.10.4. </span>Additional comments<a class="headerlink" href="#additional-comments" title="Link to this heading">#</a></h2>
 <p>Note that if <span class="math notranslate nohighlight">\(\mu(x) = e^{2(x-1)}\)</span> or something similar rather than a polynomial with only a few terms, then the Cauchy integral method would still work, but the other two methods would require some level of truncation before even beginning.  Keeping many terms would also slow those methods down significantly.</p>
+<p>For this Cauchy integral, a finite Riemann sum having more terms than the maximum degree of <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> is exact.  That is, if the arithmetic is exact, the coefficients will all be exact.  If there is no maximum degree or there is arithmetic error, then using more points helps to reduce accumulated error.</p>
+</section>
+<section id="self-test">
+<h2><span class="section-number">1.10.5. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<p><strong>These are just notes to myself about what to create</strong></p>
+<ol class="arabic simple">
+<li><p>What happens in integral if we use fewer points than the <span class="math notranslate nohighlight">\(k\)</span> we want?</p></li>
+<li><p>Give integral with <span class="math notranslate nohighlight">\(z = re^{i\theta}\)</span> for smaller <span class="math notranslate nohighlight">\(r\)</span> and infinite series for <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  Experimentally observe error.</p></li>
+<li><p>Design problem showing Riemann sum is exact….</p></li>
+</ol>
 </section>
 </section>
 
@@ -964,10 +975,11 @@ If you haven’t taken Complex Analysis, don’t worry, we’ll rewrite the inte
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-calculation">1.10.1. Symbolic calculation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-calculation">1.10.2. Vectorized calculation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-integration">1.10.3. Cauchy Integration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternate-view-of-integral">1.10.3.1. Alternate view of integral.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternate-view-of-cauchy-integral">1.10.3.1. Alternate view of Cauchy integral.</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-comments">1.10.4. Additional comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.10.5. Self-test</a></li>
 </ul>
   </nav></div>
 
