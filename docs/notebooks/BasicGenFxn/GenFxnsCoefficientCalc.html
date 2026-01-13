@@ -394,7 +394,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -410,6 +412,20 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-calculation">1.10.1. Symbolic calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-calculation">1.10.2. Vectorized calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-integration">1.10.3. Cauchy Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternate-view-of-integral">1.10.3.1. Alternate view of integral.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-comments">1.10.4. Additional comments</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -421,9 +437,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numerical-calculation-of-pgf-coefficients">
 <h1><span class="section-number">1.10. </span>Numerical Calculation of PGF coefficients<a class="headerlink" href="#numerical-calculation-of-pgf-coefficients" title="Link to this heading">#</a></h1>
-<p><strong>This Section is Under Construction</strong></p>
-<p>There are times when we may want to find the coefficient of a generating function coefficient.  One example would be where we know <span class="math notranslate nohighlight">\(\mu(x)\)</span> but we want to find the coefficients of <span class="math notranslate nohighlight">\(\Phi_g(x) = \mu^{(g)}(x)\)</span>.</p>
-<p>The natural first attempt is to simply take the series expansion of <span class="math notranslate nohighlight">\(\mu(x)\)</span>, plug it into itself and track the coefficients.  Using one of the simplest possible examples, if <span class="math notranslate nohighlight">\(\mu(x) = (1+x^2)/2\)</span>, then</p>
+<p>There are times when we may want to find coefficients of a generating function, but we do not have an analytic function.  One scenario where this might occur would be where we know <span class="math notranslate nohighlight">\(\mu(x)\)</span> but we want to find the coefficients of <span class="math notranslate nohighlight">\(\Phi_g(x) = \mu^{(g)}(x)\)</span>.</p>
+<section id="symbolic-calculation">
+<h2><span class="section-number">1.10.1. </span>Symbolic calculation<a class="headerlink" href="#symbolic-calculation" title="Link to this heading">#</a></h2>
+<p>The natural first attempt is to simply take the series expansion of <span class="math notranslate nohighlight">\(\mu(x)\)</span>, plug it into itself repeatedly while tracking the coefficients.  Using one of the simplest possible examples, if <span class="math notranslate nohighlight">\(\mu(x) = (1+x^2)/2\)</span>, then</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \Phi_1(x) &amp;= \mu(x) = \frac{1+x^2}{2}\\
@@ -431,8 +448,452 @@ document.write(`
 \Phi_3(x) &amp;= \mu(\Phi_2(x)) = \frac{1 + \frac{25 + 20x^2 + 14x^4 +4x^6 + x^8}{64}}{2} = \frac{89 + 20x^2 + 14x^4 + 4x^6 + x^8}{128}\\
 &amp; \vdots
 \end{align*}\]</div>
-<p>Although this approach will work if the <span class="math notranslate nohighlight">\(\mu(x)\)</span> is simple enough, the number of calculations at each level grows quickly, and it quickly becomes impractical to follow all of the coefficients, even using computers to do the calculations.</p>
-<p>do the calculation, using <code class="docutils literal notranslate"><span class="pre">timeit</span></code></p>
+<p>Although this approach will work if the <span class="math notranslate nohighlight">\(\mu(x)\)</span> is simple enough, the number of calculations at each level grows quickly.  The code below uses Python’s <code class="docutils literal notranslate"><span class="pre">sympy</span></code> package for symbolic calculation.  To check the run time, it uses Python’s <code class="docutils literal notranslate"><span class="pre">timeit</span></code> package and runs many simulations, and plots the median run time for different <span class="math notranslate nohighlight">\(\Phi_g\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>  <span class="c1">#package that allows symbolic computation</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">timeit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Phi</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return Phi_g(x) defined by:</span>
+<span class="sd">      Phi_0(x) = x</span>
+<span class="sd">      Phi_{g+1}(x) = mu(Phi_g(x))</span>
+<span class="sd">    as a fully expanded SymPy expression.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">g</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;g must be a nonnegative integer&quot;</span><span class="p">)</span>
+    <span class="n">intermediate_Phi</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+        <span class="n">intermediate_Phi</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">mu</span><span class="p">(</span><span class="n">intermediate_Phi</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">intermediate_Phi</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">time_Phi</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Median runtime of Phi(g) over `repeats` runs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stmt</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Phi</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">repeats</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+
+<span class="c1"># example mu</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Offspring PGF: mu(x) = (1 + x^2)/2.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">expr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># choose g values - </span>
+<span class="n">g_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_Phi</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">g_values</span><span class="p">]</span>
+
+<span class="c1"># plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_values</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Median Runtime (seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/e02156ad57b7a70a3376e8788a3522062cc6321de146be067fbe6e9f20c6fc2b.png" src="../../_images/e02156ad57b7a70a3376e8788a3522062cc6321de146be067fbe6e9f20c6fc2b.png" />
+</div>
+</div>
+<p>In the code above, if I run with a larger <span class="math notranslate nohighlight">\(g\)</span>, it suddenly slows down (I’ve never waited long enough to see if it will stop).  I presume it is running out of memory to hold all the calculations or some similar problem.</p>
+</section>
+<section id="vectorized-calculation">
+<h2><span class="section-number">1.10.2. </span>Vectorized calculation<a class="headerlink" href="#vectorized-calculation" title="Link to this heading">#</a></h2>
+<p>A different method just uses a vector of coefficients to do the calculations.</p>
+<p>It is implemented below for This can run for larger <span class="math notranslate nohighlight">\(g\)</span>.  Note that we’ve switched to a log scale.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">timeit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Phi_numpy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute coefficients of Phi_g(x) using NumPy.</span>
+<span class="sd">    Phi_0(x) = x</span>
+<span class="sd">    Phi_{g+1}(x) = mu(Phi_g(x))</span>
+
+<span class="sd">    Returns a NumPy array [a_0, ..., a_deg].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">g</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;g must be a nonnegative integer&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Phi_0(x) = x</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">a</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">time_Phi_numpy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Median runtime of Phi_numpy(g) over `repeats` runs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stmt</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Phi_numpy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">repeats</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+
+<span class="c1"># example mu acting on coefficient arrays</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mu_numpy</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    mu(x) = (1 + x^2) / 2, acting on coefficient array a.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">b</span>
+
+
+
+
+<span class="c1"># choose g values</span>
+<span class="n">g_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>   <span class="c1"># you can go higher than with SymPy</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_Phi_numpy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_numpy</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">101</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">g_values</span><span class="p">]</span>
+
+<span class="c1"># plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_values</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Runtime (seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/b3bfb226143f6b5836ca150d1a4baccc17024a87838b5fa242dda377945e1aac.png" src="../../_images/b3bfb226143f6b5836ca150d1a4baccc17024a87838b5fa242dda377945e1aac.png" />
+</div>
+</div>
+</section>
+<section id="cauchy-integration">
+<h2><span class="section-number">1.10.3. </span>Cauchy Integration<a class="headerlink" href="#cauchy-integration" title="Link to this heading">#</a></h2>
+<p>Now we’ll try a very different method.</p>
+<p>If you’ve taken Complex Analysis, you may recognize the “Cauchy integral” that can extract the coefficient of <span class="math notranslate nohighlight">\(x^k\)</span> from <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+[x^k]\Phi_g(x)
+= \frac{1}{2\pi i}\oint_{|z|=1} \frac{\Phi_g(z)}{z^{k+1}}\,dz
+\]</div>
+<p>If you haven’t taken Complex Analysis, don’t worry, we’ll rewrite the integral and then derive its properties without requiring the fancy properties.</p>
+<p>You may recall from Complex Analysis that it’s important that <span class="math notranslate nohighlight">\(\Phi_g(z)\)</span> doesn’t have any singularities inside the unit circle <span class="math notranslate nohighlight">\(|z|=1\)</span>.  It turns out that this is guaranteed by the fact that <span class="math notranslate nohighlight">\(\Phi_g(1) = \sum_k p_k = 1\)</span>.  Since <span class="math notranslate nohighlight">\(|p_k z^k| \leq p_k\)</span> for any <span class="math notranslate nohighlight">\(|z|\leq 1\)</span>, <span class="math notranslate nohighlight">\(\Phi_g(z)\)</span> converges absolutely everywhere inside and on the unit circle.</p>
+<p>We can convert this integral into something that is easier to consider using the substitution <span class="math notranslate nohighlight">\(z = e^{i\theta}\)</span>.  Then <span class="math notranslate nohighlight">\(dz/d\theta = i e^{i\theta}\)</span> and <span class="math notranslate nohighlight">\(dz = i e^{i\theta} d\theta\)</span> where <span class="math notranslate nohighlight">\(\theta\)</span> goes from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(2\pi\)</span>.  Substituting this and replacing <span class="math notranslate nohighlight">\(1/z^{k+1}\)</span> with <span class="math notranslate nohighlight">\(e^{-i(k+1)\theta}\)</span> yields:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2\pi i}\oint_{|z|=1} \frac{\Phi_g(z)}{z^{k+1}}\,dz= \frac{1}{2\pi}\int_{0}^{2\pi} \Phi_g(e^{i\theta})\,e^{-ik\theta}\,d\theta
+\]</div>
+<p>This last integral is the integral we are going to do.</p>
+<p>A few asides - The function <span class="math notranslate nohighlight">\(\Phi_g(e^{i\theta})\)</span> is sometimes called the “Characterstic Function” of the distribution corresponding to <span class="math notranslate nohighlight">\(\Phi_g\)</span>.  It is also the Fourier Transform of the discrete sequence <span class="math notranslate nohighlight">\(p_{g,0}\)</span>, <span class="math notranslate nohighlight">\(p_{g,1}\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>.  This last point is useful because there are well-established rapid methods to compute and invert the Fourier Transform of a distribution (the Fast Fourier Transform, (FFT)).  We will be able to use the FFT to calculate this integral faster than we can do it by hand.</p>
+<p>Now let’s look at this integral from the perspective of someone who hasn’t taken Complex Analysis and learned about residues.</p>
+<section id="alternate-view-of-integral">
+<h3><span class="section-number">1.10.3.1. </span>Alternate view of integral.<a class="headerlink" href="#alternate-view-of-integral" title="Link to this heading">#</a></h3>
+<p>We’d like to understand why this integral finds <span class="math notranslate nohighlight">\(p_{g,k}\)</span> without relying on Complex Analysis.</p>
+<p>The fact that <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> is a PGF guarantees lots of convergence properties on the unit circle.  This means we can do the following steps with the integral.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{1}{2\pi}\int_{0}^{2\pi} \Phi_g(e^{i\theta})e^{-ik\theta}\,d\theta &amp;= \frac{1}{2\pi} \int_0^{2\pi} \sum_{j=0}^\infty p_{g,j} (e^{i\theta})^j e^{-ik\theta} \, d\theta\\
+&amp;= \frac{1}{2\pi} \sum_{j=0}^\infty p_{g,j} \int_0^{2\pi}  (e^{i\theta})^j e^{-ik\theta} \, d\theta\\
+&amp;=\frac{1}{2\pi} \sum_{j=0}^\infty p_{g,j} \int_0^{2\pi} (e^{i(j-k)\theta}) \, d\theta\\
+&amp;=\frac{1}{2\pi} \sum_{j=0}^\infty p_{g,j} \begin{cases}\int_0^{2\pi} (e^{i(j-k)\theta}) \, d\theta &amp; j\neq k\\
+\int_0^{2\pi}1\, d\theta &amp; j=k
+\end{cases}\\
+&amp;=\frac{1}{2\pi} \sum_{j=0}^\infty p_{g,j} \begin{cases} \left[\frac{1}{i(j-k)}e^{i(j-k)\theta} \right|_{\theta=0}^{2\pi} &amp; j\neq k\\
+\theta|_{\theta=0}^{2\pi} &amp; j=k
+\end{cases}\\
+&amp;=\frac{1}{2\pi} \sum_{j=0}^\infty p_{g,j} \begin{cases} 0 &amp; j\neq k\\
+2\pi &amp; j=k
+\end{cases}\\
+&amp;= p_{g,k}
+\end{align*}\]</div>
+<p>So seemingly miraculously, multiplying by <span class="math notranslate nohighlight">\(e^{-ik\theta}\)</span> and integrating allows us to pick out the <span class="math notranslate nohighlight">\(k\)</span>-th coefficient.  If you’ve used Fourier Series before, this is the method for calculating the coefficients (for the complex case).</p>
+<p>The code in the cell below calculates <span class="math notranslate nohighlight">\(\Phi_g(z)\)</span> at a bunch of points on the unit circle, by starting with <span class="math notranslate nohighlight">\(\Phi_0(z)\)</span> at <span class="math notranslate nohighlight">\(e^{2i\pi n/N}\)</span> for a large value of <span class="math notranslate nohighlight">\(N\)</span>.  Then it iteratively finds <span class="math notranslate nohighlight">\(\Phi_{g+1}(z) = \mu(\Phi_g(z))\)</span> at those points.  Once it’s calculated up to the desired <span class="math notranslate nohighlight">\(g\)</span>, it can use a Riemann sum to calculate the integral above to find a desired coefficient.  However, since the FFT is designed to work with values like these, it can also use the more efficient FFT methods to calculate all of the coefficients at once.  By default it uses the FFT speed-up.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">timeit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Phi_values_on_unit_circle</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute values of Phi_g(z) at equally spaced points on the unit circle:</span>
+<span class="sd">        z_m = exp(2*pi*i*m/num_points),  m = 0,...,num_points-1</span>
+
+<span class="sd">    Here mu is a function that acts on an array of complex values (pointwise),</span>
+<span class="sd">    returning mu(values).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">g</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;g must be a nonnegative integer&quot;</span><span class="p">)</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+    <span class="n">z_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">m</span> <span class="o">/</span> <span class="n">num_points</span><span class="p">)</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="n">z_points</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>   <span class="c1"># Phi_0(z) = z</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">values</span><span class="p">,</span> <span class="n">z_points</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Phi_coefficients_via_cauchy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute coefficients of Phi_g(x) either using the discrete Cauchy integral</span>
+<span class="sd">    (trapezoidal rule on the unit circle), or the FFT.</span>
+
+<span class="sd">    Returns coefficients a_0, ..., a_{num_points-1}.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">z_points</span> <span class="o">=</span> <span class="n">Phi_values_on_unit_circle</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">FFT</span><span class="p">:</span>  <span class="c1"># Fast Fourier Transform is equivalent to calculation below, but much faster</span>
+        <span class="c1">#coefficients = np.fft.ifft(values)</span>
+        <span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_points</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+            <span class="c1"># a_k = (1/num_points) * sum_m Phi_g(z_m) * z_m^{-k}</span>
+            <span class="n">coefficients</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">values</span> <span class="o">*</span> <span class="n">z_points</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="p">))</span> <span class="o">/</span> <span class="n">num_points</span>
+
+    <span class="k">return</span> <span class="n">coefficients</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Phi_coefficients_real</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return real coefficients when imaginary parts are numerical noise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coeffs</span> <span class="o">=</span> <span class="n">Phi_coefficients_via_cauchy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="n">FFT</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeffs</span><span class="o">.</span><span class="n">imag</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">real</span>
+    <span class="k">return</span> <span class="n">coeffs</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">time_Phi_Cauchy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Median runtime of Phi_coefficients_real(g, num_points, mu) over `repeats` runs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">degree</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">g</span>
+    <span class="n">num_points</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">degree</span>   <span class="c1"># must be &gt; degree</span>
+
+    <span class="n">stmt</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Phi_coefficients_real</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="n">FFT</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">repeats</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+
+<span class="c1"># example mu acting pointwise on complex values: mu(x) = (1 + x^2)/2</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mu_Cauchy</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">values</span> <span class="o">*</span> <span class="n">values</span><span class="p">)</span>
+
+
+<span class="c1"># choose g values</span>
+<span class="n">g_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>   <span class="c1"># you can go higher than with SymPy</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_Phi_Cauchy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_Cauchy</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">101</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">g_values</span><span class="p">]</span>
+
+<span class="c1"># plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_values</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Median runtime (seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/49dc4374d48220a329ce3ad8902185d9180558077e6a867e47bebe78a9104be8.png" src="../../_images/49dc4374d48220a329ce3ad8902185d9180558077e6a867e47bebe78a9104be8.png" />
+</div>
+</div>
+<p>Now let’s compare these methods.  We’ll use a different <span class="math notranslate nohighlight">\(\mu(x)\)</span>:  <span class="math notranslate nohighlight">\(\mu(x) = (1+x+2x^2)/4\)</span>.  We’ll first look at run-time.  The Cauchy method wins out as <span class="math notranslate nohighlight">\(g\)</span> gets larger.  We have to stop the symbolic computation at an early <span class="math notranslate nohighlight">\(g\)</span> because it seems to get stuck.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- new mu for mu(x) = (1 + x + 2x^2)/4 ---</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mu_sympy</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="c1"># SymPy expression -&gt; SymPy expression</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">expr</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">expr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mu_numpy_coeffs</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="c1"># coefficient array a -&gt; coefficient array for (1 + p + 2p^2)/4</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>              <span class="c1"># p^2</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>                      <span class="c1"># +1</span>
+    <span class="n">out</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">a</span>                  <span class="c1"># +p</span>
+    <span class="n">out</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">b</span>                         <span class="c1"># +2p^2</span>
+    <span class="k">return</span> <span class="n">out</span> <span class="o">/</span> <span class="mf">4.0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mu_Cauchy_values</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="c1"># pointwise on complex values on unit circle</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">values</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">values</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">4.0</span>
+
+
+<span class="c1"># --- run the existing timing tests (assuming your time_* functions already exist) ---</span>
+
+<span class="n">sympy_g_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1">#sympy seems to run forever once g=10.</span>
+<span class="n">sympy_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_Phi</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_sympy</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">101</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">sympy_g_values</span><span class="p">]</span>
+
+<span class="n">g_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+<span class="n">numpy_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_Phi_numpy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_numpy_coeffs</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">101</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">g_values</span><span class="p">]</span>
+<span class="n">Cauchy_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_Phi_Cauchy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_Cauchy_values</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">101</span><span class="o">/</span><span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">g_values</span><span class="p">]</span>
+
+<span class="c1"># --- plot (assuming plt already imported) ---</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sympy_g_values</span><span class="p">,</span> <span class="n">sympy_times</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SymPy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_values</span><span class="p">,</span> <span class="n">numpy_times</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NumPy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_values</span><span class="p">,</span> <span class="n">Cauchy_times</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cauchy with FFT speedup&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Median Runtime (seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/491784a10a73d9e0d15f4b387e7dded754c70f74b5d03ffea2dd0f31960f4e14.png" src="../../_images/491784a10a73d9e0d15f4b387e7dded754c70f74b5d03ffea2dd0f31960f4e14.png" />
+</div>
+</div>
+<p>Now we’ll check that the results are consistent.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">g</span>
+
+<span class="c1"># --- SymPy coefficients ---</span>
+<span class="n">phi_sympy</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_sympy</span><span class="p">)</span>
+<span class="n">sympy_coeffs</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Poly</span><span class="p">(</span><span class="n">phi_sympy</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">all_coeffs</span><span class="p">()</span>
+<span class="n">sympy_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">sympy_coeffs</span><span class="p">)])</span>
+
+<span class="c1"># --- NumPy coefficient iteration ---</span>
+<span class="n">numpy_coeffs</span> <span class="o">=</span> <span class="n">Phi_numpy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_numpy_coeffs</span><span class="p">)</span>
+
+<span class="c1"># --- Cauchy / FFT coefficients ---</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">degree</span>
+<span class="n">cauchy_coeffs</span> <span class="o">=</span> <span class="n">Phi_coefficients_real</span><span class="p">(</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu_Cauchy_values</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)[:</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">150</span><span class="p">],</span> <span class="n">sympy_coeffs</span><span class="p">[:</span><span class="mi">150</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SymPy, g=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">150</span><span class="p">],</span> <span class="n">numpy_coeffs</span><span class="p">[:</span><span class="mi">150</span><span class="p">],</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NumPy, g=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">150</span><span class="p">],</span> <span class="n">cauchy_coeffs</span><span class="p">[:</span><span class="mi">150</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cauchy / FFT, g=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+
+
+<span class="n">g</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">degree</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">g</span>
+
+<span class="c1"># --- NumPy coefficient iteration ---</span>
+<span class="n">numpy_coeffs</span> <span class="o">=</span> <span class="n">Phi_numpy</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mu_numpy_coeffs</span><span class="p">)</span>
+
+<span class="c1"># --- Cauchy / FFT coefficients ---</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">degree</span>
+<span class="n">cauchy_coeffs</span> <span class="o">=</span> <span class="n">Phi_coefficients_real</span><span class="p">(</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu_Cauchy_values</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)[:</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">1000</span><span class="p">],</span> <span class="n">numpy_coeffs</span><span class="p">[:</span><span class="mi">1000</span><span class="p">],</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NumPy, g=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">1000</span><span class="p">],</span> <span class="n">cauchy_coeffs</span><span class="p">[:</span><span class="mi">1000</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cauchy / FFT, g=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$k$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient $a_k$ of $</span><span class="se">\\</span><span class="s2">Phi_g(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/18622dcdb5583d78423a8f8ff729a7d27914d08efb0f12be9ecc5263df364a56.png" src="../../_images/18622dcdb5583d78423a8f8ff729a7d27914d08efb0f12be9ecc5263df364a56.png" />
+</div>
+</div>
+<p>However, there are round-off errors to consider in the Cauchy integral approximation.  In this case, the errors occur for cases whose combined probability is significantly less than <span class="math notranslate nohighlight">\(10^{-15}\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Cauchy / FFT coefficients ---</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">degree</span>
+<span class="n">cauchy_coeffs</span> <span class="o">=</span> <span class="n">Phi_coefficients_real</span><span class="p">(</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">mu_Cauchy_values</span><span class="p">,</span> <span class="n">FFT</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)[:</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">numpy_coeffs</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NumPy, g=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="n">cauchy_coeffs</span><span class="p">[:</span><span class="mi">2000</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cauchy / FFT, g=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$k$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient $p_{g,k}$ of $</span><span class="se">\\</span><span class="s2">Phi_g(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/7ca07efa8fc4bd6275ea30b6e02a29603fe423d96f1af8f992c7fb3a8798ac51.png" src="../../_images/7ca07efa8fc4bd6275ea30b6e02a29603fe423d96f1af8f992c7fb3a8798ac51.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="additional-comments">
+<h2><span class="section-number">1.10.4. </span>Additional comments<a class="headerlink" href="#additional-comments" title="Link to this heading">#</a></h2>
+<p>Note that if <span class="math notranslate nohighlight">\(\mu(x) = e^{2(x-1)}\)</span> or something similar rather than a polynomial with only a few terms, then the Cauchy integral method would still work, but the other two methods would require some level of truncation before even beginning.  Keeping many terms would also slow those methods down significantly.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -489,6 +950,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-calculation">1.10.1. Symbolic calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-calculation">1.10.2. Vectorized calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cauchy-integration">1.10.3. Cauchy Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternate-view-of-integral">1.10.3.1. Alternate view of integral.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-comments">1.10.4. Additional comments</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
