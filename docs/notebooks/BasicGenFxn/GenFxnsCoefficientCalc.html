@@ -515,8 +515,8 @@ document.write(`
 </section>
 <section id="vectorized-calculation">
 <h2><span class="section-number">1.10.2. </span>Vectorized calculation<a class="headerlink" href="#vectorized-calculation" title="Link to this heading">#</a></h2>
-<p>A different method just uses a vector of coefficients to do the calculations.</p>
-<p>It is implemented below for This can run for larger <span class="math notranslate nohighlight">\(g\)</span>.  Note that we’ve switched to a log scale.</p>
+<p>A different method just uses a vector of coefficients to do the calculations.  It uses the location in the array as a proxy for <span class="math notranslate nohighlight">\(x^k\)</span>, and then it is able to do calculations without the symbolic overhead.</p>
+<p>It is implemented below using a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array in Python.  This can run for larger <span class="math notranslate nohighlight">\(g\)</span>.  Note that we’ve switched to a log scale.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -579,7 +579,7 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g_values</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Runtime (seconds)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Median runtime (seconds)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -600,7 +600,8 @@ document.write(`
 [x^k]\Phi_g(x)
 = \frac{1}{2\pi i}\oint_{|z|=1} \frac{\Phi_g(z)}{z^{k+1}}\,dz
 \]</div>
-<p>If you haven’t taken Complex Analysis, don’t worry, we’ll rewrite the integral and then derive its properties without requiring the fancy properties.</p>
+<p>(here I’ve used the notation <span class="math notranslate nohighlight">\([x^k]\Phi_g(x)\)</span> to denote the coefficient of <span class="math notranslate nohighlight">\(x^k\)</span> in <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>)
+If you haven’t taken Complex Analysis, don’t worry, we’ll rewrite the integral and then derive its properties without requiring the Complex Analysis theorems.</p>
 <p>You may recall from Complex Analysis that it’s important that <span class="math notranslate nohighlight">\(\Phi_g(z)\)</span> doesn’t have any singularities inside the unit circle <span class="math notranslate nohighlight">\(|z|=1\)</span>.  It turns out that this is guaranteed by the fact that <span class="math notranslate nohighlight">\(\Phi_g(1) = \sum_k p_k = 1\)</span>.  Since <span class="math notranslate nohighlight">\(|p_k z^k| \leq p_k\)</span> for any <span class="math notranslate nohighlight">\(|z|\leq 1\)</span>, <span class="math notranslate nohighlight">\(\Phi_g(z)\)</span> converges absolutely everywhere inside and on the unit circle.</p>
 <p>We can convert this integral into something that is easier to consider using the substitution <span class="math notranslate nohighlight">\(z = e^{i\theta}\)</span>.  Then <span class="math notranslate nohighlight">\(dz/d\theta = i e^{i\theta}\)</span> and <span class="math notranslate nohighlight">\(dz = i e^{i\theta} d\theta\)</span> where <span class="math notranslate nohighlight">\(\theta\)</span> goes from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(2\pi\)</span>.  Substituting this and replacing <span class="math notranslate nohighlight">\(1/z^{k+1}\)</span> with <span class="math notranslate nohighlight">\(e^{-i(k+1)\theta}\)</span> yields:</p>
 <div class="math notranslate nohighlight">
@@ -613,7 +614,7 @@ document.write(`
 <section id="alternate-view-of-integral">
 <h3><span class="section-number">1.10.3.1. </span>Alternate view of integral.<a class="headerlink" href="#alternate-view-of-integral" title="Link to this heading">#</a></h3>
 <p>We’d like to understand why this integral finds <span class="math notranslate nohighlight">\(p_{g,k}\)</span> without relying on Complex Analysis.</p>
-<p>The fact that <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> is a PGF guarantees lots of convergence properties on the unit circle.  This means we can do the following steps with the integral.</p>
+<p>The fact that <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> is a PGF guarantees that <span class="math notranslate nohighlight">\(|\Phi_g(z)|\)</span> converges and its magnitude is at most <span class="math notranslate nohighlight">\(\Phi_g(1)=1\)</span> everywhere on the unit circle.  This means we can do the following steps with the integral.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \frac{1}{2\pi}\int_{0}^{2\pi} \Phi_g(e^{i\theta})e^{-ik\theta}\,d\theta &amp;= \frac{1}{2\pi} \int_0^{2\pi} \sum_{j=0}^\infty p_{g,j} (e^{i\theta})^j e^{-ik\theta} \, d\theta\\
