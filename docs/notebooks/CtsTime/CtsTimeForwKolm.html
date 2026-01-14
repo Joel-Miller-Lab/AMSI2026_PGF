@@ -229,6 +229,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -401,7 +405,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -417,6 +423,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.1. Self-test</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -454,7 +468,11 @@ document.write(`
 &amp;= r \mu(x) \frac{\partial}{\partial x} \Phi(x,t) - r x \frac{\partial}{\partial x} \Phi(x,t)\\
 &amp;= r(\mu(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
 \end{align*}\]</div>
-<p>This is the Forward Kolmogorov Equation.</p>
+<p>This yields the Forward Kolmogorov Equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial t} \Phi(x,t) = r (\mu(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
+\]</div>
 <div class="proof example admonition" id="example-ForwKolmDet">
 <p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Deterministic Model)</p>
 <section class="example-content" id="proof-content">
@@ -470,7 +488,62 @@ document.write(`
 <p>The next to last step uses the product rule and substitutes <span class="math notranslate nohighlight">\(1\)</span> for <span class="math notranslate nohighlight">\(x\)</span>.  The last step uses the fact that <span class="math notranslate nohighlight">\(\mu(1)=1\)</span>.</p>
 <p>So <span class="math notranslate nohighlight">\(L(t)\)</span> grows or decays exponentially depending on the value of <span class="math notranslate nohighlight">\(r(\mu'(1)-1)\)</span>.  If on average the individuals are replaced with fewer than <span class="math notranslate nohighlight">\(1\)</span> individual <span class="math notranslate nohighlight">\(\mu'(1)-1&lt;0\)</span> and decay occurs.  Otherwise <span class="math notranslate nohighlight">\(\mu'(1)-1&gt;0\)</span> and growth occurs.</p>
 </section>
-</div></section>
+</div><div class="proof example admonition" id="example-ForwKolmPureBirth">
+<p class="admonition-title"><span class="caption-number">Example 3.2 </span> (A pure birth process)</p>
+<section class="example-content" id="proof-content">
+<p>Assume individuals give birth to a single individual with rate <span class="math notranslate nohighlight">\(\beta\)</span>.  Further assume that they never die.  In our context when they give birth, this is equivalent to replacing them by two indviduals.  Here <span class="math notranslate nohighlight">\(r=\beta\)</span> and <span class="math notranslate nohighlight">\(\mu(x)=x^2\)</span>, and <span class="math notranslate nohighlight">\(\Phi(x,0)=x\)</span>.  We have</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial t} \Phi(x,t) = r (x^2-x) \frac{\partial}{\partial x} \Phi(x,t)
+\]</div>
+<p>It can be shown that the solution to this eqution is</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(x,t) = \frac{x e^{-rt}}{1-(1-e^{-rt})x}
+\]</div>
+<p>Expanding this using a geometric series</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi(x,t) &amp;= x e^{-rt} \sum_{n=0}^\infty (1-e^{-rt})^n x^n\\
+&amp;= \sum_{n=0}^\infty e^{-rt}(1-e^{-rt})^n x^{n+1}\\
+&amp;= \sum_{\ell=1}^\infty e^{-rt} (1-e^{-ert})^{\ell-1} x^\ell 
+\end{align*}\]</div>
+<p>So the probability of <span class="math notranslate nohighlight">\(\ell\)</span> individuals is <span class="math notranslate nohighlight">\(q_{\ell}(t) = e^{-rt} (1-e^{-ert})^{\ell-1}\)</span></p>
+</section>
+</div><section id="self-test">
+<h2><span class="section-number">3.4.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Use the Forward Kolmogorov Equation to find a system of equations for <span class="math notranslate nohighlight">\(\frac{d}{d t} q_\ell(t)\)</span> for each <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+<li><p>Consider the case where individuals give birth at rate <span class="math notranslate nohighlight">\(\beta\)</span> and die at rate <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<ol class="arabic">
+<li><p>Derive the Forward Kolmogorov Equation.</p></li>
+<li><p>What is the initial condition for <span class="math notranslate nohighlight">\(\Phi(x,0)\)</span>?</p></li>
+<li><p>Show that if <span class="math notranslate nohighlight">\(\gamma \neq \beta\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \Phi(x,t) = \frac{(\gamma-\beta x)e^{-(\beta-\gamma)t} - \gamma(1-x)}{(\gamma-\beta x)e^{-(\beta-\gamma)t}-\beta(1-x)}
+      \]</div>
+<p>is a solution (you don’t need to derive it, just show that it satisfies the equation).</p>
+</li>
+<li><p>Find <span class="math notranslate nohighlight">\(q_0(t) = \Phi(0,t)\)</span> (if <span class="math notranslate nohighlight">\(\beta \neq \gamma\)</span>).</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(s(t) = \frac{\beta(1-e^{-(\beta-\gamma)t})}{\beta-\gamma e^{-(\beta-\gamma)t}}\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[
+      \Phi(x,t) = q_0(t) + (1-q_0(t)) \frac{(1-s(t))x}{1-s(t)x}
+      \]</div>
+<p>Based on this, find <span class="math notranslate nohighlight">\(q_\ell(t)\)</span> for <span class="math notranslate nohighlight">\(\ell=1,2,\ldots\)</span> in terms of <span class="math notranslate nohighlight">\(q_0(t)\)</span> and <span class="math notranslate nohighlight">\(s(t)\)</span>.</p>
+</li>
+</ol>
+</li>
+<li><p>Define <span class="math notranslate nohighlight">\(\hat{\Phi}(\theta,t) = \Phi(e^{i\theta},t)\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Convert the Kolmogorov Forward Equation into an equation with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span> derivatives for <span class="math notranslate nohighlight">\(\hat{\Phi}\)</span>.</p></li>
+<li><p>Determine the initial condition <span class="math notranslate nohighlight">\(\Phi(\theta, 0)\)</span>.</p></li>
+<li><p>Assume we can solve this system of equations numerically for <span class="math notranslate nohighlight">\(\theta = 2\pi m/M\)</span> for <span class="math notranslate nohighlight">\(m=1,\ldots, M\)</span>.  Explain how we could find <span class="math notranslate nohighlight">\(q_\ell(t)\)</span>.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -526,6 +599,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.1. Self-test</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

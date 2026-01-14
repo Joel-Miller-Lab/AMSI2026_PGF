@@ -51,7 +51,9 @@ parts:
       sections:  
       - file: notebooks/Simulation/GaltWatSimulation
     
-      
+    - file: notebooks/PracticeClasses/PracIntro
+      sections:
+      - file: notebooks/PracticeClasses/Prac1
       
       
       

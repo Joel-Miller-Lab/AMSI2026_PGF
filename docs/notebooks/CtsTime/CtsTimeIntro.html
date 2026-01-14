@@ -229,6 +229,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -501,8 +505,8 @@ document.write(`
 <p>Proof. Assume time is initially <span class="math notranslate nohighlight">\(0\)</span>.  Divide the interval from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(t\)</span> into <span class="math notranslate nohighlight">\(N\)</span> intervals of length <span class="math notranslate nohighlight">\(\Delta t = t/N\)</span>.  The probability that the event does not occur in each interval is <span class="math notranslate nohighlight">\((1- rt/N + \mathcal{o}(t/N))\)</span>.  Thus the probability it has not occured by time <span class="math notranslate nohighlight">\(t\)</span> is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\mathbb{P}[\text{event not occured by time }t] &amp;= \left(1- \frac{r}{N} + \mathcal{o}(1/N)\right)^N\\
-&amp; \to \left(1 -\frac{r}{N}\right)^N\\
+\mathbb{P}[\text{event not occured by time }t] &amp;= \left(1- \frac{rt}{N} + \mathcal{o}(1/N)\right)^N\\
+&amp; \to \left(1 -\frac{rt}{N}\right)^N\\
 &amp; \to e^{-rt}
 \end{align*}\]</div>
 <p>as <span class="math notranslate nohighlight">\(N \to \infty\)</span>.</p>
