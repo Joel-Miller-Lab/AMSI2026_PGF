@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.3. Distribution of Total Sizes of Extinct Disease Outbreaks &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>4.3. Distribution of Total Sizes of Extinct Disease Outbreaks &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisSizeDist';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3.4. SIR outbreak sizes in small populations" href="InfDisSmallPop.html" />
-    <link rel="prev" title="3.2. Early Outbreak Stage and Galton-Watson Processes" href="InfDisAsGaltWat.html" />
+    <link rel="next" title="4.4. SIR outbreak sizes in small populations" href="InfDisSmallPop.html" />
+    <link rel="prev" title="4.2. Early Outbreak Stage and Galton-Watson Processes" href="InfDisAsGaltWat.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,7 +198,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -211,14 +212,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">3. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">3.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">3.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">4. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">4.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,12 +418,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-theorem-and-motivations">3.3.1. Main Theorem and Motivations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-proof">3.3.2. Setting up the proof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-to-a-depth-first-search-of-the-nodes">3.3.3. Switching to a depth-first search of the nodes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverting-the-dfs-and-the-cycle-lemma">3.3.4. Inverting the DFS and the Cycle Lemma</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-the-proof">3.3.5. Completing the proof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.3.6. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-theorem-and-motivations">4.3.1. Main Theorem and Motivations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-proof">4.3.2. Setting up the proof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-to-a-depth-first-search-of-the-nodes">4.3.3. Switching to a depth-first search of the nodes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverting-the-dfs-and-the-cycle-lemma">4.3.4. Inverting the DFS and the Cycle Lemma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-the-proof">4.3.5. Completing the proof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.3.6. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -434,14 +436,14 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="distribution-of-total-sizes-of-extinct-disease-outbreaks">
-<h1><span class="section-number">3.3. </span>Distribution of Total Sizes of Extinct Disease Outbreaks<a class="headerlink" href="#distribution-of-total-sizes-of-extinct-disease-outbreaks" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4.3. </span>Distribution of Total Sizes of Extinct Disease Outbreaks<a class="headerlink" href="#distribution-of-total-sizes-of-extinct-disease-outbreaks" title="Link to this heading">#</a></h1>
 <section id="main-theorem-and-motivations">
-<h2><span class="section-number">3.3.1. </span>Main Theorem and Motivations<a class="headerlink" href="#main-theorem-and-motivations" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3.1. </span>Main Theorem and Motivations<a class="headerlink" href="#main-theorem-and-motivations" title="Link to this heading">#</a></h2>
 <p>Often for infectious diseases we are interested in the total number of infections that occur in an outbreak.  We will prove a theorem about the probability that an SIR outbreak spreading in a very large population fails to start an epidemic and instead goes extinct with exactly <span class="math notranslate nohighlight">\(j\)</span> total infections.  The result is more general and applies to any Galton-Watson process, but infectious diseases are typically where we are most interested in knowng the total size of small outbreaks.</p>
 <p>Consider a Galton-Watson Process whose offspring distribution has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  It is useful to know the probability that the process goes extinct and the total size is <span class="math notranslate nohighlight">\(j =\sum_{g=0}^\infty X_g\)</span> (if it goes extinct, then for large enough <span class="math notranslate nohighlight">\(g\)</span>,  <span class="math notranslate nohighlight">\(X_g\)</span> must be zero).</p>
 <p>A truly remarkable theorem lets us calculate this probability.</p>
 <div class="proof theorem admonition" id="theorem-TotalSizeDist">
-<p class="admonition-title"><span class="caption-number">Theorem 3.2 </span> (Distribution of Total Sizes of Galton-Watson Processes)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 4.2 </span> (Distribution of Total Sizes of Galton-Watson Processes)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given a Galton-Watson Process whose offspring distribution PGF is <span class="math notranslate nohighlight">\(\mu(x)\)</span>, the probability that the process terminates after a finite cumulative count of exactly <span class="math notranslate nohighlight">\(\sum_{g=0}^\infty X_g = j\)</span> is given by</p>
 <div class="math notranslate nohighlight">
@@ -449,9 +451,9 @@ document.write(`
 <p>where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}= [x^{j-1}]\left(\mu(x)^j\right)\)</span> denotes the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in  <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.</p>
 </section>
 </div><div class="proof example admonition" id="example-GeomTotalSize">
-<p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Size distribution with a geometric offspring distribution)</p>
+<p class="admonition-title"><span class="caption-number">Example 4.1 </span> (Size distribution with a geometric offspring distribution)</p>
 <section class="example-content" id="proof-content">
-<p>Imagine that an individual has a probability <span class="math notranslate nohighlight">\(p\)</span> of recovering next and <span class="math notranslate nohighlight">\(1-p\)</span> of transmitting next.  Further assume that if transmission happens, then the probabilities of the next event being recovery or transmission are again <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(1-p\)</span>.  Finding the offspring distribution is like the weighted coin-tossing distribution we saw earlier, except that we do not count the final recovery event.  The PGF of the offspring distribution is <span class="math notranslate nohighlight">\(\mu(x)=p/(1-(1-p)x)\)</span>.  By <a class="reference internal" href="#theorem-TotalSizeDist">Theorem 3.2</a>, the probability of an outbreak of size <span class="math notranslate nohighlight">\(j\)</span> is</p>
+<p>Imagine that an individual has a probability <span class="math notranslate nohighlight">\(p\)</span> of recovering next and <span class="math notranslate nohighlight">\(1-p\)</span> of transmitting next.  Further assume that if transmission happens, then the probabilities of the next event being recovery or transmission are again <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(1-p\)</span>.  Finding the offspring distribution is like the weighted coin-tossing distribution we saw earlier, except that we do not count the final recovery event.  The PGF of the offspring distribution is <span class="math notranslate nohighlight">\(\mu(x)=p/(1-(1-p)x)\)</span>.  By <a class="reference internal" href="#theorem-TotalSizeDist">Theorem 4.2</a>, the probability of an outbreak of size <span class="math notranslate nohighlight">\(j\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb{P}(\text{size}=j) = \frac{1}{j}p_{j-1}^{(j)}
@@ -473,14 +475,14 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <p>I developed the proof below that (in my opinion) very elegantly explains the Cycle Lemma.  I expect that this proof is already known, it’s just not in the places that I looked.</p>
 </section>
 <section id="setting-up-the-proof">
-<h2><span class="section-number">3.3.2. </span>Setting up the proof<a class="headerlink" href="#setting-up-the-proof" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3.2. </span>Setting up the proof<a class="headerlink" href="#setting-up-the-proof" title="Link to this heading">#</a></h2>
 <p>This is one of the most remarkable theorems I have seen.  I hope I can do justice to that proof below.</p>
 <p>First, I’ll try to set the stage for the thought process that yielded this proof.  How might we approach proving this theorem?  Let’s start down the path to proving this result.  We’ll run into an obstacle and then backtrack a bit to modify the approach at which point the proof will be more simple.</p>
 <figure class="align-default" id="fig-gwt">
 <a class="reference internal image-reference" href="../../_images/GWT.png"><img alt="../../_images/GWT.png" src="../../_images/GWT.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">A sample Galton-Watson tree with <span class="math notranslate nohighlight">\(j=9\)</span> nodes.  There are <span class="math notranslate nohighlight">\(8\)</span> edges.  The number of offspring, listed in order by node indices are <span class="math notranslate nohighlight">\((3,0,2,1,2,0,0,0,0)\)</span>.  The probability of observing exactly this tree is <span class="math notranslate nohighlight">\(p_3p_2^2p_1p_0^5\)</span>.</span><a class="headerlink" href="#fig-gwt" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">A sample Galton-Watson tree with <span class="math notranslate nohighlight">\(j=9\)</span> nodes.  There are <span class="math notranslate nohighlight">\(8\)</span> edges.  The number of offspring, listed in order by node indices are <span class="math notranslate nohighlight">\((3,0,2,1,2,0,0,0,0)\)</span>.  The probability of observing exactly this tree is <span class="math notranslate nohighlight">\(p_3p_2^2p_1p_0^5\)</span>.</span><a class="headerlink" href="#fig-gwt" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We will initially consider the nodes in their “natural” order: <span class="math notranslate nohighlight">\(u_{0,1}, \:u_{1,1}, \ldots, u_{1,X_1}, \: u_{2,1}, \ldots, u_{2,X_2}, \: \ldots\)</span>.  Then we create the sequence <span class="math notranslate nohighlight">\(k_{0,1}, \: k_{1,1}, \ldots, k_{1,X_1}, \: \ldots\)</span>, which we reindex as <span class="math notranslate nohighlight">\(k_1, k_2, \ldots\)</span>.</p>
@@ -498,12 +500,12 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <p>So in addition to requiring that the number of offspring sum to <span class="math notranslate nohighlight">\(j-1\)</span>, there is a constraint on the order.  Under the formulation so far, that constraint is that no subsequence <span class="math notranslate nohighlight">\((k_1, \ldots, k_\ell)\)</span> for <span class="math notranslate nohighlight">\(\ell&lt;j\)</span> sums to <span class="math notranslate nohighlight">\(\ell-1\)</span> as this would mean that the Galton-Watson tree terminates after <span class="math notranslate nohighlight">\(\ell\)</span> nodes.</p>
 </section>
 <section id="switching-to-a-depth-first-search-of-the-nodes">
-<h2><span class="section-number">3.3.3. </span>Switching to a depth-first search of the nodes<a class="headerlink" href="#switching-to-a-depth-first-search-of-the-nodes" title="Link to this heading">#</a></h2>
-<p>However, I was never able to come up with what I considered to be a simple proof showing that no subsequence <span class="math notranslate nohighlight">\(k_1, \ldots, k_\ell\)</span> sums to <span class="math notranslate nohighlight">\(\ell-1\)</span>.  Many proofs of <a class="reference internal" href="#theorem-TotalSizeDist">Theorem 3.2</a> that I read were based on this idea, but I always struggled with it.  Instead, let’s back up a bit and construct a different proof.  Rather than using the “obvious” ordering of the nodes, we’ll use a different ordering.</p>
+<h2><span class="section-number">4.3.3. </span>Switching to a depth-first search of the nodes<a class="headerlink" href="#switching-to-a-depth-first-search-of-the-nodes" title="Link to this heading">#</a></h2>
+<p>However, I was never able to come up with what I considered to be a simple proof showing that no subsequence <span class="math notranslate nohighlight">\(k_1, \ldots, k_\ell\)</span> sums to <span class="math notranslate nohighlight">\(\ell-1\)</span>.  Many proofs of <a class="reference internal" href="#theorem-TotalSizeDist">Theorem 4.2</a> that I read were based on this idea, but I always struggled with it.  Instead, let’s back up a bit and construct a different proof.  Rather than using the “obvious” ordering of the nodes, we’ll use a different ordering.</p>
 <p>The ordering we had above, <span class="math notranslate nohighlight">\(u_{0,1},\; u_{1,1}, \ldots, u_{1,X_1}, \; u_{2,1}, \ldots, u_{2,X_2}, \; \ldots\)</span> is called <em>breadth-first search</em> because it covers the breadth of each generation before going “deeper” (to the next generation).  Now we will switch to a <em>depth-first search</em> in which we completely explore the depth of one branch before moving on to the next.</p>
 <p>We can think of this by analogy to the “line of succession” rules for European monarchies.  The king’s sons (and their sons) would have priority over the king’s brothers who in turn have priority over the king’s uncles.  Only once there are no heirs left along one branch would the next branch be considered.</p>
 <div class="proof algorithm admonition" id="alg-DFS">
-<p class="admonition-title"><span class="caption-number">Algorithm 3.1 </span> (Depth-first search)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 4.1 </span> (Depth-first search)</p>
 <section class="algorithm-content" id="proof-content">
 <p>Consider a Galton-Watson Tree.  A depth-first search creates an ordering of the vertices <span class="math notranslate nohighlight">\((v_1, v_2, \ldots)\)</span> as follows:</p>
 <ul class="simple">
@@ -518,29 +520,29 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 </ul>
 </section>
 </div><div class="proof definition admonition" id="def-LukWord">
-<p class="admonition-title"><span class="caption-number">Definition 3.1 </span> (Łukasiewicz word.)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.1 </span> (Łukasiewicz word.)</p>
 <section class="definition-content" id="proof-content">
 <p>If we find a list of nodes <span class="math notranslate nohighlight">\(v_1, \ldots, v_j\)</span> through a Depth-First search of a Galton-Watson tree, then the sequence <span class="math notranslate nohighlight">\(\mathcal{S}=k_1, \ldots, k_j\)</span> where <span class="math notranslate nohighlight">\(k_i\)</span> is the number of offspring of <span class="math notranslate nohighlight">\(v_i\)</span> is called a <strong>Łukasiewicz word</strong>.</p>
 </section>
 </div><div class="proof example admonition" id="ex-DFS">
-<p class="admonition-title"><span class="caption-number">Example 3.2 </span> (Depth-first search)</p>
+<p class="admonition-title"><span class="caption-number">Example 4.2 </span> (Depth-first search)</p>
 <section class="example-content" id="proof-content">
-<p>A <em>depth first search</em> on the same <span class="math notranslate nohighlight">\(j=9\)</span> node Galton-Watson tree in <a class="reference internal" href="#fig-gwt"><span class="std std-numref">Fig. 3.1</span></a> is shown in <a class="reference internal" href="#fig-bfsvsdfs"><span class="std std-numref">Fig. 3.2</span></a>.  It produces the node order <span class="math notranslate nohighlight">\(u_{0,1}, u_{1,1}, u_{1,2}, u{2,1}, u_{3,1}, u_{3,2}, u_{2,2}, u_{1,3}, u_{2,3}\)</span>, which yields the Łukasiewicz word: <span class="math notranslate nohighlight">\(\mathcal{S} = (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  As expected the sum of these is <span class="math notranslate nohighlight">\(8=j-1\)</span>.</p>
+<p>A <em>depth first search</em> on the same <span class="math notranslate nohighlight">\(j=9\)</span> node Galton-Watson tree in <a class="reference internal" href="#fig-gwt"><span class="std std-numref">Fig. 4.1</span></a> is shown in <a class="reference internal" href="#fig-bfsvsdfs"><span class="std std-numref">Fig. 4.2</span></a>.  It produces the node order <span class="math notranslate nohighlight">\(u_{0,1}, u_{1,1}, u_{1,2}, u{2,1}, u_{3,1}, u_{3,2}, u_{2,2}, u_{1,3}, u_{2,3}\)</span>, which yields the Łukasiewicz word: <span class="math notranslate nohighlight">\(\mathcal{S} = (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  As expected the sum of these is <span class="math notranslate nohighlight">\(8=j-1\)</span>.</p>
 </section>
-</div><p>A comparison of a depth-first search and a breadth-first search is illustrated in  <a class="reference internal" href="#fig-bfsvsdfs"><span class="std std-numref">Fig. 3.2</span></a>:</p>
+</div><p>A comparison of a depth-first search and a breadth-first search is illustrated in  <a class="reference internal" href="#fig-bfsvsdfs"><span class="std std-numref">Fig. 4.2</span></a>:</p>
 <figure class="align-default" id="fig-bfsvsdfs">
 <a class="reference internal image-reference" href="../../_images/BFSvsDFS.png"><img alt="../../_images/BFSvsDFS.png" src="../../_images/BFSvsDFS.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).  The depth-first search yields a Łukasiewicz word <span class="math notranslate nohighlight">\(\mathcal{S}= (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</span><a class="headerlink" href="#fig-bfsvsdfs" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">A breadth-first search (left) and a depth-first search (right).  The depth-first search yields a Łukasiewicz word <span class="math notranslate nohighlight">\(\mathcal{S}= (3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</span><a class="headerlink" href="#fig-bfsvsdfs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="inverting-the-dfs-and-the-cycle-lemma">
-<h2><span class="section-number">3.3.4. </span>Inverting the DFS and the Cycle Lemma<a class="headerlink" href="#inverting-the-dfs-and-the-cycle-lemma" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3.4. </span>Inverting the DFS and the Cycle Lemma<a class="headerlink" href="#inverting-the-dfs-and-the-cycle-lemma" title="Link to this heading">#</a></h2>
 <p>As long as the offspring of each node are ordered, the Depth-First search always produces the same Łukasiewicz word and the process is invertible: given a Łukasiewicz word, we can recover the tree that produced it.</p>
 <div class="proof algorithm admonition" id="alg-GWTReconstruct">
-<p class="admonition-title"><span class="caption-number">Algorithm 3.2 </span> (Inverting the Depth-First search)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 4.2 </span> (Inverting the Depth-First search)</p>
 <section class="algorithm-content" id="proof-content">
 <p>We begin with a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers of length <span class="math notranslate nohighlight">\(j\)</span>, summing to <span class="math notranslate nohighlight">\(j-1\)</span>.  We place <span class="math notranslate nohighlight">\(j\)</span> nodes around a ring.  Starting with the top node, label the nodes clockwise with the numerical values <span class="math notranslate nohighlight">\(s_1, s_2, \ldots, s_j\)</span>, representing the number of offspring that we must assign each.</p>
 <p>We will iteratively process the nodes, assigning a parent to a node only once we have identified all of its children.</p>
@@ -555,7 +557,7 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 </section>
 </div><p>We take a brief aside to define a cyclic permutation:</p>
 <div class="proof definition admonition" id="definition-CyclicPerm">
-<p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Cyclic Permutation)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.2 </span> (Cyclic Permutation)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span>, the <span class="math notranslate nohighlight">\(j\)</span> cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -567,20 +569,20 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 &amp; (s_j, s_1, s_2, \ldots, s_{j-1})
 \end{align*}\]</div>
 </section>
-</div><p>If we take a cyclic permutation of a Łukasiewicz word in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a>, then the algorithm starts with a rotation of the same ring as for the Łukasiewicz word.  Since the algorithm steps are unaffected by rotations, the end result is a tree with the same shape as the original tree, but with the root position altered due to the rotation.  We see this in the example below:</p>
+</div><p>If we take a cyclic permutation of a Łukasiewicz word in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a>, then the algorithm starts with a rotation of the same ring as for the Łukasiewicz word.  Since the algorithm steps are unaffected by rotations, the end result is a tree with the same shape as the original tree, but with the root position altered due to the rotation.  We see this in the example below:</p>
 <div class="proof example admonition" id="ex-GWTReconstruct">
-<p class="admonition-title"><span class="caption-number">Example 3.3 </span> (Constructing a tree from a cyclically permuted Łukasiewicz word.)</p>
+<p class="admonition-title"><span class="caption-number">Example 4.3 </span> (Constructing a tree from a cyclically permuted Łukasiewicz word.)</p>
 <section class="example-content" id="proof-content">
-<p>Consider the length-9 sequence <span class="math notranslate nohighlight">\((2, 0, 0, 0, 1, 0, 3, 0, 2)\)</span>, which is a cyclic permutation of the Łukasiewicz word <span class="math notranslate nohighlight">\((3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  If we follow <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> in <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">fig-ReconstructDFS</span></code>, the result is a tree.  However, the root corresponds to the position at which the Łukasiewicz word would begin.</p>
+<p>Consider the length-9 sequence <span class="math notranslate nohighlight">\((2, 0, 0, 0, 1, 0, 3, 0, 2)\)</span>, which is a cyclic permutation of the Łukasiewicz word <span class="math notranslate nohighlight">\((3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.  If we follow <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a> in <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">fig-ReconstructDFS</span></code>, the result is a tree.  However, the root corresponds to the position at which the Łukasiewicz word would begin.</p>
 <figure class="align-default" id="fig-reconstructdfs">
 <a class="reference internal image-reference" href="../../_images/ReconstructDFS.png"><img alt="../../_images/ReconstructDFS.png" src="../../_images/ReconstructDFS.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Reconstructing the rotated Galton-Watson tree from a cyclically permuted Łukasiewicz word.  The panels of the initial and final steps are highlighted.  In each panel, the ring described in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> is shown along with an illustration of the current status of the reconstruction. The final reconstructed tree shown at the bottom.  The final tree has the same shape as the original tree.</span><a class="headerlink" href="#fig-reconstructdfs" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">Reconstructing the rotated Galton-Watson tree from a cyclically permuted Łukasiewicz word.  The panels of the initial and final steps are highlighted.  In each panel, the ring described in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a> is shown along with an illustration of the current status of the reconstruction. The final reconstructed tree shown at the bottom.  The final tree has the same shape as the original tree.</span><a class="headerlink" href="#fig-reconstructdfs" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
-</div><p>In the example we saw <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> construct the original tree, with a cyclic rotation.  Was this a lucky example, or does it always happen?</p>
+</div><p>In the example we saw <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a> construct the original tree, with a cyclic rotation.  Was this a lucky example, or does it always happen?</p>
 <p>Now we show that it is guaranteed that if a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers sums to <span class="math notranslate nohighlight">\(j-1\)</span> then applying this process must generate a rooted directed tree:</p>
 <ul class="simple">
 <li><p>We are guaranteed at each step that the number of nodes in the ring is one more than the sum of their labels, so until only one node remains, we can find a  node with nonzero label followed by a node with label <span class="math notranslate nohighlight">\(0\)</span>.  This guarantees the process continues until only one node remains.</p></li>
@@ -589,18 +591,18 @@ p_{j-1}^{(j)} = p^j \binom{j-1+j-1}{j-1} (1-p)^{j-1} = \binom{2j-2}{j-1}p^j(1-p)
 <p>Thus the end result is a directed tree whose root is the final node left in the ring.   A cyclic permutation of the sequence simply rotates the labels in the ring, which causes a corresponding cyclic permutation of the nodes in the final tree. Exactly one permutation will move the root to the top of the ring.</p>
 <p>This leads us to one version of the Cycle Lemma:</p>
 <div class="proof lemma admonition" id="lemma-CycleLemma">
-<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (Cycle Lemma)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 4.1 </span> (Cycle Lemma)</p>
 <section class="lemma-content" id="proof-content">
 <p>Given a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span>, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.</p>
 </section>
 </div><div class="proof admonition" id="proof">
 <p>Proof. Consider a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers that sumes to <span class="math notranslate nohighlight">\(j-1\)</span>.<br />
-If we use any cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a>, we end up with the same tree because the algorithm will proceed as before on the rotated ring.</p>
+If we use any cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> in <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a>, we end up with the same tree because the algorithm will proceed as before on the rotated ring.</p>
 <p>Exactly one of the cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> places the root at the top of the ring.  Hence exactly one cyclic permutation of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a Łukasiewicz word.</p>
 </div>
 </section>
 <section id="completing-the-proof">
-<h2><span class="section-number">3.3.5. </span>Completing the proof<a class="headerlink" href="#completing-the-proof" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3.5. </span>Completing the proof<a class="headerlink" href="#completing-the-proof" title="Link to this heading">#</a></h2>
 <p>Armed with this lemma, we are almost done.  We note:</p>
 <ul class="simple">
 <li><p>First: the probability a sequence of <span class="math notranslate nohighlight">\(j\)</span> numbers chosen from the offspring distribution sum to <span class="math notranslate nohighlight">\(j-1\)</span> is <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}\)</span>.</p></li>
@@ -610,10 +612,10 @@ If we use any cyclic permutation of <span class="math notranslate nohighlight">\
 <p><em>The probability a Galton-Watson process ends with total size <span class="math notranslate nohighlight">\(\sum X_g = j\)</span> is equal to <span class="math notranslate nohighlight">\(\frac{1}{j} p_{j-1}^{(j)}\)</span> where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}=[x^{j-1}]\left(\mu(x)^j\right)\)</span>.</em></p>
 </section>
 <section id="self-test">
-<h2><span class="section-number">3.3.6. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3.6. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Show the steps of <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> using the Łukasiewicz word <span class="math notranslate nohighlight">\((3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</p></li>
-<li><p>The proof did not fully explain why <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> recovers the original tree.  Plausibly we could take a Łukasiewicz word from a tree, and the reconstruction method might create a tree whose Łukasiewicz word is a cyclic permutation of the original.  We will use induction to show the process works.  For this proof it is easier to work with a modified version of the algorithm in which each step adds just one edge.</p>
+<li><p>Show the steps of <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a> using the Łukasiewicz word <span class="math notranslate nohighlight">\((3, 0, 2, 2, 0, 0, 0, 1, 0)\)</span>.</p></li>
+<li><p>The proof did not fully explain why <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a> recovers the original tree.  Plausibly we could take a Łukasiewicz word from a tree, and the reconstruction method might create a tree whose Łukasiewicz word is a cyclic permutation of the original.  We will use induction to show the process works.  For this proof it is easier to work with a modified version of the algorithm in which each step adds just one edge.</p>
 <ol class="arabic simple">
 <li><p>Consider the Łukasiewicz word with <span class="math notranslate nohighlight">\(j=1\)</span>: <span class="math notranslate nohighlight">\(\mathcal{S}=0\)</span>.  Show that only one Galton-Watson tree corresponds to this word.</p></li>
 <li><p>Now consider a Łukasiewicz word of  length <span class="math notranslate nohighlight">\(j+1\)</span> for <span class="math notranslate nohighlight">\(j \geq 1\)</span>.  Explain why if a node <span class="math notranslate nohighlight">\(v\)</span> with label zero immediately follows a node <span class="math notranslate nohighlight">\(w\)</span> with a non-zero label in the original Łukasiewicz word, then <span class="math notranslate nohighlight">\(w\)</span> must be the parent of <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
@@ -621,7 +623,7 @@ If we use any cyclic permutation of <span class="math notranslate nohighlight">\
 <li><p>Use induction to show that the remaining tree is unique and explain why the original tree must be unique.</p></li>
 </ol>
 </li>
-<li><p>The discussion of <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 3.2</a> stated that we are guaranteed that at each step the number of nodes under consideration in the ring is one more than the sum of their labels.  Explain why adding an edge in the algorithm preserves this relation.</p></li>
+<li><p>The discussion of <a class="reference internal" href="#alg-GWTReconstruct">Algorithm 4.2</a> stated that we are guaranteed that at each step the number of nodes under consideration in the ring is one more than the sum of their labels.  Explain why adding an edge in the algorithm preserves this relation.</p></li>
 </ol>
 </section>
 </section>
@@ -662,7 +664,7 @@ If we use any cyclic permutation of <span class="math notranslate nohighlight">\
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3.2. </span>Early Outbreak Stage and Galton-Watson Processes</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Early Outbreak Stage and Galton-Watson Processes</p>
       </div>
     </a>
     <a class="right-next"
@@ -670,7 +672,7 @@ If we use any cyclic permutation of <span class="math notranslate nohighlight">\
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.4. </span>SIR outbreak sizes in small populations</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>SIR outbreak sizes in small populations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -690,12 +692,12 @@ If we use any cyclic permutation of <span class="math notranslate nohighlight">\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-theorem-and-motivations">3.3.1. Main Theorem and Motivations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-proof">3.3.2. Setting up the proof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-to-a-depth-first-search-of-the-nodes">3.3.3. Switching to a depth-first search of the nodes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverting-the-dfs-and-the-cycle-lemma">3.3.4. Inverting the DFS and the Cycle Lemma</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-the-proof">3.3.5. Completing the proof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.3.6. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-theorem-and-motivations">4.3.1. Main Theorem and Motivations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-proof">4.3.2. Setting up the proof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-to-a-depth-first-search-of-the-nodes">4.3.3. Switching to a depth-first search of the nodes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverting-the-dfs-and-the-cycle-lemma">4.3.4. Inverting the DFS and the Cycle Lemma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-the-proof">4.3.5. Completing the proof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.3.6. Self-test</a></li>
 </ul>
   </nav></div>
 

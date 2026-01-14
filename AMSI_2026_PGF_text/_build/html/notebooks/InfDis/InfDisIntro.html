@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Infectious Diseases &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>4. Infectious Diseases &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisIntro';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3.2. Early Outbreak Stage and Galton-Watson Processes" href="InfDisAsGaltWat.html" />
-    <link rel="prev" title="2.5. Size Distribution at successive times" href="../GaltonWatson/GaltWatSizeOverTime.html" />
+    <link rel="next" title="4.2. Early Outbreak Stage and Galton-Watson Processes" href="InfDisAsGaltWat.html" />
+    <link rel="prev" title="3. Continuous-Time Galton-Watson Processes" href="../CtsTime/CtsTimeIntro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,7 +198,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -211,14 +212,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">3.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">3.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">3.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">4. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">4.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,7 +418,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1. Introduction</a></li>
 </ul>
             </nav>
         </div>
@@ -429,9 +431,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="infectious-diseases">
-<h1><span class="section-number">3. </span>Infectious Diseases<a class="headerlink" href="#infectious-diseases" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Infectious Diseases<a class="headerlink" href="#infectious-diseases" title="Link to this heading">#</a></h1>
 <section id="introduction">
-<h2><span class="section-number">3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>We will consider directly-transmitted infectious diseases.  Interactions between infectious and susceptible individuals can lead to infection of the susceptible individual.</p>
 <p>There are two general classes of infectious disease that are typically studied:</p>
 <ul class="simple">
@@ -481,12 +483,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../GaltonWatson/GaltWatSizeOverTime.html"
+       href="../CtsTime/CtsTimeIntro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2.5. </span>Size Distribution at successive times</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Continuous-Time Galton-Watson Processes</p>
       </div>
     </a>
     <a class="right-next"
@@ -494,7 +496,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.2. </span>Early Outbreak Stage and Galton-Watson Processes</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Early Outbreak Stage and Galton-Watson Processes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -514,7 +516,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">3.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1. Introduction</a></li>
 </ul>
   </nav></div>
 

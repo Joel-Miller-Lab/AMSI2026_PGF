@@ -35,6 +35,11 @@ parts:
       - file: notebooks/GaltonWatson/GaltWatDiff
       - file: notebooks/GaltonWatson/GaltWatExtinctByGen
       - file: notebooks/GaltonWatson/GaltWatSizeOverTime
+    - file: notebooks/CtsTime/CtsTimeIntro
+      sections:
+      - file: notebooks/CtsTime/CtsTimeGaltWat
+      - file: notebooks/CtsTime/CtsTimeForwKolm
+      - file: notebooks/CtsTime/CtsTimeBackKolm
     - file: notebooks/InfDis/InfDisIntro
       sections:
       - file: notebooks/InfDis/InfDisAsGaltWat

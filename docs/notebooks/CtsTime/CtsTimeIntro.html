@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Continuous-Time Galton-Watson Processes &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/CtsTime/CtsTimeIntro';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.2. Continuous Time Galton Watson Process" href="CtsTimeGaltWat.html" />
+    <link rel="prev" title="2.5. Size Distribution at successive times" href="../GaltonWatson/GaltWatSizeOverTime.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Probability Generating Functions and Biological Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../GaltonWatson/GaltWat.html">2. The Galton-Watson Process</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. Continuous-Time Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeBackKolm.html">3.5. The Backward Kolmogorov Equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/CtsTime/CtsTimeIntro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/CtsTime/CtsTimeIntro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Continuous-Time Galton-Watson Processes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-poisson-processes">3.1. Properties of Poisson Processes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-markovian-assumption-and-some-implications">3.1.1. The Markovian assumption and some implications</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="continuous-time-galton-watson-processes">
+<h1><span class="section-number">3. </span>Continuous-Time Galton-Watson Processes<a class="headerlink" href="#continuous-time-galton-watson-processes" title="Link to this heading">#</a></h1>
+<p>So far, we’ve been thinking about Galton-Watson Processes as evolving in generations.  Each “time-step” is a new generation.  This leads to a discrete-time setting.</p>
+<p>However, there are many cases where we might want to model a system as evolving in time.  This is particularly true if individuals may have different life-spans, so that generations overlap in time.</p>
+<p>We now consider a continuous-time version of the Galton-Watson process.</p>
+<p>As in our earlier work, we assume the population at time <span class="math notranslate nohighlight">\(t\)</span> is made up of individuals and we denote the number by <span class="math notranslate nohighlight">\(X(t)\)</span>.  The probability that there are <span class="math notranslate nohighlight">\(\ell\)</span> of them at time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\mathbb{P}[X(t)=\ell] = p_\ell(t)\)</span>.  We will use</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(x,t) = \sum_{\ell=0}^\infty q_\ell(t) x^\ell
+\]</div>
+<p>to be the PGF for population size at time <span class="math notranslate nohighlight">\(t\)</span> (similarly to <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> which was the PGF for the population size at generation <span class="math notranslate nohighlight">\(g\)</span>).</p>
+<p>We continue to assume that individuals act independently of one another.</p>
+<section id="properties-of-poisson-processes">
+<h2><span class="section-number">3.1. </span>Properties of Poisson Processes<a class="headerlink" href="#properties-of-poisson-processes" title="Link to this heading">#</a></h2>
+<p>To keep things simple, we will assume that events happen with rates.  This means we are thinking of Poisson processes:</p>
+<div class="proof definition admonition" id="def-PoissonProcess">
+<p class="admonition-title"><span class="caption-number">Definition 3.1 </span> (Poisson Process, rate of a Poisson Process)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>Poisson Process</strong> can be thought of as an event that occurs with some <strong>rate</strong> <span class="math notranslate nohighlight">\(r\)</span> such that the probability the event occurs in any time interval <span class="math notranslate nohighlight">\((t, t+\Delta t)\)</span> is <span class="math notranslate nohighlight">\(r \Delta t + \mathcal{o}(\Delta t)\)</span>.</p>
+</section>
+</div><p>The notation <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> refers to an error that shrinks much faster than <span class="math notranslate nohighlight">\(\Delta t\)</span>:  <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)/\Delta t \to 0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
+<p>In the definition above, you can reasonably think of <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> as being something quadratic in <span class="math notranslate nohighlight">\(\Delta t\)</span>.  Even though <span class="math notranslate nohighlight">\(r \Delta t \to 0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, the error term goes to <span class="math notranslate nohighlight">\(0\)</span> much faster, so the leading order term is a reasonable approximation.<a class="footnote-reference brackets" href="#infinitesimal" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<div class="proof remark admonition" id="remark-RateNeqProb">
+<p class="admonition-title"><span class="caption-number">Remark 3.1 </span> (Rates are not probabilities)</p>
+<section class="remark-content" id="proof-content">
+<p>A common misconception in terminology is to use the word “probability” when meaning “rate”.  They are closely related, but are not the same.  The probability shrinks as <span class="math notranslate nohighlight">\(\Delta t\)</span> shrinks, but the rate remains the same.  They are only (almost) the same if <span class="math notranslate nohighlight">\(\Delta t= 1\)</span> and the rate is very small.  We usually want to know what happens for <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
+</section>
+</div><section id="the-markovian-assumption-and-some-implications">
+<h3><span class="section-number">3.1.1. </span>The Markovian assumption and some implications<a class="headerlink" href="#the-markovian-assumption-and-some-implications" title="Link to this heading">#</a></h3>
+<p>We will assume that at time <span class="math notranslate nohighlight">\(t\)</span>, each individual is indistinguishable from any other.  Specifically, this means that the rate at which something happens to an individual is independent of age, nor does it depend on how long it has been since any other event occurred involving that individual.</p>
+<div class="proof theorem admonition" id="theorem-2">
+<p class="admonition-title"><span class="caption-number">Theorem 3.1 </span> (Competing Poisson Processes)</p>
+<section class="theorem-content" id="proof-content">
+<p>Consider two Poisson Process, with rates <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span>.  Then the next event occurs with combined rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.  It is event <span class="math notranslate nohighlight">\(1\)</span> with probability <span class="math notranslate nohighlight">\(r_1/(r_1+r_2)\)</span> and event <span class="math notranslate nohighlight">\(2\)</span> with probability <span class="math notranslate nohighlight">\(r_2/(r_1+r_2)\)</span>.  The probability it is both events goes to zero.</p>
+</section>
+</div><p>Most of the effort to prove this theorem focuses on handling the possibility that both events occur.  In reality if we divide time finely enough, they will not happen at the same time.  The way the proof works is to divide time into small intervals, look at the first interval where something happens and then determine the probability it is one of them, and show that the probability of both is negligibly small.</p>
+<p>An alternate way to think about this is that there is a single labelled molecule in an 1L aquarium.  Two drains are open, one with flow at rate <span class="math notranslate nohighlight">\(r_1\)</span> and the other with flow at rate <span class="math notranslate nohighlight">\(r_2\)</span>, with fresh water added at a constant rate to keep the aquarium at <span class="math notranslate nohighlight">\(1L\)</span>.  Then what is the probability that it goes through drain <span class="math notranslate nohighlight">\(1\)</span> versus drain <span class="math notranslate nohighlight">\(2\)</span>?  You can see that it should be proportional to the amount flowing through them, that is their rates, and the probabilities need to sum to <span class="math notranslate nohighlight">\(1\)</span>, so it must be <span class="math notranslate nohighlight">\(r_1/(r_1+r_2)\)</span> and <span class="math notranslate nohighlight">\(r_2/(r_1+r_2)\)</span>.  A more rigorous argument is below.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. To prove this rigorously, we divide time into intervals <span class="math notranslate nohighlight">\([t_0,t_1)\)</span>, <span class="math notranslate nohighlight">\([t_1,t_2)\)</span>, <span class="math notranslate nohighlight">\([t_2, t_3)\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span> where <span class="math notranslate nohighlight">\(t_{i+1}-t_i=\Delta t\)</span>, and take <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.  Let <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span> be the rates and <span class="math notranslate nohighlight">\(q_1 = r_1\Delta t + \mathcal{o}(\Delta t)\)</span> and <span class="math notranslate nohighlight">\(q_2 = r_2\Delta t + \mathcal{o}(\Delta t)\)</span> be the probabilities for each event to occur in a time interval.</p>
+<p>The probability that only <span class="math notranslate nohighlight">\(1\)</span> happens in a given time interval is <span class="math notranslate nohighlight">\(q_1(1-q_2)\)</span>.  The probability of only <span class="math notranslate nohighlight">\(q_2\)</span> is <span class="math notranslate nohighlight">\(q_2(1-q_1)\)</span>.  The probability of both is <span class="math notranslate nohighlight">\(q_1q_2\)</span>.  The probability of at least one is <span class="math notranslate nohighlight">\(1-(1-q_1)(1-q_2)= q_1 + q_2 - q_1q_2\)</span>.</p>
+<p>Substituting for <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span>, we see that the probability of at least one event is <span class="math notranslate nohighlight">\((r_1+r_2)\Delta t + \mathcal{o}(\Delta t) -r_1r_2\Delta t^2 = (r_1+r_2) + \mathcal{o}(\Delta t)\)</span>.  This is the definition of an event having rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.  So we can assume that <em>an</em> event happens with rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.</p>
+<p>Now consider the first time interval in which something happens.  Conditional on an event happening, the probability of only event <span class="math notranslate nohighlight">\(1\)</span> is <span class="math notranslate nohighlight">\(q_1/(q_1+q_2-q_1q_2)\)</span>.  Substituting in terms of <span class="math notranslate nohighlight">\(r_1\)</span> and taking <span class="math notranslate nohighlight">\(\Delta t\)</span> to be small:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[\text{only event 1}] &amp;= \frac{r_1\Delta t + \mathcal{o}(\Delta t)}{ r_1\Delta t + \mathcal{o}(\Delta t) +  r_2\Delta t + \mathcal{o}(\Delta t) - r_1r_2 \Delta t^2 + \Delta t \mathcal{o}(\Delta t)}\\
+&amp;= \frac{r_1 + \mathcal{o}(\Delta t)/\Delta t}{ r_1 + \mathcal{o}(\Delta t)/\Delta t +  r_2 + \mathcal{o}(\Delta t)/\Delta t - r_1r_2 \Delta t + \mathcal{o}(\Delta t)}\\
+&amp; \to \frac{r_1}{r_1+r_2}  \qquad \text{as } \Delta t \to 0
+\end{align*}\]</div>
+<p>Similar reasoning applies to event <span class="math notranslate nohighlight">\(2\)</span>, so the probability of the events is <span class="math notranslate nohighlight">\(r_1/(r_1+r_2)\)</span> and <span class="math notranslate nohighlight">\(r_2/(r_1+r_2)\)</span>.</p>
+</div>
+<p>This means that rather than thinking about two competing Poisson Processes each having its own rate, we can think about a single Poisson Process with the combined rates, and that when an event occurs, which process it corresponds to is random, with probabilities equal to the individual rates divided by the combined rate.</p>
+<p>In fact, this will hold true for an arbitrary number of events.</p>
+<p>An interesting and important question is how long does it take until an event happens?  For this we can think of just a single event (which may be a combination of events).</p>
+<div class="proof theorem admonition" id="theorem-Survival">
+<p class="admonition-title"><span class="caption-number">Theorem 3.2 </span> (Survival Probability)</p>
+<section class="theorem-content" id="proof-content">
+<p>If an event occurs with rate <span class="math notranslate nohighlight">\(r\)</span>, the probability it has not happened after waiting a time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(e^{-rt}\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume time is initially <span class="math notranslate nohighlight">\(0\)</span>.  Divide the interval from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(t\)</span> into <span class="math notranslate nohighlight">\(N\)</span> intervals of length <span class="math notranslate nohighlight">\(\Delta t = t/N\)</span>.  The probability that the event does not occur in each interval is <span class="math notranslate nohighlight">\((1- rt/N + \mathcal{o}(t/N))\)</span>.  Thus the probability it has not occured by time <span class="math notranslate nohighlight">\(t\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[\text{event not occured by time }t] &amp;= \left(1- \frac{r}{N} + \mathcal{o}(1/N)\right)^N\\
+&amp; \to \left(1 -\frac{r}{N}\right)^N\\
+&amp; \to e^{-rt}
+\end{align*}\]</div>
+<p>as <span class="math notranslate nohighlight">\(N \to \infty\)</span>.</p>
+</div>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="infinitesimal" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>This is an aside, which isn’t really relevant to this subject but it’s a useful way to think about integration in general and the role of that <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> term.  In Calculus we often add together a large number of very small things to get something approximate.  As the number of things increases and their sizes decrease, we expect the total sum to converge.  Implicitly this relies on the fact that the sizes of our <span class="math notranslate nohighlight">\(N\)</span> objects are each approximately proportional to <span class="math notranslate nohighlight">\(1/N\)</span> with an error term that goes to zero faster than <span class="math notranslate nohighlight">\(1/N\)</span>.  So adding up the <span class="math notranslate nohighlight">\(N\)</span> errors will give something that goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(N\)</span> increases.</p>
+</aside>
+</aside>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\CtsTime"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../GaltonWatson/GaltWatSizeOverTime.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>Size Distribution at successive times</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="CtsTimeGaltWat.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.2. </span>Continuous Time Galton Watson Process</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-poisson-processes">3.1. Properties of Poisson Processes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-markovian-assumption-and-some-implications">3.1.1. The Markovian assumption and some implications</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Joel C. Miller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

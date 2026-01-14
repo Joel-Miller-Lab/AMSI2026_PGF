@@ -198,7 +198,8 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -211,14 +212,15 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">3. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">3.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">3.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">3.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/Simulation/SimulationIntro.html">4. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Simulation/GaltWatSimulation.html">4.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
 </ul>
@@ -527,7 +529,7 @@ and it corresponds to the probability distribution of the sum <span class="math 
 </div>
 </section>
 <section id="infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes">
-<h2><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html#InfDisGaltWat">Theorem 3.1</a> — Early stages of infectious-disease outbreaks are Galton-Watson Processes<a class="headerlink" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes" title="Link to this heading">#</a></h2>
+<h2><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html#InfDisGaltWat">Theorem 4.1</a> — Early stages of infectious-disease outbreaks are Galton-Watson Processes<a class="headerlink" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
 <p>If:</p>
@@ -541,7 +543,7 @@ and it corresponds to the probability distribution of the sum <span class="math 
 </div>
 </section>
 <section id="theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes">
-<h2><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html#theorem-TotalSizeDist">Theorem 3.2</a> — Distribution of Total Sizes of Galton-Watson Processes<a class="headerlink" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes" title="Link to this heading">#</a></h2>
+<h2><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html#theorem-TotalSizeDist">Theorem 4.2</a> — Distribution of Total Sizes of Galton-Watson Processes<a class="headerlink" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
 <p>Given a Galton-Watson Process whose offspring distribution PGF is <span class="math notranslate nohighlight">\(\mu(x)\)</span>, the probability that the process terminates after a finite cumulative count of exactly <span class="math notranslate nohighlight">\(\sum_{g=0}^\infty X_g = j\)</span> is given by</p>
@@ -551,7 +553,7 @@ and it corresponds to the probability distribution of the sum <span class="math 
 </div>
 </section>
 <section id="lemma-cyclelemma-cycle-lemma">
-<h2><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html#lemma-CycleLemma">Lemma 3.1</a> — Cycle Lemma<a class="headerlink" href="#lemma-cyclelemma-cycle-lemma" title="Link to this heading">#</a></h2>
+<h2><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html#lemma-CycleLemma">Lemma 4.1</a> — Cycle Lemma<a class="headerlink" href="#lemma-cyclelemma-cycle-lemma" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
 <p>Given a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span>, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.</p>

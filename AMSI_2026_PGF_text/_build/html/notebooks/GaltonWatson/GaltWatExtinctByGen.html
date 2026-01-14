@@ -198,7 +198,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -211,14 +212,15 @@
 <li class="toctree-l2"><a class="reference internal" href="GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">3. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">3.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">3.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">3.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">4. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">4.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
 </ul>
@@ -423,11 +425,8 @@ document.write(`
 <p>In <a class="reference internal" href="GaltWatExtinct.html#sec-galtwatextinct"><span class="std std-numref">Section 2.2</span></a>, we showed that the probability <span class="math notranslate nohighlight">\(\alpha\)</span> of extinction of a Galton-Watson Process is a solution to the equation <span class="math notranslate nohighlight">\(x = \mu(x)\)</span>.  However, we saw that sometimes there are two solutions in <span class="math notranslate nohighlight">\([0,1]\)</span>, so identifying which is the correct solution may not be obvious.</p>
 <p>To find the correct solution, we calculate <span class="math notranslate nohighlight">\(\alpha_g\)</span>, the probability that it is extinct by generation <span class="math notranslate nohighlight">\(g\)</span>.  We assume one inividual exists in generation <span class="math notranslate nohighlight">\(g=0\)</span>, and thus <span class="math notranslate nohighlight">\(\alpha_0=0\)</span>.  In order for it to go extinct by generation <span class="math notranslate nohighlight">\(g=1\)</span>, the initial infected individual must infect no-one, so <span class="math notranslate nohighlight">\(\alpha_1 = p_0 = \mu(0)\)</span>.</p>
 <p>For <span class="math notranslate nohighlight">\(g&gt;1\)</span>, we follow a very similar argument to our initial argument that showed <span class="math notranslate nohighlight">\(\alpha = \mu(\alpha)\)</span>.  The probability that the process goes extinct by generation <span class="math notranslate nohighlight">\(g\)</span> is equal to the probability that all direct offspring of the initial individual spark their own Galton-Watson Process that is extinct within <span class="math notranslate nohighlight">\(g-1\)</span> generations.</p>
-<figure class="align-default" id="id1">
-<img alt="../../_images/UnderConstruction.png" src="../../_images/UnderConstruction.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Add IMAGE</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
+<figure class="align-default">
+<img alt="../../_images/alpha_g.png" src="../../_images/alpha_g.png" />
 </figure>
 <p>Much as when we calculated the extinction probability, we see that</p>
 <div class="amsmath math notranslate nohighlight">

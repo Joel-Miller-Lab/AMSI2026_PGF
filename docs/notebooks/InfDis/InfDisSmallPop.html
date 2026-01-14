@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.4. SIR outbreak sizes in small populations &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>4.4. SIR outbreak sizes in small populations &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisSmallPop';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. Computer Simulation" href="../Simulation/SimulationIntro.html" />
-    <link rel="prev" title="3.3. Distribution of Total Sizes of Extinct Disease Outbreaks" href="InfDisSizeDist.html" />
+    <link rel="next" title="5. Computer Simulation" href="../Simulation/SimulationIntro.html" />
+    <link rel="prev" title="4.3. Distribution of Total Sizes of Extinct Disease Outbreaks" href="InfDisSizeDist.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,7 +198,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.10. Properties of Generating functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -211,14 +212,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">3. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">3.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">3.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">4. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">4.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
 </ul>
@@ -416,19 +418,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">3.4.1. Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">3.4.2. Conversion to a directed graph.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">3.4.3. Partitioning the network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">3.4.4. Building the equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">3.4.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">3.4.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">3.4.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">3.4.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.4.1. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">4.4.2. Conversion to a directed graph.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">4.4.3. Partitioning the network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">4.4.4. Building the equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">4.4.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">4.4.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">4.4.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">4.4.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">3.4.5. Full equations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">3.4.6. Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">3.4.7. Extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">4.4.5. Full equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">4.4.6. Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">4.4.7. Extension</a></li>
 </ul>
             </nav>
         </div>
@@ -441,23 +443,23 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="sir-outbreak-sizes-in-small-populations">
-<h1><span class="section-number">3.4. </span>SIR outbreak sizes in small populations<a class="headerlink" href="#sir-outbreak-sizes-in-small-populations" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4.4. </span>SIR outbreak sizes in small populations<a class="headerlink" href="#sir-outbreak-sizes-in-small-populations" title="Link to this heading">#</a></h1>
 <p><strong>This section is still under construction</strong></p>
 <p>Now we consider an SIR disease spreading in a small population of <span class="math notranslate nohighlight">\(N\)</span> individuals where <span class="math notranslate nohighlight">\(N\)</span> is not large enough that we can assume each transmission goes to a new recipient.  The assumptions leading to a Galton-Watson process break down in this limit.  However, perhaps remarkably PGFs still play a role in the calculation of the outbreak size distribution.</p>
 <section id="setup">
-<h2><span class="section-number">3.4.1. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4.1. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p>We will use <span class="math notranslate nohighlight">\(k\)</span> to be the total number of transmissions an individual causes.  We assume that <span class="math notranslate nohighlight">\(k\)</span> is chosen independently from the “offspring distribution” which has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
 <p>We assume that each time an individual transmits, the recipient is chosen randomly from the remainder of the population uniformly at random and with replacement (so <span class="math notranslate nohighlight">\(u\)</span> may transmit to <span class="math notranslate nohighlight">\(v\)</span> multiple times, but <span class="math notranslate nohighlight">\(u\)</span> cannot transmit to itself).</p>
 <p>We define <span class="math notranslate nohighlight">\(q_k\)</span> to be the probability that exactly <span class="math notranslate nohighlight">\(k\)</span> individuals are infected, including the index case.</p>
 <p>We will number the individuals <span class="math notranslate nohighlight">\(u_1, u_2, u_3, \ldots, u_N\)</span>.  We can assume without loss of generality that infection is introduced in <span class="math notranslate nohighlight">\(u_1\)</span>.</p>
 </section>
 <section id="conversion-to-a-directed-graph">
-<h2><span class="section-number">3.4.2. </span>Conversion to a directed graph.<a class="headerlink" href="#conversion-to-a-directed-graph" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4.2. </span>Conversion to a directed graph.<a class="headerlink" href="#conversion-to-a-directed-graph" title="Link to this heading">#</a></h2>
 <figure class="align-right" id="fates">
 <a class="reference internal image-reference" href="../../_images/Fates.png"><img alt="../../_images/Fates.png" src="../../_images/Fates.png" style="width: 300px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">The Fates</span><a class="headerlink" href="#fates" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">The Fates</span><a class="headerlink" href="#fates" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Usually when we simulate infectious disease spread, we assume that who an individual transmits to is not determined until after becoming infected.  However, it will be useful for us to adopt a fatalistic interpretation.  Prior to disease introduction, for every <span class="math notranslate nohighlight">\(u_i\)</span> it is pre-determined who <span class="math notranslate nohighlight">\(u_i\)</span> would transmit to if ever infected.</p>
@@ -466,14 +468,14 @@ document.write(`
 <p><strong>Note to Self Draw a directed graph — Give network a name</strong></p>
 <p>The nodes that are eventually infected if <span class="math notranslate nohighlight">\(u_1\)</span> is the index case are the nodes that can be reached by following the directed edges in the network.</p>
 <div class="proof definition admonition" id="def-OutComponent">
-<p class="admonition-title"><span class="caption-number">Definition 3.3 </span> (Outcomponent)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.3 </span> (Outcomponent)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a directed network <span class="math notranslate nohighlight">\(G\)</span> and a node <span class="math notranslate nohighlight">\(u\)</span>, the <strong>out-component</strong> of <span class="math notranslate nohighlight">\(u\)</span> is the set of nodes that can be reached from <span class="math notranslate nohighlight">\(u\)</span> by following the edges of the network in the assigned direction (including <span class="math notranslate nohighlight">\(u\)</span>).</p>
 <p>Given a directed network <span class="math notranslate nohighlight">\(G\)</span> and a set of nodes <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span>, the <strong>out-component</strong> of <span class="math notranslate nohighlight">\(X\)</span> is the set of nodes that can be reached from any node in <span class="math notranslate nohighlight">\(X\)</span> following the edges of the network in the assigned direction (including nodes in <span class="math notranslate nohighlight">\(X\)</span>).</p>
 </section>
 </div></section>
 <section id="partitioning-the-network">
-<h2><span class="section-number">3.4.3. </span>Partitioning the network<a class="headerlink" href="#partitioning-the-network" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4.3. </span>Partitioning the network<a class="headerlink" href="#partitioning-the-network" title="Link to this heading">#</a></h2>
 <p>An important step in our calculations will be determining the probability that the nodes <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span> have no edges to <span class="math notranslate nohighlight">\(u_{M+1}, \ldots, u_N\)</span> in the directed network (we do not care if there are edges in the opposite direction).  In other words, the out-component of <span class="math notranslate nohighlight">\(X\)</span> is just <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p><strong>draw picture</strong></p>
 <p>First we calculate the probability that all edges from a node <span class="math notranslate nohighlight">\(u_j \in X\)</span> reach only within <span class="math notranslate nohighlight">\(X\)</span>.  recall that <span class="math notranslate nohighlight">\(X\)</span> has <span class="math notranslate nohighlight">\(M-1\)</span> nodes other than <span class="math notranslate nohighlight">\(u_j\)</span>), so the probability a single edge from <span class="math notranslate nohighlight">\(u_j\)</span> remains within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\((M-1)/(N-1)\)</span>.  So the probability that all edges from <span class="math notranslate nohighlight">\(u_j\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is</p>
@@ -485,17 +487,17 @@ document.write(`
 <p>Now we will look for another way to calculate this, in terms of the probabilities of outbreak sizes (or equivalently out-component sizes).</p>
 </section>
 <section id="building-the-equations">
-<h2><span class="section-number">3.4.4. </span>Building the equations<a class="headerlink" href="#building-the-equations" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4.4. </span>Building the equations<a class="headerlink" href="#building-the-equations" title="Link to this heading">#</a></h2>
 <p>We will start by looking at the probability the outbreak affects <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(2\)</span>, or <span class="math notranslate nohighlight">\(3\)</span> nodes before we start to build up to larger numbers.</p>
 <p>We assume that <span class="math notranslate nohighlight">\(u_1\)</span> is the initial infection (without loss of generality).  We are looking for its out-component sizes.</p>
 <section id="the-probability-of-a-1-node-outbreak">
-<h3><span class="section-number">3.4.4.1. </span>The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-1-node-outbreak" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.4.4.1. </span>The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-1-node-outbreak" title="Link to this heading">#</a></h3>
 <p>The probability that <span class="math notranslate nohighlight">\(u_1\)</span> does not transmit to anyone is <span class="math notranslate nohighlight">\(\mu(0)\)</span>.  This is <span class="math notranslate nohighlight">\(q_1\)</span>, the probability of an outbreak of size <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[ q_1 = \mu(0)\]</div>
 </section>
 <section id="the-probability-of-a-2-node-outbreak">
-<h3><span class="section-number">3.4.4.2. </span>The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-2-node-outbreak" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.4.4.2. </span>The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-2-node-outbreak" title="Link to this heading">#</a></h3>
 <p>To calculate the probability of an outbreak of size <span class="math notranslate nohighlight">\(2\)</span> starting from node <span class="math notranslate nohighlight">\(u_1\)</span>, we’ll take an indirect route.  We will directly calculate the probability that <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> have no edges to <span class="math notranslate nohighlight">\(u_3, \ldots, u_N\)</span> and then we’ll calculate this same probability in terms of <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span>.</p>
 <ul class="simple">
 <li><p>First we recall that the probability all transmissions involving nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> reach only within nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> is <span class="math notranslate nohighlight">\(\mu(1/(N-1))^2\)</span>.</p></li>
@@ -507,7 +509,7 @@ document.write(`
 \[q_1\mu(1/N-1) + q_2 \frac{1}{N-1} = \mu(1/(N-1))^2\]</div>
 </section>
 <section id="the-probability-of-a-3-node-outbreak">
-<h3><span class="section-number">3.4.4.3. </span>The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-3-node-outbreak" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.4.4.3. </span>The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-3-node-outbreak" title="Link to this heading">#</a></h3>
 <p>To calculate the probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak, we follow the method for <span class="math notranslate nohighlight">\(2\)</span>-nodes.  We calculate the probability that <span class="math notranslate nohighlight">\(X=\{u_1, u_2, u_3\}\)</span> has no edges to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> directly and then recalculate it in terms of <span class="math notranslate nohighlight">\(q_1\)</span>, <span class="math notranslate nohighlight">\(q_2\)</span>, and <span class="math notranslate nohighlight">\(q_3\)</span>.</p>
 <ul class="simple">
 <li><p>The probability of no edges from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\([\mu(2/(N-1))]^3\)</span></p></li>
@@ -528,7 +530,7 @@ q_2 \frac{\binom{2}{1}}{\binom{N-1}{1}} \mu\left(\frac{2}{N-1}\right)
 \]</div>
 </section>
 <section id="the-probability-of-an-m-node-outbreak">
-<h3><span class="section-number">3.4.4.4. </span>The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.<a class="headerlink" href="#the-probability-of-an-m-node-outbreak" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.4.4.4. </span>The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.<a class="headerlink" href="#the-probability-of-an-m-node-outbreak" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The probability of no edges from <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span> to <span class="math notranslate nohighlight">\(u_{M+1}, \ldots, u_N\)</span> is
 <span class="math notranslate nohighlight">\(\left[\mu\left(\frac{M-1}{N-1}\right)\right]^M\)</span>.</p></li>
@@ -553,7 +555,7 @@ c_{M,k} &amp;= \left[\mu\left(\frac{M-1}{N-1}\right)\right]^{-k} \frac{\binom{M-
 </section>
 </section>
 <section id="full-equations">
-<h2><span class="section-number">3.4.5. </span>Full equations<a class="headerlink" href="#full-equations" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4.5. </span>Full equations<a class="headerlink" href="#full-equations" title="Link to this heading">#</a></h2>
 <p>Taking <span class="math notranslate nohighlight">\(M=1, \ldots, N\)</span> we arrive at the system</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -589,10 +591,10 @@ q_N
 <p>This can be solved efficiently.</p>
 </section>
 <section id="examples">
-<h2><span class="section-number">3.4.6. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4.6. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 </section>
 <section id="extension">
-<h2><span class="section-number">3.4.7. </span>Extension<a class="headerlink" href="#extension" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4.7. </span>Extension<a class="headerlink" href="#extension" title="Link to this heading">#</a></h2>
 <p>For fixed <span class="math notranslate nohighlight">\(M\)</span>, as <span class="math notranslate nohighlight">\(N\)</span> gets large, <span class="math notranslate nohighlight">\(q_M\)</span> must converge to the result of previous section.  I’ve looked at it, but haven’t managed to find a direct proof.  I would particuarly like to be able to estimate the magnitue of the error</p>
 </section>
 </section>
@@ -633,7 +635,7 @@ q_N
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3.3. </span>Distribution of Total Sizes of Extinct Disease Outbreaks</p>
+        <p class="prev-next-title"><span class="section-number">4.3. </span>Distribution of Total Sizes of Extinct Disease Outbreaks</p>
       </div>
     </a>
     <a class="right-next"
@@ -641,7 +643,7 @@ q_N
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Computer Simulation</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Computer Simulation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -661,19 +663,19 @@ q_N
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">3.4.1. Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">3.4.2. Conversion to a directed graph.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">3.4.3. Partitioning the network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">3.4.4. Building the equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">3.4.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">3.4.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">3.4.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">3.4.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.4.1. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">4.4.2. Conversion to a directed graph.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">4.4.3. Partitioning the network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">4.4.4. Building the equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">4.4.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">4.4.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">4.4.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">4.4.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">3.4.5. Full equations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">3.4.6. Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">3.4.7. Extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">4.4.5. Full equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">4.4.6. Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">4.4.7. Extension</a></li>
 </ul>
   </nav></div>
 

@@ -216,14 +216,21 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">3. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">3.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">3.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">3.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeBackKolm.html">3.5. The Backward Kolmogorov Equation</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/Simulation/SimulationIntro.html">4. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/Simulation/GaltWatSimulation.html">4.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
 </ul>
 </details></li>
 </ul>
@@ -387,6 +394,7 @@ document.write(`
    <a href="#cap-def-GaltonWatson"><strong>def-GaltonWatson</strong></a> | 
    <a href="#cap-def-LukWord"><strong>def-LukWord</strong></a> | 
    <a href="#cap-def-OutComponent"><strong>def-OutComponent</strong></a> | 
+   <a href="#cap-def-PoissonProcess"><strong>def-PoissonProcess</strong></a> | 
    <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
    <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
    <a href="#cap-definition-CyclicPerm"><strong>definition-CyclicPerm</strong></a> | 
@@ -396,7 +404,6 @@ document.write(`
    <a href="#cap-ex-DFS"><strong>ex-DFS</strong></a> | 
    <a href="#cap-ex-GWTReconstruct"><strong>ex-GWTReconstruct</strong></a> | 
    <a href="#cap-ex-fibonacci_fxn"><strong>ex-fibonacci_fxn</strong></a> | 
-   <a href="#cap-example-0"><strong>example-0</strong></a> | 
    <a href="#cap-example-1"><strong>example-1</strong></a> | 
    <a href="#cap-example-3"><strong>example-3</strong></a> | 
    <a href="#cap-example-5"><strong>example-5</strong></a> | 
@@ -408,6 +415,7 @@ document.write(`
    <a href="#cap-example-CombIdent"><strong>example-CombIdent</strong></a> | 
    <a href="#cap-example-DiffPoissonClothesLine"><strong>example-DiffPoissonClothesLine</strong></a> | 
    <a href="#cap-example-ExtGeomDist"><strong>example-ExtGeomDist</strong></a> | 
+   <a href="#cap-example-ForwKolmDet"><strong>example-ForwKolmDet</strong></a> | 
    <a href="#cap-example-GeomPGF"><strong>example-GeomPGF</strong></a> | 
    <a href="#cap-example-GeomTotalSize"><strong>example-GeomTotalSize</strong></a> | 
    <a href="#cap-example-InfectiousDice"><strong>example-InfectiousDice</strong></a> | 
@@ -418,14 +426,15 @@ document.write(`
    <a href="#cap-example-xddxPoissonBag"><strong>example-xddxPoissonBag</strong></a> | 
    <a href="#cap-example-xddxPoissonClothesLine"><strong>example-xddxPoissonClothesLine</strong></a> | 
    <a href="#cap-lemma-CycleLemma"><strong>lemma-CycleLemma</strong></a> | 
-   <a href="#cap-remark-1"><strong>remark-1</strong></a> | 
-   <a href="#cap-remark-2"><strong>remark-2</strong></a> | 
    <a href="#cap-remark-NegBinGeomRelation"><strong>remark-NegBinGeomRelation</strong></a> | 
+   <a href="#cap-remark-RateNeqProb"><strong>remark-RateNeqProb</strong></a> | 
    <a href="#cap-remark-TS2fxn"><strong>remark-TS2fxn</strong></a> | 
    <a href="#cap-remark-fxn2TS"><strong>remark-fxn2TS</strong></a> | 
    <a href="#cap-remark-multipleflip"><strong>remark-multipleflip</strong></a> | 
-   <a href="#cap-theorem-1"><strong>theorem-1</strong></a> | 
+   <a href="#cap-theorem-2"><strong>theorem-2</strong></a> | 
    <a href="#cap-theorem-GW-size-by-generation"><strong>theorem-GW-size-by-generation</strong></a> | 
+   <a href="#cap-theorem-PGFComp"><strong>theorem-PGFComp</strong></a> | 
+   <a href="#cap-theorem-Survival"><strong>theorem-Survival</strong></a> | 
    <a href="#cap-theorem-TotalSizeDist"><strong>theorem-TotalSizeDist</strong></a> | 
    <a href="#cap-thm-ExpectedSize"><strong>thm-ExpectedSize</strong></a> | 
    <a href="#cap-thm-GWExtinctThresh"><strong>thm-GWExtinctThresh</strong></a> | 
@@ -501,6 +510,14 @@ document.write(`
        <a href="notebooks/InfDis/InfDisSmallPop.html#def-OutComponent"><code class="xref">def-OutComponent</code></a> <em>(notebooks/InfDis/InfDisSmallPop)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-def-PoissonProcess"><td></td><td>
+       <strong>def-PoissonProcess</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/CtsTime/CtsTimeIntro.html#def-PoissonProcess"><code class="xref">def-PoissonProcess</code></a> <em>(notebooks/CtsTime/CtsTimeIntro)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-0"><td></td><td>
        <strong>definition-0</strong></td><td></td></tr>
      <tr>
@@ -571,14 +588,6 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#ex-fibonacci_fxn"><code class="xref">ex-fibonacci_fxn</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-0"><td></td><td>
-       <strong>example-0</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsProveIdent.html#example-0"><code class="xref">example-0</code></a> <em>(notebooks/BasicGenFxn/GenFxnsProveIdent)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-1"><td></td><td>
@@ -669,6 +678,14 @@ document.write(`
        <a href="notebooks/GaltonWatson/GaltWatExtinct.html#example-ExtGeomDist"><code class="xref">example-ExtGeomDist</code></a> <em>(notebooks/GaltonWatson/GaltWatExtinct)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-ForwKolmDet"><td></td><td>
+       <strong>example-ForwKolmDet</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/CtsTime/CtsTimeForwKolm.html#example-ForwKolmDet"><code class="xref">example-ForwKolmDet</code></a> <em>(notebooks/CtsTime/CtsTimeForwKolm)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-GeomPGF"><td></td><td>
        <strong>example-GeomPGF</strong></td><td></td></tr>
      <tr>
@@ -749,28 +766,20 @@ document.write(`
        <a href="notebooks/InfDis/InfDisSizeDist.html#lemma-CycleLemma"><code class="xref">lemma-CycleLemma</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-remark-1"><td></td><td>
-       <strong>remark-1</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#remark-1"><code class="xref">remark-1</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
-       <em>remark</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-remark-2"><td></td><td>
-       <strong>remark-2</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsProveIdent.html#remark-2"><code class="xref">remark-2</code></a> <em>(notebooks/BasicGenFxn/GenFxnsProveIdent)</em></td><td>
-       <em>remark</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-NegBinGeomRelation"><td></td><td>
        <strong>remark-NegBinGeomRelation</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#remark-NegBinGeomRelation"><code class="xref">remark-NegBinGeomRelation</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-RateNeqProb"><td></td><td>
+       <strong>remark-RateNeqProb</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/CtsTime/CtsTimeIntro.html#remark-RateNeqProb"><code class="xref">remark-RateNeqProb</code></a> <em>(notebooks/CtsTime/CtsTimeIntro)</em></td><td>
        <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-TS2fxn"><td></td><td>
@@ -797,12 +806,12 @@ document.write(`
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#remark-multipleflip"><code class="xref">remark-multipleflip</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
        <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-1"><td></td><td>
-       <strong>theorem-1</strong></td><td></td></tr>
+     <tr class="cap" id="cap-theorem-2"><td></td><td>
+       <strong>theorem-2</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsComp.html#theorem-1"><code class="xref">theorem-1</code></a> <em>(notebooks/BasicGenFxn/GenFxnsComp)</em></td><td>
+       <a href="notebooks/CtsTime/CtsTimeIntro.html#theorem-2"><code class="xref">theorem-2</code></a> <em>(notebooks/CtsTime/CtsTimeIntro)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-GW-size-by-generation"><td></td><td>
@@ -811,6 +820,22 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/GaltonWatson/GaltWatSizeOverTime.html#theorem-GW-size-by-generation"><code class="xref">theorem-GW-size-by-generation</code></a> <em>(notebooks/GaltonWatson/GaltWatSizeOverTime)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-PGFComp"><td></td><td>
+       <strong>theorem-PGFComp</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/BasicGenFxn/GenFxnsComp.html#theorem-PGFComp"><code class="xref">theorem-PGFComp</code></a> <em>(notebooks/BasicGenFxn/GenFxnsComp)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-Survival"><td></td><td>
+       <strong>theorem-Survival</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/CtsTime/CtsTimeIntro.html#theorem-Survival"><code class="xref">theorem-Survival</code></a> <em>(notebooks/CtsTime/CtsTimeIntro)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-TotalSizeDist"><td></td><td>
