@@ -55,6 +55,16 @@ and it corresponds to the probability distribution of the sum $n_1 + n_2 + \cdot
 Given a PGF $\mu(x)$, if we perform $k$ draws from its distribution, the PGF for the sum of all $k$ draws is $\mu(x)^k$.
 :::
 
+## {prf:ref}`theorem-PGFComp` — Composition of PGFs
+
+:::{admonition} Statement
+:class: dropdown
+
+Given PGFs $\mu_1(x)$ and $\mu_2(x)$, the composition $\psi(x) = \mu_1(\mu_2(x))$ is the PGF for the following process of choosing a number $n$:
+- use the distribution with PGF $\mu_1(x)$ to choose a random integer $k$
+- then choose $k$ numbers independently from the distribution with PGF $\mu_2(x)$ and add them together to get $n$.
+:::
+
 ## {prf:ref}`thm-GWTisGWP` — Galton-Watson trees are Galton-Watson processes.
 
 :::{admonition} Statement
@@ -78,7 +88,13 @@ Given a Galton-Watson process whose offspring distribution has PGF $\mu(x)$:
 :::{admonition} Statement
 :class: dropdown
 
-If $\mu(x)$ is the PGF of the offspring distribution of a Galton-Watson process, then the distribution of sizes at generation $g$ has PGF $\mu^{(g)}(x)$ where $\mu^{(0)}(x) = x$ and $\mu^{(g)}(x) = \mu^{(g-1)}(\mu(x)) = \mu(\mu^{(g-1)}(x))$.
+If $\mu(x)$ is the PGF of the offspring distribution of a Galton-Watson process then $\Phi_g(x)$, the PGF of the distribution of $X_g$, satisfies
+
+\begin{align*}
+\Phi_0(x) &= x\\
+\Phi_{g+1}(x) &= \mu(\Phi_g(x)) \quad g>0
+\end{align*}
+that is, $\Phi_0(x) = x$, &nbsp; $\Phi_1(x)=\mu(x)$, &nbsp; $\Phi_2(x)=\mu(\mu(x))$, &nbsp; $\cdots$, &nbsp;  $\Phi_g(x) = \mu^{(g)}(x) = \mu(\mu(\mu(\cdots \mu(x)\cdots)))$.
 :::
 
 ## {prf:ref}`thm-ExpectedSize` — Average Size of a Galton Watson Process after $g$ generations
@@ -91,6 +107,14 @@ The expected size of a Galton Watson process at generation $g$ is
 $$
 \mathbb{E}[X_g] = [\mu'(1)]^g
 $$
+:::
+
+## {prf:ref}`theorem-Survival` — Survival Probability
+
+:::{admonition} Statement
+:class: dropdown
+
+If an event occurs with rate $r$, the probability it has not happened after waiting a time $t$ is $e^{-rt}$.
 :::
 
 ## {prf:ref}`InfDisGaltWat` — Early stages of infectious-disease outbreaks are Galton-Watson Processes
