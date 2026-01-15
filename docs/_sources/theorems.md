@@ -14,6 +14,18 @@ $$
 $$
 :::
 
+## {prf:ref}`theorem-GFConvolution` — Convolution in series product
+
+:::{admonition} Statement
+:class: dropdown
+
+Given two Generating Functions $f(x) = f_0 + f_1 x + f_2 x^2 + \cdots$ and $g(x) = g_0 + g_1 x + g_2 x^2 + \cdots$, then the coefficient of $x^n$ in the product $f(g)g(x)$ is given by 
+
+$$
+[x^n](f(x)g(x)) = \sum_{k=0}^n f_k g_{n-k}
+$$
+:::
+
 ## {prf:ref}`thm-partialsums` — Partial Sums
 
 :::{admonition} Statement
@@ -33,7 +45,30 @@ $$
 have generating function $\frac{f(x)}{1-x}$
 :::
 
-## {prf:ref}`thmPGFprod` — Product of PGFs
+## {prf:ref}`theorem-PGFRandSum` — PGF of random sum
+
+:::{admonition} Statement
+:class: dropdown
+
+Given the PGFs
+
+\begin{align*}
+\mu_1(x) &= \sum_n p_n x^n\\
+\mu_2(x) &= \sum_n q_n x^n
+\end{align*}
+If we choose $K$ from the distribution with PGF $\mu_1(x)$ and $M$ from the distribution with PGF $\mu_2(x)$, then the probability $\mathbb{P}[K+M=n]$ is 
+
+$$
+\mathbb{P}[K+M=n] = \sum_{k=0}^n p_k q_{n-k}
+$$
+and the PGF of the sum is
+
+$$
+\psi(x) = \mu_1(x)\mu_2(x)
+$$
+:::
+
+## {prf:ref}`corrPGFprod` — Product of PGFs
 
 :::{admonition} Statement
 :class: dropdown
@@ -43,16 +78,25 @@ Given $k$ PGFs $\mu_1(x), \mu_2(x), \ldots, \mu_k(x)$, the product
 $$
 \psi(x) = \prod_{i=1}^k \mu_i(x)
 $$ 
-is also a PGF
-and it corresponds to the probability distribution of the sum $n_1 + n_2 + \cdots + n_k$ where each $n_i$ comes from the distribution whose PGF is $\mu_i(x)$.
+is also a PGF and it corresponds to the probability distribution of the sum $n_1 + n_2 + \cdots + n_k$ where each $n_i$ comes from the distribution whose PGF is $\mu_i(x)$.
 :::
 
-## {prf:ref}`cor-PGFPower` — Sum of repeated draws
+## {prf:ref}`cor-PGFPower` — PGF of sum of repeated draws
 
 :::{admonition} Statement
 :class: dropdown
 
 Given a PGF $\mu(x)$, if we perform $k$ draws from its distribution, the PGF for the sum of all $k$ draws is $\mu(x)^k$.
+:::
+
+## {prf:ref}`theorem-PGFComp` — Composition of PGFs
+
+:::{admonition} Statement
+:class: dropdown
+
+Given PGFs $\mu_1(x)$ and $\mu_2(x)$, the composition $\psi(x) = \mu_1(\mu_2(x))$ is the PGF for the following process of choosing a number $n$:
+- use the distribution with PGF $\mu_1(x)$ to choose a random integer $k$
+- then choose $k$ numbers independently from the distribution with PGF $\mu_2(x)$ and add them together to get $n$.
 :::
 
 ## {prf:ref}`thm-GWTisGWP` — Galton-Watson trees are Galton-Watson processes.
@@ -78,7 +122,13 @@ Given a Galton-Watson process whose offspring distribution has PGF $\mu(x)$:
 :::{admonition} Statement
 :class: dropdown
 
-If $\mu(x)$ is the PGF of the offspring distribution of a Galton-Watson process, then the distribution of sizes at generation $g$ has PGF $\mu^{(g)}(x)$ where $\mu^{(0)}(x) = x$ and $\mu^{(g)}(x) = \mu^{(g-1)}(\mu(x)) = \mu(\mu^{(g-1)}(x))$.
+If $\mu(x)$ is the PGF of the offspring distribution of a Galton-Watson process then $\Phi_g(x)$, the PGF of the distribution of $X_g$, satisfies
+
+\begin{align*}
+\Phi_0(x) &= x\\
+\Phi_{g+1}(x) &= \mu(\Phi_g(x)) \quad g>0
+\end{align*}
+that is, $\Phi_0(x) = x$, &nbsp; $\Phi_1(x)=\mu(x)$, &nbsp; $\Phi_2(x)=\mu(\mu(x))$, &nbsp; $\cdots$, &nbsp;  $\Phi_g(x) = \mu^{(g)}(x) = \mu(\mu(\mu(\cdots \mu(x)\cdots)))$.
 :::
 
 ## {prf:ref}`thm-ExpectedSize` — Average Size of a Galton Watson Process after $g$ generations
@@ -91,6 +141,14 @@ The expected size of a Galton Watson process at generation $g$ is
 $$
 \mathbb{E}[X_g] = [\mu'(1)]^g
 $$
+:::
+
+## {prf:ref}`theorem-Survival` — Survival Probability
+
+:::{admonition} Statement
+:class: dropdown
+
+If an event occurs with rate $r$, the probability it has not happened after waiting a time $t$ is $e^{-rt}$.
 :::
 
 ## {prf:ref}`InfDisGaltWat` — Early stages of infectious-disease outbreaks are Galton-Watson Processes

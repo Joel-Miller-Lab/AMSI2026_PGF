@@ -212,7 +212,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.5. The Backward Kolmogorov Equation</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
@@ -221,6 +227,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
 </ul>
 </details></li>
 </ul>
@@ -264,6 +274,55 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/master?urlpath=tree/docs/notebooks/BasicGenFxn/GenFxnsExamples.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
 
 
 
@@ -644,14 +703,37 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
 </div></section>
 <section id="self-test">
 <h2><span class="section-number">1.4.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Consider the sequence <span class="math notranslate nohighlight">\(A, Ar, Ar^2, \ldots\)</span>.</p>
-<ol class="arabic simple">
-<li><p>Write down the generating function of this sequence in expanded form.</p></li>
-<li><p>Use the formula for the geometric series to find <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
-<li><p>For what values of <span class="math notranslate nohighlight">\(x\)</span> does the series converge?</p></li>
-</ol>
-</li>
+<ol class="arabic">
+<li><p>Consider the sequence (A, Ar, Ar^2, \ldots).</p>
+<p><strong>(a)</strong> Write down the generating function of this sequence in expanded (series) form.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The generating function is</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = A + Arx + Ar^2x^2 + Ar^3x^3 + \cdots
+\]</div>
+</div>
+</details><p><strong>(b)</strong> Use the formula for the geometric series to find <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(x) &amp;= A + Arx + Ar^2x^2 + Ar^3x^3 + \cdots\\
+     &amp;= A(1 + rx + (rx)^2 + \cdots)\\
+     &amp;= A \frac{1}{1-rx}
+ \end{align*}\]</div>
+</div>
+</details><p><strong>(c)</strong> For what values of <span class="math notranslate nohighlight">\(x\)</span> does the series converge?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Answer (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">As long as <span class="math notranslate nohighlight">\(|rx|&lt;1\)</span> the series converges, so we need <span class="math notranslate nohighlight">\(|x|&lt;1/|r|\)</span>.</p>
+</div>
+</details></li>
 <li><p>(this extends the results of the previous question) Consider the function <span class="math notranslate nohighlight">\(g(x) = \frac{5-4x}{x^2-3x+2}\)</span>.</p>
 <ol class="arabic simple">
 <li><p>Show that <span class="math notranslate nohighlight">\(g(x)=\frac{1}{1-x} + \frac{3/2}{1-x/2}\)</span> (one could use partial fractions to break <span class="math notranslate nohighlight">\(g\)</span> up into two terms like this and find the coefficients, but for this question, there’s no need to derive it.  Just verify that you can combine the terms to get the original <span class="math notranslate nohighlight">\(g(x)\)</span>).</p></li>
@@ -689,7 +771,7 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "Joel-Miller-Lab/AMSI2026_PGF",
             ref: "master",
         },
         codeMirrorConfig: {

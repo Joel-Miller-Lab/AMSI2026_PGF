@@ -279,6 +279,55 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/master?urlpath=tree/docs/notebooks/BasicGenFxn/GenFxnsComp.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -442,18 +491,18 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="composition-of-pgfs">
 <span id="sec-genfxncomp"></span><h1><span class="section-number">1.9. </span>Composition of PGFs<a class="headerlink" href="#composition-of-pgfs" title="Link to this heading">#</a></h1>
-<p>In this section, we focus just on PGFs.  Given two PGFs, we would like to know how to interpret <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span>.</p>
+<p>In this section, we focus just on PGFs and do not consider Ordinary Generating Functions.  Given two PGFs, we would like to know how to interpret <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span>.</p>
 <p>We have learned the following facts for PGFs:</p>
 <ul>
-<li><p>If we take a linear combination of PGFs <span class="math notranslate nohighlight">\(\mu_1(x)\)</span>, <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span> where the coefficients themselves are probabilities summing to <span class="math notranslate nohighlight">\(1\)</span>:</p>
+<li><p><a class="reference internal" href="GenFxnsAdd.html#thm-PGFLinComb">Theorem 1.1</a>: If we take a linear combination of PGFs <span class="math notranslate nohighlight">\(\mu_1(x)\)</span>, <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span> where the coefficients themselves are probabilities summing to <span class="math notranslate nohighlight">\(1\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\psi(x) = \sum \pi_i \mu_i(x)\]</div>
 <p>then <span class="math notranslate nohighlight">\(\psi(x)\)</span> is a PGF and the corresponding distribution can be thought of as choosing the distribution for <span class="math notranslate nohighlight">\(\mu_i\)</span> with probability <span class="math notranslate nohighlight">\(\pi_i\)</span> and then choosing <span class="math notranslate nohighlight">\(n\)</span> from that distribution.</p>
 </li>
-<li><p>If we multiply PGFs <span class="math notranslate nohighlight">\(\mu_1(x)\)</span>, <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(\mu_k(x)\)</span> together:</p>
+<li><p><a class="reference internal" href="GenFxnsMult.html#cor-PGFPower">Corollary 1.2</a>: Given the PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>, the result of multiplying it by itself <span class="math notranslate nohighlight">\(k\)</span> times gives:</p>
 <div class="math notranslate nohighlight">
-\[\psi(x) = \prod_{i=1}^k \mu_i(x)\]</div>
-<p>then <span class="math notranslate nohighlight">\(\psi(x)\)</span> is a PGF and the corresponding distribution can be thought of as choosing one number from each of the <span class="math notranslate nohighlight">\(k\)</span> distributions for <span class="math notranslate nohighlight">\(\mu_1(x), \ldots, \mu_k(x)\)</span> and then adding the <span class="math notranslate nohighlight">\(k\)</span> numbers together.  In particular, if all of the PGFs are the same, then we get a power of the PGF.</p>
+\[\psi_k(x) = \mu(x)^k\]</div>
+<p>then <span class="math notranslate nohighlight">\(\psi_k(x)\)</span> is a PGF and the corresponding distribution can be thought of as adding <span class="math notranslate nohighlight">\(k\)</span> numbers chosen independently from the distribution for <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
 </li>
 </ul>
 <p>Now we consider two arbitrary PGFs</p>
@@ -469,10 +518,10 @@ document.write(`
 \]</div>
 <p>Let’s look at an example before we do the general case.</p>
 <div class="proof example admonition" id="example-CashMachine">
-<p class="admonition-title"><span class="caption-number">Example 1.22 </span> (Cash machine PGF)</p>
+<p class="admonition-title"><span class="caption-number">Example 1.23 </span> (Cash machine PGF)</p>
 <section class="example-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mu_1(x) = \sum_{k=0}^\infty p_k x^k\)</span> be the PGF for the number of customers who come to a cash machine during a day and <span class="math notranslate nohighlight">\(\mu_2(x)= \sum_{m=0}^\infty q_m x^m\)</span> be the PGF for the amount of money a random customer withdraws.  What would be the PGF for the total amount of money withdrawn from the cash machine during a day?</p>
-<p>Let’s first think through separate cases based on <span class="math notranslate nohighlight">\(k\)</span>, how many customers arrive.  We’ll find the PGF assuming that <span class="math notranslate nohighlight">\(k\)</span> is known.  Then we’ll combine the PGFs for each possible <span class="math notranslate nohighlight">\(k\)</span> into a complete PGF.   Given <span class="math notranslate nohighlight">\(k\)</span>, we know that the PGF of the amount withdrawn is <span class="math notranslate nohighlight">\(\xi_k(x)=[\mu_2(x)]^k\)</span> by <a class="reference internal" href="GenFxnsMult.html#cor-PGFPower">Corollary 1.1</a>.</p>
+<p>Let’s first think through separate cases based on <span class="math notranslate nohighlight">\(k\)</span>, how many customers arrive.  We’ll find the PGF assuming that <span class="math notranslate nohighlight">\(k\)</span> is known.  Then we’ll combine the PGFs for each possible <span class="math notranslate nohighlight">\(k\)</span> into a complete PGF.   Given <span class="math notranslate nohighlight">\(k\)</span>, we know that the PGF of the amount withdrawn is <span class="math notranslate nohighlight">\(\xi_k(x)=[\mu_2(x)]^k\)</span> by <a class="reference internal" href="GenFxnsMult.html#cor-PGFPower">Corollary 1.2</a>.</p>
 <p>The PGF for the total amount withdrawn is then <span class="math notranslate nohighlight">\(\psi(x) = \sum_{k=0}^\infty p_k \xi_k(x)\)</span> by <a class="reference internal" href="GenFxnsAdd.html#thm-PGFLinComb">Theorem 1.1</a>.  Substituting <span class="math notranslate nohighlight">\([\mu_2(x)]^k\)</span> for  <span class="math notranslate nohighlight">\(\xi_k(x)\)</span> we get</p>
 <div class="math notranslate nohighlight">
 \[
@@ -488,7 +537,7 @@ document.write(`
 <p>The <span class="math notranslate nohighlight">\(k\)</span>-th power of <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> is the PGF for sum of <span class="math notranslate nohighlight">\(k\)</span> numbers drawn from the distribution of <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.  The linear combination of these corresponds to choosing the number <span class="math notranslate nohighlight">\(k\)</span> from the distribution for <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and then choosing <span class="math notranslate nohighlight">\(n\)</span> to be the sum of <span class="math notranslate nohighlight">\(k\)</span> numbers chosen from the distribution for <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.</p>
 <p>This leads to</p>
 <div class="proof theorem admonition" id="theorem-PGFComp">
-<p class="admonition-title"><span class="caption-number">Theorem 1.4 </span> (Composition of PGFs)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 1.5 </span> (Composition of PGFs)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given PGFs <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, the composition <span class="math notranslate nohighlight">\(\psi(x) = \mu_1(\mu_2(x))\)</span> is the PGF for the following process of choosing a number <span class="math notranslate nohighlight">\(n\)</span>:</p>
 <ul class="simple">
@@ -497,29 +546,45 @@ document.write(`
 </ul>
 </section>
 </div><p>That is, <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span> is the PGF for a sum of independent random numbers from the <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> distribution where the number of terms in the sum is randomly chosen from the <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> distribution.</p>
+<div class="proof definition admonition" id="def-FuncComp">
+<p class="admonition-title"><span class="caption-number">Definition 1.3 </span> (Function Composition)</p>
+<section class="definition-content" id="proof-content">
+<p>The <strong>composition</strong> of two functions <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> is the new function <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span>.</p>
+</section>
+</div><div class="proof remark admonition" id="remark-3">
+<p class="admonition-title"><span class="caption-number">Remark 1.7 </span> (Function Composition Notation)</p>
+<section class="remark-content" id="proof-content">
+<p>Sometimes the notation <span class="math notranslate nohighlight">\(\psi(x) = \mu_1 \circ \mu_2(x)\)</span> is used to denote function composition, but we will stick to <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span> in these notes.</p>
+</section>
+</div><div class="proof definition admonition" id="def-RandStopSum">
+<p class="admonition-title"><span class="caption-number">Definition 1.4 </span> (Randomly stopped sum)</p>
+<section class="definition-content" id="proof-content">
+<p>A sum <span class="math notranslate nohighlight">\(\sum_{j=1}^K M_j\)</span> where <span class="math notranslate nohighlight">\(K\)</span> is a random non-negative integer from a distribution and <span class="math notranslate nohighlight">\(M_j\)</span> are all random non-negative integers from another distribution is a <strong>randomly stopped sum</strong></p>
+</section>
+</div><p>Our theorem states that the PGF of a randomly stopped sum can be found by using composition <span class="math notranslate nohighlight">\(\psi(x)=\mu_1(\mu_2(x))\)</span> where <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> is the PGF corresponding to <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> is the PGF corresponding to the <span class="math notranslate nohighlight">\(M_j\)</span>.</p>
 <p>We illustrate this in the following example in which <span class="math notranslate nohighlight">\(\mu_1(x)=\mu_2(x)\)</span>:</p>
 <div class="proof example admonition" id="example-InfectiousDice">
-<p class="admonition-title"><span class="caption-number">Example 1.23 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 1.24 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider one person who rolls a single standard six-sided die with PGF <span class="math notranslate nohighlight">\(\mu(x) = (x+x^2+ \cdots + x^6)/6\)</span>.  Let <span class="math notranslate nohighlight">\(k\)</span> be the resulting random number.</p>
 <p>Then <span class="math notranslate nohighlight">\(k\)</span> individuals are chosen from the population, each of whom rolls a six-sided die.  Add their results together to get <span class="math notranslate nohighlight">\(n\)</span>.  The PGF for <span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(\psi(x)=\mu(\mu(x))\)</span>.</p>
-<p>This is illustrated in figure <a class="reference internal" href="#fig-infectiousdice"><span class="std std-numref">Fig. 1.8</span></a>.</p>
+<p>This is illustrated in figure <a class="reference internal" href="#fig-infectiousdice"><span class="std std-numref">Fig. 1.9</span></a>.</p>
 </section>
 </div><figure class="align-default" id="fig-infectiousdice">
 <a class="reference internal image-reference" href="../../_images/InfectiousDice.png"><img alt="../../_images/InfectiousDice.png" src="../../_images/InfectiousDice.png" style="width: 600px; height: 450px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">If we roll one die to choose the random number <span class="math notranslate nohighlight">\(k\)</span> and then sum the rolls of <span class="math notranslate nohighlight">\(k\)</span> dice to get <span class="math notranslate nohighlight">\(n\)</span>, then the PGF of the final sum is <span class="math notranslate nohighlight">\(\mu(\mu(x))\)</span>, illustrating <a class="reference internal" href="#example-InfectiousDice">Example 1.23</a>.</span><a class="headerlink" href="#fig-infectiousdice" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.9 </span><span class="caption-text">If we roll one die to choose the random number <span class="math notranslate nohighlight">\(k\)</span> and then sum the rolls of <span class="math notranslate nohighlight">\(k\)</span> dice to get <span class="math notranslate nohighlight">\(n\)</span>, then the PGF of the final sum is <span class="math notranslate nohighlight">\(\mu(\mu(x))\)</span>, illustrating <a class="reference internal" href="#example-InfectiousDice">Example 1.24</a>.</span><a class="headerlink" href="#fig-infectiousdice" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="self-test">
 <h2><span class="section-number">1.9.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
-<p><strong>Note to self: I’ve added problems, starting from Q3,  to this since the start of the subject.  I don’t want to change the ordering during the course.  After the course, re-order the questions.</strong></p>
+<p><strong>instructor’s note to self: I’ve added problems, starting from Q3,  to this since the start of the subject.  I don’t want to change the ordering during the course.  After the course, re-order the questions.</strong></p>
 <ol class="arabic simple">
-<li><p>Consider the dice rolling in <a class="reference internal" href="#example-InfectiousDice">Example 1.23</a>.  Set <span class="math notranslate nohighlight">\(X_0=1\)</span>.  For <span class="math notranslate nohighlight">\(g=1, 2, 3\)</span>, find <span class="math notranslate nohighlight">\(X_g\)</span> by having <span class="math notranslate nohighlight">\(X_{g-1}\)</span> individuals each roll a die and setting <span class="math notranslate nohighlight">\(X_g\)</span> to be the sum.</p>
+<li><p>Consider the dice rolling in <a class="reference internal" href="#example-InfectiousDice">Example 1.24</a>.  Set <span class="math notranslate nohighlight">\(X_0=1\)</span>.  For <span class="math notranslate nohighlight">\(g=1, 2, 3\)</span>, find <span class="math notranslate nohighlight">\(X_g\)</span> by having <span class="math notranslate nohighlight">\(X_{g-1}\)</span> individuals each roll a die and setting <span class="math notranslate nohighlight">\(X_g\)</span> to be the sum.</p>
 <ol class="arabic simple">
 <li><p>Show that the PGF of <span class="math notranslate nohighlight">\(X_1\)</span> is <span class="math notranslate nohighlight">\(\psi(x)\)</span> where <span class="math notranslate nohighlight">\(\psi(x)\)</span> is the PGF of a single die.</p></li>
-<li><p>Explain why the PGF of <span class="math notranslate nohighlight">\(X_2\)</span> is <span class="math notranslate nohighlight">\(\psi(\psi(x))\)</span>.  [hint: <a class="reference internal" href="#example-InfectiousDice">Example 1.23</a> should be helpful for this.]</p></li>
+<li><p>Explain why the PGF of <span class="math notranslate nohighlight">\(X_2\)</span> is <span class="math notranslate nohighlight">\(\psi(\psi(x))\)</span>.  [hint: <a class="reference internal" href="#example-InfectiousDice">Example 1.24</a> should be helpful for this.]</p></li>
 <li><p>What is the PGF of <span class="math notranslate nohighlight">\(X_3\)</span>?</p></li>
 </ol>
 </li>
@@ -533,6 +598,13 @@ document.write(`
 <li><p>Your answer above probably has <span class="math notranslate nohighlight">\(\mu_{\text{coin}}\)</span> appear twice.  Which appearance corresponds to the first flip?</p></li>
 </ol>
 </li>
+<li><p>Recall that the derivative of a PGF, evaluated at <span class="math notranslate nohighlight">\(x=1\)</span> gives the expected value.  Use this property to show that a randomly stopped sum has expected value equal to the expected number of terms times the expected value of each term.</p></li>
+<li><p>Insurance claims, such as for fires or floods do not arrive as independent events.  If one house is affected by a flood or a bushfire, it is likely that others are as well.  Assume that the number of claims per month has some distribution whose PGF is <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  Assume also that the size of claims are independent of one another and have a PGF <span class="math notranslate nohighlight">\(\xi(x)\)</span>.</p>
+<ol class="arabic simple">
+<li><p>How can we use PGFs to calculate the mean amount of claims during a month?</p></li>
+<li><p>The variance of a function is <span class="math notranslate nohighlight">\(\mathbb{E}[X^2] - \mathbb{E}[X]^2\)</span>.  How can we use PGFs to calculate the variance of the monthly claims?</p></li>
+</ol>
+</li>
 </ol>
 </section>
 </section>
@@ -541,7 +613,7 @@ document.write(`
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "Joel-Miller-Lab/AMSI2026_PGF",
             ref: "master",
         },
         codeMirrorConfig: {

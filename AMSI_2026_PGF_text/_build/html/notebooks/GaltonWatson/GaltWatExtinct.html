@@ -279,6 +279,55 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/master?urlpath=tree/docs/notebooks/GaltonWatson/GaltWatExtinct.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -523,7 +572,8 @@ x(1-(1-p)x) &amp;= p\\
 -(1-p)\left(x^2 - \frac{x}{1-p} + \frac{p}{1-p}\right) &amp;= 0\\
 -(1-p) (x-1)\left(x-\frac{p}{1-p}\right) &amp;= 0
 \end{align*}\]</div>
-<p>(to do the factoring in the final step, I took advantage of the fact I know <span class="math notranslate nohighlight">\(\hat{\mu}(1)=1\)</span> for any PGF, so <span class="math notranslate nohighlight">\(x=1\)</span> was guaranteed to be a root).  Thus <span class="math notranslate nohighlight">\(x=1\)</span> or <span class="math notranslate nohighlight">\(x = p/(1-p)\)</span>.  If <span class="math notranslate nohighlight">\(p&lt;1-p\)</span>, then <span class="math notranslate nohighlight">\(p/(1-p)&lt;1\)</span> and <span class="math notranslate nohighlight">\(\alpha = p/(1-p)\)</span>.  If <span class="math notranslate nohighlight">\(p \geq (1-p)\)</span>, then <span class="math notranslate nohighlight">\(p/(1-p) \geq 1\)</span> and there is only one solution in <span class="math notranslate nohighlight">\([0,1]\)</span>, so <span class="math notranslate nohighlight">\(\alpha = 1\)</span>.</p>
+<p>(to do the factoring in the final step, I took advantage of the fact I know <span class="math notranslate nohighlight">\(\hat{\mu}(1)=1\)</span> for any PGF, so <span class="math notranslate nohighlight">\(x=1\)</span> was guaranteed to be a root).  Thus <span class="math notranslate nohighlight">\(x=1\)</span> or <span class="math notranslate nohighlight">\(x = p/(1-p)\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(p&lt;1-p\)</span>, then <span class="math notranslate nohighlight">\(p/(1-p)&lt;1\)</span> and <span class="math notranslate nohighlight">\(\alpha = p/(1-p)\)</span>.  If <span class="math notranslate nohighlight">\(p \geq (1-p)\)</span>, then <span class="math notranslate nohighlight">\(p/(1-p) \geq 1\)</span> and there is only one solution in <span class="math notranslate nohighlight">\([0,1]\)</span>, so <span class="math notranslate nohighlight">\(\alpha = 1\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\(p&lt;1-p\)</span> is equivalent to <span class="math notranslate nohighlight">\(p&lt;0.5\)</span>, we conclude that</p>
 <ul class="simple">
 <li><p>if <span class="math notranslate nohighlight">\(p&lt;0.5\)</span>, then the extinction probability is <span class="math notranslate nohighlight">\(\alpha=p/(1-p)&lt;1\)</span>.</p></li>
@@ -556,7 +606,7 @@ x(1-(1-p)x) &amp;= p\\
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "Joel-Miller-Lab/AMSI2026_PGF",
             ref: "master",
         },
         codeMirrorConfig: {

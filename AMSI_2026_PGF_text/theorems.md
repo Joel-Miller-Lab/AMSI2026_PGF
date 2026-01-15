@@ -14,6 +14,18 @@ $$
 $$
 :::
 
+## {prf:ref}`theorem-GFConvolution` — Convolution in series product
+
+:::{admonition} Statement
+:class: dropdown
+
+Given two Generating Functions $f(x) = f_0 + f_1 x + f_2 x^2 + \cdots$ and $g(x) = g_0 + g_1 x + g_2 x^2 + \cdots$, then the coefficient of $x^n$ in the product $f(g)g(x)$ is given by 
+
+$$
+[x^n](f(x)g(x)) = \sum_{k=0}^n f_k g_{n-k}
+$$
+:::
+
 ## {prf:ref}`thm-partialsums` — Partial Sums
 
 :::{admonition} Statement
@@ -33,7 +45,30 @@ $$
 have generating function $\frac{f(x)}{1-x}$
 :::
 
-## {prf:ref}`thmPGFprod` — Product of PGFs
+## {prf:ref}`theorem-PGFRandSum` — PGF of random sum
+
+:::{admonition} Statement
+:class: dropdown
+
+Given the PGFs
+
+\begin{align*}
+\mu_1(x) &= \sum_n p_n x^n\\
+\mu_2(x) &= \sum_n q_n x^n
+\end{align*}
+If we choose $K$ from the distribution with PGF $\mu_1(x)$ and $M$ from the distribution with PGF $\mu_2(x)$, then the probability $\mathbb{P}[K+M=n]$ is 
+
+$$
+\mathbb{P}[K+M=n] = \sum_{k=0}^n p_k q_{n-k}
+$$
+and the PGF of the sum is
+
+$$
+\psi(x) = \mu_1(x)\mu_2(x)
+$$
+:::
+
+## {prf:ref}`corrPGFprod` — Product of PGFs
 
 :::{admonition} Statement
 :class: dropdown
@@ -43,11 +78,10 @@ Given $k$ PGFs $\mu_1(x), \mu_2(x), \ldots, \mu_k(x)$, the product
 $$
 \psi(x) = \prod_{i=1}^k \mu_i(x)
 $$ 
-is also a PGF
-and it corresponds to the probability distribution of the sum $n_1 + n_2 + \cdots + n_k$ where each $n_i$ comes from the distribution whose PGF is $\mu_i(x)$.
+is also a PGF and it corresponds to the probability distribution of the sum $n_1 + n_2 + \cdots + n_k$ where each $n_i$ comes from the distribution whose PGF is $\mu_i(x)$.
 :::
 
-## {prf:ref}`cor-PGFPower` — Sum of repeated draws
+## {prf:ref}`cor-PGFPower` — PGF of sum of repeated draws
 
 :::{admonition} Statement
 :class: dropdown

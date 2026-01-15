@@ -212,7 +212,13 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeBackKolm.html">3.5. The Backward Kolmogorov Equation</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
@@ -221,6 +227,10 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/PracticeClasses/Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
 </ul>
 </details></li>
 </ul>
@@ -419,13 +429,17 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-pgflincomb-linear-combination-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-PGFLinComb</span></code> — Linear combination of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-gfconvolution-convolution-in-series-product"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-GFConvolution</span></code> — Convolution in series product</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-partialsums-partial-sums"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-partialsums</span></code> — Partial Sums</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thmpgfprod-product-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thmPGFprod</span></code> — Product of PGFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cor-pgfpower-sum-of-repeated-draws"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">cor-PGFPower</span></code> — Sum of repeated draws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-pgfrandsum-pgf-of-random-sum"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-PGFRandSum</span></code> — PGF of random sum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corrpgfprod-product-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">corrPGFprod</span></code> — Product of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cor-pgfpower-pgf-of-sum-of-repeated-draws"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">cor-PGFPower</span></code> — PGF of sum of repeated draws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-pgfcomp-composition-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-PGFComp</span></code> — Composition of PGFs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-gwtisgwp-galton-watson-trees-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-GWTisGWP</span></code> — Galton-Watson trees are Galton-Watson processes.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-gwextinctthresh-galton-watson-extinction-threshold"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-GWExtinctThresh</span></code> — Galton-Watson extinction threshold</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-gw-size-by-generation-galton-watson-sizes-at-later-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-GW-size-by-generation</span></code> — Galton-Watson sizes at later generations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-expectedsize-average-size-of-a-galton-watson-process-after-g-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-ExpectedSize</span></code> — Average Size of a Galton Watson Process after <span class="math notranslate nohighlight">\(g\)</span> generations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-survival-survival-probability"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-Survival</span></code> — Survival Probability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">InfDisGaltWat</span></code> — Early stages of infectious-disease outbreaks are Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-TotalSizeDist</span></code> — Distribution of Total Sizes of Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>
@@ -454,8 +468,19 @@ document.write(`
 \]</div>
 </div>
 </section>
+<section id="theorem-gfconvolution-convolution-in-series-product">
+<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#theorem-GFConvolution">Theorem 1.2</a> — Convolution in series product<a class="headerlink" href="#theorem-gfconvolution-convolution-in-series-product" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Given two Generating Functions <span class="math notranslate nohighlight">\(f(x) = f_0 + f_1 x + f_2 x^2 + \cdots\)</span> and <span class="math notranslate nohighlight">\(g(x) = g_0 + g_1 x + g_2 x^2 + \cdots\)</span>, then the coefficient of <span class="math notranslate nohighlight">\(x^n\)</span> in the product <span class="math notranslate nohighlight">\(f(g)g(x)\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+[x^n](f(x)g(x)) = \sum_{k=0}^n f_k g_{n-k}
+\]</div>
+</div>
+</section>
 <section id="thm-partialsums-partial-sums">
-<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#thm-partialsums">Theorem 1.2</a> — Partial Sums<a class="headerlink" href="#thm-partialsums-partial-sums" title="Link to this heading">#</a></h2>
+<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#thm-partialsums">Theorem 1.3</a> — Partial Sums<a class="headerlink" href="#thm-partialsums-partial-sums" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
 <p>Consider a sequence of numbers <span class="math notranslate nohighlight">\(c_0, c_1, \ldots\)</span> whose generating function is <span class="math notranslate nohighlight">\(f(x)\)</span>.  The partial sums</p>
@@ -472,8 +497,30 @@ s_n = \sum_{i=0}^n c_i
 <p>have generating function <span class="math notranslate nohighlight">\(\frac{f(x)}{1-x}\)</span></p>
 </div>
 </section>
-<section id="thmpgfprod-product-of-pgfs">
-<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#thmPGFprod">Theorem 1.3</a> — Product of PGFs<a class="headerlink" href="#thmpgfprod-product-of-pgfs" title="Link to this heading">#</a></h2>
+<section id="theorem-pgfrandsum-pgf-of-random-sum">
+<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#theorem-PGFRandSum">Theorem 1.4</a> — PGF of random sum<a class="headerlink" href="#theorem-pgfrandsum-pgf-of-random-sum" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Given the PGFs</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu_1(x) &amp;= \sum_n p_n x^n\\
+\mu_2(x) &amp;= \sum_n q_n x^n
+\end{align*}\]</div>
+<p>If we choose <span class="math notranslate nohighlight">\(K\)</span> from the distribution with PGF <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(M\)</span> from the distribution with PGF <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, then the probability <span class="math notranslate nohighlight">\(\mathbb{P}[K+M=n]\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}[K+M=n] = \sum_{k=0}^n p_k q_{n-k}
+\]</div>
+<p>and the PGF of the sum is</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x) = \mu_1(x)\mu_2(x)
+\]</div>
+</div>
+</section>
+<section id="corrpgfprod-product-of-pgfs">
+<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#corrPGFprod">Corollary 1.1</a> — Product of PGFs<a class="headerlink" href="#corrpgfprod-product-of-pgfs" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
 <p>Given <span class="math notranslate nohighlight">\(k\)</span> PGFs <span class="math notranslate nohighlight">\(\mu_1(x), \mu_2(x), \ldots, \mu_k(x)\)</span>, the product</p>
@@ -481,15 +528,25 @@ s_n = \sum_{i=0}^n c_i
 \[
 \psi(x) = \prod_{i=1}^k \mu_i(x)
 \]</div>
-<p>is also a PGF
-and it corresponds to the probability distribution of the sum <span class="math notranslate nohighlight">\(n_1 + n_2 + \cdots + n_k\)</span> where each <span class="math notranslate nohighlight">\(n_i\)</span> comes from the distribution whose PGF is <span class="math notranslate nohighlight">\(\mu_i(x)\)</span>.</p>
+<p>is also a PGF and it corresponds to the probability distribution of the sum <span class="math notranslate nohighlight">\(n_1 + n_2 + \cdots + n_k\)</span> where each <span class="math notranslate nohighlight">\(n_i\)</span> comes from the distribution whose PGF is <span class="math notranslate nohighlight">\(\mu_i(x)\)</span>.</p>
 </div>
 </section>
-<section id="cor-pgfpower-sum-of-repeated-draws">
-<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#cor-PGFPower">Corollary 1.1</a> — Sum of repeated draws<a class="headerlink" href="#cor-pgfpower-sum-of-repeated-draws" title="Link to this heading">#</a></h2>
+<section id="cor-pgfpower-pgf-of-sum-of-repeated-draws">
+<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsMult.html#cor-PGFPower">Corollary 1.2</a> — PGF of sum of repeated draws<a class="headerlink" href="#cor-pgfpower-pgf-of-sum-of-repeated-draws" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
 <p>Given a PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>, if we perform <span class="math notranslate nohighlight">\(k\)</span> draws from its distribution, the PGF for the sum of all <span class="math notranslate nohighlight">\(k\)</span> draws is <span class="math notranslate nohighlight">\(\mu(x)^k\)</span>.</p>
+</div>
+</section>
+<section id="theorem-pgfcomp-composition-of-pgfs">
+<h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a> — Composition of PGFs<a class="headerlink" href="#theorem-pgfcomp-composition-of-pgfs" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Given PGFs <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, the composition <span class="math notranslate nohighlight">\(\psi(x) = \mu_1(\mu_2(x))\)</span> is the PGF for the following process of choosing a number <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ul class="simple">
+<li><p>use the distribution with PGF <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> to choose a random integer <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p>then choose <span class="math notranslate nohighlight">\(k\)</span> numbers independently from the distribution with PGF <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> and add them together to get <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ul>
 </div>
 </section>
 <section id="thm-gwtisgwp-galton-watson-trees-are-galton-watson-processes">
@@ -514,7 +571,13 @@ and it corresponds to the probability distribution of the sum <span class="math 
 <h2><a class="reference internal" href="notebooks/GaltonWatson/GaltWatSizeOverTime.html#theorem-GW-size-by-generation">Theorem 2.3</a> — Galton-Watson sizes at later generations<a class="headerlink" href="#theorem-gw-size-by-generation-galton-watson-sizes-at-later-generations" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
-<p>If <span class="math notranslate nohighlight">\(\mu(x)\)</span> is the PGF of the offspring distribution of a Galton-Watson process, then the distribution of sizes at generation <span class="math notranslate nohighlight">\(g\)</span> has PGF <span class="math notranslate nohighlight">\(\mu^{(g)}(x)\)</span> where <span class="math notranslate nohighlight">\(\mu^{(0)}(x) = x\)</span> and <span class="math notranslate nohighlight">\(\mu^{(g)}(x) = \mu^{(g-1)}(\mu(x)) = \mu(\mu^{(g-1)}(x))\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\mu(x)\)</span> is the PGF of the offspring distribution of a Galton-Watson process then <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span>, the PGF of the distribution of <span class="math notranslate nohighlight">\(X_g\)</span>, satisfies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_0(x) &amp;= x\\
+\Phi_{g+1}(x) &amp;= \mu(\Phi_g(x)) \quad g&gt;0
+\end{align*}\]</div>
+<p>that is, <span class="math notranslate nohighlight">\(\Phi_0(x) = x\)</span>,   <span class="math notranslate nohighlight">\(\Phi_1(x)=\mu(x)\)</span>,   <span class="math notranslate nohighlight">\(\Phi_2(x)=\mu(\mu(x))\)</span>,   <span class="math notranslate nohighlight">\(\cdots\)</span>,    <span class="math notranslate nohighlight">\(\Phi_g(x) = \mu^{(g)}(x) = \mu(\mu(\mu(\cdots \mu(x)\cdots)))\)</span>.</p>
 </div>
 </section>
 <section id="thm-expectedsize-average-size-of-a-galton-watson-process-after-g-generations">
@@ -526,6 +589,13 @@ and it corresponds to the probability distribution of the sum <span class="math 
 \[
 \mathbb{E}[X_g] = [\mu'(1)]^g
 \]</div>
+</div>
+</section>
+<section id="theorem-survival-survival-probability">
+<h2><a class="reference internal" href="notebooks/CtsTime/CtsTimeIntro.html#theorem-Survival">Theorem 3.2</a> — Survival Probability<a class="headerlink" href="#theorem-survival-survival-probability" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>If an event occurs with rate <span class="math notranslate nohighlight">\(r\)</span>, the probability it has not happened after waiting a time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(e^{-rt}\)</span>.</p>
 </div>
 </section>
 <section id="infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes">
@@ -565,7 +635,7 @@ and it corresponds to the probability distribution of the sum <span class="math 
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "Joel-Miller-Lab/AMSI2026_PGF",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -626,13 +696,17 @@ and it corresponds to the probability distribution of the sum <span class="math 
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-pgflincomb-linear-combination-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-PGFLinComb</span></code> — Linear combination of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-gfconvolution-convolution-in-series-product"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-GFConvolution</span></code> — Convolution in series product</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-partialsums-partial-sums"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-partialsums</span></code> — Partial Sums</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thmpgfprod-product-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thmPGFprod</span></code> — Product of PGFs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cor-pgfpower-sum-of-repeated-draws"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">cor-PGFPower</span></code> — Sum of repeated draws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-pgfrandsum-pgf-of-random-sum"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-PGFRandSum</span></code> — PGF of random sum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corrpgfprod-product-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">corrPGFprod</span></code> — Product of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cor-pgfpower-pgf-of-sum-of-repeated-draws"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">cor-PGFPower</span></code> — PGF of sum of repeated draws</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-pgfcomp-composition-of-pgfs"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-PGFComp</span></code> — Composition of PGFs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-gwtisgwp-galton-watson-trees-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-GWTisGWP</span></code> — Galton-Watson trees are Galton-Watson processes.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-gwextinctthresh-galton-watson-extinction-threshold"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-GWExtinctThresh</span></code> — Galton-Watson extinction threshold</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-gw-size-by-generation-galton-watson-sizes-at-later-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-GW-size-by-generation</span></code> — Galton-Watson sizes at later generations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-expectedsize-average-size-of-a-galton-watson-process-after-g-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-ExpectedSize</span></code> — Average Size of a Galton Watson Process after <span class="math notranslate nohighlight">\(g\)</span> generations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-survival-survival-probability"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-Survival</span></code> — Survival Probability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">InfDisGaltWat</span></code> — Early stages of infectious-disease outbreaks are Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-TotalSizeDist</span></code> — Distribution of Total Sizes of Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>

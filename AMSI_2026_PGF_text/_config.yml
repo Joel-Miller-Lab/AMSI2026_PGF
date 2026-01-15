@@ -45,7 +45,10 @@ sphinx:
     - sphinx_proof
   config:
     bibtex_reference_style: author_year
-
+    
+launch_buttons:
+  binderhub_url: "https://mybinder.org"  # The URL for your BinderHub (e.g., https://mybinder.org)
+  thebe                  : true
 
 exclude_patterns:
   - "**/*_ignore.ipynb"
