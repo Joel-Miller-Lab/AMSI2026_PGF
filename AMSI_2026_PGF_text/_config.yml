@@ -48,7 +48,8 @@ sphinx:
     
 launch_buttons:
   binderhub_url: "https://mybinder.org"  # The URL for your BinderHub (e.g., https://mybinder.org)
-  thebe                  : true
+  notebook_interface: jupyterlab
+  thebe: true
 
 exclude_patterns:
   - "**/*_ignore.ipynb"
