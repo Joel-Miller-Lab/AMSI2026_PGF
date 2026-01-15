@@ -209,14 +209,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at Successive Generations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.5. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -225,8 +224,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">5.2. Computer-based exploration of Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -347,6 +350,23 @@
   <i class="fab fa-github"></i>
   </span>
 <span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/BasicGenFxn/GenFxnsAdd.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
 </a>
 </li>
       
@@ -477,7 +497,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-combination-of-pgfs">1.7.1. Linear Combination of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convex-combination-of-pgfs">1.7.1. Convex Combination of PGFs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.7.2. Self-test</a></li>
 </ul>
             </nav>
@@ -498,11 +518,17 @@ document.write(`
 \[
 \alpha f(x) + \beta g(x)= \sum_{n=0}^\infty (\alpha f_n + \beta g_n) x^n
 \]</div>
-<p>which is the generating function for the corresponding linear combination of the sequences.</p>
-<section id="linear-combination-of-pgfs">
-<h2><span class="section-number">1.7.1. </span>Linear Combination of PGFs<a class="headerlink" href="#linear-combination-of-pgfs" title="Link to this heading">#</a></h2>
-<p>Consider two PGFs <span class="math notranslate nohighlight">\(\mu_1(x) = p_0 + p_1 x + p_2 x^2 + \cdots\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x) = q_0 + q_1 x + q_2 x^2 + \cdots\)</span> and the corresponding probability distributions.</p>
-<p>Let <span class="math notranslate nohighlight">\(\pi_1\)</span> and <span class="math notranslate nohighlight">\(\pi_2\)</span> be probabilities, <span class="math notranslate nohighlight">\(\pi_1 + \pi_2 = 1\)</span>.  Then the linear combination</p>
+<p>which is the generating function for the corresponding linear combination of the sequences.  This generalizes to linear combinations of more than two functions.</p>
+<section id="convex-combination-of-pgfs">
+<h2><span class="section-number">1.7.1. </span>Convex Combination of PGFs<a class="headerlink" href="#convex-combination-of-pgfs" title="Link to this heading">#</a></h2>
+<p>When working with PGFs, we are typically interested in <em>Convex Combinations</em>:</p>
+<div class="proof definition admonition" id="def-ConvComb">
+<p class="admonition-title"><span class="caption-number">Definition 1.3 </span> (Convex Combination)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>Convex Combination</strong> is a special case of a linear combination in which all coefficients are non-negative and sum to <span class="math notranslate nohighlight">\(1\)</span> — that is, they can be thought of as a collection of probabilities.</p>
+</section>
+</div><p>Consider two PGFs <span class="math notranslate nohighlight">\(\mu_1(x) = p_0 + p_1 x + p_2 x^2 + \cdots\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x) = q_0 + q_1 x + q_2 x^2 + \cdots\)</span> and the corresponding probability distributions.</p>
+<p>Let <span class="math notranslate nohighlight">\(\pi_1\)</span> and <span class="math notranslate nohighlight">\(\pi_2\)</span> be probabilities, <span class="math notranslate nohighlight">\(\pi_1 + \pi_2 = 1\)</span>.  Then the convex combination</p>
 <div class="math notranslate nohighlight">
 \[
 \psi(x) = \pi_1 \mu_1(x) + \pi_2 \mu_2(x) = \sum_{n=0}^\infty (\pi_1 p_n + \pi_2 q_n)x^n
@@ -512,7 +538,7 @@ document.write(`
 <li><p>We first decide with probability <span class="math notranslate nohighlight">\(\pi_1\)</span> to use <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and with probability <span class="math notranslate nohighlight">\(\pi_2\)</span> to use <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.</p></li>
 <li><p>Then we choose an integer <span class="math notranslate nohighlight">\(k\)</span> using the distribution corresponding to either <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> or <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.</p></li>
 </ul>
-<div class="proof example admonition" id="example-0">
+<div class="proof example admonition" id="example-1">
 <p class="admonition-title"><span class="caption-number">Example 1.20 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider a fair coin, for which tails is considered <span class="math notranslate nohighlight">\(0\)</span> and heads <span class="math notranslate nohighlight">\(1\)</span>, and a standard <span class="math notranslate nohighlight">\(6\)</span>-sided die.  The corresponding PGFs are</p>
@@ -540,13 +566,29 @@ document.write(`
 <div class="proof theorem admonition" id="thm-PGFLinComb">
 <p class="admonition-title"><span class="caption-number">Theorem 1.1 </span> (Linear combination of PGFs)</p>
 <section class="theorem-content" id="proof-content">
-<p>Assume that we have a (possibly infinite) set of PGFs <span class="math notranslate nohighlight">\(\mu_1(x), \mu_2(x), \ldots\)</span>.  We choose a number <span class="math notranslate nohighlight">\(n\)</span> by first choosing the PGF <span class="math notranslate nohighlight">\(\mu_i(x)\)</span> with probability <span class="math notranslate nohighlight">\(\pi_i\)</span>, and then we choose <span class="math notranslate nohighlight">\(n\)</span> from the distribution with PGF <span class="math notranslate nohighlight">\(\mu_i(x)\)</span>.  The resulting distribution for <span class="math notranslate nohighlight">\(n\)</span> has PGF</p>
+<p>Assume that we have a (possibly infinite) set of PGFs <span class="math notranslate nohighlight">\(\mu_1(x), \mu_2(x), \ldots\)</span>.  We choose a number <span class="math notranslate nohighlight">\(n\)</span> by first choosing the distribution corresponding to <span class="math notranslate nohighlight">\(\mu_i(x)\)</span> with probability <span class="math notranslate nohighlight">\(\pi_i\)</span>, and then we choose <span class="math notranslate nohighlight">\(n\)</span> from the distribution.  The resulting distribution for <span class="math notranslate nohighlight">\(n\)</span> has PGF</p>
 <div class="math notranslate nohighlight">
 \[
 \psi(x) = \sum_{i=1}^\infty \pi_i\mu_i(x)
 \]</div>
 </section>
-</div></section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To prove this we must show that the PGF for this process is the given convex combination of the original PGFs.  We will construct the PGF for this process by finding <span class="math notranslate nohighlight">\(p_n\)</span>, the probability of <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Assume <span class="math notranslate nohighlight">\([x^n]\mu_i(x) = p_{i,n}\)</span>, that is, <span class="math notranslate nohighlight">\(\mu_i(x) = \sum_n p_{i,n} x^n\)</span>.  The probability of choosing distribution <span class="math notranslate nohighlight">\(i\)</span> and then choosing <span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(\pi_i p_{i,n}\)</span>.  So the probability of choosing <span class="math notranslate nohighlight">\(n\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+p_n = \sum_i \pi_i p_{i,n}
+\]</div>
+<p>So setting <span class="math notranslate nohighlight">\(\xi(x) = \sum_n p_n x^n\)</span> to be the PGF for <span class="math notranslate nohighlight">\(n\)</span>, we find</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\xi(x) &amp;= \sum_n p_n x^n\\
+&amp;= \sum_n \sum_i \pi_i p_{i,n} x^n\\
+&amp;= \sum_i \pi_i \sum_n p_{i,n} x^n\\
+&amp;= \sum_i \pi_i \mu_i(x)
+\end{align*}\]</div>
+</div>
+</section>
 <section id="self-test">
 <h2><span class="section-number">1.7.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
@@ -619,7 +661,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-combination-of-pgfs">1.7.1. Linear Combination of PGFs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convex-combination-of-pgfs">1.7.1. Convex Combination of PGFs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">1.7.2. Self-test</a></li>
 </ul>
   </nav></div>

@@ -213,14 +213,13 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at Successive Generations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeBackKolm.html">3.5. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -229,8 +228,12 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Simulation/GaltonWatsonExploration.html">5.2. Computer-based exploration of Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -395,6 +398,7 @@ document.write(`
    <a href="#cap-alg-GWTReconstruct"><strong>alg-GWTReconstruct</strong></a> | 
    <a href="#cap-cor-PGFPower"><strong>cor-PGFPower</strong></a> | 
    <a href="#cap-corrPGFprod"><strong>corrPGFprod</strong></a> | 
+   <a href="#cap-def-ConvComb"><strong>def-ConvComb</strong></a> | 
    <a href="#cap-def-FuncComp"><strong>def-FuncComp</strong></a> | 
    <a href="#cap-def-GWTree"><strong>def-GWTree</strong></a> | 
    <a href="#cap-def-GaltonWatson"><strong>def-GaltonWatson</strong></a> | 
@@ -437,15 +441,17 @@ document.write(`
    <a href="#cap-example-xddxPoissonBag"><strong>example-xddxPoissonBag</strong></a> | 
    <a href="#cap-example-xddxPoissonClothesLine"><strong>example-xddxPoissonClothesLine</strong></a> | 
    <a href="#cap-lemma-CycleLemma"><strong>lemma-CycleLemma</strong></a> | 
-   <a href="#cap-remark-0"><strong>remark-0</strong></a> | 
    <a href="#cap-remark-1"><strong>remark-1</strong></a> | 
    <a href="#cap-remark-2"><strong>remark-2</strong></a> | 
    <a href="#cap-remark-3"><strong>remark-3</strong></a> | 
+   <a href="#cap-remark-CauchyOrthogonality"><strong>remark-CauchyOrthogonality</strong></a> | 
+   <a href="#cap-remark-Cauchy_finite"><strong>remark-Cauchy_finite</strong></a> | 
    <a href="#cap-remark-NegBinGeomRelation"><strong>remark-NegBinGeomRelation</strong></a> | 
    <a href="#cap-remark-RateNeqProb"><strong>remark-RateNeqProb</strong></a> | 
    <a href="#cap-remark-TS2fxn"><strong>remark-TS2fxn</strong></a> | 
    <a href="#cap-remark-fxn2TS"><strong>remark-fxn2TS</strong></a> | 
    <a href="#cap-remark-multipleflip"><strong>remark-multipleflip</strong></a> | 
+   <a href="#cap-remark-nonpolynomialCauchy"><strong>remark-nonpolynomialCauchy</strong></a> | 
    <a href="#cap-theorem-2"><strong>theorem-2</strong></a> | 
    <a href="#cap-theorem-GFConvolution"><strong>theorem-GFConvolution</strong></a> | 
    <a href="#cap-theorem-GW-size-by-generation"><strong>theorem-GW-size-by-generation</strong></a> | 
@@ -501,6 +507,14 @@ document.write(`
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsMult.html#corrPGFprod"><code class="xref">corrPGFprod</code></a> <em>(notebooks/BasicGenFxn/GenFxnsMult)</em></td><td>
        <em>corollary</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-def-ConvComb"><td></td><td>
+       <strong>def-ConvComb</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/BasicGenFxn/GenFxnsAdd.html#def-ConvComb"><code class="xref">def-ConvComb</code></a> <em>(notebooks/BasicGenFxn/GenFxnsAdd)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-def-FuncComp"><td></td><td>
        <strong>def-FuncComp</strong></td><td></td></tr>
@@ -838,14 +852,6 @@ document.write(`
        <a href="notebooks/InfDis/InfDisSizeDist.html#lemma-CycleLemma"><code class="xref">lemma-CycleLemma</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-remark-0"><td></td><td>
-       <strong>remark-0</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsCoefficientCalc.html#remark-0"><code class="xref">remark-0</code></a> <em>(notebooks/BasicGenFxn/GenFxnsCoefficientCalc)</em></td><td>
-       <em>remark</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-1"><td></td><td>
        <strong>remark-1</strong></td><td></td></tr>
      <tr>
@@ -868,6 +874,22 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsComp.html#remark-3"><code class="xref">remark-3</code></a> <em>(notebooks/BasicGenFxn/GenFxnsComp)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-CauchyOrthogonality"><td></td><td>
+       <strong>remark-CauchyOrthogonality</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/BasicGenFxn/GenFxnsCoefficientCalc.html#remark-CauchyOrthogonality"><code class="xref">remark-CauchyOrthogonality</code></a> <em>(notebooks/BasicGenFxn/GenFxnsCoefficientCalc)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-Cauchy_finite"><td></td><td>
+       <strong>remark-Cauchy_finite</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/BasicGenFxn/GenFxnsCoefficientCalc.html#remark-Cauchy_finite"><code class="xref">remark-Cauchy_finite</code></a> <em>(notebooks/BasicGenFxn/GenFxnsCoefficientCalc)</em></td><td>
        <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-NegBinGeomRelation"><td></td><td>
@@ -908,6 +930,14 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#remark-multipleflip"><code class="xref">remark-multipleflip</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-nonpolynomialCauchy"><td></td><td>
+       <strong>remark-nonpolynomialCauchy</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/BasicGenFxn/GenFxnsCoefficientCalc.html#remark-nonpolynomialCauchy"><code class="xref">remark-nonpolynomialCauchy</code></a> <em>(notebooks/BasicGenFxn/GenFxnsCoefficientCalc)</em></td><td>
        <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-2"><td></td><td>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.5. The Backward Kolmogorov Equation &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>3.4. The Backward Kolmogorov Equation &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4. Infectious Diseases" href="../InfDis/InfDisIntro.html" />
-    <link rel="prev" title="3.4. Forward Kolmogorov Equations" href="CtsTimeForwKolm.html" />
+    <link rel="prev" title="3.3. Forward Kolmogorov Equations" href="CtsTimeForwKolm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -209,14 +209,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at successive times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at Successive Generations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.5. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.4. The Backward Kolmogorov Equation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -225,8 +224,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">5.2. Computer-based exploration of Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -347,6 +350,23 @@
   <i class="fab fa-github"></i>
   </span>
 <span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/CtsTime/CtsTimeBackKolm.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
 </a>
 </li>
       
@@ -477,7 +497,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.5.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.1. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -490,7 +510,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-backward-kolmogorov-equation">
-<h1><span class="section-number">3.5. </span>The Backward Kolmogorov Equation<a class="headerlink" href="#the-backward-kolmogorov-equation" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">3.4. </span>The Backward Kolmogorov Equation<a class="headerlink" href="#the-backward-kolmogorov-equation" title="Link to this heading">#</a></h1>
 <p>The backward Kolmogorov equation along similar lines to the forward Kolmogorov equation.  We assume we know <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> and <span class="math notranslate nohighlight">\(\mu(x)\)</span> and we want to determine <span class="math notranslate nohighlight">\(\Phi(x, t + \Delta t)\)</span>.</p>
 <p>However, instead of taking time <span class="math notranslate nohighlight">\(t\)</span> and stepping forward an amount <span class="math notranslate nohighlight">\(\Delta t\)</span>, we take time <span class="math notranslate nohighlight">\(\Delta t\)</span> and step forward an amount <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Given <span class="math notranslate nohighlight">\(\Phi(x,0)= x\)</span>, that is, there is one individual at time <span class="math notranslate nohighlight">\(t=0\)</span>, we can find <span class="math notranslate nohighlight">\(\Phi(x,\Delta t)\)</span>.  With probability <span class="math notranslate nohighlight">\((1-r\Delta t)\)</span> nothing has happened, but with probability <span class="math notranslate nohighlight">\(r\Delta t\)</span>, an event has occured and the new PGF is <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  So</p>
@@ -529,7 +549,7 @@ document.write(`
 <p>with the initial condition <span class="math notranslate nohighlight">\(\alpha(0)=0\)</span>.</p>
 </section>
 </div><section id="self-test">
-<h2><span class="section-number">3.5.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.4.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -569,7 +589,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3.4. </span>Forward Kolmogorov Equations</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>Forward Kolmogorov Equations</p>
       </div>
     </a>
     <a class="right-next"
@@ -597,7 +617,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.5.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.1. Self-test</a></li>
 </ul>
   </nav></div>
 

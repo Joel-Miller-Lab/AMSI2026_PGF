@@ -47,9 +47,13 @@ parts:
       #- file: notebooks/InfDis/InfDisTotalSize
       - file: notebooks/InfDis/InfDisSizeDist
       - file: notebooks/InfDis/InfDisSmallPop
+  - caption: Simulations and Practice Problems
+    numbered: True
+    chapters:
     - file: notebooks/Simulation/SimulationIntro
       sections:  
       - file: notebooks/Simulation/GaltWatSimulation
+      - file: notebooks/Simulation/GaltonWatsonExploration
     
     - file: notebooks/PracticeClasses/PracIntro
       sections:

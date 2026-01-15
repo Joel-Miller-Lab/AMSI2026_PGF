@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2.5. Size Distribution at successive times &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>2.5. Size Distribution at Successive Generations &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -209,14 +209,13 @@
 <li class="toctree-l2"><a class="reference internal" href="GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.5. Size Distribution at successive times</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.5. Size Distribution at Successive Generations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.4. Forward Kolmogorov Equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.5. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -225,8 +224,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">5.2. Computer-based exploration of Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -353,6 +356,23 @@
       
       
       
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/GaltonWatson/GaltWatSizeOverTime.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
       <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/GaltonWatson/GaltWatSizeOverTime.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
@@ -467,7 +487,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Size Distribution at successive times</h1>
+    <h1>Size Distribution at Successive Generations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -491,8 +511,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="size-distribution-at-successive-times">
-<h1><span class="section-number">2.5. </span>Size Distribution at successive times<a class="headerlink" href="#size-distribution-at-successive-times" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="size-distribution-at-successive-generations">
+<h1><span class="section-number">2.5. </span>Size Distribution at Successive Generations<a class="headerlink" href="#size-distribution-at-successive-generations" title="Link to this heading">#</a></h1>
 <p>Please read <a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html#sec-genfxnlinearcomb"><span class="std std-numref">Section 1.7</span></a>, <a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html#sec-genfxnmult"><span class="std std-numref">Section 1.8</span></a>, and <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#sec-genfxncomp"><span class="std std-numref">Section 1.9</span></a> before reading this section.</p>
 <p>The major result we rely on in this section is <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>:  if <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> are both PGFs, then <span class="math notranslate nohighlight">\(\psi(x) = \mu_1(\mu_2(x))\)</span> is the PGF for the following process:
 First we choose <span class="math notranslate nohighlight">\(k\)</span> from the distribution of <span class="math notranslate nohighlight">\(\mu_1(x)\)</span>.  Then we choose <span class="math notranslate nohighlight">\(k\)</span> numbers from the distribution of <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> and add them together.  That is, we are taking a sum of numbers from the distribution of <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> and the number of terms in the sum is taken from the distribution of <span class="math notranslate nohighlight">\(\mu_1(x)\)</span>.</p>
