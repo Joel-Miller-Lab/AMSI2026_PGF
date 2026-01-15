@@ -505,51 +505,131 @@ document.write(`
 <p>For example, consider a Negative Binomial Distribution with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import all helper functions used in the AMSI 2026 PGF material.</span>
+<span class="c1"># In particular, this provides:</span>
+<span class="c1">#   - GaltonWatsonTreeSimulation : simulates a Galton–Watson process as a tree</span>
+<span class="c1">#   - hierarchy_pos              : computes node positions for tree-style plots</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Numerical and scientific computing</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># NetworkX is used to store the Galton–Watson tree as a directed graph</span>
+<span class="c1"># (parents -&gt; children)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+
+<span class="c1"># Matplotlib is used only for visualisation</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="c1"># --- Negative binomial offspring distribution ---</span>
-<span class="c1"># NumPy parameterization: np.random.negative_binomial(n, p)</span>
-<span class="c1"># returns the number of failures before n successes, with success prob p.</span>
-<span class="c1"># Mean offspring = n*(1-p)/p</span>
+
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># Negative binomial offspring distribution</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># We model the number of offspring of each individual using a</span>
+<span class="c1"># negative binomial distribution.</span>
+<span class="c1">#</span>
+<span class="c1"># NumPy parameterisation:</span>
+<span class="c1">#   np.random.negative_binomial(n, p)</span>
+<span class="c1">#</span>
+<span class="c1"># returns the number of *failures* before achieving n successes,</span>
+<span class="c1"># where each trial has success probability p.</span>
+<span class="c1">#</span>
+<span class="c1"># In a Galton–Watson context, we simply interpret this integer as</span>
+<span class="c1"># the number of offspring produced by an individual.</span>
+<span class="c1">#</span>
+<span class="c1"># Mean number of offspring:</span>
+<span class="c1">#   E[K] = n (1 - p) / p</span>
+<span class="c1"># -------------------------------------------------------------------</span>
 
 
+<span class="c1"># Create a random number generator.</span>
+<span class="c1"># Using default_rng() is preferred to the older np.random interface.</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 
 
-<span class="c1">#Neg Binomial Parameters:</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># Negative binomial parameters</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># n controls the dispersion (how variable the offspring numbers are).</span>
+<span class="c1"># p controls the success probability in each Bernoulli trial.</span>
+<span class="c1">#</span>
+<span class="c1"># Note:</span>
+<span class="c1">#   NumPy allows n to be non-integer, which is convenient for modelling</span>
+<span class="c1">#   overdispersed offspring distributions.</span>
+<span class="c1"># -------------------------------------------------------------------</span>
 
-<span class="n">n</span> <span class="o">=</span> <span class="mf">1.5</span>          <span class="c1"># &quot;number of successes&quot; (dispersion-ish parameter)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>        <span class="c1"># success probability</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mf">1.5</span>          <span class="c1"># &quot;number of successes&quot; (dispersion-like parameter)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>          <span class="c1"># success probability</span>
 
-<span class="c1">#rng = np.random.default_rng(12345)</span>
+<span class="c1"># Uncomment the following line if you want *reproducible* simulations</span>
+<span class="c1"># rng = np.random.default_rng(12345)</span>
+
 
 <span class="k">def</span><span class="w"> </span><span class="nf">NegBinOffspringDist</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sample the number of offspring produced by a single individual.</span>
+
+<span class="sd">    Each call returns an independent draw from a negative binomial</span>
+<span class="sd">    distribution with parameters (n, p).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">rng</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 
 
-<span class="c1"># --- Run one simulation ---</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># Run one Galton–Watson tree simulation</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># G     : a directed graph representing the realised Galton-Watson tree</span>
+<span class="c1"># Xlist : Xlist[g] = population size in generation g</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+
 <span class="n">G</span><span class="p">,</span> <span class="n">Xlist</span> <span class="o">=</span> <span class="n">GaltonWatsonTreeSimulation</span><span class="p">(</span><span class="n">NegBinOffspringDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-<span class="c1"># --- Plot the resulting tree ---</span>
+
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># Plot the resulting Galton–Watson tree</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># hierarchy_pos computes positions so that:</span>
+<span class="c1">#   - generation 0 is at the top</span>
+<span class="c1">#   - later generations appear lower</span>
+<span class="c1">#   - siblings are placed side-by-side</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+
 <span class="n">pos</span> <span class="o">=</span> <span class="n">hierarchy_pos</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Draw the tree structure (nodes and directed edges)</span>
 <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># Label nodes using mathematical notation</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># Each node is named (g, j), representing the j-th individual</span>
+<span class="c1"># in generation g.</span>
+<span class="c1">#</span>
+<span class="c1"># We convert this into a LaTeX-style label u_{g,j} for display.</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+
 <span class="n">labels</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="sa">rf</span><span class="s2">&quot;$u_</span><span class="se">{{</span><span class="si">{</span><span class="n">g</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="se">}}</span><span class="s2">$&quot;</span> <span class="k">for</span> <span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">}</span>
+
 <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
+
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># Display population sizes by generation</span>
+<span class="c1"># -------------------------------------------------------------------</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Population sizes by generation:&quot;</span><span class="p">,</span> <span class="n">Xlist</span><span class="p">)</span>
+
+<span class="c1"># Uncomment these lines for additional diagnostics</span>
 <span class="c1"># print(&quot;Total individuals in tree:&quot;, G.number_of_nodes())</span>
 <span class="c1"># print(&quot;Total parent-&gt;child edges:&quot;, G.number_of_edges())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f7968d16c7b2942a082f91561f9b609082852f9e71ac3ca05f2349ffafac0efb.png" src="../../_images/f7968d16c7b2942a082f91561f9b609082852f9e71ac3ca05f2349ffafac0efb.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population sizes by generation: [1 2 0 0 0 0 0 0 0 0 0]
+<img alt="../../_images/6861d8cf6d21566f11b278abf82385e64f07fc70a06377a777097e98ce871121.png" src="../../_images/6861d8cf6d21566f11b278abf82385e64f07fc70a06377a777097e98ce871121.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population sizes by generation: [ 1  2  1  2  1  1  1  5  7 12 10]
 </pre></div>
 </div>
 </div>
@@ -558,34 +638,116 @@ document.write(`
 <p>Next we’re going to look at extinction probability  The code below runs many simulations, and estimates the extinction probability based on that.  By default it decides extinction has happened if <span class="math notranslate nohighlight">\(X_g=0\)</span> by <span class="math notranslate nohighlight">\(g=10\)</span>.  Then it plots the PGF and the line <span class="math notranslate nohighlight">\(y=x\)</span>. Run this with various parameters.  Try making the mean larger than, smaller than, and close to <span class="math notranslate nohighlight">\(1\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_extinction_probability</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">OffspringDist</span><span class="p">,</span> <span class="n">nsim</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_generations</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Imports needed to run this cell on its own</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaltonWatsonSimulation</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Monte Carlo estimation of extinction probability</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># We estimate the probability of extinction by simulating</span>
+<span class="c1"># many independent Galton–Watson processes and checking</span>
+<span class="c1"># whether the population has died out by a fixed generation.</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">estimate_extinction_probability</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">OffspringDist</span><span class="p">,</span> <span class="n">nsim</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_generations</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Estimate the extinction probability of a Galton–Watson process</span>
+<span class="sd">    using Monte Carlo simulation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r, p : float</span>
+<span class="sd">        Parameters of the offspring distribution (included here</span>
+<span class="sd">        for clarity, though only OffspringDist is used directly).</span>
+<span class="sd">    OffspringDist : callable</span>
+<span class="sd">        A function returning the number of offspring of one individual.</span>
+<span class="sd">    nsim : int</span>
+<span class="sd">        Number of independent simulations.</span>
+<span class="sd">    max_generations : int</span>
+<span class="sd">        Maximum number of generations to simulate.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Estimated probability that the process goes extinct.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">extinct_count</span> <span class="o">=</span> <span class="mi">0</span>
+
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsim</span><span class="p">):</span>
-        <span class="n">Xlist</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">OffspringDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="n">max_generations</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">Xlist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Run one Galton–Watson simulation</span>
+        <span class="n">Xlist</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span>
+            <span class="n">OffspringDist</span><span class="p">,</span>
+            <span class="n">num_generations</span><span class="o">=</span><span class="n">max_generations</span>
+        <span class="p">)</span>
+
+        <span class="c1"># If the population size at the final generation is zero,</span>
+        <span class="c1"># we treat the process as extinct</span>
+        <span class="k">if</span> <span class="n">Xlist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">extinct_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
     <span class="k">return</span> <span class="n">extinct_count</span> <span class="o">/</span> <span class="n">nsim</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">nb_pgf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>  <span class="c1">#the PGF for the negative binomial distribution</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="n">r</span>
 
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Probability generating function for the negative binomial</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># This is the PGF of a negative binomial(r, p) distribution:</span>
+<span class="c1">#</span>
+<span class="c1">#     mu(x) = E[x^K] = ( p / (1 - (1 - p) x) )^r</span>
+<span class="c1">#</span>
+<span class="c1"># In a Galton–Watson process, the extinction probability α</span>
+<span class="c1"># satisfies the fixed-point equation:</span>
+<span class="c1">#</span>
+<span class="c1">#     α = mu(α)</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">nb_pgf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>  <span class="c1"># the PGF for the negative binomial distribution</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="n">r</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Parameters and offspring distribution</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="mf">1.5</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
 
+<span class="c1"># Random number generator for reproducibility if desired</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">NegBinOffspringDist</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">rng</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sample the number of offspring from a negative binomial</span>
+<span class="sd">    distribution with parameters (r, p).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">rng</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Estimate extinction probability via simulation</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
 <span class="n">alpha</span> <span class="o">=</span> <span class="n">estimate_extinction_probability</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">NegBinOffspringDist</span><span class="p">)</span>
 <span class="c1"># print(alpha)</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Plot mu(x) and y = x to visualise the fixed point</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">mu_x</span> <span class="o">=</span> <span class="n">nb_pgf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu_x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\mu(x)$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$y=x$&quot;</span><span class="p">)</span>
+
+<span class="c1"># Estimated extinction probability shown as a vertical line</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
             <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$\alpha \approx </span><span class="si">{</span><span class="n">alpha</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
 
@@ -601,59 +763,114 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5eced07825672ec2e46cf3990a82f463084a771413be73483ff4e5e82ba588b9.png" src="../../_images/5eced07825672ec2e46cf3990a82f463084a771413be73483ff4e5e82ba588b9.png" />
+<img alt="../../_images/7d95c20cfc21440b2c67a8b887c62638921f01b8f60757478c0b369e70c1e70b.png" src="../../_images/7d95c20cfc21440b2c67a8b887c62638921f01b8f60757478c0b369e70c1e70b.png" />
 </div>
 </div>
 <p>Next we’ll look at the probability of extinction by generation <span class="math notranslate nohighlight">\(g\)</span></p>
-<p>The first plot shows how the extinction probability as predicted and as simulated converge as <span class="math notranslate nohighlight">\(g\)</span> increases.</p>
-<p>The second shows how the prediction looks as a “cobweb diagram” when plotted with the PGF.</p>
-<p>Try seeing how fast convergence happens when <span class="math notranslate nohighlight">\(\mu'(1)=1\)</span>.</p>
+<p>The first plot shows how the extinction probability as predicted by theory <span class="math notranslate nohighlight">\(\alpha_{g+1} = \mu(\alpha_g)\)</span> as well as from stochastic simulations compare as <span class="math notranslate nohighlight">\(g\)</span> increases.</p>
+<p>The second plot shows how the prediction looks as a “cobweb diagram” when plotted with the PGF.</p>
+<p>Try seeing how fast convergence happens as <span class="math notranslate nohighlight">\(g\)</span> increases when <span class="math notranslate nohighlight">\(\mu'(1)=1\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Imports needed to run this cell on its own</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
+<span class="c1"># Import the basic Galton–Watson simulator (population sizes only)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools.Galton_Watson</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaltonWatsonSimulation</span>
 
-<span class="c1"># Parameters</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mf">1.5</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">gmax</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">nsim</span> <span class="o">=</span> <span class="mi">1000</span>
 
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Parameters for the Galton–Watson process</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="mf">1.5</span>          <span class="c1"># negative binomial dispersion parameter</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>          <span class="c1"># success probability</span>
+<span class="n">gmax</span> <span class="o">=</span> <span class="mi">10</span>        <span class="c1"># maximum generation to simulate</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">1000</span>      <span class="c1"># number of Monte Carlo simulations</span>
+
+<span class="c1"># Random number generator</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">OffspringDist</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sample the number of offspring produced by one individual.</span>
+
+<span class="sd">    Each call returns an independent draw from a negative binomial</span>
+<span class="sd">    distribution with parameters (r, p).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Probability generating function (PGF) of the offspring distribution.</span>
+
+<span class="sd">    For a negative binomial(r, p) distribution,</span>
+<span class="sd">        μ(x) = ( p / (1 - (1 - p) x) )^r</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="o">**</span> <span class="n">r</span>
 
-<span class="c1"># --- Simulation: estimate P(X_g=0) for g=1..gmax ---</span>
-<span class="n">extinct_by_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># count first extinction at generation g</span>
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Simulation: estimate P(X_g = 0) for g = 1, ..., gmax</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># extinct_by_g[g] counts how many simulations first go extinct</span>
+<span class="c1"># at generation g.</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
+<span class="n">extinct_by_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsim</span><span class="p">):</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">OffspringDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="n">gmax</span><span class="p">)</span>  <span class="c1"># should return length gmax+1</span>
-    <span class="c1"># Find first generation where extinct</span>
+    <span class="c1"># Run one Galton–Watson simulation</span>
+    <span class="c1"># X[g] = population size in generation g</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">OffspringDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="n">gmax</span><span class="p">)</span>
+
+    <span class="c1"># Find the first generation at which extinction occurs</span>
     <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">X</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">extinct_by_g</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">break</span>
 
-<span class="n">sim_P_extinct_by_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">extinct_by_g</span><span class="p">)</span> <span class="o">/</span> <span class="n">nsim</span>  <span class="c1"># P(X_g=0)</span>
 
-<span class="c1"># --- Prediction: alpha recursion ---</span>
+<span class="c1"># Cumulative probability:</span>
+<span class="c1">#   P(X_g = 0) = probability that extinction has occurred</span>
+<span class="c1">#   by generation g</span>
+<span class="n">sim_P_extinct_by_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">extinct_by_g</span><span class="p">)</span> <span class="o">/</span> <span class="n">nsim</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Theoretical prediction via PGF recursion</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># alpha_g = P(X_g = 0) satisfies</span>
+<span class="c1">#</span>
+<span class="c1">#   alpha_0 = 0</span>
+<span class="c1">#   alpha_g = mu(alpha_{g-1})</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
 <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
 <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
     <span class="n">alpha</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="n">g</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
 
-<span class="c1"># --- Plot ---</span>
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Plot: simulation vs theoretical prediction</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
 <span class="n">gvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gvals</span><span class="p">,</span> <span class="n">sim_P_extinct_by_g</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Simulation: P(extinct by g)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gvals</span><span class="p">,</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Prediction: $\alpha_g=\mu(\alpha_{g-1})$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gvals</span><span class="p">,</span> <span class="n">sim_P_extinct_by_g</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Simulation: P(extinct by g)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gvals</span><span class="p">,</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Prediction: $\alpha_g=\mu(\alpha_{g-1})$&quot;</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">gmax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Generation $g$&quot;</span><span class="p">)</span>
@@ -663,7 +880,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
-<span class="c1"># --- Cobweb diagram (uses alpha[0..gmax] and mu) ---</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Cobweb diagram for the recursion alpha_{g} = mu(alpha_{g-1})</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">mu_x</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -672,21 +891,24 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu_x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\mu(x)$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$y=x$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>
-<span class="c1"># Cobweb starting at (alpha0, 0) = (0,0)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">a_next</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>          <span class="c1"># = mu(a)</span>
 
-    <span class="c1"># vertical step: (a, a) -&gt; (a, mu(a)) (or from (a,0) at start it&#39;s the same since a=0)</span>
+<span class="c1"># Cobweb construction starting from alpha_0 = 0</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">a_next</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>  <span class="c1"># = mu(a)</span>
+    <span class="c1"># Vertical step: from (a, a) to (a, mu(a))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">],</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">a_next</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># horizontal step: (a, mu(a)) -&gt; (mu(a), mu(a)) = (a_next, a_next)</span>
+    <span class="c1"># Horizontal step: from (a, mu(a)) to (mu(a), mu(a))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">a_next</span><span class="p">],</span> <span class="p">[</span><span class="n">a_next</span><span class="p">,</span> <span class="n">a_next</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">a</span> <span class="o">=</span> <span class="n">a_next</span>
 
-<span class="c1"># Mark the alpha_g points on the diagonal</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">alpha</span><span class="p">[:</span><span class="n">gmax</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="p">[:</span><span class="n">gmax</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha_g$ on diagonal&quot;</span><span class="p">)</span>
+
+<span class="c1"># Mark the points (alpha_g, alpha_g) on the diagonal</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">alpha</span><span class="p">[:</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="p">[:</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">s</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha_g$ on diagonal&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -695,6 +917,11 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Numerical comparison table</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; g   sim P(X_g=0)     alpha_g&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gvals</span><span class="p">:</span>
@@ -723,54 +950,129 @@ document.write(`
 <p>Now we’ll look at the size distribution at generation <span class="math notranslate nohighlight">\(g=5\)</span>.  This calculates <span class="math notranslate nohighlight">\(\Phi_g(e^{i\theta})\)</span> and then uses Cauchy integrals (actually Fast Fourier Transforms) to find the coefficients.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools.Galton_Watson</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaltonWatsonSimulation</span><span class="p">,</span> <span class="n">Phi_coefficients_real</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Galton–Watson simulation tools:</span>
+<span class="c1">#   - GaltonWatsonSimulation : simulates population sizes by generation</span>
+<span class="c1">#   - Phi_coefficients_real  : computes coefficients of the generating</span>
+<span class="c1">#                             function Phi_g for X_g</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools.Galton_Watson</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaltonWatsonSimulation</span><span class="p">,</span> <span class="n">Phi_coefficients_real</span>
                                
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 
+<span class="c1"># ------------------------------------------------------------</span>
 <span class="c1"># Parameters</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mf">1.5</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">gmax</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">nsim</span> <span class="o">=</span> <span class="mi">1000000</span>
-<span class="n">g</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
+<span class="n">r</span> <span class="o">=</span> <span class="mf">1.5</span>          <span class="c1"># negative binomial dispersion parameter</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>          <span class="c1"># success probability</span>
+<span class="n">gmax</span> <span class="o">=</span> <span class="mi">5</span>         <span class="c1"># maximum generation (used for labels and plotting)</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">1_000_000</span> <span class="c1"># number of Monte Carlo simulations</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mi">5</span>            <span class="c1"># generation at which we study the distribution of X_g</span>
+
+<span class="c1"># Number of coefficients used when approximating the distribution</span>
+<span class="c1"># from the probability generating function Phi_g</span>
 <span class="n">numCoefficients</span> <span class="o">=</span> <span class="mi">500</span>
 
+<span class="c1"># Random number generator</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">OffspringDist</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sample the number of offspring produced by one individual.</span>
+
+<span class="sd">    Each call returns an independent draw from a negative binomial</span>
+<span class="sd">    distribution with parameters r and p.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Probability generating function mu of the offspring distribution.</span>
+
+<span class="sd">    For a negative binomial distribution with parameters r and p,</span>
+
+<span class="sd">        mu(x) = ( p / (1 - (1 - p) x) )^r</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="o">**</span> <span class="n">r</span>
 
 
-<span class="c1"># --- theory: P(X_g = k) from coefficients of Phi_g ---</span>
-<span class="n">p_theory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Phi_coefficients_real</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">numCoefficients</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># length numCoefficients</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Theory: compute P(X_g = k) from coefficients of Phi_g</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Phi_g(x) is the probability generating function of X_g.</span>
+<span class="c1"># The coefficient of x^k in Phi_g(x) is P(X_g = k).</span>
+<span class="c1">#</span>
+<span class="c1"># Phi_coefficients_real returns the first numCoefficients</span>
+<span class="c1"># coefficients of Phi_g.</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
-<span class="c1"># --- simulation: sample X_g many times ---</span>
+<span class="n">p_theory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+    <span class="n">Phi_coefficients_real</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">numCoefficients</span><span class="p">,</span> <span class="n">mu</span><span class="p">),</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
+<span class="p">)</span>  <span class="c1"># length = numCoefficients</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Simulation: sample X_g many times</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># We simulate the Galton–Watson process nsim times and record</span>
+<span class="c1"># the population size X_g at generation g.</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
 <span class="n">Xg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsim</span><span class="p">):</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">OffspringDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># returns X_0,...,X_g</span>
+    <span class="c1"># Run one Galton–Watson simulation</span>
+    <span class="c1"># X = (X_0, X_1, ..., X_g)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">GaltonWatsonSimulation</span><span class="p">(</span><span class="n">OffspringDist</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
     <span class="n">Xg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
 
-<span class="c1"># empirical pmf with a tail bin at k = numCoefficients (meaning &quot;&gt;= numCoefficients&quot;)</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">Xg</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numCoefficients</span><span class="p">),</span> <span class="n">minlength</span><span class="o">=</span><span class="n">numCoefficients</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Empirical probability mass function</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># We bin the simulated values of X_g.</span>
+<span class="c1">#</span>
+<span class="c1"># All values greater than or equal to numCoefficients are placed</span>
+<span class="c1"># into a single &quot;tail&quot; bin at k = numCoefficients.</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
+<span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">Xg</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numCoefficients</span><span class="p">),</span>
+    <span class="n">minlength</span><span class="o">=</span><span class="n">numCoefficients</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
 <span class="n">p_emp</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">/</span> <span class="n">nsim</span>
 
-<span class="c1"># theory tail bin</span>
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Theory tail probability</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># The theoretical coefficients only sum over k = 0,...,numCoefficients-1.</span>
+<span class="c1"># Any remaining probability mass is placed into the same tail bin.</span>
+<span class="c1"># ------------------------------------------------------------</span>
+
 <span class="n">p_tail</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">p_theory</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <span class="n">p_theory_with_tail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">p_theory</span><span class="p">,</span> <span class="p">[</span><span class="n">p_tail</span><span class="p">]])</span>
 
+
+<span class="c1"># Support of the distribution (including the tail bin)</span>
 <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">numCoefficients</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-12</span>  <span class="c1"># floor for log scale</span>
+<span class="c1"># Small floor value for plotting on a logarithmic scale</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-12</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># Plot: theory versus simulation on a logarithmic scale</span>
+<span class="c1"># ------------------------------------------------------------</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="c1"># Simulation: points</span>
+<span class="c1"># Simulation: plotted as points</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
     <span class="n">k</span><span class="p">,</span>
     <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">p_emp</span><span class="p">,</span> <span class="n">eps</span><span class="p">),</span>
@@ -781,7 +1083,7 @@ document.write(`
     <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Simulation (n=</span><span class="si">{</span><span class="n">nsim</span><span class="si">}</span><span class="s2">)&quot;</span>
 <span class="p">)</span>
 
-<span class="c1"># Theory: thin line + markers</span>
+<span class="c1"># Theory: plotted as a thin line with markers</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
     <span class="n">k</span><span class="p">,</span>
     <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">p_theory_with_tail</span><span class="p">,</span> <span class="n">eps</span><span class="p">),</span>
@@ -802,7 +1104,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ff81d67510aa30fa461cacf9ae588bc2bcfe86479665a06c42e9bb5a385da12a.png" src="../../_images/ff81d67510aa30fa461cacf9ae588bc2bcfe86479665a06c42e9bb5a385da12a.png" />
+<img alt="../../_images/c8662c16847bcb05f71dc87f98c35436553e098c76b7ea06a982cd561d212db4.png" src="../../_images/c8662c16847bcb05f71dc87f98c35436553e098c76b7ea06a982cd561d212db4.png" />
 </div>
 </div>
 </section>
