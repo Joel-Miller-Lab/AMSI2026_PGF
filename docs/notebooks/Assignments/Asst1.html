@@ -514,10 +514,8 @@ document.write(`
 \[
    P(X=0) = 0.2, \quad P(X=1) = 0.5, \quad P(X=2) = 0.3.
    \]</div>
-<ol class="arabic simple">
-<li><p>Find the probability generating function <span class="math notranslate nohighlight">\(\psi(x)\)</span> of this distribution.</p></li>
-<li><p>Use the probability generating function to compute the expected value <span class="math notranslate nohighlight">\(\mathbb{E}[X]\)</span>.</p></li>
-</ol>
+<p><strong>(a)</strong> Find the probability generating function <span class="math notranslate nohighlight">\(\psi(x)\)</span> of this distribution.</p>
+<p><strong>(b)</strong> Use the probability generating function to compute the expected value <span class="math notranslate nohighlight">\(\mathbb{E}[X]\)</span>.</p>
 </li>
 <li><p>Suppose a generating function is defined as</p>
 <div class="math notranslate nohighlight">
@@ -529,10 +527,8 @@ document.write(`
 \[
    f(x) = e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}.
    \]</div>
-<ol class="arabic simple">
-<li><p>According to the generating-function paradigm, what sequence <span class="math notranslate nohighlight">\((c_n)\)</span> does the function <span class="math notranslate nohighlight">\(f(x)\)</span> represent?</p></li>
-<li><p>Explain how the generating-function paradigm interprets <span class="math notranslate nohighlight">\(f(x)\)</span> as a compact way of encoding this sequence. In your explanation, describe how the coefficients <span class="math notranslate nohighlight">\(c_n\)</span> can be recovered from the function using derivatives evaluated at <span class="math notranslate nohighlight">\(x = 0\)</span>.</p></li>
-</ol>
+<p><strong>(a)</strong> According to the generating-function paradigm, what sequence <span class="math notranslate nohighlight">\((c_n)\)</span> does the function <span class="math notranslate nohighlight">\(f(x)\)</span> represent?</p>
+<p><strong>(b)</strong> Explain how the generating-function paradigm interprets <span class="math notranslate nohighlight">\(f(x)\)</span> as a compact way of encoding this sequence. In your explanation, describe how the coefficients <span class="math notranslate nohighlight">\(c_n\)</span> can be recovered from the function using derivatives evaluated at <span class="math notranslate nohighlight">\(x = 0\)</span>.</p>
 </li>
 <li><p>Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable with values <span class="math notranslate nohighlight">\(\{0,1,2,\ldots\}\)</span> and</p>
 <div class="math notranslate nohighlight">
@@ -540,30 +536,24 @@ document.write(`
    P(X = k) = C \left(\frac{1}{2}\right)^k \quad \text{for } k = 0,1,2,\ldots
    \]</div>
 <p>where <span class="math notranslate nohighlight">\(C\)</span> is a normalizing constant.</p>
-<ol class="arabic simple">
-<li><p>Determine the value of <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
-<li><p>Find the probability generating function <span class="math notranslate nohighlight">\(\mu(x)\)</span> in closed form.</p></li>
-<li><p>Use <span class="math notranslate nohighlight">\(\mu(x)\)</span> and <span class="math notranslate nohighlight">\(x \partial_x\)</span> to find <span class="math notranslate nohighlight">\(\sum_k k^2/2^k\)</span>.</p></li>
-</ol>
+<p><strong>(a)</strong> Determine the value of <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p><strong>(b)</strong> Find the probability generating function <span class="math notranslate nohighlight">\(\mu(x)\)</span> in closed form.</p>
+<p><strong>(c)</strong> Use <span class="math notranslate nohighlight">\(\mu(x)\)</span> and <span class="math notranslate nohighlight">\(x \partial_x\)</span> to find <span class="math notranslate nohighlight">\(\sum_k k^2/2^k\)</span>.</p>
 </li>
 <li><p>In high school I came across a method that seemed to find all of the numbers that are both triangular numbers <span class="math notranslate nohighlight">\((m)(m+1)/2\)</span> and square numbers <span class="math notranslate nohighlight">\(n^2\)</span> (I couldn’t prove it at the time).</p>
 <p>Consider the sequence <span class="math notranslate nohighlight">\(a_n\)</span> defined by <span class="math notranslate nohighlight">\(a_0=1\)</span>, <span class="math notranslate nohighlight">\(a_1=2\)</span> and <span class="math notranslate nohighlight">\(a_{n+2} = a_n + 2a_{n+1}\)</span> and the sequence <span class="math notranslate nohighlight">\(b_n\)</span> defined by <span class="math notranslate nohighlight">\(b_0=1\)</span>, <span class="math notranslate nohighlight">\(b_1 = 3\)</span> and <span class="math notranslate nohighlight">\(b_{n+2} = b_n + 2b_{n+1}\)</span>.  Then <span class="math notranslate nohighlight">\((a_nb_n)^2\)</span> is both triangular and square.</p>
 <p>I’ve since learned that this property of the sequence is known, but it’s still an interesting result.  We can use OGFs to prove that these are both triangular and square (though it doesn’t prove that every triangular and square number is in the sequence).  Some of these steps follow our derivation of the formula for the Fibonacci numbers.</p>
-<ol class="arabic simple">
-<li><p>For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> use direct calculate to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p></li>
-<li><p>Derive the OGFs <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> for both <span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span>.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(Q= 1+\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(R = 1-\sqrt{2}\)</span>.  Your denominators for the OGFs should equal <span class="math notranslate nohighlight">\((1-Qx)(1-Rx)\)</span>.  Write <span class="math notranslate nohighlight">\(f(x) = A/(1-Qx) + B/(1-Rx)\)</span>.  Find <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
-<li><p>Use this to write <span class="math notranslate nohighlight">\(a_n\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>. Similar steps show that <span class="math notranslate nohighlight">\(b_n = (Q^{n+1} + R^{n+1})/2\)</span>.</p></li>
-<li><p>Write <span class="math notranslate nohighlight">\(b_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, simplifying any <span class="math notranslate nohighlight">\(QR\)</span> term using <span class="math notranslate nohighlight">\(QR=-1\)</span>.</p></li>
-<li><p>Similarly simplify <span class="math notranslate nohighlight">\(2a_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, and show that <span class="math notranslate nohighlight">\(2a_n^2  = b_n^2 + (-1)^n\)</span>.</p></li>
-<li><p>Thus explain why <span class="math notranslate nohighlight">\(b_n^2 a_n^2\)</span> is a triangular number (it is clearly square).</p></li>
-</ol>
+<p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> use direct calculate to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p>
+<p><strong>(b)</strong> Derive the OGFs <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> for both <span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span>.</p>
+<p><strong>(c)</strong> Let <span class="math notranslate nohighlight">\(Q= 1+\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(R = 1-\sqrt{2}\)</span>.  Your denominators for the OGFs should equal <span class="math notranslate nohighlight">\((1-Qx)(1-Rx)\)</span>.  Write <span class="math notranslate nohighlight">\(f(x) = A/(1-Qx) + B/(1-Rx)\)</span>.  Find <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p><strong>(d)</strong> Use this to write <span class="math notranslate nohighlight">\(a_n\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>. Similar steps show that <span class="math notranslate nohighlight">\(b_n = (Q^{n+1} + R^{n+1})/2\)</span>.</p>
+<p><strong>(e)</strong> Write <span class="math notranslate nohighlight">\(b_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, simplifying any <span class="math notranslate nohighlight">\(QR\)</span> term using <span class="math notranslate nohighlight">\(QR=-1\)</span>.</p>
+<p><strong>(f)</strong> Similarly simplify <span class="math notranslate nohighlight">\(2a_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, and show that <span class="math notranslate nohighlight">\(2a_n^2  = b_n^2 + (-1)^n\)</span>.</p>
+<p><strong>(g)</strong> Thus explain why <span class="math notranslate nohighlight">\(b_n^2 a_n^2\)</span> is a triangular number (it is clearly square).</p>
 </li>
-<li><ol class="arabic simple">
-<li><p>Show how the variance of a distribution can be written using derivatives of a PGF evaluated at <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
-<li><p>Show that the variance equals the mean, iff <span class="math notranslate nohighlight">\(\mu''(1)/\mu'(1) = \mu'(1)\)</span>.</p></li>
-<li><p>Use PGFs to show that the variance of the Poisson distribution equals its mean.</p></li>
-</ol>
+<li><p><strong>(a)</strong> Show how the variance of a distribution can be written using derivatives of a PGF evaluated at <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p><strong>(b)</strong> Show that the variance equals the mean, iff <span class="math notranslate nohighlight">\(\mu''(1)/\mu'(1) = \mu'(1)\)</span>.</p>
+<p><strong>(c)</strong> Use PGFs to show that the variance of the Poisson distribution equals its mean.</p>
 </li>
 <li><p>Suppose</p>
 <div class="math notranslate nohighlight">
@@ -573,35 +563,31 @@ document.write(`
    g(x)=\sum_{n=0}^\infty g_n x^n
    \]</div>
 <p>are ordinary generating functions for sequences <span class="math notranslate nohighlight">\((f_n)\)</span> and <span class="math notranslate nohighlight">\((g_n)\)</span>.</p>
-<ol class="arabic simple">
-<li><p>If <span class="math notranslate nohighlight">\(\alpha,\beta\in\mathbb{R}\)</span>, write down the generating function corresponding to the sequence <span class="math notranslate nohighlight">\((\alpha f_n+\beta g_n)_{n\ge 0}\)</span>.</p></li>
-<li><p>Explain why this shows that the set of all generating functions is closed under linear combinations.</p></li>
-</ol>
+<p><strong>(a)</strong> If <span class="math notranslate nohighlight">\(\alpha,\beta\in\mathbb{R}\)</span>, write down the generating function corresponding to the sequence <span class="math notranslate nohighlight">\((\alpha f_n+\beta g_n)_{n\ge 0}\)</span>.</p>
+<p><strong>(b)</strong> Explain why this shows that the set of all generating functions is closed under linear combinations.</p>
 </li>
 <li><p>Consider a pair of standard tetrahedral (4-sided) dice numbered <span class="math notranslate nohighlight">\(1, 2, 3, 4\)</span>.</p>
-<ol class="arabic simple">
-<li><p>Find the PGF of the sum found by rolling both.</p></li>
-<li><p>Find another pair of 4-sided dice that have positive integer values and give the same sums with the same probabilities.</p></li>
-<li><p>Show that the only possible pairs are the standard dice and the pair you have just found.</p></li>
-</ol>
+<p><strong>(a)</strong> Find the PGF of the sum found by rolling both.</p>
+<p><strong>(b)</strong> Find another pair of 4-sided dice that have positive integer values and give the same sums with the same probabilities.</p>
+<p><strong>(c)</strong> Show that the only possible pairs are the standard dice and the pair you have just found.</p>
 </li>
 <li><p>A researcher is looking for patients with a particular rare disease.  Based on careful experiments and knowledge of exposure risk in the populations, she expects the PGF for the number of patients in several similarly sized populations should be <span class="math notranslate nohighlight">\(\mu(x) = e^{5(x-1)}\)</span>.  However, when she looks at medical records, she sees that the number seems to have PGF <span class="math notranslate nohighlight">\(e^{1.5(x-1)}\)</span>.  Using the fact that <span class="math notranslate nohighlight">\(\mu(0.7+0.3x) = e^{1.5(x-1)}\)</span> and many individuals in the population have limited access to medical care, explain what may have happened [hint, what does the PGF <span class="math notranslate nohighlight">\(0.7+0.3x\)</span> represent?]</p></li>
 <li><p>Consider a Galton–Watson process with <span class="math notranslate nohighlight">\(X_0=1\)</span> and offspring distribution given by <span class="math notranslate nohighlight">\(\Pr(k=3)=1\)</span> (every individual has exactly 3 offspring).</p>
-<ol class="arabic simple">
-<li><p>Draw the Galton–Watson tree up to (and including) generation <span class="math notranslate nohighlight">\(2\)</span>.</p></li>
-<li><p>What are the values of <span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(X_1\)</span>, and <span class="math notranslate nohighlight">\(X_2\)</span>?</p></li>
-<li><p>Give a formula for <span class="math notranslate nohighlight">\(X_g\)</span> for general <span class="math notranslate nohighlight">\(g \geq 0\)</span>.</p></li>
-</ol>
+<p><strong>(a)</strong> Draw the Galton–Watson tree up to (and including) generation <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p><strong>(b)</strong> What are the values of <span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(X_1\)</span>, and <span class="math notranslate nohighlight">\(X_2\)</span>?</p>
+<p><strong>(c)</strong> Give a formula for <span class="math notranslate nohighlight">\(X_g\)</span> for general <span class="math notranslate nohighlight">\(g \geq 0\)</span>.</p>
 </li>
-<li><p>Consider a Galton-Watson process with offspring distribution having PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p></li>
-<li><p>Explain why the extinction probability <span class="math notranslate nohighlight">\(\alpha\)</span> of a Galton-Watson process must equal <span class="math notranslate nohighlight">\(\mu(\alpha)\)</span>.</p></li>
-<li><p>We always have <span class="math notranslate nohighlight">\(1 = \mu(1)\)</span>.  Why does this not guarantee us that all Galton-Watson processes go extinct?</p></li>
-<li><p>Assume that <span class="math notranslate nohighlight">\(3\)</span> individuals of a  plant species are introduced into 3 locations in Victoria.  Find the extinction probability in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> calculated for a single introduction.</p></li>
-<li><p>Consider a Galton-Watson process with offspring distibution having PGF <span class="math notranslate nohighlight">\(\mu_r(x) = (r + (2-r)x^2)/2\)</span> for <span class="math notranslate nohighlight">\(r=1\)</span> or <span class="math notranslate nohighlight">\(r=5/4\)</span> and <span class="math notranslate nohighlight">\(r=3/2\)</span>.</p></li>
-<li><p>Show that for all of these values it goes extinct with probability <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
-<li><p>Plot <span class="math notranslate nohighlight">\(1-\alpha_g\)</span> for <span class="math notranslate nohighlight">\(g = 1, \ldots, 100\)</span> for these values of <span class="math notranslate nohighlight">\(r\)</span> with a logarithmic vertical scale.</p></li>
-<li><p>Plot the expected size at generation <span class="math notranslate nohighlight">\(g\)</span> for these same values.</p></li>
-<li><p>Plot the expected size conditional on not being extinct.</p></li>
+<li><p>Consider a Galton-Watson process with offspring distribution having PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
+<p><strong>(a)</strong> Explain why the extinction probability <span class="math notranslate nohighlight">\(\alpha\)</span> of a Galton-Watson process must equal <span class="math notranslate nohighlight">\(\mu(\alpha)\)</span>.</p>
+<p><strong>(b)</strong> We always have <span class="math notranslate nohighlight">\(1 = \mu(1)\)</span>.  Why does this not guarantee us that all Galton-Watson processes go extinct?</p>
+<p><strong>(c)</strong> Assume that <span class="math notranslate nohighlight">\(3\)</span> individuals of a  plant species are introduced into 3 locations in Victoria.  Find the extinction probability in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> calculated for a single introduction.</p>
+</li>
+<li><p>Consider a Galton-Watson process with offspring distibution having PGF <span class="math notranslate nohighlight">\(\mu_r(x) = (r + (2-r)x^2)/2\)</span> for <span class="math notranslate nohighlight">\(r=1\)</span>, <span class="math notranslate nohighlight">\(r=5/4\)</span>, and <span class="math notranslate nohighlight">\(r=3/2\)</span>.</p>
+<p><strong>(a)</strong> Show that for all of these values it goes extinct with probability <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p><strong>(b)</strong> Plot <span class="math notranslate nohighlight">\(1-\alpha_g\)</span> for <span class="math notranslate nohighlight">\(g = 1, \ldots, 100\)</span> for these values of <span class="math notranslate nohighlight">\(r\)</span> with a logarithmic vertical scale.  What unusual behavior do you see (if any)?</p>
+<p><strong>(c)</strong> Plot the expected size at generation <span class="math notranslate nohighlight">\(g\)</span> for these same values.</p>
+<p><strong>(d)</strong> Plot the expected size conditional on not being extinct.</p>
+</li>
 <li><p>I plan to add a problem on size distributions for different generations.  I’m thinking of looking for a way to get the probability <span class="math notranslate nohighlight">\(\mathbb{P}[X_g&lt;K]\)</span> for some imposed threshold <span class="math notranslate nohighlight">\(K\)</span>, but I need to double check that what I plan works.</p></li>
 </ol>
 </section>
