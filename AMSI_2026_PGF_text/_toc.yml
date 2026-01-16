@@ -60,7 +60,9 @@ parts:
       - file: notebooks/PracticeClasses/Prac1
       
       
-      
+    - file: notebooks/Assignments/AssignmentsIntro
+      sections:
+      - file: notebooks/Assignments/Asst1  
     
     
     #- file: notebooks/BasicGenFxn/GenFxnsPartFrac
