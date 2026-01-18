@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/CtsTime/CtsTimeBackKolm';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. Infectious Diseases" href="../InfDis/InfDisIntro.html" />
+    <link rel="next" title="3.5. Simulation of Continuous-Time Galton-Watson Processes" href="CtsTimeSim.html" />
     <link rel="prev" title="3.3. Forward Kolmogorov Equations" href="CtsTimeForwKolm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -216,6 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -501,7 +502,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability-by-time-t">3.4.1. Extinction probability by time <span class="math notranslate nohighlight">\(t\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.2. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -515,45 +517,63 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-backward-kolmogorov-equation">
 <h1><span class="section-number">3.4. </span>The Backward Kolmogorov Equation<a class="headerlink" href="#the-backward-kolmogorov-equation" title="Link to this heading">#</a></h1>
-<p>The backward Kolmogorov equation along similar lines to the forward Kolmogorov equation.  We assume we know <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> and <span class="math notranslate nohighlight">\(\mu(x)\)</span> and we want to determine <span class="math notranslate nohighlight">\(\Phi(x, t + \Delta t)\)</span>.</p>
-<p>However, instead of taking time <span class="math notranslate nohighlight">\(t\)</span> and stepping forward an amount <span class="math notranslate nohighlight">\(\Delta t\)</span>, we take time <span class="math notranslate nohighlight">\(\Delta t\)</span> and step forward an amount <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>Given <span class="math notranslate nohighlight">\(\Phi(x,0)= x\)</span>, that is, there is one individual at time <span class="math notranslate nohighlight">\(t=0\)</span>, we can find <span class="math notranslate nohighlight">\(\Phi(x,\Delta t)\)</span>.  With probability <span class="math notranslate nohighlight">\((1-r\Delta t)\)</span> nothing has happened, but with probability <span class="math notranslate nohighlight">\(r\Delta t\)</span>, an event has occured and the new PGF is <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  So</p>
+<p>The backward Kolmogorov equation along similar lines to the forward Kolmogorov equation.  We assume we know <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span> and we want to determine <span class="math notranslate nohighlight">\(\Phi(x, t + \Delta t)\)</span>.</p>
+<p>However, instead of taking the PGF for time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> and stepping forward an amount <span class="math notranslate nohighlight">\(\Delta t\)</span> using <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span> as we did in deriving the Forward Kolmogorov Equations, we take the PGF for time <span class="math notranslate nohighlight">\(\Delta t\)</span> from <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.1</a> and step forward an amount <span class="math notranslate nohighlight">\(t\)</span> using <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  This will arrive at a different partial differential equation for <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  However, both equations will yield the same solution <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  Each equation gives insight into different properties of <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.</p>
+<p>Given <span class="math notranslate nohighlight">\(\Phi(x,0)= x\)</span>, that is, there is one individual at time <span class="math notranslate nohighlight">\(t=0\)</span>, <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.1</a> tells us</p>
 <div class="math notranslate nohighlight">
 \[
-\Phi(x,\Delta t) = (1-r\Delta t)x + r\Delta t \mu(x)
+\Phi(x,\Delta t) = (1-r\Delta t)x + r\Delta t \hat{\mu}(x)
 \]</div>
-<p>By the rules of composition of PGFs, the number at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is given by <span class="math notranslate nohighlight">\(\Phi(\Phi(x,t),\Delta t)\)</span>.  So</p>
+<p>To determine <span class="math notranslate nohighlight">\(\Phi(x,\Delta t + t)\)</span>, we look at each individual at time <span class="math notranslate nohighlight">\(\Delta t\)</span> and determine how many descendents they will have after an additional waiting time <span class="math notranslate nohighlight">\(t\)</span>.  Then we sum these up.  This is a randomly stopped sum.  The number of terms has PGF <span class="math notranslate nohighlight">\(\Phi(x,\Delta t)\)</span>, while each term has PGF <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.
+By the rules of composition of PGFs, the number at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is given by substituting <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> in for <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\Phi(x,\Delta t)\)</span>.  So</p>
 <div class="math notranslate nohighlight">
 \[
-\Phi(x,t+\Delta t) = (1-r\Delta t) \Phi(x,t) + r \Delta t \mu(\Phi(x,t))
+\Phi(x,t+\Delta t) = (1-r\Delta t) \Phi(x,t) + r \Delta t \hat{\mu}(\Phi(x,t))
 \]</div>
-<p>Calculating the derivative</p>
+<p>This is illustrated in <a class="reference internal" href="#fig-backkolcomp"><span class="std std-numref">Fig. 3.4</span></a></p>
+<figure class="align-default" id="fig-backkolcomp">
+<a class="reference internal image-reference" href="../../_images/BackwardKolmComposition.png"><img alt="../../_images/BackwardKolmComposition.png" src="../../_images/BackwardKolmComposition.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">Illustration of the  derivation of <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span> using function composition.  We start from the PGF for <span class="math notranslate nohighlight">\(X(\Delta t)\)</span> and then step forward in time by a large amount <span class="math notranslate nohighlight">\(t\)</span>.  By <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.1</a> and <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>, we substitute <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>  for <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\Phi(x,\Delta t) = (1-r\Delta t)x + (r\Delta t)(\hat{\mu}(x))\)</span>.  This yields  <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t) = (1-r\Delta t) \Phi(x,t) + r \Delta t \hat{\mu}(\Phi(x,t))\)</span>.</span><a class="headerlink" href="#fig-backkolcomp" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Calculating the <span class="math notranslate nohighlight">\(t\)</span> derivative of <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \frac{\partial}{\partial t} \Phi(x,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi(x,t+\Delta t)-\Phi(x,t)}{\Delta t}\\
-&amp;=\lim_{\Delta t \to 0} \frac{(1-r\Delta t) \Phi(x,t) + r \Delta t \mu(\Phi(x,t)) - \Phi(x,t)}{\Delta t}\\
-&amp;= -r\Phi(x,t) + r \mu(\Phi(x,t)) \\
-&amp;= r (\mu(\Phi(x,t))-\Phi(x,t))
+&amp;=\lim_{\Delta t \to 0} \frac{(1-r\Delta t) \Phi(x,t) + r \Delta t \hat{\mu}(\Phi(x,t)) - \Phi(x,t)}{\Delta t}\\
+&amp;= -r\Phi(x,t) + r \hat{\mu}(\Phi(x,t)) \\
+&amp;= r (\hat{\mu}(\Phi(x,t))-\Phi(x,t))
 \end{align*} \]</div>
 <p>This yields the Backward Kolmogorov Equation</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\partial}{\partial t} \Phi(x,t) = r (\mu(\Phi(x,t))-\Phi(x,t))
+\frac{\partial}{\partial t} \Phi(x,t) = r (\hat{\mu}(\Phi(x,t))-\Phi(x,t))
 \]</div>
-<div class="proof example admonition" id="example-BackKolmExtProb">
-<p class="admonition-title"><span class="caption-number">Example 3.3 </span> (Extinction probability by time <span class="math notranslate nohighlight">\(t\)</span>)</p>
-<section class="example-content" id="proof-content">
-<p>The probability of extinction by time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(q_{0}(t) = \Phi(0,t)\)</span>.  We define this to be <span class="math notranslate nohighlight">\(\alpha(t)\)</span>.  The Backward Kolmogorov Equation gives</p>
+<section id="extinction-probability-by-time-t">
+<h2><span class="section-number">3.4.1. </span>Extinction probability by time <span class="math notranslate nohighlight">\(t\)</span><a class="headerlink" href="#extinction-probability-by-time-t" title="Link to this heading">#</a></h2>
+<p>The probability of extinction by time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\alpha(t) = q_{0}(t) = \Phi(0,t)\)</span>.  The Backward Kolmogorov Equation gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\alpha'(t) &amp;= \left[\frac{\partial}{\partial t} \Phi(x,t)\right|_{t=0}\\
-&amp;= r(\mu(\Phi(0,t)-\Phi(0,t)))\\
-&amp;= r(\mu(\alpha(t))-\alpha(t))
+\alpha'(t) &amp;= \left[\frac{\partial}{\partial t} \Phi(x,t)\right]_{x=0}\\
+&amp;= r(\hat{\mu}(\Phi(0,t)-\Phi(0,t)))\\
+&amp;= r\left(\hat{\mu}(\alpha(t))-\alpha(t)\right)
 \end{align*}\]</div>
 <p>with the initial condition <span class="math notranslate nohighlight">\(\alpha(0)=0\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\hat{\mu}(0)=0\)</span>, then the extinction probability remains <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>Otherwise, <span class="math notranslate nohighlight">\(\hat{\mu}(0)&gt;0\)</span> and so initially <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> is increasing.  It continues to increase and it approaches the smallest value of <span class="math notranslate nohighlight">\(x&gt;0\)</span> for what <span class="math notranslate nohighlight">\(\hat{\mu}(x)=x\)</span>.  This is the final extinction probability.</p>
 </section>
-</div><section id="self-test">
-<h2><span class="section-number">3.4.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<section id="self-test">
+<h2><span class="section-number">3.4.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>We noted that if <span class="math notranslate nohighlight">\(\hat{\mu}(0)=0\)</span>, then extinction is impossible.  Under what conditions is <span class="math notranslate nohighlight">\(\hat{\mu}(0)=0\)</span>?</p></li>
+<li><p>Define <span class="math notranslate nohighlight">\(\alpha\)</span> to be the eventual extinction probability.  Following our derivation of <span class="math notranslate nohighlight">\(\alpha\)</span> in the generation-based case:</p>
+<p><strong>(a)</strong> Explain why <span class="math notranslate nohighlight">\(\alpha\)</span> must be equal to the probability that when the first event happens, the individual either is removed or is replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals, all of whom lead to eventual extinction.</p>
+<p><strong>(b)</strong> Show that the explanation above implies <span class="math notranslate nohighlight">\(\alpha = \hat{\mu}(\alpha)\)</span>.</p>
+<p><strong>(c)</strong> Explain how we should address the case of multiple solutions to <span class="math notranslate nohighlight">\(\alpha = \hat{\mu}(\alpha)\)</span>.</p>
+</li>
+</ol>
 </section>
 </section>
 
@@ -597,11 +617,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../InfDis/InfDisIntro.html"
+       href="CtsTimeSim.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Infectious Diseases</p>
+        <p class="prev-next-title"><span class="section-number">3.5. </span>Simulation of Continuous-Time Galton-Watson Processes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -621,7 +641,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability-by-time-t">3.4.1. Extinction probability by time <span class="math notranslate nohighlight">\(t\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.2. Self-test</a></li>
 </ul>
   </nav></div>
 

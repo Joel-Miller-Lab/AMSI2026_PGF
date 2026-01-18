@@ -216,6 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -673,6 +674,7 @@ The probability of <span class="math notranslate nohighlight">\(k\)</span> succe
 &amp;= px \sum_{k=1}^\infty ((1-p)x)^{k-1}\\
 &amp;= \frac{px}{1-(1-p)x}
 \end{align*}\]</div>
+<p>If we use the other version of the Geometric Distribution, not counting the final event, then <span class="math notranslate nohighlight">\(\mu_{\text{other definition}}(x) = p/(1-(1-p)x)\)</span>.</p>
 </section>
 </div><div class="proof example admonition" id="example-PoissonPGF">
 <p class="admonition-title"><span class="caption-number">Example 1.10 </span> (Poisson Distribution)</p>
@@ -718,6 +720,7 @@ p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
 <p>We still find the same form of the PGF</p>
 <div class="math notranslate nohighlight">
 \[\mu(x) = \left(\frac{p}{1-(1-p)x}\right)^r\]</div>
+<p>As with the Geometric Distribution, there is another version of the Negative Binomial Distribution, in which we would count the <span class="math notranslate nohighlight">\(r\)</span> successes.  In this case we would have <span class="math notranslate nohighlight">\(\mu_{\text{other definition}}(x) = \left( px/(1-(1-p)x)\right)^r\)</span>.</p>
 </section>
 </div><div class="proof remark admonition" id="remark-NegBinGeomRelation">
 <p class="admonition-title"><span class="caption-number">Remark 1.5 </span></p>

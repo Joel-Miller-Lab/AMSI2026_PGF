@@ -40,6 +40,7 @@ parts:
       - file: notebooks/CtsTime/CtsTimeGaltWat
       - file: notebooks/CtsTime/CtsTimeForwKolm
       - file: notebooks/CtsTime/CtsTimeBackKolm
+      - file: notebooks/CtsTime/CtsTimeSim
     - file: notebooks/InfDis/InfDisIntro
       sections:
       - file: notebooks/InfDis/InfDisAsGaltWat

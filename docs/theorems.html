@@ -216,6 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/CtsTime/CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -464,6 +465,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-gw-size-by-generation-galton-watson-sizes-at-later-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-GW-size-by-generation</span></code> — Galton-Watson sizes at later generations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-expectedsize-average-size-of-a-galton-watson-process-after-g-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-ExpectedSize</span></code> — Average Size of a Galton Watson Process after <span class="math notranslate nohighlight">\(g\)</span> generations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-survival-survival-probability"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-Survival</span></code> — Survival Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lem-pgfatdt-pgf-of-x-t-at-time-delta-t"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lem-PGFatDt</span></code> — PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">InfDisGaltWat</span></code> — Early stages of infectious-disease outbreaks are Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-TotalSizeDist</span></code> — Distribution of Total Sizes of Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>
@@ -485,7 +487,7 @@ document.write(`
 <h2><a class="reference internal" href="notebooks/BasicGenFxn/GenFxnsAdd.html#thm-PGFLinComb">Theorem 1.1</a> — Linear combination of PGFs<a class="headerlink" href="#thm-pgflincomb-linear-combination-of-pgfs" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
-<p>Assume that we have a (possibly infinite) set of PGFs <span class="math notranslate nohighlight">\(\mu_1(x), \mu_2(x), \ldots\)</span>.  We choose a number <span class="math notranslate nohighlight">\(n\)</span> by first choosing the PGF <span class="math notranslate nohighlight">\(\mu_i(x)\)</span> with probability <span class="math notranslate nohighlight">\(\pi_i\)</span>, and then we choose <span class="math notranslate nohighlight">\(n\)</span> from the distribution with PGF <span class="math notranslate nohighlight">\(\mu_i(x)\)</span>.  The resulting distribution for <span class="math notranslate nohighlight">\(n\)</span> has PGF</p>
+<p>Assume that we have a (possibly infinite) set of PGFs <span class="math notranslate nohighlight">\(\mu_1(x), \mu_2(x), \ldots\)</span>.  We choose a number <span class="math notranslate nohighlight">\(n\)</span> by first choosing the distribution corresponding to <span class="math notranslate nohighlight">\(\mu_i(x)\)</span> with probability <span class="math notranslate nohighlight">\(\pi_i\)</span>, and then we choose <span class="math notranslate nohighlight">\(n\)</span> from the distribution.  The resulting distribution for <span class="math notranslate nohighlight">\(n\)</span> has PGF</p>
 <div class="math notranslate nohighlight">
 \[
 \psi(x) = \sum_{i=1}^\infty \pi_i\mu_i(x)
@@ -622,6 +624,18 @@ s_n = \sum_{i=0}^n c_i
 <p>If an event occurs with rate <span class="math notranslate nohighlight">\(r\)</span>, the probability it has not happened after waiting a time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(e^{-rt}\)</span>.</p>
 </div>
 </section>
+<section id="lem-pgfatdt-pgf-of-x-t-at-time-delta-t">
+<h2><a class="reference internal" href="notebooks/CtsTime/CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.1</a> — PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span><a class="headerlink" href="#lem-pgfatdt-pgf-of-x-t-at-time-delta-t" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>If <span class="math notranslate nohighlight">\(X(0)=1\)</span>, the PGF of the population size <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t \ll 1\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi(x,\Delta t) &amp;= (1-r\Delta t) x + (r \Delta t) \hat{\mu}(x) + \mathcal{o}(\Delta t)\\
+ &amp;= x + (r \Delta t) (\hat{\mu}(x)-x)+ \mathcal{o}(\Delta t)
+\end{align*}\]</div>
+</div>
+</section>
 <section id="infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes">
 <h2><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html#InfDisGaltWat">Theorem 4.1</a> — Early stages of infectious-disease outbreaks are Galton-Watson Processes<a class="headerlink" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
@@ -731,6 +745,7 @@ s_n = \sum_{i=0}^n c_i
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-gw-size-by-generation-galton-watson-sizes-at-later-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-GW-size-by-generation</span></code> — Galton-Watson sizes at later generations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-expectedsize-average-size-of-a-galton-watson-process-after-g-generations"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-ExpectedSize</span></code> — Average Size of a Galton Watson Process after <span class="math notranslate nohighlight">\(g\)</span> generations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-survival-survival-probability"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-Survival</span></code> — Survival Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lem-pgfatdt-pgf-of-x-t-at-time-delta-t"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lem-PGFatDt</span></code> — PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">InfDisGaltWat</span></code> — Early stages of infectious-disease outbreaks are Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-TotalSizeDist</span></code> — Distribution of Total Sizes of Galton-Watson Processes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>

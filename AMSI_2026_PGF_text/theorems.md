@@ -7,7 +7,7 @@
 :::{admonition} Statement
 :class: dropdown
 
-Assume that we have a (possibly infinite) set of PGFs $\mu_1(x), \mu_2(x), \ldots$.  We choose a number $n$ by first choosing the PGF $\mu_i(x)$ with probability $\pi_i$, and then we choose $n$ from the distribution with PGF $\mu_i(x)$.  The resulting distribution for $n$ has PGF
+Assume that we have a (possibly infinite) set of PGFs $\mu_1(x), \mu_2(x), \ldots$.  We choose a number $n$ by first choosing the distribution corresponding to $\mu_i(x)$ with probability $\pi_i$, and then we choose $n$ from the distribution.  The resulting distribution for $n$ has PGF
 
 $$
 \psi(x) = \sum_{i=1}^\infty \pi_i\mu_i(x)
@@ -149,6 +149,19 @@ $$
 :class: dropdown
 
 If an event occurs with rate $r$, the probability it has not happened after waiting a time $t$ is $e^{-rt}$.
+:::
+
+## {prf:ref}`lem-PGFatDt` — PGF of $X(t)$ at time $\Delta t$
+
+:::{admonition} Statement
+:class: dropdown
+
+If $X(0)=1$, the PGF of the population size $X(t)$ at time $\Delta t \ll 1$ is
+
+\begin{align*}
+\Phi(x,\Delta t) &= (1-r\Delta t) x + (r \Delta t) \hat{\mu}(x) + \mathcal{o}(\Delta t)\\
+ &= x + (r \Delta t) (\hat{\mu}(x)-x)+ \mathcal{o}(\Delta t)
+\end{align*}
 :::
 
 ## {prf:ref}`InfDisGaltWat` — Early stages of infectious-disease outbreaks are Galton-Watson Processes

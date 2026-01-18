@@ -216,6 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -501,7 +502,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.3.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation">3.3.1. Derivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phi-x-t-delta-t">3.3.1.1. <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-partial-phi-x-t-partial-t">3.3.1.2. Finding <span class="math notranslate nohighlight">\(\partial \Phi(x,t)/\partial t\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-population-size">3.3.2. Expected Population size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.3.3. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -521,50 +528,81 @@ document.write(`
 \Phi(x,t)= \sum_\ell q_\ell(t)x^\ell
 \]</div>
 <p>changes in time.</p>
-<p>We assume that each individual in the population has an associated Poisson process with rate <span class="math notranslate nohighlight">\(r\)</span> and that when an event happens, the associated individual is removed and replaced by <span class="math notranslate nohighlight">\(k\)</span> new individuals having PGF <span class="math notranslate nohighlight">\(\mu(x) = \sum p_k x^k\)</span></p>
-<p>If there are <span class="math notranslate nohighlight">\(\ell\)</span> individuals at time <span class="math notranslate nohighlight">\(t\)</span>, then the combined rate is <span class="math notranslate nohighlight">\(\ell r\)</span>. The probability that the event happens in the next <span class="math notranslate nohighlight">\(\Delta t\)</span> units of time can be treated as <span class="math notranslate nohighlight">\(\ell r \Delta t\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
-<p>If it occurs, one random individual is removed and replaced with <span class="math notranslate nohighlight">\(k\)</span> individuals, chosen from the distribution corresponding to <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  The PGF of the resulting population (if we know <span class="math notranslate nohighlight">\(\ell\)</span>) is <span class="math notranslate nohighlight">\(x^{\ell-1} \mu(x)\)</span>.</p>
-<p>So given that the event may not occur, and again assuming we know <span class="math notranslate nohighlight">\(\ell\)</span>, the PGF for the next time step is (approximately as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>) <span class="math notranslate nohighlight">\((1-\ell r\Delta t) x^\ell + \ell r \Delta t x^{\ell-1}\mu(x)\)</span></p>
-<p>Now using the rule for linear combinations of PGFs:</p>
+<p>We will work from the assumption that we know <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> and we will find <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span>.  From this we will be able to determine the <span class="math notranslate nohighlight">\(t\)</span> derivative of <span class="math notranslate nohighlight">\(\Phi\)</span>. For the forward Kolmogorov Equations, we mimic our (forward) approach for finding <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> in the generation-based approach.  We start from the individuals in the population at time <span class="math notranslate nohighlight">\(t\)</span>, and determine the PGF by stepping forward in time by <span class="math notranslate nohighlight">\(\Delta t\)</span> to derive <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span>, using <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> and properties of PGFs.</p>
+<section id="derivation">
+<h2><span class="section-number">3.3.1. </span>Derivation<a class="headerlink" href="#derivation" title="Link to this heading">#</a></h2>
+<section id="phi-x-t-delta-t">
+<h3><span class="section-number">3.3.1.1. </span><span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span><a class="headerlink" href="#phi-x-t-delta-t" title="Link to this heading">#</a></h3>
+<p>We first find <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span>.</p>
+<p>We give two different derivations.  The first is more elegant, but relies on a method for “randomly stopped sums” that we’ve proven earlier, <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>, as well as an additional step.  The second revisits the method of derivation of <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>.</p>
+<p><strong>First Derivation</strong>
+By assumption we know the PGF for <span class="math notranslate nohighlight">\(X(t)\)</span>, <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  If we look at each of the <span class="math notranslate nohighlight">\(X(t)\)</span> individuals <span class="math notranslate nohighlight">\(u_i\)</span> <span class="math notranslate nohighlight">\(i = 1, \ldots, X(t)\)</span>, the PGF for the number of individuals resulting from individual <span class="math notranslate nohighlight">\(u_i\)</span> at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is <span class="math notranslate nohighlight">\(x + (r\Delta t) \left(\hat{\mu}(x)-x\right)+\mathcal{o}(\Delta t)\)</span> by <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.1</a>.</p>
+<p>We have a randomly stopped sum, so the PGF for the total number at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\Phi(x, t+\Delta t) &amp;= \sum_\ell q_{\ell}(t) (1-\ell r\Delta t) x^\ell + \ell r \Delta t x^{\ell-1}\mu(x)\\
-&amp;=\sum_\ell q_{\ell}(t) x^\ell + r\Delta t \sum_{\ell} q_\ell(t) \ell (x^{\ell-1}\mu(x) - x^{\ell})\\
-&amp;= \Phi(x,t) + r\Delta t \mu(x)\sum_{\ell}\frac{\partial}{\partial x} q_\ell(t) x^\ell - r \Delta t \sum_\ell \ell q_\ell(t) x^\ell\\
-&amp;=\Phi(x,t) + r \Delta t \mu(x) \frac{\partial}{\partial x} \Phi(x,t) - r \Delta t x \frac{\partial}{\partial x} \Phi(x,t)
+\Phi(x,t+\Delta t)&amp;= \Phi\left(x + (r\Delta t) \left(\hat{\mu}(x)-x\right)+\mathcal{o}(\Delta t), t\right)\\
+&amp;= \Phi(x,t) + (r\Delta t)\left(\hat{\mu}(x)-x\right) \frac{\partial}{\partial x}\Phi(x,t) +\mathcal{o}(\Delta t)
 \end{align*}\]</div>
-<p>(technically there are some error terms in the above which are <span class="math notranslate nohighlight">\(\mathcal{p}(\Delta t)\)</span> that have been neglected, which would be eliminated in the limit below).  Using the definition of the derivative:</p>
+<p>using the Taylor Series expansion of <span class="math notranslate nohighlight">\(\Phi(x+\Delta x, t)\)</span></p>
+<p>This is illustrated in <a class="reference internal" href="#fig-forkolcomp"><span class="std std-numref">Fig. 3.2</span></a></p>
+<figure class="align-default" id="fig-forkolcomp">
+<a class="reference internal image-reference" href="../../_images/ForwardKolmComposition.png"><img alt="../../_images/ForwardKolmComposition.png" src="../../_images/ForwardKolmComposition.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Illustration of the first derivation of <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span> (leaving out neglected terms).  We start from the PGF for <span class="math notranslate nohighlight">\(X(t)\)</span> and then step forward in time by a small amount <span class="math notranslate nohighlight">\(\Delta t\)</span>.  By <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.1</a> and <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>, we substitute <span class="math notranslate nohighlight">\(x + (r\Delta t) (\hat{\mu}(x)-x)\)</span> for <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  Then expanding <span class="math notranslate nohighlight">\(\Phi\)</span> using the Taylor Series, we find <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t) = \Phi(x,t) + (r\Delta t) (\hat{\mu}(x)-x) \frac{\partial }{\partial x} \Phi(x,t)\)</span>.</span><a class="headerlink" href="#fig-forkolcomp" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Second Derivation</strong>
+(in this derivation we will not track the <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> terms)</p>
+<p>If there are known to be exactly <span class="math notranslate nohighlight">\(X(t)=\ell\)</span> individuals at time <span class="math notranslate nohighlight">\(t\)</span>, then we can consider the compound Poisson process made up of the processes for each individual.  The combined rate is <span class="math notranslate nohighlight">\(\ell r\)</span>. The probability that an event happens in the next <span class="math notranslate nohighlight">\(\Delta t\)</span> units of time can be treated as <span class="math notranslate nohighlight">\(\ell r \Delta t\)</span> for <span class="math notranslate nohighlight">\(\Delta t \ll 1\)</span>.  When the first event occurs, one random individual is removed and replaced with <span class="math notranslate nohighlight">\(k\)</span> individuals, chosen from the distribution corresponding to <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>.  The PGF of the resulting population at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is <span class="math notranslate nohighlight">\(x^{\ell-1} \hat{\mu}(x)\)</span>.</p>
+<p>So again assuming we know <span class="math notranslate nohighlight">\(X(t)=\ell\)</span>, but now assuming we do not know whether an event will occur in the interval <span class="math notranslate nohighlight">\([t,t+\Delta t)\)</span>, the PGF for <span class="math notranslate nohighlight">\(X(t+\Delta t)\)</span> is given by the convex combination of the PGFs if nothing happens and the PGF if an event happens.  This is (approximately as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[
+(1-\ell r\Delta t) x^\ell + \ell r (\Delta t) x^{\ell-1}\hat{\mu}(x)
+\]</div>
+<p>This is illustrated in <a class="reference internal" href="#fig-forkolfromell"><span class="std std-numref">Fig. 3.3</span></a></p>
+<figure class="align-default" id="fig-forkolfromell">
+<a class="reference internal image-reference" href="../../_images/ForwardKolmFromEll.png"><img alt="../../_images/ForwardKolmFromEll.png" src="../../_images/ForwardKolmFromEll.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Illustration of one step of the second derivation of <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span>. If we know that <span class="math notranslate nohighlight">\(X(t)=\ell\)</span>, then at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, the probability none of them have changed is <span class="math notranslate nohighlight">\(1-\ell r\Delta t\)</span>, leaving a PGF of <span class="math notranslate nohighlight">\(x^\ell\)</span>.  The probability that one changes is <span class="math notranslate nohighlight">\(\ell r \Delta t\)</span> leaving a PGF of <span class="math notranslate nohighlight">\(x^{\ell-1} \hat{\mu}(x)\)</span>.  Adding these two gives the PGF at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> if we know <span class="math notranslate nohighlight">\(\ell\)</span>.  Summing over all <span class="math notranslate nohighlight">\(\ell\)</span> gives the PGF at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> if we only know the distribution of <span class="math notranslate nohighlight">\(\ell\)</span>.</span><a class="headerlink" href="#fig-forkolfromell" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Now using the rule for convex combinations of PGFs we can find the PGF of <span class="math notranslate nohighlight">\(X(t+\Delta t)\)</span> if we only know the probability <span class="math notranslate nohighlight">\(q_{\ell}(t)\)</span> that <span class="math notranslate nohighlight">\(X(t)=\ell\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi(x, t+\Delta t) &amp;= \sum_\ell q_{\ell}(t) \left((1-\ell r\Delta t) x^\ell + \ell r \Delta t x^{\ell-1}\hat{\mu}(x)\right)\\
+&amp;=\sum_\ell q_{\ell}(t) x^\ell + (r\Delta t) \sum_{\ell} q_\ell(t) \ell (x^{\ell-1}\hat{\mu}(x) - x^{\ell})\\
+&amp;= \Phi(x,t) + (r\Delta t) \hat{\mu}(x)\sum_{\ell}\frac{\partial}{\partial x} q_\ell(t) x^\ell - (r \Delta t) \sum_\ell \ell q_\ell(t) x^\ell\\
+&amp;=\Phi(x,t) +(r \Delta t) \hat{\mu}(x) \frac{\partial}{\partial x} \Phi(x,t) - (r \Delta t) x \frac{\partial}{\partial x} \Phi(x,t)
+\end{align*}\]</div>
+<p>(technically there are some error terms in the above which are <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> that have been neglected).</p>
+</section>
+<section id="finding-partial-phi-x-t-partial-t">
+<h3><span class="section-number">3.3.1.2. </span>Finding <span class="math notranslate nohighlight">\(\partial \Phi(x,t)/\partial t\)</span><a class="headerlink" href="#finding-partial-phi-x-t-partial-t" title="Link to this heading">#</a></h3>
+<p>Using the definition of the derivative:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \frac{\partial}{\partial t} \Phi(x,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi(x,t+\Delta t) - \Phi(x,t)}{\Delta t}\\
-&amp;= \lim_{\Delta t \to 0}\frac{\Phi(x,t) + r \Delta t \mu(x) \frac{\partial}{\partial x} \Phi(x,t) - r \Delta t x \frac{\partial}{\partial x} \Phi(x,t) - \Phi(x,t)}{\Delta t}\\
-&amp;= r \mu(x) \frac{\partial}{\partial x} \Phi(x,t) - r x \frac{\partial}{\partial x} \Phi(x,t)\\
-&amp;= r(\mu(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
+&amp;= \lim_{\Delta t \to 0}\frac{\Phi(x,t) + r \Delta t \hat{\mu}(x) \frac{\partial}{\partial x} \Phi(x,t) - r \Delta t x \frac{\partial}{\partial x} \Phi(x,t) +\mathcal{o}(\Delta t)- \Phi(x,t)}{\Delta t}\\
+&amp;= r \hat{\mu}(x) \frac{\partial}{\partial x} \Phi(x,t) - r x \frac{\partial}{\partial x} \Phi(x,t)\\
+&amp;= r(\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
 \end{align*}\]</div>
-<p>This yields the Forward Kolmogorov Equation:</p>
+<p>This yields</p>
+<div class="proof theorem admonition" id="theorem-0">
+<p class="admonition-title"><span class="caption-number">Theorem 3.3 </span> (Forward Kolmogorov Equation)</p>
+<section class="theorem-content" id="proof-content">
+<p>The PGF <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> for <span class="math notranslate nohighlight">\(X(t)\)</span> satisfies the <strong>Forward Kolmogorov Equation</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\partial}{\partial t} \Phi(x,t) = r (\mu(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
+\frac{\partial}{\partial t} \Phi(x,t) = r (\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
 \]</div>
-<div class="proof example admonition" id="example-ForwKolmDet">
-<p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Deterministic Model)</p>
-<section class="example-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(L(t)\)</span> denote the expected size of the population at time <span class="math notranslate nohighlight">\(t\)</span>.  Then <span class="math notranslate nohighlight">\(L(t) = \left[ \frac{\partial}{\partial x} \Phi(x,t) \right|_{x=1}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-\frac{d}{dt}L(t) &amp;= \frac{\partial}{\partial t} \left[\frac{\partial}{\partial x} \Phi(x,t) \right|_{x=1}\\
-&amp;= \left[\frac{\partial}{\partial x} \frac{\partial}{\partial t} \Phi(x,t) \right|_{x=1}\\
-&amp;= \left[\frac{\partial}{\partial x} \left(r(\mu(x)-x) \frac{\partial}{\partial x} \Phi(x,t)\right)\right|_{x=1}\\
-&amp;= r (\mu'(1)-1) L(t) + r(\mu(1)-1)\frac{\partial^2}{\partial x^2} \Phi(1,t)\\
-&amp;= r (\mu'(1)-1)L(t)
-\end{align*}\]</div>
-<p>The next to last step uses the product rule and substitutes <span class="math notranslate nohighlight">\(1\)</span> for <span class="math notranslate nohighlight">\(x\)</span>.  The last step uses the fact that <span class="math notranslate nohighlight">\(\mu(1)=1\)</span>.</p>
-<p>So <span class="math notranslate nohighlight">\(L(t)\)</span> grows or decays exponentially depending on the value of <span class="math notranslate nohighlight">\(r(\mu'(1)-1)\)</span>.  If on average the individuals are replaced with fewer than <span class="math notranslate nohighlight">\(1\)</span> individual <span class="math notranslate nohighlight">\(\mu'(1)-1&lt;0\)</span> and decay occurs.  Otherwise <span class="math notranslate nohighlight">\(\mu'(1)-1&gt;0\)</span> and growth occurs.</p>
+<p>with initial condition <span class="math notranslate nohighlight">\(\Phi(x,0)=x\)</span>.</p>
 </section>
 </div><div class="proof example admonition" id="example-ForwKolmPureBirth">
 <p class="admonition-title"><span class="caption-number">Example 3.2 </span> (A pure birth process)</p>
 <section class="example-content" id="proof-content">
-<p>Assume individuals give birth to a single individual with rate <span class="math notranslate nohighlight">\(\beta\)</span>.  Further assume that they never die.  In our context when they give birth, this is equivalent to replacing them by two indviduals.  Here <span class="math notranslate nohighlight">\(r=\beta\)</span> and <span class="math notranslate nohighlight">\(\mu(x)=x^2\)</span>, and <span class="math notranslate nohighlight">\(\Phi(x,0)=x\)</span>.  We have</p>
+<p>Assume individuals give birth to a single individual with rate <span class="math notranslate nohighlight">\(\beta\)</span>.  Further assume that they never die.  In our context when they give birth, this is equivalent to replacing them by two indviduals.  Here <span class="math notranslate nohighlight">\(r=\beta\)</span> and <span class="math notranslate nohighlight">\(\hat{\mu}(x)=x^2\)</span>, and <span class="math notranslate nohighlight">\(\Phi(x,0)=x\)</span>.  We have</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\partial}{\partial t} \Phi(x,t) = r (x^2-x) \frac{\partial}{\partial x} \Phi(x,t)
@@ -583,29 +621,50 @@ document.write(`
 \end{align*}\]</div>
 <p>So the probability of <span class="math notranslate nohighlight">\(\ell\)</span> individuals is <span class="math notranslate nohighlight">\(q_{\ell}(t) = e^{-rt} (1-e^{-ert})^{\ell-1}\)</span></p>
 </section>
-</div><section id="self-test">
-<h2><span class="section-number">3.3.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+</div></section>
+</section>
+<section id="expected-population-size">
+<h2><span class="section-number">3.3.2. </span>Expected Population size<a class="headerlink" href="#expected-population-size" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(L(t)\)</span> denote the expected size of the population at time <span class="math notranslate nohighlight">\(t\)</span>.  Then <span class="math notranslate nohighlight">\(L(t) = \left[ \frac{\partial}{\partial x} \Phi(x,t) \right]_{x=1}\)</span> and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d}{dt}L(t) &amp;= \frac{\partial}{\partial t} \left[\frac{\partial}{\partial x} \Phi(x,t) \right]_{x=1}\\
+&amp;= \left[\frac{\partial}{\partial x} \frac{\partial}{\partial t} \Phi(x,t) \right]_{x=1}\\
+&amp;= \left[\frac{\partial}{\partial x} \left(r(\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)\right)\right]_{x=1}\\
+&amp;= r (\hat{\mu}'(1)-1) L(t) + r(\hat{\mu}(1)-1)\frac{\partial^2}{\partial x^2} \Phi(1,t)\\
+&amp;= r (\mu'(1)-1)L(t)
+\end{align*}\]</div>
+<p>The next to last step uses the product rule and substitutes <span class="math notranslate nohighlight">\(1\)</span> for <span class="math notranslate nohighlight">\(x\)</span>.  The last step uses the fact that <span class="math notranslate nohighlight">\(\hat{\mu}(1)=1\)</span>.</p>
+<p>The solution to this differential equation is <span class="math notranslate nohighlight">\(L(t) = L(0)\exp(ct)\)</span> where <span class="math notranslate nohighlight">\(c=r(\hat{\mu}'(1)-1)\)</span>.  Note that For our assumptions <span class="math notranslate nohighlight">\(L(0)=1\)</span>.</p>
+<p>So <span class="math notranslate nohighlight">\(L(t)\)</span> grows or decays exponentially depending on the value of <span class="math notranslate nohighlight">\(r(\hat{\mu}'(1)-1)\)</span>.  If on average the individuals are replaced with fewer than <span class="math notranslate nohighlight">\(1\)</span> individual <span class="math notranslate nohighlight">\(\hat{\mu}'(1)-1&lt;0\)</span> and decay occurs, while if <span class="math notranslate nohighlight">\(\hat{\mu}'(1)-1&gt;0\)</span> growth occurs.</p>
+<p>So we have seen that the expected population size in a continuous-time Galton-Watson process is exponential with growth rate <span class="math notranslate nohighlight">\(r(\hat{\mu}'(1)-1)\)</span>.</p>
+<div class="proof definition admonition" id="def-MalthPar">
+<p class="admonition-title"><span class="caption-number">Definition 3.6 </span> (Malthusian Parameter)</p>
+<section class="definition-content" id="proof-content">
+<p>The expected size of a continuous-time Galton-Watson process is <span class="math notranslate nohighlight">\(e^{r(\hat{\mu}'(1)-1)t}\)</span>.  The parameter <span class="math notranslate nohighlight">\(r(\hat{\mu}'(1)-1)\)</span> which governs the growth is the <strong>Malthusian Parameter</strong>.</p>
+</section>
+</div></section>
+<section id="self-test">
+<h2><span class="section-number">3.3.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic">
-<li><p>Use the Forward Kolmogorov Equation to find a system of equations for <span class="math notranslate nohighlight">\(\frac{d}{d t} q_\ell(t)\)</span> for each <span class="math notranslate nohighlight">\(\ell\)</span>.</p></li>
+<li><p>The text claims that when an event happens in a population of <span class="math notranslate nohighlight">\(\ell\)</span> individuals the PGF after the event is <span class="math notranslate nohighlight">\(x^{\ell-1} \hat{\mu}(x)\)</span>.  Justify this claim.</p></li>
+<li><p>Use the Forward Kolmogorov Equation for the PGF <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> to find a system of equations for <span class="math notranslate nohighlight">\(\frac{d}{d t} q_\ell(t)\)</span> for each <span class="math notranslate nohighlight">\(\ell\)</span>.  This system is often called the <em>master equation</em> as well as also being called the Forward Kolmogorov Equations.</p></li>
 <li><p>Consider the case where individuals give birth at rate <span class="math notranslate nohighlight">\(\beta\)</span> and die at rate <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
-<ol class="arabic">
-<li><p>Derive the Forward Kolmogorov Equation.</p></li>
-<li><p>What is the initial condition for <span class="math notranslate nohighlight">\(\Phi(x,0)\)</span>?</p></li>
-<li><p>Show that if <span class="math notranslate nohighlight">\(\gamma \neq \beta\)</span></p>
+<p><strong>(a)</strong> Derive the Forward Kolmogorov Equation.</p>
+<p><strong>(b)</strong> Find the Malthusian Parameter.</p>
+<p><strong>(c)</strong> What is the initial condition for <span class="math notranslate nohighlight">\(\Phi(x,0)\)</span>?</p>
+<p><strong>(d)</strong> Show that if <span class="math notranslate nohighlight">\(\gamma \neq \beta\)</span></p>
 <div class="math notranslate nohighlight">
 \[ \Phi(x,t) = \frac{(\gamma-\beta x)e^{-(\beta-\gamma)t} - \gamma(1-x)}{(\gamma-\beta x)e^{-(\beta-\gamma)t}-\beta(1-x)}
       \]</div>
 <p>is a solution (you don’t need to derive it, just show that it satisfies the equation).</p>
-</li>
-<li><p>Find <span class="math notranslate nohighlight">\(q_0(t) = \Phi(0,t)\)</span> (if <span class="math notranslate nohighlight">\(\beta \neq \gamma\)</span>).</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(s(t) = \frac{\beta(1-e^{-(\beta-\gamma)t})}{\beta-\gamma e^{-(\beta-\gamma)t}}\)</span> then</p>
+<p><strong>(e)</strong> Find <span class="math notranslate nohighlight">\(q_0(t) = \Phi(0,t)\)</span> (if <span class="math notranslate nohighlight">\(\beta \neq \gamma\)</span>).</p>
+<p><strong>(f)</strong> If <span class="math notranslate nohighlight">\(s(t) = \frac{\beta(1-e^{-(\beta-\gamma)t})}{\beta-\gamma e^{-(\beta-\gamma)t}}\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[
       \Phi(x,t) = q_0(t) + (1-q_0(t)) \frac{(1-s(t))x}{1-s(t)x}
       \]</div>
-<p>Based on this, find <span class="math notranslate nohighlight">\(q_\ell(t)\)</span> for <span class="math notranslate nohighlight">\(\ell=1,2,\ldots\)</span> in terms of <span class="math notranslate nohighlight">\(q_0(t)\)</span> and <span class="math notranslate nohighlight">\(s(t)\)</span>.</p>
-</li>
-</ol>
+<p>(you do not need to show this).  Based on this, find <span class="math notranslate nohighlight">\(q_\ell(t)\)</span> for <span class="math notranslate nohighlight">\(\ell=1,2,\ldots\)</span> in terms of <span class="math notranslate nohighlight">\(q_0(t)\)</span> and <span class="math notranslate nohighlight">\(s(t)\)</span>.</p>
 </li>
 <li><p>Define <span class="math notranslate nohighlight">\(\hat{\Phi}(\theta,t) = \Phi(e^{i\theta},t)\)</span>.</p>
 <ol class="arabic simple">
@@ -682,7 +741,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.3.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation">3.3.1. Derivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phi-x-t-delta-t">3.3.1.1. <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-partial-phi-x-t-partial-t">3.3.1.2. Finding <span class="math notranslate nohighlight">\(\partial \Phi(x,t)/\partial t\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-population-size">3.3.2. Expected Population size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.3.3. Self-test</a></li>
 </ul>
   </nav></div>
 

@@ -216,6 +216,7 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -501,7 +502,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pgf-at-small-times">3.2.1. PGF at small times</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-to-the-generation-based-galton-watson-process">3.2.2. Mapping to the generation-based Galton-Watson process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.3. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -515,16 +518,100 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="continuous-time-galton-watson-process">
 <h1><span class="section-number">3.2. </span>Continuous Time Galton Watson Process<a class="headerlink" href="#continuous-time-galton-watson-process" title="Link to this heading">#</a></h1>
-<p>We now assume that individuals reproduce or die as Poisson processes.  Individuals reproduce with one rate (having a random number of offspring) and die with another rate.</p>
-<p>Conceptually if all we care about is the counts at time <span class="math notranslate nohighlight">\(t\)</span>, one individual creating <span class="math notranslate nohighlight">\(k-1\)</span> offspring is equivalent to one individual being replaced by <span class="math notranslate nohighlight">\(k\)</span> offspring.  This allows us to combine our reproduction and deaths into a single Poisson process with a combined rate <span class="math notranslate nohighlight">\(r\)</span>.  When the event occurs, the individual is removed and replaced by number of offspring with a given distribution.  We define</p>
+<p>We now assume that we begin with a single individual and individuals reproduce or die as Poisson processes.  Individuals reproduce with one rate (having a possibly random number of offspring) and die with another rate.</p>
+<p>Conceptually if all we care about is the counts at time <span class="math notranslate nohighlight">\(t\)</span>, one individual creating <span class="math notranslate nohighlight">\(k-1\)</span> offspring is equivalent to one individual being removed and replaced by <span class="math notranslate nohighlight">\(k\)</span> offspring.  This allows us to combine our reproduction and deaths into a single compound Poisson process with a combined rate <span class="math notranslate nohighlight">\(r = \sum_k r_k\)</span> where <span class="math notranslate nohighlight">\(r_k\)</span> is the probability of being replaced by <span class="math notranslate nohighlight">\(k\)</span> offspring.</p>
+<p>This leads to the following definition:</p>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 3.3 </span> (Continuous-Time Galton Watson Process)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>continuous-time Galton-Watson process</strong> is defined as follows.</p>
+<ul class="simple">
+<li><p>The process begins with a single individual at <span class="math notranslate nohighlight">\(t=0\)</span>.</p></li>
+<li><p>Each individual lives for an exponentially distributed time with total rate <span class="math notranslate nohighlight">\(r = \sum_{k\geq 0} r_k &lt; \infty\)</span>, independently of all other events.</p></li>
+<li><p>Upon death, she is instantaneously replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals with probability <span class="math notranslate nohighlight">\(r_k/r\)</span>, independently of all other events.</p></li>
+</ul>
+</section>
+</div><p>Using <span class="math notranslate nohighlight">\(p_k=r_k/r\)</span> to be the probability that after an event, the individual has been replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals, we define</p>
+<div class="proof definition admonition" id="def-CtsOffspringPGF">
+<p class="admonition-title"><span class="caption-number">Definition 3.4 </span> (The Offspring PGF <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>)</p>
+<section class="definition-content" id="proof-content">
+<p>We will use the PGF</p>
 <div class="math notranslate nohighlight">
-\[\hat{\mu}(x) = p_0 + p_1x + p_2x^2\cdots \]</div>
-<p>Typically we assume <span class="math notranslate nohighlight">\(p_1 \neq 0\)</span>.  For most infectious disease models we assume that only <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are nonzero.</p>
-<p>Note that if we want to count the cumulative number of individuals, we cannot assume that the individual is removed and then replaced.  Different methods will be needed then.</p>
+\[ 
+\hat{\mu}(x) = p_0 + p_1x + p_2x^2\cdots 
+\]</div>
+<p>to be the PGF of the offspring distribution in the continuous time Galton-Watson process.</p>
+</section>
+</div><div class="proof definition admonition" id="def-CtsTimeX">
+<p class="admonition-title"><span class="caption-number">Definition 3.5 </span> (<span class="math notranslate nohighlight">\(X(t)\)</span>)</p>
+<section class="definition-content" id="proof-content">
+<p>We use <span class="math notranslate nohighlight">\(X(t)\)</span> to denote the (stochastic) population size at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</section>
+</div><p>If all we care about is calculating <span class="math notranslate nohighlight">\(X(t)\)</span>, we can assume <span class="math notranslate nohighlight">\(p_1 \neq 0\)</span>.  For most infectious disease models we will assume that only <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are nonzero, but for other processes we can have <span class="math notranslate nohighlight">\(p_k &gt;0\)</span> for <span class="math notranslate nohighlight">\(k &gt;2\)</span>.</p>
+<p>Note that if we want to count the cumulative number of individuals in our real-world application, we cannot assume that the individual is removed and then replaced when giving birth.  We would need to be careful with the accounting in this case.</p>
+<section id="pgf-at-small-times">
+<h2><span class="section-number">3.2.1. </span>PGF at small times<a class="headerlink" href="#pgf-at-small-times" title="Link to this heading">#</a></h2>
+<p>It will be important to know what the PGF of <span class="math notranslate nohighlight">\(X(\Delta t)\)</span> is when <span class="math notranslate nohighlight">\(\Delta t \ll 1\)</span>.</p>
+<p>We will ignore small terms in the derivation below.  They could be kept and later shown to go to zero.</p>
+<p>We begin with one individual at <span class="math notranslate nohighlight">\(t=0\)</span>.  The probability that the individual dies during the first <span class="math notranslate nohighlight">\(\Delta t\)</span> time units is (approximately) <span class="math notranslate nohighlight">\(r \Delta t\)</span>.  If so, the number of individuals replacing her has PGF <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>.  If not, then the resulting PGF is simply <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>For sufficiently small <span class="math notranslate nohighlight">\(\Delta t\)</span>, we can assume that at most one event occurs in the time interval.  Then taking the appropriate convex combination of <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span> and <span class="math notranslate nohighlight">\(x\)</span>, we find</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi(x,\Delta t) &amp;= (1-r\Delta t) x + (r \Delta t) \hat{\mu}(x)\\
+ &amp;= x + (r \Delta t) (\hat{\mu}(x)-x)
+\end{align*}\]</div>
+<p>We turn this into a Lemma for future use, holding on to the small error terms that were neglected above:</p>
+<div class="proof lemma admonition" id="lem-PGFatDt">
+<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span>)</p>
+<section class="lemma-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(X(0)=1\)</span>, the PGF of the population size <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t \ll 1\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi(x,\Delta t) &amp;= (1-r\Delta t) x + (r \Delta t) \hat{\mu}(x) + \mathcal{o}(\Delta t)\\
+ &amp;= x + (r \Delta t) (\hat{\mu}(x)-x)+ \mathcal{o}(\Delta t)
+\end{align*}\]</div>
+</section>
+</div><p>This is illustrated in <a class="reference internal" href="#fig-phixdt"><span class="std std-numref">Fig. 3.1</span></a></p>
+<figure class="align-default" id="fig-phixdt">
+<a class="reference internal image-reference" href="../../_images/Phi_x_Dt.png"><img alt="../../_images/Phi_x_Dt.png" src="../../_images/Phi_x_Dt.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Illustration of <a class="reference internal" href="#lem-PGFatDt">Lemma 3.1</a>.</span><a class="headerlink" href="#fig-phixdt" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="mapping-to-the-generation-based-galton-watson-process">
+<h2><span class="section-number">3.2.2. </span>Mapping to the generation-based Galton-Watson process<a class="headerlink" href="#mapping-to-the-generation-based-galton-watson-process" title="Link to this heading">#</a></h2>
+<p>In defining <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>, we assume that when an event happens an individual either dies (with probability <span class="math notranslate nohighlight">\(p_0\)</span>) or gives birth to <span class="math notranslate nohighlight">\(k-1\)</span> individuals (with probability <span class="math notranslate nohighlight">\(p_k\)</span>, <span class="math notranslate nohighlight">\(k&gt;1\)</span>), but we have treated it as if the individual dies and is replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals.  This assumption simplifies the calculations, but if we want to relate our results in the continuous time case to the generation-based case, we need to undo this assumption.</p>
+<p>If we assume that the individual does not die in the birth events, then conditional on a birth event, the probability of having <span class="math notranslate nohighlight">\(k\)</span> offspring is <span class="math notranslate nohighlight">\(q_k = p_{k+1}/(1-p_0)\)</span>.  The corresponding PGF is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_k q_k x^k &amp;= \sum_k \frac{p_{k+1}}{1-p_0} x^k\\
+&amp;= \frac{p_2}{1-p_0} x + \frac{p_3}{1-p_0} x^2 + \cdots\\
+&amp; = \frac{ \hat{\mu}(x) - p_0}{(1-p_0)x}
+\end{align*}\]</div>
+<p>The PGF for the number of birth events <span class="math notranslate nohighlight">\(m\)</span> comes from the geometric distribution, <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-GeomPGF">Example 1.9</a> (not counting the final event) is <span class="math notranslate nohighlight">\(p_0/(1-(1-p_0)x)\)</span>.</p>
+<p>Since the offspring distribution for the entire lifetime is a randomly stopped sum of <span class="math notranslate nohighlight">\(m\)</span> terms each with PGF <span class="math notranslate nohighlight">\(\frac{ \hat{\mu}(x) - p_0}{(1-p_0)x}\)</span>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu(x) &amp;= \frac{p_0}{1-(1-p_0)\frac{ \hat{\mu}(x) - p_0}{(1-p_0)x}}\\
+   &amp;= \frac{x p_0}{x - (\hat{\mu}(x)-p_0)}
+\end{align*}\]</div>
+</section>
 <section id="self-test">
-<h2><span class="section-number">3.2.1. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Explain why we can assume <span class="math notranslate nohighlight">\(p_1=0\)</span>.  Hint: if there is one offspring and the parent is removed, what has changed?</p></li>
+<h2><span class="section-number">3.2.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Explain why we can assume <span class="math notranslate nohighlight">\(p_1=0\)</span> in the definition of <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>.  Hint: if there is one offspring and the parent is removed, what has changed?</p></li>
+<li><p>If each birth event results in exactly one new individual (and the original individual remains present):</p>
+<p><strong>(a)</strong> Show that <span class="math notranslate nohighlight">\(\hat{\mu}(x) = p_0 + (1-p_0)x^2\)</span></p>
+<p><strong>(b)</strong> Find <span class="math notranslate nohighlight">\(\mu(x)\)</span> for the generation-based model.</p>
+<p><strong>(c)</strong> Compare <span class="math notranslate nohighlight">\(\mu(x)\)</span> to the Geometric Distribution PGF <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-GeomPGF">Example 1.9</a> and explain why this process is equivalent to the coin flip description in <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-GeomPGF">Example 1.9</a>.</p>
+</li>
+<li><p>It is relatively common to use the <em>branching mechanism</em>: <span class="math notranslate nohighlight">\(\psi(x) = \sum_k r_k(x^k-x)\)</span>.</p>
+<p><strong>(a)</strong> Show that <span class="math notranslate nohighlight">\(\psi(x) = r(\hat{\mu}(x) - x)\)</span>.</p>
+<p><strong>(b)</strong> Find the PGF <span class="math notranslate nohighlight">\(\Phi(x,\Delta t)\)</span> in terms of <span class="math notranslate nohighlight">\(\psi\)</span> rather than <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>.</p>
+<p><strong>(c)</strong> Explain why <span class="math notranslate nohighlight">\(\psi(x)\)</span> is not a PGF. (hint: what is <span class="math notranslate nohighlight">\(\psi(1)\)</span>?)</p>
+</li>
 </ol>
 </section>
 </section>
@@ -593,7 +680,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.1. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pgf-at-small-times">3.2.1. PGF at small times</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-to-the-generation-based-galton-watson-process">3.2.2. Mapping to the generation-based Galton-Watson process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.3. Self-test</a></li>
 </ul>
   </nav></div>
 
