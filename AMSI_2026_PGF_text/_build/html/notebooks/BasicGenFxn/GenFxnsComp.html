@@ -562,7 +562,7 @@ document.write(`
 <p>The <span class="math notranslate nohighlight">\(k\)</span>-th power of <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> is the PGF for sum of <span class="math notranslate nohighlight">\(k\)</span> numbers drawn from the distribution of <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.  The linear combination of these corresponds to choosing the number <span class="math notranslate nohighlight">\(k\)</span> from the distribution for <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and then choosing <span class="math notranslate nohighlight">\(n\)</span> to be the sum of <span class="math notranslate nohighlight">\(k\)</span> numbers chosen from the distribution for <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.</p>
 <p>This leads to</p>
 <div class="proof theorem admonition" id="theorem-PGFComp">
-<p class="admonition-title"><span class="caption-number">Theorem 1.5 </span> (Composition of PGFs)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 1.5 </span> (Composition of PGFs and randomly-stopped sums)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given PGFs <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, the composition <span class="math notranslate nohighlight">\(\psi(x) = \mu_1(\mu_2(x))\)</span> is the PGF for the following process of choosing a number <span class="math notranslate nohighlight">\(n\)</span>:</p>
 <ul class="simple">
@@ -570,7 +570,12 @@ document.write(`
 <li><p>then choose <span class="math notranslate nohighlight">\(k\)</span> numbers independently from the distribution with PGF <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> and add them together to get <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 </ul>
 </section>
-</div><p>That is, <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span> is the PGF for a sum of independent random numbers from the <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> distribution where the number of terms in the sum is randomly chosen from the <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> distribution.</p>
+</div><p>That is, <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span> is the PGF for the sum</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^k m_i
+\]</div>
+<p>where the number of terms <span class="math notranslate nohighlight">\(k\)</span> is a random number chosen from the <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> distribution and each independent random number <span class="math notranslate nohighlight">\(m_i\)</span> is chosen from the <span class="math notranslate nohighlight">\(\mu_2(x)\)</span> distribution.</p>
 <div class="proof definition admonition" id="def-FuncComp">
 <p class="admonition-title"><span class="caption-number">Definition 1.4 </span> (Function Composition)</p>
 <section class="definition-content" id="proof-content">

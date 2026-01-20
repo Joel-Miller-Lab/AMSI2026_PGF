@@ -502,9 +502,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pgf-at-small-times">3.2.1. PGF at small times</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-to-the-generation-based-galton-watson-process">3.2.2. Mapping to the generation-based Galton-Watson process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.3. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-phi-x-t-1-t-2">3.2.1. Finding <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pgf-at-small-times">3.2.2. PGF at small times</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-to-the-generation-based-galton-watson-process">3.2.3. Mapping to the generation-based Galton-Watson process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.4. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -554,14 +555,68 @@ document.write(`
 <p>to be the PGF of the offspring distribution in the continuous time Galton-Watson process.</p>
 </section>
 </div><div class="proof definition admonition" id="def-CtsTimeX">
-<p class="admonition-title"><span class="caption-number">Definition 3.6 </span> (<span class="math notranslate nohighlight">\(X(t)\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Definition 3.6 </span> (<span class="math notranslate nohighlight">\(X(t)\)</span> and <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>)</p>
 <section class="definition-content" id="proof-content">
-<p>We use <span class="math notranslate nohighlight">\(X(t)\)</span> to denote the (stochastic) population size at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>We use <span class="math notranslate nohighlight">\(X(t)\)</span> to denote the (stochastic) population size at time <span class="math notranslate nohighlight">\(t\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(x,t) = \sum_{k=0}^\infty q_k x^k
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_k = \mathbb{P}[X(t)=k]\)</span>.</p>
 </section>
 </div><p>If all we care about is calculating <span class="math notranslate nohighlight">\(X(t)\)</span>, we can assume <span class="math notranslate nohighlight">\(p_1 \neq 0\)</span>.  For most infectious disease models we will assume that only <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are nonzero, but for other processes we can have <span class="math notranslate nohighlight">\(p_k &gt;0\)</span> for <span class="math notranslate nohighlight">\(k &gt;2\)</span>.</p>
 <p>Note that if we want to count the cumulative number of individuals in our real-world application, we cannot assume that the individual is removed and then replaced when giving birth.  We would need to be careful with the accounting in this case.</p>
+<section id="finding-phi-x-t-1-t-2">
+<h2><span class="section-number">3.2.1. </span>Finding <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span><a class="headerlink" href="#finding-phi-x-t-1-t-2" title="Link to this heading">#</a></h2>
+<p>To see how <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> changes in time, it will be important to know how to find <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span> if we know <span class="math notranslate nohighlight">\(\Phi(x,T_1)\)</span> and <span class="math notranslate nohighlight">\(\Phi(x,T_2)\)</span>.</p>
+<p>This will rely heavily on our earlier result about “Randomly Stopped Sums”, <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>.  That is, if we take the sum</p>
+<div class="math notranslate nohighlight">
+\[
+X = \sum_{i=1}^k m_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k\)</span> is a random number with PGF <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(m_i\)</span> are independent random numbers with PGF <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>, then the PGF for <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(\mu_1(\mu_2(x))\)</span>.</p>
+<div class="proof lemma admonition" id="lem-PhiTimeSum">
+<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (The PGF of <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span>)</p>
+<section class="lemma-content" id="proof-content">
+<p>Consider a continuous-time Galton-Watson Process with <span class="math notranslate nohighlight">\(X(t)\)</span> representing the (random) population size at time <span class="math notranslate nohighlight">\(t\)</span>.  Then</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(x,T_1+T_2) = \Phi(\Phi(x,T_2),T_1)
+\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To prove this, we consider the image illustrated in <a class="reference internal" href="#fig-xtimesum"><span class="std std-numref">Fig. 3.1</span></a>.  The size <span class="math notranslate nohighlight">\(X(T_1+T_2)\)</span> found by considering each of the individuals <span class="math notranslate nohighlight">\(u_i\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots, X(T_1)\)</span> at time <span class="math notranslate nohighlight">\(T_1\)</span>.  We set <span class="math notranslate nohighlight">\(m_i\)</span> to be the number of descendents of <span class="math notranslate nohighlight">\(u_i\)</span> at time <span class="math notranslate nohighlight">\(T_1+T_2\)</span>.</p>
+<figure class="align-default" id="fig-xtimesum">
+<a class="reference internal image-reference" href="../../_images/XTimeSum.png"><img alt="../../_images/XTimeSum.png" src="../../_images/XTimeSum.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Illustration of how <span class="math notranslate nohighlight">\(X(T_1+T_2)\)</span> depends on <span class="math notranslate nohighlight">\(X(T_1)\)</span> and the number of descendents of each individual present at time <span class="math notranslate nohighlight">\(T_1\)</span> has at time <span class="math notranslate nohighlight">\(T_1+T_2\)</span>.</span><a class="headerlink" href="#fig-xtimesum" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>So</p>
+<div class="math notranslate nohighlight">
+\[
+X(T_1+T_2) = \sum_{i=1}^{X(T_2)} m_i
+\]</div>
+<p>Our key observation is that the distribution of <span class="math notranslate nohighlight">\(X(T_2)\)</span> does not just tell us the distribution of the number present at time <span class="math notranslate nohighlight">\(T_2\)</span>.  It is also the distribution of the number of descendents if we consider any individual at time <span class="math notranslate nohighlight">\(t\)</span> and wait for a time period of <span class="math notranslate nohighlight">\(T_2\)</span>.  So each <span class="math notranslate nohighlight">\(m_i\)</span> is a random variable with the same distribution as <span class="math notranslate nohighlight">\(X(T_2)\)</span>.</p>
+<p>This is a randomly stopped sum.  By <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>, the PGF of <span class="math notranslate nohighlight">\(X(T_1+T_2)\)</span> is the PGF of <span class="math notranslate nohighlight">\(X(T_2)\)</span> (that is, <span class="math notranslate nohighlight">\(\Phi(x,T_2)\)</span>) plugged into the PGF of <span class="math notranslate nohighlight">\(X_1\)</span> (that is, <span class="math notranslate nohighlight">\(\Phi(x,T_1)\)</span>).   So we have</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(x,T_1+T_2) = \Phi(\Phi(x,T_2),T_1)
+\]</div>
+<p><a class="reference internal" href="#fig-phitimesum"><span class="std std-numref">Fig. 3.2</span></a> translates the count-based information in <a class="reference internal" href="#fig-xtimesum"><span class="std std-numref">Fig. 3.1</span></a> into a PGF framework.</p>
+<figure class="align-default" id="fig-phitimesum">
+<a class="reference internal image-reference" href="../../_images/PhiTimeSum.png"><img alt="../../_images/PhiTimeSum.png" src="../../_images/PhiTimeSum.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Illustration of how <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span> depends on <span class="math notranslate nohighlight">\(\Phi(x,T_1)\)</span> and <span class="math notranslate nohighlight">\(\Phi(x,T_2)\)</span>.</span><a class="headerlink" href="#fig-phitimesum" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<p>In our later derivations we will assume <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> is known.  Then, in the <em>Forward Kolmogorov Case</em> we use <span class="math notranslate nohighlight">\(T_1=t\)</span> and <span class="math notranslate nohighlight">\(T_2=\Delta t\)</span> to find <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span>, which we then plug into the definition of the <span class="math notranslate nohighlight">\(t\)</span>-derivative to find <span class="math notranslate nohighlight">\(\partial \Phi/\partial t\)</span>.  The result is a differential equation for <span class="math notranslate nohighlight">\(\Phi\)</span>.  In the <em>Backward Kolmogorov Case</em> we use <span class="math notranslate nohighlight">\(T_1=\Delta t\)</span> and <span class="math notranslate nohighlight">\(T_2=t\)</span> to find a different differential equation for <span class="math notranslate nohighlight">\(\Phi\)</span> (which of course has the same solution <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>, but offers up different information).</p>
+</section>
 <section id="pgf-at-small-times">
-<h2><span class="section-number">3.2.1. </span>PGF at small times<a class="headerlink" href="#pgf-at-small-times" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2.2. </span>PGF at small times<a class="headerlink" href="#pgf-at-small-times" title="Link to this heading">#</a></h2>
 <p>It will be important to know what the PGF of <span class="math notranslate nohighlight">\(X(\Delta t)\)</span> is when <span class="math notranslate nohighlight">\(\Delta t \ll 1\)</span>.</p>
 <p>We will ignore small terms in the derivation below.  They could be kept and later shown to go to zero.</p>
 <p>We begin with one individual at <span class="math notranslate nohighlight">\(t=0\)</span>.  The probability that the individual dies during the first <span class="math notranslate nohighlight">\(\Delta t\)</span> time units is (approximately) <span class="math notranslate nohighlight">\(r \Delta t\)</span>.  If so, the number of individuals replacing her has PGF <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>.  If not, then the resulting PGF is simply <span class="math notranslate nohighlight">\(x\)</span>.</p>
@@ -573,7 +628,7 @@ document.write(`
 \end{align*}\]</div>
 <p>We turn this into a Lemma for future use, holding on to the small error terms that were neglected above:</p>
 <div class="proof lemma admonition" id="lem-PGFatDt">
-<p class="admonition-title"><span class="caption-number">Lemma 3.1 </span> (PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Lemma 3.2 </span> (PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span>)</p>
 <section class="lemma-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(X(0)=1\)</span>, the PGF of the population size <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t \ll 1\)</span> is</p>
 <div class="amsmath math notranslate nohighlight">
@@ -582,17 +637,17 @@ document.write(`
  &amp;= x + (r \Delta t) (\hat{\mu}(x)-x)+ \mathcal{o}(\Delta t)
 \end{align*}\]</div>
 </section>
-</div><p>This is illustrated in <a class="reference internal" href="#fig-phixdt"><span class="std std-numref">Fig. 3.1</span></a></p>
+</div><p>This is illustrated in <a class="reference internal" href="#fig-phixdt"><span class="std std-numref">Fig. 3.3</span></a></p>
 <figure class="align-default" id="fig-phixdt">
 <a class="reference internal image-reference" href="../../_images/Phi_x_Dt.png"><img alt="../../_images/Phi_x_Dt.png" src="../../_images/Phi_x_Dt.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Illustration of <a class="reference internal" href="#lem-PGFatDt">Lemma 3.1</a>.</span><a class="headerlink" href="#fig-phixdt" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Illustration of <a class="reference internal" href="#lem-PGFatDt">Lemma 3.2</a>.</span><a class="headerlink" href="#fig-phixdt" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="mapping-to-the-generation-based-galton-watson-process">
-<h2><span class="section-number">3.2.2. </span>Mapping to the generation-based Galton-Watson process<a class="headerlink" href="#mapping-to-the-generation-based-galton-watson-process" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2.3. </span>Mapping to the generation-based Galton-Watson process<a class="headerlink" href="#mapping-to-the-generation-based-galton-watson-process" title="Link to this heading">#</a></h2>
 <p>In defining <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>, we assume that when an event happens an individual either dies (with probability <span class="math notranslate nohighlight">\(p_0\)</span>) or gives birth to <span class="math notranslate nohighlight">\(k-1\)</span> individuals (with probability <span class="math notranslate nohighlight">\(p_k\)</span>, <span class="math notranslate nohighlight">\(k&gt;1\)</span>), but we have treated it as if the individual dies and is replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals.  This assumption simplifies the calculations, but if we want to relate our results in the continuous time case to the generation-based case, we need to undo this assumption.</p>
 <p>If we assume that the individual does not die in the birth events, then conditional on a birth event, the probability of having <span class="math notranslate nohighlight">\(k\)</span> offspring is <span class="math notranslate nohighlight">\(q_k = p_{k+1}/(1-p_0)\)</span>.  The corresponding PGF is:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -610,7 +665,7 @@ document.write(`
 \end{align*}\]</div>
 </section>
 <section id="self-test">
-<h2><span class="section-number">3.2.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2.4. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><p>Explain why we can assume <span class="math notranslate nohighlight">\(p_1=0\)</span> in the definition of <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>.  Hint: if there is one offspring and the parent is removed, what has changed?</p></li>
 <li><p>If each birth event results in exactly one new individual (and the original individual remains present):</p>
@@ -691,9 +746,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pgf-at-small-times">3.2.1. PGF at small times</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-to-the-generation-based-galton-watson-process">3.2.2. Mapping to the generation-based Galton-Watson process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.3. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-phi-x-t-1-t-2">3.2.1. Finding <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pgf-at-small-times">3.2.2. PGF at small times</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-to-the-generation-based-galton-watson-process">3.2.3. Mapping to the generation-based Galton-Watson process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.2.4. Self-test</a></li>
 </ul>
   </nav></div>
 
