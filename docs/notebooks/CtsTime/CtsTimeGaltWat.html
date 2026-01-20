@@ -521,8 +521,19 @@ document.write(`
 <p>We now assume that we begin with a single individual and individuals reproduce or die as Poisson processes.  Individuals reproduce with one rate (having a possibly random number of offspring) and die with another rate.</p>
 <p>Conceptually if all we care about is the counts at time <span class="math notranslate nohighlight">\(t\)</span>, one individual creating <span class="math notranslate nohighlight">\(k-1\)</span> offspring is equivalent to one individual being removed and replaced by <span class="math notranslate nohighlight">\(k\)</span> offspring.  This allows us to combine our reproduction and deaths into a single compound Poisson process with a combined rate <span class="math notranslate nohighlight">\(r = \sum_k r_k\)</span> where <span class="math notranslate nohighlight">\(r_k\)</span> is the probability of being replaced by <span class="math notranslate nohighlight">\(k\)</span> offspring.</p>
 <p>This leads to the following definition:</p>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 3.3 </span> (Continuous-Time Galton Watson Process)</p>
+<div class="proof definition admonition" id="def-CTGW-XFocused">
+<p class="admonition-title"><span class="caption-number">Definition 3.3 </span> (Continuous-Time Galton-Watson Process)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>continuous-time Galton-Watson process</strong> is defined as follows.</p>
+<ul class="simple">
+<li><p>The process begins with <span class="math notranslate nohighlight">\(X(0)=1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> changes by discrete jumps at time <span class="math notranslate nohighlight">\(t_1\)</span>, <span class="math notranslate nohighlight">\(t_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, with the time between <span class="math notranslate nohighlight">\(t_i\)</span> and <span class="math notranslate nohighlight">\(t_{i+1}\)</span> exponentially distributed with total rate <span class="math notranslate nohighlight">\(X(t_i) r\)</span> (taking <span class="math notranslate nohighlight">\(t_0=0\)</span>).</p></li>
+<li><p>At the jumps, <span class="math notranslate nohighlight">\(X\)</span> changes by an amount <span class="math notranslate nohighlight">\(k-1\)</span> with probability <span class="math notranslate nohighlight">\(p_k = r_k/r\)</span> (so <span class="math notranslate nohighlight">\(\sum_k r_k = r &lt; \infty\)</span>).</p></li>
+</ul>
+</section>
+</div><p>We can create a definition resembling the Galton-Watson Tree definition.</p>
+<div class="proof definition admonition" id="def-CTGW-treelike">
+<p class="admonition-title"><span class="caption-number">Definition 3.4 </span> (Continuous-Time Galton Watson Process)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>continuous-time Galton-Watson process</strong> is defined as follows.</p>
 <ul class="simple">
@@ -533,7 +544,7 @@ document.write(`
 </section>
 </div><p>Using <span class="math notranslate nohighlight">\(p_k=r_k/r\)</span> to be the probability that after an event, the individual has been replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals, we define</p>
 <div class="proof definition admonition" id="def-CtsOffspringPGF">
-<p class="admonition-title"><span class="caption-number">Definition 3.4 </span> (The Offspring PGF <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Definition 3.5 </span> (The Offspring PGF <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>)</p>
 <section class="definition-content" id="proof-content">
 <p>We will use the PGF</p>
 <div class="math notranslate nohighlight">
@@ -543,7 +554,7 @@ document.write(`
 <p>to be the PGF of the offspring distribution in the continuous time Galton-Watson process.</p>
 </section>
 </div><div class="proof definition admonition" id="def-CtsTimeX">
-<p class="admonition-title"><span class="caption-number">Definition 3.5 </span> (<span class="math notranslate nohighlight">\(X(t)\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Definition 3.6 </span> (<span class="math notranslate nohighlight">\(X(t)\)</span>)</p>
 <section class="definition-content" id="proof-content">
 <p>We use <span class="math notranslate nohighlight">\(X(t)\)</span> to denote the (stochastic) population size at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 </section>

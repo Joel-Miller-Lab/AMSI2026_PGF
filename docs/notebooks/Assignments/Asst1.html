@@ -478,7 +478,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -494,6 +496,19 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions-for-ai-use">7.1.1. Instructions for AI use:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-prompt">7.1.1.1. AI Prompt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-reflection">7.1.1.2. Learning Reflection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set">7.1.2. Problem set</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -509,6 +524,41 @@ document.write(`
 <p>Please do not use AI to assist with these.  I plan to do some “auditing” of solutions to make sure you can reproduce the answers you submit.  I will update these instructions with guidance about a prompt that you can use with AI systems to get help on these.</p>
 <p>If you get help or give help to anyone else, please find a similar problem to discuss.  Do not directly work on a problem in the question.</p>
 <p>These problems are <strong>not</strong> ordered by difficulty.  They are ordered roughly with where the corresponding material appears in the text.  I have a reputation for setting long assignments (I get excited by what each problem can reveal to students).  I will have consultation hours next week (and I will make sure that you can reach me on zoom if you are remote).  As I see where people struggle, I may add hints to these questions.</p>
+<section id="instructions-for-ai-use">
+<h2><span class="section-number">7.1.1. </span>Instructions for AI use:<a class="headerlink" href="#instructions-for-ai-use" title="Link to this heading">#</a></h2>
+<p><em>Never trust anything that can think for itself if you can’t see where it keeps its brain.</em></p>
+<p>— Arthur Weasley,  <em>Harry Potter and the Chamber of Secrets</em></p>
+<p>AI can be an amazing learning tool.  It is also amazingly effective at preventing learning.  There is a lot of benefit in looking at a problem on your own, thinking about how to solve it, and even running into dead-ends when you attempt the wrong method.</p>
+<p>Here are the guidelines for use of AI on this problem set:</p>
+<ol class="arabic simple">
+<li><p>Before turning to AI for assistance on a question, think about the question yourself.  Identify what the question is asking and make some attempt to solve it on your own.</p></li>
+<li><p>If you use an AI, you must save the “conversation” you have.</p></li>
+<li><p>You must start the conversation with the prompt below, and you cannot encourage the AI to violate the prompt.</p></li>
+<li><p>You must complete the “Learning Reflection” below for each question on which you used AI.</p></li>
+</ol>
+<section id="ai-prompt">
+<h3><span class="section-number">7.1.1.1. </span>AI Prompt<a class="headerlink" href="#ai-prompt" title="Link to this heading">#</a></h3>
+<p><em>I am working on a problem that I must solve on my own. Please do not give me the full solution. Instead:</em></p>
+<ul class="simple">
+<li><p><em>Find a similar problem to solve.</em></p></li>
+<li><p><em>Ask me questions to check whether I understand each step.</em></p></li>
+<li><p><em>Only reveal the next step after I attempt it.</em></p></li>
+<li><p><em>If I make a mistake, respond with hints instead of the correct answer.</em></p></li>
+</ul>
+<p><em>My goal is to understand and be able to solve similar problems without AI.</em></p>
+</section>
+<section id="learning-reflection">
+<h3><span class="section-number">7.1.1.2. </span>Learning Reflection<a class="headerlink" href="#learning-reflection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>What did I already know about this problem before asking AI?</p></li>
+<li><p>What did I learn?</p></li>
+<li><p>What detail or technique was the most important for completing this problem?</p></li>
+</ul>
+<p>(3-6 sentences maximum)</p>
+</section>
+</section>
+<section id="problem-set">
+<h2><span class="section-number">7.1.2. </span>Problem set<a class="headerlink" href="#problem-set" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><p>Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable with distribution</p>
 <div class="math notranslate nohighlight">
@@ -589,8 +639,25 @@ document.write(`
 <p><strong>(c)</strong> Plot the expected size at generation <span class="math notranslate nohighlight">\(g\)</span> for these same values.</p>
 <p><strong>(d)</strong> Plot the expected size conditional on not being extinct.</p>
 </li>
-<li><p>I plan to add a problem on size distributions for different generations.  I’m thinking of looking for a way to get the probability <span class="math notranslate nohighlight">\(\mathbb{P}[X_g&lt;K]\)</span> for some imposed threshold <span class="math notranslate nohighlight">\(K\)</span>, but I need to double check that what I plan works.</p></li>
+<li><p>[Optional] Consider a Galton-Watson process with an offspring PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>, with <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> representing the PGF for <span class="math notranslate nohighlight">\(X_g(t)\)</span>.</p></li>
 </ol>
+<p><strong>(a)</strong> Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \Psi_g(x) = \Phi_g(x) \frac{1}{1-x}
+   \]</div>
+<p>Explain why <span class="math notranslate nohighlight">\([x^k]\psi_g(x)\)</span> gives the probability that <span class="math notranslate nohighlight">\(X_g \leq k\)</span>.</p>
+<p><strong>(b)</strong> If we try to use</p>
+<div class="math notranslate nohighlight">
+\[
+   [x^k]\psi_g(x) = \frac{1}{2\pi} \oint_{|z|=1} \frac{\psi_g(x)}{z^k} \, dz
+   \]</div>
+<p>why will there be issues around <span class="math notranslate nohighlight">\(z=1\)</span>?</p>
+<p><strong>(c)</strong> Instead we will use the circle <span class="math notranslate nohighlight">\(|z|=1/2\)</span>.  Set <span class="math notranslate nohighlight">\(z = e^{i\theta}/2\)</span> for <span class="math notranslate nohighlight">\(0 \leq \theta \leq 2\pi\)</span>.  Rewrite the integral in terms of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p><strong>(d)</strong> Adapt the method <code class="docutils literal notranslate"><span class="pre">Phi_coefficients_real</span></code> at https://github.com/Joel-Miller-Lab/AMSI2026_PGF/blob/main/AMSI_2026_PGF_tools/Galton_Watson.py
+and the methods it relies on to perform the integral above.  Note that the code in place uses the Fast Fourier Transform by default, but I do not believe this will work for a radius of <span class="math notranslate nohighlight">\(1/2\)</span>.  So instead you will need to set it up to perform the integral.  Ideally use Python or R.</p>
+<p><strong>(e)</strong> Choose a few simple offspring distributions and test the results.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -638,6 +705,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions-for-ai-use">7.1.1. Instructions for AI use:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-prompt">7.1.1.1. AI Prompt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-reflection">7.1.1.2. Learning Reflection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-set">7.1.2. Problem set</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
