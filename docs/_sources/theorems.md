@@ -89,7 +89,7 @@ is also a PGF and it corresponds to the probability distribution of the sum $n_1
 Given a PGF $\mu(x)$, if we perform $k$ draws from its distribution, the PGF for the sum of all $k$ draws is $\mu(x)^k$.
 :::
 
-## {prf:ref}`theorem-PGFComp` — Composition of PGFs
+## {prf:ref}`theorem-PGFComp` — Composition of PGFs and randomly-stopped sums
 
 :::{admonition} Statement
 :class: dropdown
@@ -149,6 +149,18 @@ $$
 :class: dropdown
 
 If an event occurs with rate $r$, the probability it has not happened after waiting a time $t$ is $e^{-rt}$.
+:::
+
+## {prf:ref}`lem-PhiTimeSum` — The PGF of $\Phi(x,T_1+T_2)$
+
+:::{admonition} Statement
+:class: dropdown
+
+Consider a continuous-time Galton-Watson Process with $X(t)$ representing the (random) population size at time $t$.  Then
+
+$$
+\Phi(x,T_1+T_2) = \Phi(\Phi(x,T_2),T_1)
+$$
 :::
 
 ## {prf:ref}`lem-PGFatDt` — PGF of $X(t)$ at time $\Delta t$
