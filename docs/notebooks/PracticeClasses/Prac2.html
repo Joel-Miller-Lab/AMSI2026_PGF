@@ -558,20 +558,24 @@ document.write(`
 <p><strong>(b)</strong> Solve this equation and identify which solution in <span class="math notranslate nohighlight">\([0,1]\)</span> is the correct extinction probability. Explain why any other solutions should be rejected.</p>
 <p><strong>(c)</strong> Compute the mean number of offspring <span class="math notranslate nohighlight">\(\mu'(1)\)</span> and use it to explain whether extinction is certain or only occurs with some probability less than <span class="math notranslate nohighlight">\(1\)</span>.</p>
 </li>
-<li><p>Consider a continuous-time branching process defined as follows.<br />
-Each individual lives for an exponentially distributed amount of time with rate <span class="math notranslate nohighlight">\(r\)</span>.</p>
-<p>When an individual dies, it is replaced by a random number of offspring with probability generating function <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>.  All individuals behave independently of one another.</p>
-<p>Let <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> be the probability generating function of the population size at time <span class="math notranslate nohighlight">\(t\)</span>, starting from a single individual at time <span class="math notranslate nohighlight">\(0\)</span>.  Define</p>
-<div class="math notranslate nohighlight">
-\[
-   \alpha(t) = \mathbb{P}[\text{the population is extinct by time } t] = \Phi(0,t).
-   \]</div>
+<li><p>Consider a continuous-time branching process defined as follows:</p>
+<ul class="simple">
+<li><p>Each individual lives for an exponentially distributed amount of time with rate <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+<li><p>When an individual dies, it is instantaneously replaced by a random number of offspring with probability generating function <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span>.</p></li>
+<li><p>All individuals behave independently of one another.</p></li>
+</ul>
+<p>Let <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> be the probability generating function of the population size <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, starting from a single individual at time <span class="math notranslate nohighlight">\(0\)</span>: <span class="math notranslate nohighlight">\(X(0)=1\)</span>.</p>
 <p>The Backward Kolmogorov equation for this process is</p>
 <div class="math notranslate nohighlight">
 \[
    \frac{\partial}{\partial t}\Phi(x,t) = r\bigl(\hat{\mu}(\Phi(x,t)) - \Phi(x,t)\bigr),
    \]</div>
 <p>with initial condition <span class="math notranslate nohighlight">\(\Phi(x,0) = x\)</span>.</p>
+<p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+   \alpha(t) = \mathbb{P}[\text{the population is extinct by time } t] = \Phi(0,t).
+   \]</div>
 <p><strong>(a)</strong> By substituting <span class="math notranslate nohighlight">\(x=0\)</span>, derive a differential equation satisfied by <span class="math notranslate nohighlight">\(\alpha(t)\)</span>.</p>
 <p><strong>(b)</strong> Suppose the offspring distribution is Poisson with mean <span class="math notranslate nohighlight">\(2\)</span>, so that</p>
 <div class="math notranslate nohighlight">
