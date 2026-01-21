@@ -533,6 +533,15 @@ document.write(`
    \]</div>
 <p>Compute <span class="math notranslate nohighlight">\([x^2]\psi(x)\)</span>, and explain what this coefficient represents in the context of the problem.</p>
 </li>
+<li><p>Consider a Galton-Watson process whose offspring distribution has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  Assume that <span class="math notranslate nohighlight">\(X_0=1\)</span>, <span class="math notranslate nohighlight">\(X_1=3\)</span>, and <span class="math notranslate nohighlight">\(X_2=4\)</span>.</p>
+<p><strong>(a)</strong> Find the PGF for <span class="math notranslate nohighlight">\(X_2\)</span> conditional on the information above in terms of <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
+<p><strong>(b)</strong> The formula you found in (a) should depend on <span class="math notranslate nohighlight">\(X_2\)</span>.  Does knowing <span class="math notranslate nohighlight">\(X_1\)</span> (or <span class="math notranslate nohighlight">\(X_0\)</span>) provide any useful information for predicting <span class="math notranslate nohighlight">\(X_3\)</span>?</p>
+<p><strong>(c)</strong> For each of the following distributions, find a formula for <span class="math notranslate nohighlight">\(\mathbb{P}[X_3 = n]\)</span> for <span class="math notranslate nohighlight">\(n=0,1,2,\ldots\)</span>.  Note that in each case a power of the PGF is a PGF of the same general form, so its series expansion is known:</p>
+<p><em>(i</em>). Poisson: <span class="math notranslate nohighlight">\(\mu(x) = e^{\lambda (x-1)} = \sum_{k=0}^\infty \frac{e^{-\lambda} x^k}{k!}\)</span>.</p>
+<p><em>(ii)</em> Binomial: <span class="math notranslate nohighlight">\(\mu(x) = (1-p + px)^N = \sum_{k=0}^N \binom{N}{k} p^k(1-p)^{N-k}\)</span>.</p>
+<p><em>(iii)</em> Negative Binomial: <span class="math notranslate nohighlight">\(\mu(x) = \left(\frac{p}{1-(1-p)x}\right)^r = \sum_{N=0}^\infty \binom{k+r-1}{k} p^{r}(1-p)^k x^k\)</span>.</p>
+<p><em>(iv)</em> (*) Write down an intgral that can be used in a general case where a power of the PGF is not simply another PGF whose Taylor Series is known.</p>
+</li>
 <li><p>A traffic light allows a random number of cars to pass during each cycle.  The PGF for the number of cars passing in a single cycle is <span class="math notranslate nohighlight">\(\mu(x)\)</span>. Assume different cycles are independent.</p>
 <p><strong>(a)</strong> Write down the probability generating function for the total number of cars passing through the light over two consecutive cycles.</p>
 <p><strong>(b)</strong> Explain how you would use this generating function to find the probability that exactly <span class="math notranslate nohighlight">\(n\)</span> cars pass in two cycles.</p>
@@ -582,7 +591,7 @@ Each individual lives for an exponentially distributed amount of time with rate 
 <p><strong>(b)</strong> What would need to change about the setup of the Backward Kolmogorov Equation derivation?</p>
 <p><strong>(c)</strong> If you have time, derive the two equations.</p>
 </li>
-<li><p>Consider the two different definitions of the Continuous-Time Galton-Watson processes.  By referring to superposition<a class="footnote-reference brackets" href="#compound" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> of Poisson processes, explain why at time <span class="math notranslate nohighlight">\(t_i\)</span> we can assume that the time until the next event is exponentially distributed with rate <span class="math notranslate nohighlight">\(rX(t_i)\)</span>.</p></li>
+<li><p>Consider the two different definitions of the Continuous-Time Galton-Watson processes.  Assume we are using the definition based on individuals in which they have an exponentially distributed lifetime of rate <span class="math notranslate nohighlight">\(r\)</span>, corresponding to a Poisson process with rate <span class="math notranslate nohighlight">\(r\)</span>.  By referring to superposition<a class="footnote-reference brackets" href="#compound" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> of Poisson processes, explain why at time <span class="math notranslate nohighlight">\(t_i\)</span> we can assume that the time until the next event is exponentially distributed with rate <span class="math notranslate nohighlight">\(rX(t_i)\)</span>.</p></li>
 </ol>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
