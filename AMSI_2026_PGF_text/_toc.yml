@@ -59,6 +59,7 @@ parts:
     - file: notebooks/PracticeClasses/PracIntro
       sections:
       - file: notebooks/PracticeClasses/Prac1
+      - file: notebooks/PracticeClasses/Prac2
       
       
     - file: notebooks/Assignments/AssignmentsIntro
