@@ -545,7 +545,7 @@ document.write(`
 <p><em>(i</em>). Poisson: <span class="math notranslate nohighlight">\(\mu(x) = e^{\lambda (x-1)} = \sum_{k=0}^\infty \frac{e^{-\lambda} (\lambda x)^k}{k!}\)</span>.</p>
 <p><em>(ii)</em> Binomial: <span class="math notranslate nohighlight">\(\mu(x) = (1-p + px)^N = \sum_{k=0}^N \binom{N}{k} p^k(1-p)^{N-k}x^k\)</span>.</p>
 <p><em>(iii)</em> Negative Binomial: <span class="math notranslate nohighlight">\(\mu(x) = \left(\frac{p}{1-(1-p)x}\right)^r = \sum_{N=0}^\infty \binom{k+r-1}{k} p^{r}(1-p)^k x^k\)</span>.</p>
-<p><em>(iv)</em> Why is it harder to do this for the Geometric Distribution: <span class="math notranslate nohighlight">\(\mu(x)=\frac{1}{1-(1-p)x} = \sum_{k=1}^\infty (1-p)^{k-1} p x^k\)</span>?</p>
+<p><em>(iv)</em> Geometric distribution: <span class="math notranslate nohighlight">\(\mu(x)=\frac{pc}{1-(1-p)x} = \sum_{k=1}^\infty (1-p)^{k-1} p x^k\)</span>? (hint, compare with the Negative Binomial distribution)</p>
 <p><em>(v)</em> (*) Write down an intgral that can be used in a general case where a power of the PGF is not simply another PGF whose Taylor Series is known.</p>
 </li>
 <li><p>Consider a Galton–Watson branching process with offspring distribution having probability generating function</p>
