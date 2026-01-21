@@ -640,24 +640,25 @@ document.write(`
 <p><strong>(c)</strong> Plot the expected size at generation <span class="math notranslate nohighlight">\(g\)</span> for these same values.</p>
 <p><strong>(d)</strong> Plot the expected size conditional on not being extinct.</p>
 </li>
-<li><p>[Optional] Consider a Galton-Watson process with an offspring PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>, with <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> representing the PGF for <span class="math notranslate nohighlight">\(X_g(t)\)</span>.</p></li>
-</ol>
+<li><p>[Optional] Consider a Galton-Watson process with an offspring PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>, with <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> representing the PGF for <span class="math notranslate nohighlight">\(X_g(t)\)</span>.</p>
 <p><strong>(a)</strong> Define</p>
 <div class="math notranslate nohighlight">
 \[
-   \Psi_g(x) = \Phi_g(x) \frac{1}{1-x}
-   \]</div>
+    \Psi_g(x) = \Phi_g(x) \frac{1}{1-x}
+    \]</div>
 <p>Explain why <span class="math notranslate nohighlight">\([x^k]\psi_g(x)\)</span> gives the probability that <span class="math notranslate nohighlight">\(X_g \leq k\)</span>.</p>
 <p><strong>(b)</strong> If we try to use</p>
 <div class="math notranslate nohighlight">
 \[
-   [x^k]\psi_g(x) = \frac{1}{2\pi i} \oint_{|z|=1} \frac{\psi_g(x)}{z^{k+1}} \, dz
-   \]</div>
+    [x^k]\psi_g(x) = \frac{1}{2\pi i} \oint_{|z|=1} \frac{\psi_g(x)}{z^{k+1}} \, dz
+    \]</div>
 <p>why will there be issues around <span class="math notranslate nohighlight">\(z=1\)</span>?  <strong>Note - the initial version had a typo with the <span class="math notranslate nohighlight">\(i\)</span> missing from the denominator, and the wrong exponent on <span class="math notranslate nohighlight">\(z\)</span>.</strong></p>
 <p><strong>(c)</strong> Instead we will use the circle <span class="math notranslate nohighlight">\(|z|=1/2\)</span>.  Set <span class="math notranslate nohighlight">\(z = e^{i\theta}/2\)</span> for <span class="math notranslate nohighlight">\(0 \leq \theta \leq 2\pi\)</span>.  Rewrite the integral in terms of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <p><strong>(d)</strong> Adapt the method <code class="docutils literal notranslate"><span class="pre">Phi_coefficients_real</span></code> at https://github.com/Joel-Miller-Lab/AMSI2026_PGF/blob/main/AMSI_2026_PGF_tools/Galton_Watson.py
 and the methods it relies on to perform the integral above.  Note that the code in place uses the Fast Fourier Transform by default, but I do not believe this will work for a radius of <span class="math notranslate nohighlight">\(1/2\)</span>.  So instead you will need to set it up to perform the integral.  Ideally use Python or R.</p>
 <p><strong>(e)</strong> Choose a few simple offspring distributions and test the results.</p>
+</li>
+</ol>
 </section>
 </section>
 
