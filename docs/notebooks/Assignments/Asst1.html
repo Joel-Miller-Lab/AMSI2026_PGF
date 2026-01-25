@@ -215,13 +215,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -560,6 +563,7 @@ document.write(`
 </section>
 <section id="problem-set">
 <h2><span class="section-number">7.1.2. </span>Problem set<a class="headerlink" href="#problem-set" title="Link to this heading">#</a></h2>
+<p><strong>Any edits since the assignment was released are in bold</strong></p>
 <ol class="arabic">
 <li><p>Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable with distribution</p>
 <div class="math notranslate nohighlight">
@@ -595,7 +599,7 @@ document.write(`
 <li><p>In high school I came across a method that seemed to find all of the numbers that are both triangular numbers <span class="math notranslate nohighlight">\((m)(m+1)/2\)</span> and square numbers <span class="math notranslate nohighlight">\(n^2\)</span> (I couldn’t prove it at the time).</p>
 <p>Consider the sequence <span class="math notranslate nohighlight">\(a_n\)</span> defined by <span class="math notranslate nohighlight">\(a_0=1\)</span>, <span class="math notranslate nohighlight">\(a_1=2\)</span> and <span class="math notranslate nohighlight">\(a_{n+2} = a_n + 2a_{n+1}\)</span> and the sequence <span class="math notranslate nohighlight">\(b_n\)</span> defined by <span class="math notranslate nohighlight">\(b_0=1\)</span>, <span class="math notranslate nohighlight">\(b_1 = 3\)</span> and <span class="math notranslate nohighlight">\(b_{n+2} = b_n + 2b_{n+1}\)</span>.  Then <span class="math notranslate nohighlight">\((a_nb_n)^2\)</span> is both triangular and square.</p>
 <p>I’ve since learned that this property of the sequence is known, but it’s still an interesting result.  We can use OGFs to prove that these are both triangular and square (though it doesn’t prove that every triangular and square number is in the sequence).  Some of these steps follow our derivation of the formula for the Fibonacci numbers.</p>
-<p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> use direct calculate to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p>
+<p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> <strong>(only these three values)</strong> use direct calculate to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p>
 <p><strong>(b)</strong> Derive the OGFs <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> for both <span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span>.  <strong>Please disregard my prior advice about what this function should look like.  I misplaced my calculations when I wrote the question.  Ultimately, you should end up with something that gets a simple expression for <span class="math notranslate nohighlight">\(a_n\)</span> in (d) that somewhat resembles the expression stated for <span class="math notranslate nohighlight">\(b_n\)</span>.</strong></p>
 <p><strong>(c)</strong> Let <span class="math notranslate nohighlight">\(Q= 1+\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(R = 1-\sqrt{2}\)</span>.  Your denominators for the OGFs should equal <span class="math notranslate nohighlight">\((1-Qx)(1-Rx)\)</span>.  Write <span class="math notranslate nohighlight">\(f(x) = A/(1-Qx) + B/(1-Rx)\)</span>.  <strong>Find <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>.</strong></p>
 <p><strong>(d)</strong> Use this to write <span class="math notranslate nohighlight">\(a_n\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>. Similar steps show that <span class="math notranslate nohighlight">\(b_n = (Q^{n+1} + R^{n+1})/2\)</span>.</p>
@@ -632,7 +636,7 @@ document.write(`
 <li><p>Consider a Galton-Watson process with offspring distribution having PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
 <p><strong>(a)</strong> Explain why the extinction probability <span class="math notranslate nohighlight">\(\alpha\)</span> of a Galton-Watson process must equal <span class="math notranslate nohighlight">\(\mu(\alpha)\)</span>.</p>
 <p><strong>(b)</strong> We always have <span class="math notranslate nohighlight">\(1 = \mu(1)\)</span>.  Why does this not guarantee us that all Galton-Watson processes go extinct?</p>
-<p><strong>(c)</strong> Assume that <span class="math notranslate nohighlight">\(3\)</span> individuals of a  plant species are introduced into 3 locations in Victoria.  Find the extinction probability in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> calculated for a single introduction.</p>
+<p><strong>(c)</strong> Assume that <span class="math notranslate nohighlight">\(3\)</span> individuals of a  plant species are introduced in Victoria <strong>in separate locations (1 into each - my initial wording was vague, so I will also accept 3 into each)</strong>.  Find the extinction probability in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> calculated for a single introduction.</p>
 </li>
 <li><p>Consider a Galton-Watson process with offspring distibution having PGF <span class="math notranslate nohighlight">\(\mu_r(x) = (r + (2-r)x^2)/2\)</span> for <span class="math notranslate nohighlight">\(r=1\)</span>, <span class="math notranslate nohighlight">\(r=5/4\)</span>, and <span class="math notranslate nohighlight">\(r=3/2\)</span>.</p>
 <p><strong>(a)</strong> Show that for all of these values it goes extinct with probability <span class="math notranslate nohighlight">\(1\)</span>.</p>

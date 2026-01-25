@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.5. Simulation of Continuous-Time Galton-Watson Processes &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>3.5. Simulating a Poisson Process &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -216,13 +216,16 @@
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.5. Simulating a Poisson Process</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -493,7 +496,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Simulation of Continuous-Time Galton-Watson Processes</h1>
+    <h1>Simulating a Poisson Process</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -503,8 +506,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gillespie-algorithm">3.5.1. Gillespie Algorithm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3.5. Simulating a Poisson Process</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-continuous-time-galton-watson-processes">3.6. Simulation of Continuous-Time Galton-Watson Processes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gillespie-algorithm">3.6.1. Gillespie Algorithm</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -515,24 +523,179 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="simulation-of-continuous-time-galton-watson-processes">
-<h1><span class="section-number">3.5. </span>Simulation of Continuous-Time Galton-Watson Processes<a class="headerlink" href="#simulation-of-continuous-time-galton-watson-processes" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="simulating-a-poisson-process">
+<h1><span class="section-number">3.5. </span>Simulating a Poisson Process<a class="headerlink" href="#simulating-a-poisson-process" title="Link to this heading">#</a></h1>
+<p>Imagine rolling a <span class="math notranslate nohighlight">\(6\)</span>-sided die for which face number <span class="math notranslate nohighlight">\(1\)</span> is colored red and all others are colored black.  We roll it <span class="math notranslate nohighlight">\(6\)</span> times a second at regular intervals for <span class="math notranslate nohighlight">\(3\)</span> seconds.  We simulate this many times.</p>
+<p>We plot</p>
+<ul class="simple">
+<li><p>the “survival probability” — the probability that all rolls have been black up to time <span class="math notranslate nohighlight">\(t\)</span>,</p></li>
+<li><p>the distribution of the first time the red face comes up, and</p></li>
+<li><p>the distribution of the total number of times the red face comes up in the <span class="math notranslate nohighlight">\(3\)</span> seconds.</p></li>
+</ul>
+<p>On average we expect the red face to appear 3 times out of those 3 seconds (on average 1 per second).  However, there is variation for across simulations.</p>
+<p>Then we switch to doing the same thing with <span class="math notranslate nohighlight">\(N\)</span>-sided dice for which the <span class="math notranslate nohighlight">\(1\)</span> face is red and all others are black. We roll it <span class="math notranslate nohighlight">\(N\)</span> times a second for <span class="math notranslate nohighlight">\(3\)</span> seconds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">nsim</span><span class="o">=</span><span class="mi">20000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exactly N rolls per second.</span>
+<span class="sd">    One red face, N−1 non-red faces.</span>
+<span class="sd">    Rolls occur at times 0, 1/N, 2/N, ..., (nsteps-1)/N.</span>
+<span class="sd">    If the first roll is red, first_red_time = 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nsteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">tgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+
+    <span class="n">red_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nsim</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">no_red_yet</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">nsim</span><span class="p">,</span> <span class="n">nsteps</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">first_red_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nsim</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">sim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsim</span><span class="p">):</span>
+        <span class="n">seen_red</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+            <span class="n">roll</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># uniform on {1,...,N}</span>
+            <span class="k">if</span> <span class="n">roll</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">seen_red</span><span class="p">:</span>
+                    <span class="n">first_red_time</span><span class="p">[</span><span class="n">sim</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span> <span class="o">/</span> <span class="n">N</span>
+                    <span class="n">seen_red</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">red_count</span><span class="p">[</span><span class="n">sim</span><span class="p">,</span> <span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span>
+            <span class="n">no_red_yet</span><span class="p">[</span><span class="n">sim</span><span class="p">,</span> <span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">seen_red</span>
+
+    <span class="n">survival</span> <span class="o">=</span> <span class="n">no_red_yet</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># P(no red yet) at each time</span>
+    <span class="n">total_reds</span> <span class="o">=</span> <span class="n">red_count</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>        <span class="c1"># total reds over the interval</span>
+    <span class="k">return</span> <span class="n">tgrid</span><span class="p">,</span> <span class="n">survival</span><span class="p">,</span> <span class="n">first_red_time</span><span class="p">,</span> <span class="n">total_reds</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_for_many_N</span><span class="p">(</span><span class="n">N_list</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">nsim</span><span class="o">=</span><span class="mi">20000</span><span class="p">):</span>
+    <span class="c1"># --- fixed color per N (consistent across all figures) ---</span>
+    <span class="n">color_cycle</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.prop_cycle&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">by_key</span><span class="p">()[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span>
+    <span class="n">color_for_N</span> <span class="o">=</span> <span class="p">{</span><span class="n">N</span><span class="p">:</span> <span class="n">color_cycle</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">color_cycle</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">N</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">N_list</span><span class="p">)}</span>
+
+    <span class="c1"># run sims once per N and store results</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_list</span><span class="p">:</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">nsim</span><span class="o">=</span><span class="n">nsim</span><span class="p">)</span>
+
+    <span class="c1"># =========================================================</span>
+    <span class="c1"># 1) Survival probabilities on the same axes</span>
+    <span class="c1"># =========================================================</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_list</span><span class="p">:</span>
+        <span class="n">tgrid</span><span class="p">,</span> <span class="n">survival</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">tgrid</span><span class="p">,</span> <span class="n">survival</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color_for_N</span><span class="p">[</span><span class="n">N</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time (seconds)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;P(no red yet)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Survival probability&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># =========================================================</span>
+    <span class="c1"># 2) First-red time distributions on the same axes</span>
+    <span class="c1">#    bins of width 1/N, and first roll red is at time 0</span>
+    <span class="c1">#    (we plot step histograms so no shading)</span>
+    <span class="c1"># =========================================================</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_list</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">first_red</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>
+        <span class="n">finite_times</span> <span class="o">=</span> <span class="n">first_red</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">first_red</span><span class="p">)]</span>
+
+        <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>  <span class="c1"># to ensure bin edges don&#39;t fall exactly on data points</span>
+        <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">N</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>  <span class="c1"># exact width 1/N on [0,T]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+            <span class="n">finite_times</span><span class="p">,</span>
+            <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span>
+            <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color_for_N</span><span class="p">[</span><span class="n">N</span><span class="p">],</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time of first red (seconds)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;probability density&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;First-red time distribution (bin width = 1/N)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># =========================================================</span>
+    <span class="c1"># 3) Distribution of total number of reds in T seconds</span>
+    <span class="c1">#    (step histograms, same axes, legend)</span>
+    <span class="c1"># =========================================================</span>
+    <span class="c1"># Choose a common x-range for all N so they truly share axes.</span>
+    <span class="n">max_k</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_list</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">total_reds</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>
+        <span class="n">current_max</span> <span class="o">=</span> <span class="n">total_reds</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_max</span> <span class="o">&gt;</span> <span class="n">max_k</span><span class="p">:</span>
+            <span class="n">max_k</span> <span class="o">=</span> <span class="n">current_max</span>
+    <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_k</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>     <span class="c1"># bins centered at integers</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_list</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">total_reds</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+            <span class="n">total_reds</span><span class="p">,</span>
+            <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span>
+            <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color_for_N</span><span class="p">[</span><span class="n">N</span><span class="p">],</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;number of red outcomes in </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2"> second(s)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;probability&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of total red outcomes&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Example</span>
+<span class="n">plot_for_many_N</span><span class="p">(</span><span class="n">N_list</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">T</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">nsim</span><span class="o">=</span><span class="mi">40000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cb9048ce319943965c575f1b3d940fdd6e93e222cf82babe592d1fd98fb0de65.png" src="../../_images/cb9048ce319943965c575f1b3d940fdd6e93e222cf82babe592d1fd98fb0de65.png" />
+<img alt="../../_images/452f3bbd4227f608a4e6069df45b861383a0e6e5008c9d866ec56da70c33ffee.png" src="../../_images/452f3bbd4227f608a4e6069df45b861383a0e6e5008c9d866ec56da70c33ffee.png" />
+<img alt="../../_images/4c81254f0e1c3da716364df0372526a2a539862cabf737377b9c8f33a39d75e1.png" src="../../_images/4c81254f0e1c3da716364df0372526a2a539862cabf737377b9c8f33a39d75e1.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="simulation-of-continuous-time-galton-watson-processes">
+<h1><span class="section-number">3.6. </span>Simulation of Continuous-Time Galton-Watson Processes<a class="headerlink" href="#simulation-of-continuous-time-galton-watson-processes" title="Link to this heading">#</a></h1>
+<p><strong>List of significant edits</strong></p>
+<ul class="simple">
+<li><p>22 Jan:
+Significant edits</p></li>
+</ul>
 <section id="gillespie-algorithm">
-<h2><span class="section-number">3.5.1. </span>Gillespie Algorithm<a class="headerlink" href="#gillespie-algorithm" title="Link to this heading">#</a></h2>
-<p>A highly-efficient and simple-to-implement algorithm for simulating Continuous-Time Galton-Watson processes is the <strong>Gillespie Algorithm</strong>.  To</p>
-<p>This section explains the algorithm used to simulate these processes.  This is not the focus of the subject, but it is useful to know as we are using it for comparisons.</p>
-<p>One of the most common ways to simulate a Continuous-Time Galton-Watson Process is the so-called Gillespie Algorithm.  For most cases this is very fast, and it avoids some complications that arise for other methods that might be based on looking at discrete time steps.</p>
-<p>The algorithm is based on combining Poisson Processes into a superposition Poisson processes.</p>
-<p>First we consider the process for an individual in which an individual is removed at rate <span class="math notranslate nohighlight">\(r\)</span> and immediately replaced by  <span class="math notranslate nohighlight">\(k\)</span> individuals with probabilities <span class="math notranslate nohighlight">\(p_0, p_2, p_3, \ldots\)</span> (we have <span class="math notranslate nohighlight">\(p_1=0\)</span>).  We can combine all of these into a single population-wide Poisson process with rate <span class="math notranslate nohighlight">\(r \ell\)</span> (if <span class="math notranslate nohighlight">\(\ell\)</span> is the current population size).</p>
-<p>The waiting time until the next event can be chosen from an exponential distribution with rate <span class="math notranslate nohighlight">\(r\ell\)</span> (this is the continous-time equivalent of the geometric distribution, which corresponds to a survival function of <span class="math notranslate nohighlight">\(e^{-r\ell t}\)</span>).  Note that different computer languages may want the exponential distribution argument to be the rate <span class="math notranslate nohighlight">\(r\)</span> or the scale <span class="math notranslate nohighlight">\(1/r\)</span></p>
-<p>When an event occurs, <span class="math notranslate nohighlight">\(k\)</span> is chosen from the distribution, and then the population size is replaced by <span class="math notranslate nohighlight">\(\ell - 1 + k\)</span>.  The algorithm continues with this new value of <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<h2><span class="section-number">3.6.1. </span>Gillespie Algorithm<a class="headerlink" href="#gillespie-algorithm" title="Link to this heading">#</a></h2>
+<p>A highly-efficient and simple-to-implement algorithm for simulating Continuous-Time Galton-Watson processes is the <strong>Gillespie Algorithm</strong>.  This algorithm is actually more general and applies whenever we have superposition of Poisson processes.</p>
+<p>The key detail underlying the Gillespie Algorithm is that if everything is a Poisson Process, then we can use superposition of Poisson processes to simplify things.  We can calculate the total rate associated with the current state of the system.  Then we choose the waiting time until the next event from the appropriate exponential distribution.  This lets us (exactly) update the time.  Next, we choose the event to occur from the appropriate distribution (proportional to the rates of the events).  Once we identify the event, we update the system state and rpeat these steps.</p>
+<p>For this, we will use <a class="reference internal" href="CtsTimeGaltWat.html#def-CTGW-XFocused">Definition 3.3</a> which focuses on just total counts, and combines all of the Poisson processes for each individual into a superposition of Poisson processes for the total population.</p>
+<p>The waiting time <span class="math notranslate nohighlight">\(T\)</span> until the time <span class="math notranslate nohighlight">\(t_{i+1}=t_i+T\)</span> of the next event can be chosen from an exponential distribution with rate <span class="math notranslate nohighlight">\(rX(t_i)\)</span> (this is the continous-time equivalent of the geometric distribution, which corresponds to a survival function of <span class="math notranslate nohighlight">\(e^{-r X(t_i) T}\)</span>).  Note that different computer languages may want the exponential distribution argument to be the rate <span class="math notranslate nohighlight">\(r\)</span> or the scale <span class="math notranslate nohighlight">\(1/r\)</span></p>
+<p>When an event occurs, <span class="math notranslate nohighlight">\(k\)</span> is chosen from the distribution, and then the population size is replaced by <span class="math notranslate nohighlight">\(X(t_{i+1})= X(t_i) - 1 + k\)</span>.  If <span class="math notranslate nohighlight">\(X(t_{i+1})&gt;0\)</span>, the algorithm repeats with this new value, otherwise the process has gone extinct and the simulation terminates.</p>
 <div class="proof algorithm admonition" id="Alg-Gillespie">
-<p class="admonition-title"><span class="caption-number">Algorithm 3.1 </span> (Gillespie Algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 3.1 </span> (Gillespie Algorithm for a Continuous-time Galton-Watson Process)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">float</span> <span class="n">r</span> <span class="c1">#rate of one individual&#39;s process</span>
 <span class="n">function</span> <span class="n">FindK</span> <span class="c1">#to generate k given distribution p_k</span>
-<span class="nb">float</span> <span class="n">maxtime</span> <span class="c1">#stopping condition</span>
+<span class="nb">float</span> <span class="n">maxtime</span> <span class="c1">#time to stop (if X not equal to 0)</span>
 </pre></div>
 </div>
 <p><strong>Algorithm</strong></p>
@@ -540,17 +703,21 @@ document.write(`
 <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span><span class="p">]</span>
 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">PopSize</span><span class="p">]</span>
 <span class="n">While</span> <span class="n">PopSize</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">time</span><span class="o">&lt;</span><span class="n">maxtime</span><span class="p">:</span>
-    <span class="n">TimeToNextEvent</span> <span class="o">=</span> <span class="n">exponential</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">PopSize</span><span class="o">*</span><span class="n">r</span><span class="p">))</span> <span class="c1">#note, numpy wants 1/rate</span>
+    <span class="n">TimeToNextEvent</span> <span class="o">=</span> <span class="n">ExponentialRandVar</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">PopSize</span><span class="o">*</span><span class="n">r</span><span class="p">))</span> <span class="c1">#note, numpy wants 1/rate</span>
     <span class="n">time</span> <span class="o">+=</span> <span class="n">TimeToNextEvent</span>
     <span class="n">k</span> <span class="o">=</span> <span class="n">FindK</span><span class="p">()</span>
     <span class="n">PopSize</span> <span class="o">+=</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span>
     <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
     <span class="n">sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Popsize</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">times</span><span class="p">,</span> <span class="n">sizes</span>
+</pre></div>
+</div>
+<p><strong>Outputs</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">times</span><span class="p">,</span> <span class="n">sizes</span>
 </pre></div>
 </div>
 </section>
-</div><div class="cell docutils container">
+</div><p>Here is an implementation and sample output.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -576,94 +743,24 @@ document.write(`
 
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">FindK</span><span class="p">():</span>
+    <span class="c1">#k=rng.poisson(1)</span>
+    <span class="c1">#return k</span>
+
     <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">&lt;</span><span class="n">beta</span><span class="o">/</span><span class="n">r</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">2</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
-    
-<span class="n">times</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">Gillespie</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">FindK</span><span class="p">,</span> <span class="n">maxtime</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span>
+
+<span class="n">times</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">Gillespie</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">FindK</span><span class="p">,</span> <span class="n">maxtime</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">sizes</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1d1e407f4d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1590915da90&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/a0ed71d97c8faa5759463170f3201614bfae18a82efdb9854c6c993764818ee3.png" src="../../_images/a0ed71d97c8faa5759463170f3201614bfae18a82efdb9854c6c993764818ee3.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-
-
-<span class="c1"># ------------------------------------------------------------</span>
-<span class="c1"># Model parameters</span>
-<span class="c1"># ------------------------------------------------------------</span>
-
-<span class="n">beta</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">gamma</span>
-<span class="n">maxtime</span> <span class="o">=</span> <span class="mi">5</span>
-
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">FindK</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Birth–death mechanism:</span>
-<span class="sd">      with probability beta / r  -&gt; birth event (k = 2)</span>
-<span class="sd">      with probability gamma / r -&gt; death event (k = 0)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">beta</span> <span class="o">/</span> <span class="n">r</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">2</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-
-
-<span class="c1"># ------------------------------------------------------------</span>
-<span class="c1"># Run Gillespie simulation and generate the tree</span>
-<span class="c1"># ------------------------------------------------------------</span>
-
-<span class="n">G</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">GillespieTree</span><span class="p">(</span>
-    <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
-    <span class="n">FindK</span><span class="o">=</span><span class="n">FindK</span><span class="p">,</span>
-    <span class="n">maxtime</span><span class="o">=</span><span class="n">maxtime</span><span class="p">,</span>
-    <span class="n">rng</span><span class="o">=</span><span class="n">rng</span>
-<span class="p">)</span>
-
-<span class="c1"># Optional: plot population size over time</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">sizes</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;population size&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Population size over time&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-
-<span class="c1"># ------------------------------------------------------------</span>
-<span class="c1"># Plot the genealogical tree</span>
-<span class="c1"># ------------------------------------------------------------</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plot_ct_tree_leaf_layout_with_offsets</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">maxtime</span><span class="o">=</span><span class="n">maxtime</span><span class="p">,</span> <span class="n">show_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/bb52803066ffaa769f6d0759c6aa1c3bc22a596e16fa5de1565536c41b052fa3.png" src="../../_images/bb52803066ffaa769f6d0759c6aa1c3bc22a596e16fa5de1565536c41b052fa3.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 900x600 with 0 Axes&gt;
-</pre></div>
-</div>
-<img alt="../../_images/02f8c259d583c04da46fe19e309f6a885a82fcafe844890b7620dd73a14461c5.png" src="../../_images/02f8c259d583c04da46fe19e309f6a885a82fcafe844890b7620dd73a14461c5.png" />
+<img alt="../../_images/c011aa96989182080c6bfd11f20b4d0e850c8268bbe1bc5afd9fe65e203972de.png" src="../../_images/c011aa96989182080c6bfd11f20b4d0e850c8268bbe1bc5afd9fe65e203972de.png" />
 </div>
 </div>
 </section>
@@ -733,8 +830,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gillespie-algorithm">3.5.1. Gillespie Algorithm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3.5. Simulating a Poisson Process</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-continuous-time-galton-watson-processes">3.6. Simulation of Continuous-Time Galton-Watson Processes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gillespie-algorithm">3.6.1. Gillespie Algorithm</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

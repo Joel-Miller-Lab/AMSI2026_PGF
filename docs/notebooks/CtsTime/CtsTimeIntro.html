@@ -216,13 +216,16 @@
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -520,6 +523,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="continuous-time-galton-watson-processes">
 <h1><span class="section-number">3. </span>Continuous-Time Galton-Watson Processes<a class="headerlink" href="#continuous-time-galton-watson-processes" title="Link to this heading">#</a></h1>
+<p><strong>List of Edits 25 Jan:</strong></p>
+<ul class="simple">
+<li><p>Add examples showing a Poisson Process as the limiting behavior as we roll an <span class="math notranslate nohighlight">\(N\)</span>-sided at <span class="math notranslate nohighlight">\(rN\)</span> regular intervals per unit time.</p></li>
+</ul>
+<p><strong>End List</strong></p>
 <p>So far, we’ve been thinking about Galton-Watson Processes as evolving in generations.  Each “time-step” is a new generation.  This leads to a discrete-time setting.</p>
 <p>However, there are many cases where we might want to model a system as evolving in time.  This is particularly true if individuals may have different life-spans, so that generations overlap in time.</p>
 <p>We now consider a continuous-time version of the Galton-Watson process.</p>
@@ -540,8 +548,34 @@ document.write(`
 </section>
 </div><p>The notation <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> refers to an error that shrinks much faster than <span class="math notranslate nohighlight">\(\Delta t\)</span>:  <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)/\Delta t \to 0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
 <p>In the definition above, you can reasonably think of <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> as being something quadratic in <span class="math notranslate nohighlight">\(\Delta t\)</span>.  So even though <span class="math notranslate nohighlight">\(r \Delta t \to 0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, the error term goes to <span class="math notranslate nohighlight">\(0\)</span> much faster.  So the probability that the event happens in a time interval, divided by the length of the time interval <span class="math notranslate nohighlight">\(\mathbb{P}[\text{event}]/\Delta t = [r \Delta t + \mathcal{o}(\Delta t))/\Delta t \to r\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.  So the error term is very small compared to the leading term (which itself is quite small).<a class="footnote-reference brackets" href="#infinitesimal" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-<div class="proof example admonition" id="example-1">
-<p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Poisson Processes)</p>
+<div class="proof example admonition" id="example-PoissonDiscreteLimitRate1">
+<p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Poisson Process as limit of discrete random die rolls)</p>
+<section class="example-content" id="proof-content">
+<p>Assume that we have an <span class="math notranslate nohighlight">\(N\)</span>-sided die, where <span class="math notranslate nohighlight">\(N\)</span> is large.  We paint one side red.  Assume we perform <span class="math notranslate nohighlight">\(TN\)</span> rolls at times <span class="math notranslate nohighlight">\(t_0\)</span>, <span class="math notranslate nohighlight">\(t_0+1/N\)</span>, <span class="math notranslate nohighlight">\(t_0 + 2/N\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(t_0 + (TN-1)/N\)</span>, tracking the number of times it comes up red.  (implicitly we assume <span class="math notranslate nohighlight">\(TN\)</span> is an integer for simplicity, but we can take <span class="math notranslate nohighlight">\(\lfloor TN \rfloor\)</span> if it is not.)</p>
+<ul class="simple">
+<li><p>The <em>expected number of times</em> it comes up red in the time interval <span class="math notranslate nohighlight">\([t_0, t_0 + T )\)</span> is the number of rolls times the probability of red per roll, which is <span class="math notranslate nohighlight">\(TN/N = T\)</span>.</p></li>
+<li><p>The probability that it <em>does not</em> come up red at all in the time interval <span class="math notranslate nohighlight">\([T_0, t_0+T)\)</span> is <span class="math notranslate nohighlight">\((1-1/N)^{TN} = \left((1-1/N)^N\right)^T\)</span>.  For large <span class="math notranslate nohighlight">\(N\)</span>, this approaches <span class="math notranslate nohighlight">\(e^{-T}\)</span>.</p></li>
+</ul>
+<p>In the <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit, we can think of this as being a Poisson process of rate <span class="math notranslate nohighlight">\(r=1\)</span>.  The exercises ask you to show that this satisfies the definition.</p>
+</section>
+</div><div class="proof example admonition" id="example-PoissonDiscreteLimitRateR">
+<p class="admonition-title"><span class="caption-number">Example 3.2 </span> (Poisson Process of rate <span class="math notranslate nohighlight">\(r\)</span> as a limit of die rolls)</p>
+<section class="example-content" id="proof-content">
+<p>We look at two generalizations of <a class="reference internal" href="#example-PoissonDiscreteLimitRate1">Example 3.1</a> to allow for different rates.</p>
+<p>In the first, we assume that we change the rolling interval to be <span class="math notranslate nohighlight">\(r\)</span> times per unit time interval.  So we roll the die at times <span class="math notranslate nohighlight">\(t_0, t_0+1/(rN), t_0+2/(rN) \cdots, t_0+(TrN-1)/(rN)\)</span>.  Because we are now rolling it <span class="math notranslate nohighlight">\(rTN\)</span> times rather than <span class="math notranslate nohighlight">\(TN\)</span> times, we find that in the <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit:</p>
+<ul class="simple">
+<li><p>The expected number of times it comes up red is <span class="math notranslate nohighlight">\(rT\)</span>,</p></li>
+<li><p>The probability it does not come up red in any roll is <span class="math notranslate nohighlight">\(e^{-rT}\)</span>.</p></li>
+</ul>
+<p>In the second generalization, we assume that the die is painted so that with probability <span class="math notranslate nohighlight">\(r/N\)</span> it comes up red, but we still roll at intervals separated by distance <span class="math notranslate nohighlight">\(1/N\)</span>.  Again for large <span class="math notranslate nohighlight">\(N\)</span>:</p>
+<ul class="simple">
+<li><p>The expected number of times it comes up red is <span class="math notranslate nohighlight">\(rT\)</span>,</p></li>
+<li><p>The probability it does not come up red in any roll is <span class="math notranslate nohighlight">\(e^{-rT}\)</span>.</p></li>
+</ul>
+<p>The <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit of these two mental images are both Poisson processes with rate <span class="math notranslate nohighlight">\(r\)</span>.</p>
+</section>
+</div><div class="proof example admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 3.3 </span> (Sample Applications of Poisson Processes)</p>
 <section class="example-content" id="proof-content">
 <p>Poisson processes are often used as a first step towards modelling events that we can approximate as independent.  For example:</p>
 <ul class="simple">
@@ -557,7 +591,7 @@ document.write(`
 <section class="remark-content" id="proof-content">
 <p>A common misconception in terminology is to use the word “probability” when meaning “rate”.  They are closely related, but are not the same.  The probability shrinks as <span class="math notranslate nohighlight">\(\Delta t\)</span> shrinks, but the rate remains the same.  They are only (almost) the same if <span class="math notranslate nohighlight">\(\Delta t= 1\)</span> and the rate is very small.  We usually want to know what happens for <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-3">
+</div><div class="proof theorem admonition" id="theorem-5">
 <p class="admonition-title"><span class="caption-number">Theorem 3.1 </span> (Combining Poisson Processes)</p>
 <section class="theorem-content" id="proof-content">
 <p>Consider two Poisson Process, with rates <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span> each.  Then the next event occurs with combined rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.  It is event <span class="math notranslate nohighlight">\(1\)</span> with probability <span class="math notranslate nohighlight">\(r_1/(r_1+r_2)\)</span> and event <span class="math notranslate nohighlight">\(2\)</span> with probability <span class="math notranslate nohighlight">\(r_2/(r_1+r_2)\)</span>.  The two events cannot both occur at the same time.</p>
@@ -646,7 +680,7 @@ document.write(`
 </div>
 <p>In fact, this will hold true for an arbitrary number of events.</p>
 <p>This means that rather than thinking about competing Poisson Processes each having its own rate, we can think about a single combined Poisson Process with the combined rates. When an event occurs, which event occurs is random, with probabilities equal to the individual rates divided by the combined rate.  This motivates the definition of superposition of Poisson processes (<strong>It’s very embarrasing, but I mixed terminology when I wrote these notes — what I called a <em>compound Poisson process</em> is actually a <em>superposition of Poisson processes</em>.</strong>).</p>
-<div class="proof definition admonition" id="definition-4">
+<div class="proof definition admonition" id="definition-6">
 <p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Superposition of Poisson Processes)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a set of Poisson processes with rates <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> happening at the same time, the <strong>Superposition of the Poisson Processes</strong>, is itself a Poisson process with rate <span class="math notranslate nohighlight">\(r = \sum r_i\)</span>.  When an event occurs with the superposition process, the probability it is event <span class="math notranslate nohighlight">\(i\)</span> is <span class="math notranslate nohighlight">\(r_i/r\)</span>.</p>
@@ -684,6 +718,19 @@ where we used <span class="math notranslate nohighlight">\((1+c/N)^N \to e^{-c}\
 <p><strong>(a)</strong> Explain why the number of intervals until the first event occurs has a Geometric Distribution and find its PGF.</p>
 <p><strong>(b)</strong> Using the PGF, find the average number of intervals (of length <span class="math notranslate nohighlight">\(\Delta t\)</span>) until the first event, and thus find the average amount of time until the start of the interval in which the first event occurs.</p>
 <p><strong>(c)</strong> Taking <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, find the average time until the first event.</p>
+</li>
+<li><p>This question is intended to give an example of a Poisson process.  Consider one person rolling a (fair)<span class="math notranslate nohighlight">\(6\)</span>-sided die with one side colored red exactly six times every second (that is, rolls occur at <span class="math notranslate nohighlight">\(t=0, 1/6, 2/6, 3/6, \ldots\)</span>).</p>
+<p><strong>(a)</strong> What is the expected number of times it comes up red in the time interval <span class="math notranslate nohighlight">\([t_0, t_0+1)\)</span>?</p>
+<p><strong>(b)</strong> What is the probability it comes up red at least once in that time interval?</p>
+<p><strong>(c)</strong> Now assume that the die is replaced with an <span class="math notranslate nohighlight">\(N\)</span>-sided die, still with one side colored red, exactly <span class="math notranslate nohighlight">\(N\)</span> times a second.  What are</p>
+<p><em>(i)</em> the expected number of times it comes up red in a second?</p>
+<p><em>(ii)</em> the probability it comes up red at least once in a second?</p>
+<p><strong>(d)</strong> Consider <span class="math notranslate nohighlight">\(N \to \infty\)</span>.  This becomes a Poisson process. What are the expected number of red rolls and the probability of a red roll in one second as <span class="math notranslate nohighlight">\(N \to \infty\)</span>?</p>
+<p><strong>(e)</strong> For <span class="math notranslate nohighlight">\(N \to \infty\)</span>, replace one second by a time interval of length <span class="math notranslate nohighlight">\(\Delta t\)</span>.  What are the expected number of red rolls in that time interval?</p>
+<p><strong>(f)</strong> What is the probability of at least one red roll in the time interval of length <span class="math notranslate nohighlight">\(\Delta t\)</span>?  Expand it as a Taylor series up to the <span class="math notranslate nohighlight">\(\Delta t^2\)</span> term.</p>
+<p><strong>(f)</strong> Looking at the definition of a Poisson Process, what is the “rate of a red roll”?</p>
+<p><strong>(g)</strong> Now consider an <span class="math notranslate nohighlight">\(N\)</span>-sided die with one red side which is rolled <span class="math notranslate nohighlight">\(rN\)</span> times per second.  What are the expected number of red rolls and the probability of a red roll in a time interval of duration <span class="math notranslate nohighlight">\(\Delta t\)</span>?</p>
+<p><strong>(h)</strong> According to the definition of a Poisson process, what is the “rate of a red roll” for this case?</p>
 </li>
 </ol>
 <hr class="footnotes docutils" />

@@ -216,13 +216,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -515,9 +518,10 @@ document.write(`
 <li><p>With probability <span class="math notranslate nohighlight">\(0.4\)</span>, <span class="math notranslate nohighlight">\(X\)</span> has probability generating function <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.</p></li>
 </ul>
 <p>Independently of this choice, let <span class="math notranslate nohighlight">\(Y\)</span> be a Bernoulli<span class="math notranslate nohighlight">\((0.5)\)</span> random variable (so <span class="math notranslate nohighlight">\(Y=0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> with equal probability), and define <span class="math notranslate nohighlight">\(Z = X + Y\)</span>.</p>
-<p><strong>(a)</strong> Find the PGFs for <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> in terms of <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.</p>
-<p><strong>(b)</strong> Write down the probability generating function of <span class="math notranslate nohighlight">\(Z\)</span>.</p>
-<p><strong>(c)</strong> Explain how the coefficient of <span class="math notranslate nohighlight">\(x^k\)</span> in this generating function can be interpreted in terms of the underlying random mechanism that produces <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+<p><strong>(a)</strong> Find the PGF for <span class="math notranslate nohighlight">\(X\)</span> in terms of <span class="math notranslate nohighlight">\(\mu_1(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)\)</span>.</p>
+<p><strong>(b)</strong> Find the PGF for <span class="math notranslate nohighlight">\(Y\)</span></p>
+<p><strong>(c)</strong> Write down the probability generating function of <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+<p><strong>(d)</strong> Explain how the coefficient of <span class="math notranslate nohighlight">\(x^k\)</span> in this generating function can be interpreted.</p>
 </li>
 <li><p>Let <span class="math notranslate nohighlight">\(D\)</span> be the number of customers arriving at a store in one hour, with PGF <span class="math notranslate nohighlight">\(\mu_D(x)\)</span>.  Each customer independently purchases a random number of items, with PGF <span class="math notranslate nohighlight">\(\mu_S(x)\)</span>.  Let <span class="math notranslate nohighlight">\(T\)</span> be the total number of items purchased in that hour and <span class="math notranslate nohighlight">\(\psi(x)\)</span> be the PGF of <span class="math notranslate nohighlight">\(T\)</span>.</p>
 <p><strong>(a)</strong> Express <span class="math notranslate nohighlight">\(\psi(x)\)</span> in terms of <span class="math notranslate nohighlight">\(\mu_D(x)\)</span> and <span class="math notranslate nohighlight">\(\mu_S(x)\)</span>.</p>
@@ -590,7 +594,7 @@ document.write(`
    \]</div>
 <p>represents.</p>
 </li>
-<li><p>Review the derivation of <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span> in the notes.  Adapt it to find the generation-based equivalent for <span class="math notranslate nohighlight">\(\Phi_{g_1+g_2}(x)\)</span>.</p></li>
+<li><p>Review the derivation of <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span> in the notes.  In the generation-based case we focused on just <span class="math notranslate nohighlight">\(\Phi_{g+1}(x)\)</span>.  Adapt the derivation of <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span> to find the generation-based equivalent for <span class="math notranslate nohighlight">\(\Phi_{g_1+g_2}(x)\)</span>.</p></li>
 <li><p>We derived the Forward and Backward Kolmogorov Equations for the case of one initial individual.  Assume instead that the process begins with <span class="math notranslate nohighlight">\(2\)</span> individuals.</p>
 <p><strong>(a)</strong> What would need to change about the setup of the Forward Kolmogorov Equation derivation?</p>
 <p><strong>(b)</strong> What would need to change about the setup of the Backward Kolmogorov Equation derivation?</p>

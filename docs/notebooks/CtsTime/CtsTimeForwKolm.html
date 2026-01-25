@@ -216,13 +216,16 @@
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">3.3. Forward Kolmogorov Equations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulation of Continuous-Time Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.2. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.3. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.4. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -611,7 +614,7 @@ We will derive a partial differential equation for <span class="math notranslate
 <p>with initial condition <span class="math notranslate nohighlight">\(\Phi(x,0)=x\)</span>.</p>
 </section>
 </div><div class="proof example admonition" id="example-ForwKolmPureBirth">
-<p class="admonition-title"><span class="caption-number">Example 3.2 </span> (A pure birth process)</p>
+<p class="admonition-title"><span class="caption-number">Example 3.4 </span> (A pure birth process)</p>
 <section class="example-content" id="proof-content">
 <p>Assume individuals give birth to a single individual with rate <span class="math notranslate nohighlight">\(\beta\)</span>.  Further assume that they never die.  In our context when they give birth, this is equivalent to replacing them by two indviduals.  Here <span class="math notranslate nohighlight">\(r=\beta\)</span> and <span class="math notranslate nohighlight">\(\hat{\mu}(x)=x^2\)</span>, and <span class="math notranslate nohighlight">\(\Phi(x,0)=x\)</span>.  We have</p>
 <div class="math notranslate nohighlight">

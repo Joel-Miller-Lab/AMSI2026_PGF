@@ -1,0 +1,893 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.3. Statistics of small outbreaks &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisCtsTimeSizeDist_Sim';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.4. Early Outbreak Stage and Galton-Watson Processes" href="InfDisAsGaltWat.html" />
+    <link rel="prev" title="4.2. Infectious Diseases in Continuous Time" href="InfDisCtsTime.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Probability Generating Functions and Biological Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../GaltonWatson/GaltWat.html">2. The Galton-Watson Process</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at Successive Generations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">5. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">5.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">5.2. Computer-based exploration of Galton-Watson Processes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac2.html">6.2. Probability Generating Functions, Practical Class 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Assignments/AssignmentsIntro.html">7. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst1.html">7.1. Assignment 1</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/main?urlpath=lab/tree/AMSI_2026_PGF_text/notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Statistics of small outbreaks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sir-simulations">4.3.1. SIR simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sis-simulations">4.3.2. SIS Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#size-distribution-of-small-outbreaks">4.3.3. Size distribution of small outbreaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.3.4. Self-test</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="statistics-of-small-outbreaks">
+<h1><span class="section-number">4.3. </span>Statistics of small outbreaks<a class="headerlink" href="#statistics-of-small-outbreaks" title="Link to this heading">#</a></h1>
+<p>We now study the statitistics of final sizes of outbreaks for both SIS and SIR models.</p>
+<p>We use the same Gillespie simulations algorithms as in the previous section, but take them from the package of tools included with this text.</p>
+<section id="sir-simulations">
+<h2><span class="section-number">4.3.1. </span>SIR simulations<a class="headerlink" href="#sir-simulations" title="Link to this heading">#</a></h2>
+<p>For the SIR case, we plot the probability distribution of the total number of infections to occur <span class="math notranslate nohighlight">\(R(\infty)\)</span>.  We show how these depend on the total population size <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gillespie_SIR_model</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">gammas</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">750</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">ylim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.003</span><span class="p">)):</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">mainax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">])</span>
+    <span class="n">inset_ax1</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim1</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim1</span><span class="p">)</span>
+    <span class="n">inset_ax2</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.55</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.25</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim2</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="n">gammas</span><span class="p">:</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">R0</span> <span class="o">*</span> <span class="n">gamma</span>
+        <span class="n">I0</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">final_sizes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numsims</span><span class="p">):</span>
+            <span class="n">t</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">Gillespie_SIR_model</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">I0</span><span class="p">,</span> <span class="n">I0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+            <span class="n">final_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">final_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Probability: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+        <span class="n">inset_ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">inset_ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+
+        <span class="c1">#modifying cumulative dist plot followinghttps://stackoverflow.com/a/50711003/2966723</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">findobj</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span><span class="o">.</span><span class="n">vertices</span>
+
+        <span class="c1"># Keep everything above y == 0. You can define this mask however</span>
+        <span class="c1"># you need, if you want to be more careful in your selection.</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+        <span class="c1"># Construct new polygon from these &quot;good&quot; vertices</span>
+        <span class="n">new_poly</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">closed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">edgecolor</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
+                               <span class="n">linewidth</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_linewidth</span><span class="p">(),</span> 
+                               <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cumulative Distribution: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">poly</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">new_poly</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax1</span><span class="p">)</span>
+    <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Total Number Infected&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$N=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim2</span><span class="o">=</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span><span class="mi">6500</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.002</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/dfb2455625973bfebd71d5182e701648aaffd4d2cc3df10063469c0e20445104.png" src="../../_images/dfb2455625973bfebd71d5182e701648aaffd4d2cc3df10063469c0e20445104.png" />
+<img alt="../../_images/cf532bc2caac9c0bea255d31c1856466b67c79ed6d084a4d0f7ad56eb97d2a23.png" src="../../_images/cf532bc2caac9c0bea255d31c1856466b67c79ed6d084a4d0f7ad56eb97d2a23.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>We see that small outbreaks appear to have the same distribution regardless of <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p>Epidemics however seem to affect the same proportion of the population for different <span class="math notranslate nohighlight">\(N\)</span>.  The distribution of the the proportion infected grows tighter around the average as <span class="math notranslate nohighlight">\(N\)</span> increases.</p></li>
+</ul>
+</section>
+<section id="sis-simulations">
+<h2><span class="section-number">4.3.2. </span>SIS Simulations<a class="headerlink" href="#sis-simulations" title="Link to this heading">#</a></h2>
+<p>Now we look at SIS:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gillespie_SIS_model</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_and_plot_SIS_final_size</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">gammas</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.7</span><span class="p">),</span> <span class="n">ylim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.003</span><span class="p">),</span> <span class="n">tmax</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">mainax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">])</span>
+    <span class="n">inset_ax1</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim1</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim1</span><span class="p">)</span>
+    <span class="n">inset_ax2</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.55</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.25</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim2</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="n">gammas</span><span class="p">:</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">R0</span> <span class="o">*</span> <span class="n">gamma</span>
+        <span class="n">I0</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">final_sizes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numsims</span><span class="p">):</span>
+            <span class="n">t</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">I</span> <span class="o">=</span> <span class="n">Gillespie_SIS_model</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">I0</span><span class="p">,</span> <span class="n">I0</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+            <span class="n">final_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">I</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">final_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Probability: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+        <span class="n">inset_ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">inset_ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+
+        <span class="c1">#modifying cumulative dist plot followinghttps://stackoverflow.com/a/50711003/2966723</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">findobj</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span><span class="o">.</span><span class="n">vertices</span>
+
+        <span class="c1"># Keep everything above y == 0. You can define this mask however</span>
+        <span class="c1"># you need, if you want to be more careful in your selection.</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+        <span class="c1"># Construct new polygon from these &quot;good&quot; vertices</span>
+        <span class="n">new_poly</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">closed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">edgecolor</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
+                               <span class="n">linewidth</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_linewidth</span><span class="p">(),</span> 
+                               <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cumulative Distribution: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">poly</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">new_poly</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax1</span><span class="p">)</span>
+    <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number Infected at Final Time&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$N=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">simulate_and_plot_SIS_final_size</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">xlim2</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">450</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.004</span><span class="p">),</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIS_final_size</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">xlim2</span><span class="o">=</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.002</span><span class="p">),</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0bc4060ef62a3d84dff70c77837d53a680d2acc9e5e05a7e800456717fa3f35f.png" src="../../_images/0bc4060ef62a3d84dff70c77837d53a680d2acc9e5e05a7e800456717fa3f35f.png" />
+<img alt="../../_images/e6e4961bd9b8885404633c5a75101d320aec20167bcf4e06b8dfa552797293e0.png" src="../../_images/e6e4961bd9b8885404633c5a75101d320aec20167bcf4e06b8dfa552797293e0.png" />
+</div>
+</div>
+<p>Now let’s look at the distribution of cumulative sizes of the small outbreaks.  We add a flag to the SIS simulation to return the cumulative number of infections, and we discard any outbreaks with over <span class="math notranslate nohighlight">\(100\)</span> cumulative infections.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gillespie_SIS_model</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_and_plot_SIS_cumulative_small_size</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">gammas</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.7</span><span class="p">),</span> <span class="n">ylim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.003</span><span class="p">),</span> <span class="n">tmax</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">mainax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">])</span>
+    <span class="c1">#inset_ax1 = mainax.inset_axes([0.15,0.1,0.2,0.5], xlim=xlim1, ylim=ylim1)</span>
+    <span class="c1">#inset_ax2 = mainax.inset_axes([0.55,0.3,0.4,0.25], xlim=xlim2, ylim=ylim2)</span>
+
+    <span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="n">gammas</span><span class="p">:</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">R0</span> <span class="o">*</span> <span class="n">gamma</span>
+        <span class="n">I0</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">cumulative_sizes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numsims</span><span class="p">):</span>
+            <span class="n">t</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">cumsize</span><span class="o">=</span> <span class="n">Gillespie_SIS_model</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">I0</span><span class="p">,</span> <span class="n">I0</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">return_cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="n">tmax</span><span class="p">,</span> <span class="n">cum_max</span><span class="o">=</span><span class="n">threshold</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">cumulative_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cumsize</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            
+        <span class="n">cumulative_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cumulative_sizes</span><span class="p">)</span>
+
+        <span class="c1"># If I plot the cumulative distribution up to threshold, then it by default it</span>
+        <span class="c1"># scales so that threshold is 1, even though many are larger than threshold.</span>
+        <span class="c1"># The next few lines fix this.</span>
+
+        <span class="c1"># build bins for probability mass including an overflow bin for &gt; threshold</span>
+        <span class="n">bins_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">threshold</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="n">threshold</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]))</span>
+        <span class="c1"># build bins for cumulative plot only up to the threshold (no overflow)</span>
+        <span class="n">bins_cum</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">threshold</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># normalize by the total number of simulations so probabilities reflect the</span>
+        <span class="c1"># fraction of all sims (not just those falling inside the plotted bins)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">cumulative_sizes</span><span class="p">)</span> <span class="o">/</span> <span class="n">cumulative_sizes</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="c1"># plot probability mass (includes overflow bin)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">cumulative_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins_mass</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                     <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Probability: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+        <span class="c1"># plot cumulative probability only up to threshold (so it plateaus at fraction &lt;= 1)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">cumulative_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins_cum</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+
+        <span class="c1">#modifying cumulative dist plot following https://stackoverflow.com/a/50711003/2966723</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">findobj</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span><span class="o">.</span><span class="n">vertices</span>
+
+        <span class="c1"># Keep everything above y == 0. You can define this mask however</span>
+        <span class="c1"># you need, if you want to be more careful in your selection.</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+        <span class="c1"># Construct new polygon from these &quot;good&quot; vertices</span>
+        <span class="n">new_poly</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">closed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">edgecolor</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
+                               <span class="n">linewidth</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_linewidth</span><span class="p">(),</span> 
+                               <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cumulative Distribution: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">poly</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">new_poly</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Cumulative size (showing just small sizes)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$N=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">simulate_and_plot_SIS_cumulative_small_size</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIS_cumulative_small_size</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/a68cf864a22c9a269acdc44f8bafa77996fd9ff5294c8c6acb6b2c8667e68fb1.png" src="../../_images/a68cf864a22c9a269acdc44f8bafa77996fd9ff5294c8c6acb6b2c8667e68fb1.png" />
+<img alt="../../_images/7f61ac2b09a4a2e090225ed1ab30869a22f57b1b228c95eee0094e871100a8c8.png" src="../../_images/7f61ac2b09a4a2e090225ed1ab30869a22f57b1b228c95eee0094e871100a8c8.png" />
+</div>
+</div>
+</section>
+<section id="size-distribution-of-small-outbreaks">
+<h2><span class="section-number">4.3.3. </span>Size distribution of small outbreaks<a class="headerlink" href="#size-distribution-of-small-outbreaks" title="Link to this heading">#</a></h2>
+<p>Looking at both SIS and SIR and both <span class="math notranslate nohighlight">\(N=1000\)</span> and <span class="math notranslate nohighlight">\(N=10,000\)</span>, it should be clear that the total number of infections occuring in small outbreaks has the same distribution in all cases.</p>
+<div class="proof theorem admonition" id="theorem-LargeNSmallOutbreak">
+<p class="admonition-title"><span class="caption-number">Theorem 4.1 </span> (Small outbreak size distribution (<span class="math notranslate nohighlight">\(N \to \infty\)</span>))</p>
+<section class="theorem-content" id="proof-content">
+<p>In the limit <span class="math notranslate nohighlight">\(N \to \infty\)</span>, <span class="math notranslate nohighlight">\(I(t)\)</span> for small outbreaks of continuous-time SIS and SIR diseases is indistinguishable from <span class="math notranslate nohighlight">\(X(t)\)</span> in continuous-time Galton-Watson processes with <span class="math notranslate nohighlight">\(r_0 = \gamma\)</span> and <span class="math notranslate nohighlight">\(r_2 = \beta\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. In the <span class="math notranslate nohighlight">\(N\)</span> \to \infty<span class="math notranslate nohighlight">\( limit, the probability that a transmission goes to an individual who is not susceptible goes to \)</span>0$.  As small outbreaks have a finite number of transmissions, we can assume that all transmissions go to susceptible individuals.</p>
+<p>Then the transmission and recovery processes are identical.</p>
+</div>
+<p>Note that this theorem means that SIS and SIR are indistinguishable from each other for small outbreaks.</p>
+<p>Our next goal is to find out what this size distribution is.</p>
+</section>
+<section id="self-test">
+<h2><span class="section-number">4.3.4. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Look at the distribution of final sizes for SIR epidemics for different <span class="math notranslate nohighlight">\(N\)</span>.  You should see that the distribution of the proportion infected appears to get tighter as <span class="math notranslate nohighlight">\(N\)</span> increases (in fact the width is roughly proportional to <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span>  as <span class="math notranslate nohighlight">\(N\)</span> increases).  However, if we look at the number infected, we should see that it is getting wider.  Explain.</p></li>
+<li></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Joel-Miller-Lab/AMSI2026_PGF",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\InfDis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="InfDisCtsTime.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Infectious Diseases in Continuous Time</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="InfDisAsGaltWat.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Early Outbreak Stage and Galton-Watson Processes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sir-simulations">4.3.1. SIR simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sis-simulations">4.3.2. SIS Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#size-distribution-of-small-outbreaks">4.3.3. Size distribution of small outbreaks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.3.4. Self-test</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Joel C. Miller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
