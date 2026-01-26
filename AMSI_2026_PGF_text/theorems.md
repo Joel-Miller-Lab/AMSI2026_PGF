@@ -176,30 +176,12 @@ If $X(0)=1$, the PGF of the population size $X(t)$ at time $\Delta t \ll 1$ is
 \end{align*}
 :::
 
-## {prf:ref}`InfDisGaltWat` — Early stages of infectious-disease outbreaks are Galton-Watson Processes
+## {prf:ref}`theorem-LargeNSmallOutbreak` — Small outbreak size distribution ($N \to \infty$)
 
 :::{admonition} Statement
 :class: dropdown
 
-If:
-- an infectious disease outbreak begins with a single infected individual (the *index case* ) counted as generation $0$, 
-- the infections are separated by generation so that those infected by generation $g$ are considered to be in generation $g+1$,
-- the number of transmissions caused by each infected individual is independent of all others and has PGF $\mu(x)$.
-- the population is large enough that every transmission goes to a new never-before infected individual,
-
-Then the number of infections at generation $g$ forms a Galton-Watson process with offspring distribution $\mu(x)$.  If we generate edges from infector to infectee, we get a Galton-Watson tree.
-:::
-
-## {prf:ref}`theorem-TotalSizeDist` — Distribution of Total Sizes of Galton-Watson Processes
-
-:::{admonition} Statement
-:class: dropdown
-
-Given a Galton-Watson Process whose offspring distribution PGF is $\mu(x)$, the probability that the process terminates after a finite cumulative count of exactly $\sum_{g=0}^\infty X_g = j$ is given by 
-
-$$ \mathbb{P}\left(j=\sum X_g\right) = \frac{1}{j} p_{j-1}^{(j)}$$ 
-
-where $p_{j-1}^{(j)}= [x^{j-1}]\left(\mu(x)^j\right)$ denotes the coefficient of $x^{j-1}$ in  $\mu(x)^j$.
+In the limit $N \to \infty$, $I(t)$ for small outbreaks of continuous-time SIS and SIR diseases is indistinguishable from $X(t)$ in continuous-time Galton-Watson processes with $r_0 = \gamma$ and $r_2 = \beta$.
 :::
 
 ## {prf:ref}`lemma-CycleLemma` — Cycle Lemma
@@ -207,5 +189,17 @@ where $p_{j-1}^{(j)}= [x^{j-1}]\left(\mu(x)^j\right)$ denotes the coefficient of
 :::{admonition} Statement
 :class: dropdown
 
-Given a sequence of $j$ non-negative integers summing to $j-1$, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.
+Given a sequence $S$ of $j$ non-negative integers summing to $j-1$, there is a unique tree whose Łukasiewicz word is one of the cyclic permutations of $S$.
+:::
+
+## {prf:ref}`theorem-ctsTimeSIS_SIR_SizeDist` — Continuous-time SIS and SIR small outbreak size distribution
+
+:::{admonition} Statement
+:class: dropdown
+
+Consider the SIS and SIR disease models with transmission rate $\beta$ and recovery rate $\gamma$ and $\mathcal{R}_0 = \beta/\gamma$.  In the $N \to \infty$ limit, the probability an outbreak ends with exactly $\ell$ infections is
+
+$$
+\mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
+$$
 :::

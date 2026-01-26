@@ -46,11 +46,12 @@ parts:
       - file: notebooks/InfDis/InfDisCtsTime
       - file: notebooks/InfDis/InfDisCtsTimeSizeDist_Sim
       - file: notebooks/InfDis/InfDisCtsTimeSizeDistAnal
-      - file: notebooks/InfDis/InfDisAsGaltWat
+      - file: notebooks/InfDis/InfDisGenBased
+      #- file: notebooks/InfDis/InfDisAsGaltWat
       #- file: notebooks/InfDis/InfDisCumulativeSize
       #- file: notebooks/InfDis/InfDisTotalSize
-      - file: notebooks/InfDis/InfDisSizeDist
-      - file: notebooks/InfDis/InfDisSmallPop
+      #- file: notebooks/InfDis/InfDisSizeDist
+      #- file: notebooks/InfDis/InfDisSmallPop
   - caption: Simulations and Practice Problems
     numbered: True
     chapters:
