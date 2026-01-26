@@ -227,9 +227,10 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">4.5. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">4.6. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.7. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -406,6 +407,7 @@ document.write(`
    <a href="#cap-InfDisGaltWat"><strong>InfDisGaltWat</strong></a> | 
    <a href="#cap-alg-DFS"><strong>alg-DFS</strong></a> | 
    <a href="#cap-alg-GWTReconstruct"><strong>alg-GWTReconstruct</strong></a> | 
+   <a href="#cap-algorithm-GenerateTree"><strong>algorithm-GenerateTree</strong></a> | 
    <a href="#cap-algorithm-ctsTimeInfDis"><strong>algorithm-ctsTimeInfDis</strong></a> | 
    <a href="#cap-cor-PGFPower"><strong>cor-PGFPower</strong></a> | 
    <a href="#cap-corrPGFprod"><strong>corrPGFprod</strong></a> | 
@@ -425,6 +427,7 @@ document.write(`
    <a href="#cap-def-RandStopSum"><strong>def-RandStopSum</strong></a> | 
    <a href="#cap-def-SmallOutbreak"><strong>def-SmallOutbreak</strong></a> | 
    <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
+   <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
    <a href="#cap-definition-6"><strong>definition-6</strong></a> | 
    <a href="#cap-definition-CyclicPerm"><strong>definition-CyclicPerm</strong></a> | 
    <a href="#cap-defn-GenFxn"><strong>defn-GenFxn</strong></a> | 
@@ -520,6 +523,14 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/InfDis/InfDisSizeDist.html#alg-GWTReconstruct"><code class="xref">alg-GWTReconstruct</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-algorithm-GenerateTree"><td></td><td>
+       <strong>algorithm-GenerateTree</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#algorithm-GenerateTree"><code class="xref">algorithm-GenerateTree</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-algorithm-ctsTimeInfDis"><td></td><td>
@@ -674,6 +685,14 @@ document.write(`
        <a href="notebooks/GaltonWatson/GaltWatExtinct.html#definition-0"><code class="xref">definition-0</code></a> <em>(notebooks/GaltonWatson/GaltWatExtinct)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-2"><td></td><td>
+       <strong>definition-2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/GaltonWatson/GaltWat.html#definition-2"><code class="xref">definition-2</code></a> <em>(notebooks/GaltonWatson/GaltWat)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-6"><td></td><td>
        <strong>definition-6</strong></td><td></td></tr>
      <tr>
@@ -767,7 +786,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#example-5"><code class="xref">example-5</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#example-5"><code class="xref">example-5</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-6"><td></td><td>
@@ -983,7 +1002,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsComp.html#remark-3"><code class="xref">remark-3</code></a> <em>(notebooks/BasicGenFxn/GenFxnsComp)</em></td><td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#remark-3"><code class="xref">remark-3</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-CauchyOrthogonality"><td></td><td>

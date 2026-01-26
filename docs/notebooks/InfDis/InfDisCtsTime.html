@@ -223,9 +223,10 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.2. Infectious Diseases in Continuous Time</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.5. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.6. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.7. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -777,7 +778,7 @@ document.write(`
 </section>
 <section id="sir-simulations">
 <h2><span class="section-number">4.2.2. </span>SIR simulations<a class="headerlink" href="#sir-simulations" title="Link to this heading">#</a></h2>
-<p>Now let’s look at an SIR version.  One change from the SIS case is that we allow <code class="docutils literal notranslate"><span class="pre">tmax=</span></code><span class="math notranslate nohighlight">\(\infty\)</span>.  The simulation is guaranteed to stop because eventually <span class="math notranslate nohighlight">\(I(t)\)</span> goes to zero since <span class="math notranslate nohighlight">\(S\)</span> decreases monotonically.</p>
+<p>Now let’s look at an SIR version.  One change from the SIS case is that we allow <code class="docutils literal notranslate"><span class="pre">tmax=</span></code><span class="math notranslate nohighlight">\(\infty\)</span>.  The simulation is guaranteed to stop because eventually <span class="math notranslate nohighlight">\(I(t)\)</span> goes to zero since <span class="math notranslate nohighlight">\(S(t)\)</span> decreases monotonically.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -826,13 +827,13 @@ document.write(`
 <h2><span class="section-number">4.2.3. </span>General behavior of simulations<a class="headerlink" href="#general-behavior-of-simulations" title="Link to this heading">#</a></h2>
 <p>We see that for both SIS and SIR simulations, many realizations die out, leaving only a small outbreak.  In these realizations, <span class="math notranslate nohighlight">\(S/N \approx 1\)</span> for all time.  Thus we expect that these small outbreaks should be consistent with Galton Watson processes.  In the large outbreaks we see that eventually <span class="math notranslate nohighlight">\(S/N\)</span> differs from <span class="math notranslate nohighlight">\(1\)</span>, and so after an initial phase in which the outbreaks are consistent with Galton-Watson proceses (that are growing exponentially), the process begins to differ.</p>
 <p>This motivates the definition of small outbrak and epidemic, which we will explore more in the next section.</p>
-<div class="proof definition admonition" id="definition-2">
+<div class="proof definition admonition" id="def-SmallOutbreak">
 <p class="admonition-title"><span class="caption-number">Definition 4.1 </span> (Small outbreak)</p>
 <section class="definition-content" id="proof-content">
 <p>In a large population, we call an outbreak a <strong>small outbreak</strong> if it dies out having only infected a tiny fraction of the entire population.</p>
 </section>
 </div><p>A small outbreak never grows large enough to be significantly affected by the fact that the population size is finite.  Every transmission attempt is successful, but the outbreak dies out because the average infected individual in the realization causes fewer than <span class="math notranslate nohighlight">\(1\)</span> transmission.</p>
-<div class="proof definition admonition" id="definition-3">
+<div class="proof definition admonition" id="def-Epidemic">
 <p class="admonition-title"><span class="caption-number">Definition 4.2 </span> (Epidemic)</p>
 <section class="definition-content" id="proof-content">
 <p>In a large population, we call an outbreak an <strong>epidemic</strong> if it grows large enough to be limited by the population size.</p>

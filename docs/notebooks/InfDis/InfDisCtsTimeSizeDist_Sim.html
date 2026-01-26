@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisCtsTimeSizeDist_Sim';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.4. Early Outbreak Stage and Galton-Watson Processes" href="InfDisAsGaltWat.html" />
+    <link rel="next" title="4.4. Total size distribution of Continuous-Time small outbreaks: \(N \to \infty\)" href="InfDisCtsTimeSizeDistAnal.html" />
     <link rel="prev" title="4.2. Infectious Diseases in Continuous Time" href="InfDisCtsTime.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -223,9 +223,10 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Statistics of small outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.4. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.5. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.5. Early Outbreak Stage and Galton-Watson Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.6. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.7. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -596,7 +597,7 @@ document.write(`
 </div>
 <ul class="simple">
 <li><p>We see that small outbreaks appear to have the same distribution regardless of <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
-<li><p>Epidemics however seem to affect the same proportion of the population for different <span class="math notranslate nohighlight">\(N\)</span>.  The distribution of the the proportion infected grows tighter around the average as <span class="math notranslate nohighlight">\(N\)</span> increases.</p></li>
+<li><p>Epidemics however seem to affect the same proportion of the population for different <span class="math notranslate nohighlight">\(N\)</span>.  The distribution of the proportion infected grows tighter around the average as <span class="math notranslate nohighlight">\(N\)</span> increases.</p></li>
 </ul>
 </section>
 <section id="sis-simulations">
@@ -647,22 +648,22 @@ document.write(`
         <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
     <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax1</span><span class="p">)</span>
     <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number Infected at Final Time&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Size of $I(t)$ at Final Time $t=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tmax</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$N=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
 
-<span class="n">simulate_and_plot_SIS_final_size</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">xlim2</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">450</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.004</span><span class="p">),</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">simulate_and_plot_SIS_final_size</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">xlim2</span><span class="o">=</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">4000</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.002</span><span class="p">),</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIS_final_size</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim2</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.005</span><span class="p">),</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIS_final_size</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim2</span><span class="o">=</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">3600</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.002</span><span class="p">),</span> <span class="n">tmax</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0bc4060ef62a3d84dff70c77837d53a680d2acc9e5e05a7e800456717fa3f35f.png" src="../../_images/0bc4060ef62a3d84dff70c77837d53a680d2acc9e5e05a7e800456717fa3f35f.png" />
-<img alt="../../_images/e6e4961bd9b8885404633c5a75101d320aec20167bcf4e06b8dfa552797293e0.png" src="../../_images/e6e4961bd9b8885404633c5a75101d320aec20167bcf4e06b8dfa552797293e0.png" />
+<img alt="../../_images/03465dc06e500809c2ea723792ff5e34e56203e3a90a244b6b93c36bd088468b.png" src="../../_images/03465dc06e500809c2ea723792ff5e34e56203e3a90a244b6b93c36bd088468b.png" />
+<img alt="../../_images/d2bac80da15d2d829d12fd30a93c964e32d3b968295c6af99268cbb35497d8f9.png" src="../../_images/d2bac80da15d2d829d12fd30a93c964e32d3b968295c6af99268cbb35497d8f9.png" />
 </div>
 </div>
-<p>Now let’s look at the distribution of cumulative sizes of the small outbreaks.  We add a flag to the SIS simulation to return the cumulative number of infections, and we discard any outbreaks with over <span class="math notranslate nohighlight">\(100\)</span> cumulative infections.</p>
+<p>Now let’s look at the distribution of cumulative sizes of the small outbreaks.  We add a flag to the SIS simulation to return the cumulative number of infections, and focus on outbreaks that end with fewer than <span class="math notranslate nohighlight">\(100\)</span> total infections.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -723,13 +724,13 @@ document.write(`
         <span class="n">new_poly</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">closed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">edgecolor</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
                                <span class="n">linewidth</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_linewidth</span><span class="p">(),</span> 
-                               <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cumulative Distribution: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+                               <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cumulative Distribution:&#39;</span><span class="p">)</span>
         <span class="n">poly</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">mainax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">new_poly</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Cumulative size (showing just small sizes)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Total number ever infected&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$N=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
 
 <span class="n">simulate_and_plot_SIS_cumulative_small_size</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -739,8 +740,8 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/a68cf864a22c9a269acdc44f8bafa77996fd9ff5294c8c6acb6b2c8667e68fb1.png" src="../../_images/a68cf864a22c9a269acdc44f8bafa77996fd9ff5294c8c6acb6b2c8667e68fb1.png" />
-<img alt="../../_images/7f61ac2b09a4a2e090225ed1ab30869a22f57b1b228c95eee0094e871100a8c8.png" src="../../_images/7f61ac2b09a4a2e090225ed1ab30869a22f57b1b228c95eee0094e871100a8c8.png" />
+<img alt="../../_images/c63aa7ae53492c73611f98a6cdb628ad12f929c87d8192a3e3377f95da7f4d60.png" src="../../_images/c63aa7ae53492c73611f98a6cdb628ad12f929c87d8192a3e3377f95da7f4d60.png" />
+<img alt="../../_images/02ac8579258d53168153b30576735c1244cf6e6a413f2affca7bf140f18cffce.png" src="../../_images/02ac8579258d53168153b30576735c1244cf6e6a413f2affca7bf140f18cffce.png" />
 </div>
 </div>
 </section>
@@ -808,11 +809,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="InfDisAsGaltWat.html"
+       href="InfDisCtsTimeSizeDistAnal.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.4. </span>Early Outbreak Stage and Galton-Watson Processes</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
