@@ -506,7 +506,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sir-simulations">4.3.1. SIR simulations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sis-simulations">4.3.2. SIS Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sis-simulations">4.3.2. SIS Simulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-number-infected-i-t-at-large-time">4.3.2.1. Distribution of number infected <span class="math notranslate nohighlight">\(I(t)\)</span> at large time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-size-distribution-of-small-sis-outbreaks">4.3.2.2. Total size distribution of small SIS outbreaks</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#size-distribution-of-small-outbreaks">4.3.3. Size distribution of small outbreaks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.3.4. Self-test</a></li>
 </ul>
@@ -600,7 +604,11 @@ document.write(`
 </section>
 <section id="sis-simulations">
 <h2><span class="section-number">4.3.2. </span>SIS Simulations<a class="headerlink" href="#sis-simulations" title="Link to this heading">#</a></h2>
-<p>Now we look at SIS:</p>
+<p>Now we look at SIS.</p>
+<section id="distribution-of-number-infected-i-t-at-large-time">
+<h3><span class="section-number">4.3.2.1. </span>Distribution of number infected <span class="math notranslate nohighlight">\(I(t)\)</span> at large time<a class="headerlink" href="#distribution-of-number-infected-i-t-at-large-time" title="Link to this heading">#</a></h3>
+<p>We do not plot the total number of infections because at large time, the epidemics do not die out, so the number of infections continually grows.</p>
+<p>Instead, we plot the value of <span class="math notranslate nohighlight">\(I(t)\)</span> at the stopping time (<span class="math notranslate nohighlight">\(t=20\)</span>).  We use the same parameters as in the SIR case.  Small outbreaks have (almost invariably) gone extinct by this time, so either the number of infections is <span class="math notranslate nohighlight">\(0\)</span> or it is close to the endemic equilibrium.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -667,7 +675,11 @@ document.write(`
 <img alt="../../_images/d2bac80da15d2d829d12fd30a93c964e32d3b968295c6af99268cbb35497d8f9.png" src="../../_images/d2bac80da15d2d829d12fd30a93c964e32d3b968295c6af99268cbb35497d8f9.png" />
 </div>
 </div>
-<p>Now let’s look at the distribution of cumulative sizes of the small outbreaks.  We add a flag to the SIS simulation to return the cumulative number of infections, and focus on outbreaks that end with fewer than <span class="math notranslate nohighlight">\(100\)</span> total infections.</p>
+<p>We see that about <span class="math notranslate nohighlight">\(2/3\)</span> of the outbreaks die out and have no infections remaining by <span class="math notranslate nohighlight">\(t=20\)</span>.  The other <span class="math notranslate nohighlight">\(1/3\)</span> appear to be infecting close to <span class="math notranslate nohighlight">\(1/3\)</span> of the population.</p>
+</section>
+<section id="total-size-distribution-of-small-sis-outbreaks">
+<h3><span class="section-number">4.3.2.2. </span>Total size distribution of small SIS outbreaks<a class="headerlink" href="#total-size-distribution-of-small-sis-outbreaks" title="Link to this heading">#</a></h3>
+<p>Now let’s look at the distribution of cumulative sizes of the small outbreaks.  We add a flag to the SIS simulation to return the cumulative number of infections, and we focus on outbreaks that end with fewer than <span class="math notranslate nohighlight">\(100\)</span> total infections.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -748,6 +760,7 @@ document.write(`
 <img alt="../../_images/02ac8579258d53168153b30576735c1244cf6e6a413f2affca7bf140f18cffce.png" src="../../_images/02ac8579258d53168153b30576735c1244cf6e6a413f2affca7bf140f18cffce.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="size-distribution-of-small-outbreaks">
 <h2><span class="section-number">4.3.3. </span>Size distribution of small outbreaks<a class="headerlink" href="#size-distribution-of-small-outbreaks" title="Link to this heading">#</a></h2>
@@ -838,7 +851,11 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sir-simulations">4.3.1. SIR simulations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sis-simulations">4.3.2. SIS Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sis-simulations">4.3.2. SIS Simulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-of-number-infected-i-t-at-large-time">4.3.2.1. Distribution of number infected <span class="math notranslate nohighlight">\(I(t)\)</span> at large time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-size-distribution-of-small-sis-outbreaks">4.3.2.2. Total size distribution of small SIS outbreaks</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#size-distribution-of-small-outbreaks">4.3.3. Size distribution of small outbreaks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.3.4. Self-test</a></li>
 </ul>
