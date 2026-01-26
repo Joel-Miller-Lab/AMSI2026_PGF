@@ -228,9 +228,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">4.5. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">4.6. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.7. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -404,9 +402,6 @@ document.write(`
 
    <div class="modindex-jumpbox">
    <a href="#cap-Alg-Gillespie"><strong>Alg-Gillespie</strong></a> | 
-   <a href="#cap-InfDisGaltWat"><strong>InfDisGaltWat</strong></a> | 
-   <a href="#cap-alg-DFS"><strong>alg-DFS</strong></a> | 
-   <a href="#cap-alg-GWTReconstruct"><strong>alg-GWTReconstruct</strong></a> | 
    <a href="#cap-algorithm-GenerateTree"><strong>algorithm-GenerateTree</strong></a> | 
    <a href="#cap-algorithm-ctsTimeInfDis"><strong>algorithm-ctsTimeInfDis</strong></a> | 
    <a href="#cap-cor-PGFPower"><strong>cor-PGFPower</strong></a> | 
@@ -422,7 +417,6 @@ document.write(`
    <a href="#cap-def-GaltonWatson"><strong>def-GaltonWatson</strong></a> | 
    <a href="#cap-def-LukWord"><strong>def-LukWord</strong></a> | 
    <a href="#cap-def-MalthPar"><strong>def-MalthPar</strong></a> | 
-   <a href="#cap-def-OutComponent"><strong>def-OutComponent</strong></a> | 
    <a href="#cap-def-PoissonProcess"><strong>def-PoissonProcess</strong></a> | 
    <a href="#cap-def-RandStopSum"><strong>def-RandStopSum</strong></a> | 
    <a href="#cap-def-SmallOutbreak"><strong>def-SmallOutbreak</strong></a> | 
@@ -433,8 +427,6 @@ document.write(`
    <a href="#cap-defn-GenFxn"><strong>defn-GenFxn</strong></a> | 
    <a href="#cap-defn-PGF"><strong>defn-PGF</strong></a> | 
    <a href="#cap-ex-BinomCoeff"><strong>ex-BinomCoeff</strong></a> | 
-   <a href="#cap-ex-DFS"><strong>ex-DFS</strong></a> | 
-   <a href="#cap-ex-GWTReconstruct"><strong>ex-GWTReconstruct</strong></a> | 
    <a href="#cap-ex-fibonacci_fxn"><strong>ex-fibonacci_fxn</strong></a> | 
    <a href="#cap-example-0"><strong>example-0</strong></a> | 
    <a href="#cap-example-1"><strong>example-1</strong></a> | 
@@ -450,7 +442,6 @@ document.write(`
    <a href="#cap-example-ExtGeomDist"><strong>example-ExtGeomDist</strong></a> | 
    <a href="#cap-example-ForwKolmPureBirth"><strong>example-ForwKolmPureBirth</strong></a> | 
    <a href="#cap-example-GeomPGF"><strong>example-GeomPGF</strong></a> | 
-   <a href="#cap-example-GeomTotalSize"><strong>example-GeomTotalSize</strong></a> | 
    <a href="#cap-example-InfectiousDice"><strong>example-InfectiousDice</strong></a> | 
    <a href="#cap-example-NegBinPGF"><strong>example-NegBinPGF</strong></a> | 
    <a href="#cap-example-PoissonDiscreteLimitRate1"><strong>example-PoissonDiscreteLimitRate1</strong></a> | 
@@ -483,7 +474,7 @@ document.write(`
    <a href="#cap-theorem-PGFComp"><strong>theorem-PGFComp</strong></a> | 
    <a href="#cap-theorem-PGFRandSum"><strong>theorem-PGFRandSum</strong></a> | 
    <a href="#cap-theorem-Survival"><strong>theorem-Survival</strong></a> | 
-   <a href="#cap-theorem-TotalSizeDist"><strong>theorem-TotalSizeDist</strong></a> | 
+   <a href="#cap-theorem-ctsTimeSIS_SIR_SizeDist"><strong>theorem-ctsTimeSIS_SIR_SizeDist</strong></a> | 
    <a href="#cap-thm-ExpectedSize"><strong>thm-ExpectedSize</strong></a> | 
    <a href="#cap-thm-GWExtinctThresh"><strong>thm-GWExtinctThresh</strong></a> | 
    <a href="#cap-thm-GWTisGWP"><strong>thm-GWTisGWP</strong></a> | 
@@ -499,30 +490,6 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/CtsTime/CtsTimeSim.html#Alg-Gillespie"><code class="xref">Alg-Gillespie</code></a> <em>(notebooks/CtsTime/CtsTimeSim)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-InfDisGaltWat"><td></td><td>
-       <strong>InfDisGaltWat</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisAsGaltWat.html#InfDisGaltWat"><code class="xref">InfDisGaltWat</code></a> <em>(notebooks/InfDis/InfDisAsGaltWat)</em></td><td>
-       <em>theorem</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-alg-DFS"><td></td><td>
-       <strong>alg-DFS</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#alg-DFS"><code class="xref">alg-DFS</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
-       <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-alg-GWTReconstruct"><td></td><td>
-       <strong>alg-GWTReconstruct</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#alg-GWTReconstruct"><code class="xref">alg-GWTReconstruct</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-algorithm-GenerateTree"><td></td><td>
@@ -634,7 +601,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#def-LukWord"><code class="xref">def-LukWord</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#def-LukWord"><code class="xref">def-LukWord</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-def-MalthPar"><td></td><td>
@@ -643,14 +610,6 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/CtsTime/CtsTimeForwKolm.html#def-MalthPar"><code class="xref">def-MalthPar</code></a> <em>(notebooks/CtsTime/CtsTimeForwKolm)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-def-OutComponent"><td></td><td>
-       <strong>def-OutComponent</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisSmallPop.html#def-OutComponent"><code class="xref">def-OutComponent</code></a> <em>(notebooks/InfDis/InfDisSmallPop)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-def-PoissonProcess"><td></td><td>
@@ -706,7 +665,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#definition-CyclicPerm"><code class="xref">definition-CyclicPerm</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#definition-CyclicPerm"><code class="xref">definition-CyclicPerm</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-defn-GenFxn"><td></td><td>
@@ -731,22 +690,6 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#ex-BinomCoeff"><code class="xref">ex-BinomCoeff</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-ex-DFS"><td></td><td>
-       <strong>ex-DFS</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#ex-DFS"><code class="xref">ex-DFS</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-ex-GWTReconstruct"><td></td><td>
-       <strong>ex-GWTReconstruct</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#ex-GWTReconstruct"><code class="xref">ex-GWTReconstruct</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-ex-fibonacci_fxn"><td></td><td>
@@ -786,7 +729,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#example-5"><code class="xref">example-5</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
+       <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#example-5"><code class="xref">example-5</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-6"><td></td><td>
@@ -794,7 +737,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsMult.html#example-6"><code class="xref">example-6</code></a> <em>(notebooks/BasicGenFxn/GenFxnsMult)</em></td><td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#example-6"><code class="xref">example-6</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-7"><td></td><td>
@@ -867,14 +810,6 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#example-GeomPGF"><code class="xref">example-GeomPGF</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-GeomTotalSize"><td></td><td>
-       <strong>example-GeomTotalSize</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#example-GeomTotalSize"><code class="xref">example-GeomTotalSize</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-InfectiousDice"><td></td><td>
@@ -978,7 +913,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#lemma-CycleLemma"><code class="xref">lemma-CycleLemma</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#lemma-CycleLemma"><code class="xref">lemma-CycleLemma</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-1"><td></td><td>
@@ -1133,12 +1068,12 @@ document.write(`
        <a href="notebooks/CtsTime/CtsTimeIntro.html#theorem-Survival"><code class="xref">theorem-Survival</code></a> <em>(notebooks/CtsTime/CtsTimeIntro)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-theorem-TotalSizeDist"><td></td><td>
-       <strong>theorem-TotalSizeDist</strong></td><td></td></tr>
+     <tr class="cap" id="cap-theorem-ctsTimeSIS_SIR_SizeDist"><td></td><td>
+       <strong>theorem-ctsTimeSIS_SIR_SizeDist</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/InfDis/InfDisSizeDist.html#theorem-TotalSizeDist"><code class="xref">theorem-TotalSizeDist</code></a> <em>(notebooks/InfDis/InfDisSizeDist)</em></td><td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#theorem-ctsTimeSIS_SIR_SizeDist"><code class="xref">theorem-ctsTimeSIS_SIR_SizeDist</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm-ExpectedSize"><td></td><td>

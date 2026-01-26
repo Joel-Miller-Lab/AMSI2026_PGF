@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisCtsTimeSizeDistAnal';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4.5. Early Outbreak Stage and Galton-Watson Processes" href="InfDisAsGaltWat.html" />
+    <link rel="next" title="4.5. Generation-Based Infectious Disease Models" href="InfDisGenBased.html" />
     <link rel="prev" title="4.3. Statistics of small outbreaks" href="InfDisCtsTimeSizeDist_Sim.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -224,9 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.5. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.6. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.7. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -525,19 +523,27 @@ document.write(`
 <p>We now study the total number infected in small outbreaks in the <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit.  We do this by studying a Galton-Watson process with <span class="math notranslate nohighlight">\(r_2 = \beta\)</span> and <span class="math notranslate nohighlight">\(r_0=\gamma\)</span> having</p>
 <div class="math notranslate nohighlight">
 \[
-\hat{\mu}(x) = \frac{\gamma}{\beta+\gamma} + \hat{\beta}{\beta+\gamma}x^2
+\hat{\mu}(x) = \frac{\gamma}{\beta+\gamma} + \frac{\beta}{\beta+\gamma}x^2
 \]</div>
 <p>and starting with <span class="math notranslate nohighlight">\(X(t)=1\)</span>.</p>
 <p>Although it is possible to solve the Forward Kolmogorov equations for this model analytically, the resulting solution only tells us the probability of having a given size at each given time.  The solution does not tell us about how past sizes and current sizes are correlated, and so it does not directly give us the total size distribution.</p>
-<p>Instead we will use a different approach.  We first make some observations about the trees that emerge from this continuous-time Galton-Watson process.  A sample small outbreak is shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-BinaryTreeWithTime</span></code>, for which each infection event corresponds to the “death” of a node and replacement by two nodes.</p>
-<figure class="align-default">
-<img alt="../../_images/BinaryTreeWithTime.png" src="../../_images/BinaryTreeWithTime.png" />
+<p>Instead we will use a different approach.  We first make some observations about the trees that emerge from this continuous-time Galton-Watson process.  A sample small outbreak is shown in <a class="reference internal" href="#fig-binarytreewithtime"><span class="std std-numref">Fig. 4.1</span></a>, for which each infection event corresponds to the “death” of a node and replacement by two nodes.</p>
+<figure class="align-default" id="fig-binarytreewithtime">
+<a class="reference internal image-reference" href="../../_images/BinaryTreeWithTime.png"><img alt="../../_images/BinaryTreeWithTime.png" src="../../_images/BinaryTreeWithTime.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">A sample illustration of <span class="math notranslate nohighlight">\(I(t)\)</span> for a small outbreak (which could be SIS or SIR), using a Galton-Watson conceptualization.  Each node persists for an exponentially distributed random time with rate <span class="math notranslate nohighlight">\(\beta+\gamma\)</span>.  At that point she is replaced by either <span class="math notranslate nohighlight">\(k=0\)</span> (crosses) or <span class="math notranslate nohighlight">\(k=2\)</span> nodes with identical properties. The corresponding probabilities are <span class="math notranslate nohighlight">\(p_0=\gamma/(\beta+\gamma)\)</span> and <span class="math notranslate nohighlight">\(p_2=\beta/(\beta+\gamma)\)</span>.  In the disease conceptualization, the <span class="math notranslate nohighlight">\(k=0\)</span> case corresponds to recovery.  The <span class="math notranslate nohighlight">\(k=2\)</span> case corresponds to the infected individual infecting another individual, with the same individual represented by  different nodes before and after the event (we can think of the original infected individual being the left offspring and the newly infected individual being the right offspring).  Although this plot shows <span class="math notranslate nohighlight">\(9\)</span> nodes, it corresponds to exactly <span class="math notranslate nohighlight">\(5\)</span> total individuals.</span><a class="headerlink" href="#fig-binarytreewithtime" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 <p>We can convert this outbreak to a different representation which is simpler to analyze (but loses the time dependence):</p>
-<figure class="align-default">
-<img alt="../../_images/BinaryTreeNoTime.png" src="../../_images/BinaryTreeNoTime.png" />
+<figure class="align-default" id="fig-binarytreenotime">
+<a class="reference internal image-reference" href="../../_images/BinaryTreeNoTime.png"><img alt="../../_images/BinaryTreeNoTime.png" src="../../_images/BinaryTreeNoTime.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">The same outbreak as in <a class="reference internal" href="#fig-binarytreewithtime"><span class="std std-numref">Fig. 4.1</span></a>, but without the time dependence.  The number of offspring of each node is more clearly visible.  Again, an individual in the disease model may be represented by multiple nodes in this Galtonrepresentation.</span><a class="headerlink" href="#fig-binarytreenotime" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<p>To determine the probability of a particular size, we will want to calculate the probability of a tree like in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-BinaryTreeNoTime</span></code>.  To determine this probability, we first look for properties of the tree.</p>
+<p>To determine the probability of a particular size, we will want to calculate the probability of a tree like in <a class="reference internal" href="#fig-binarytreenotime"><span class="std std-numref">Fig. 4.2</span></a>.  To determine this probability, we first look for properties of the tree.</p>
 <p>The following properties are relatively easy to confirm:</p>
 <ul class="simple">
 <li><p>Each node in the Galton-Watson process has either <span class="math notranslate nohighlight">\(k=0\)</span> or <span class="math notranslate nohighlight">\(k=2\)</span> offspring.</p></li>
@@ -545,11 +551,15 @@ document.write(`
 <li><p>The total number of nodes with <span class="math notranslate nohighlight">\(k=0\)</span> corresponds to the total number of individuals infected (each infected individual eventually recovers exactly once).</p></li>
 </ul>
 <p>If the total number of <em>nodes</em> in the tree is <span class="math notranslate nohighlight">\(j\)</span>, then from the fact that all nodes except the first have a single parent, we conclude that the total number of parent-offspring pairs is <span class="math notranslate nohighlight">\(j-1\)</span>.  However, this is also the sum <span class="math notranslate nohighlight">\(\sum k_i\)</span>.  So <span class="math notranslate nohighlight">\(\sum k_i = j-1\)</span>.  There are <span class="math notranslate nohighlight">\(\frac{j-1}{2}\)</span> nodes with <span class="math notranslate nohighlight">\(2\)</span> offspring, so the total number of infections is <span class="math notranslate nohighlight">\(j - \frac{j-1}{2} = \frac{j+1}{2}\)</span>.</p>
-<p>We do not yet have enough information to calculate the probability of <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-BinaryTreeNoTime</span></code>.  First, we will convert it into a sequence of <span class="math notranslate nohighlight">\(k_i\)</span>, then we will analyze the probability of that sequence.  There are two natural ways to order the nodes in <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-BinaryTreeNoTime</span></code>, shown in <a class="reference internal" href="InfDisSizeDist.html#fig-bfsvsdfs"><span class="std std-numref">Fig. 4.2</span></a>.</p>
-<figure class="align-default">
-<img alt="../../_images/BFSvsDFS.png" src="../../_images/BFSvsDFS.png" />
+<p>We do not yet have enough information to calculate the probability of <a class="reference internal" href="#fig-binarytreenotime"><span class="std std-numref">Fig. 4.2</span></a>.  We will need an additional constraint.  To find this constraint, we first convert the tree into a sequence of <span class="math notranslate nohighlight">\(k_i\)</span>, then we will analyze the probability of that sequence.  There are two natural ways to order the nodes in <a class="reference internal" href="#fig-binarytreenotime"><span class="std std-numref">Fig. 4.2</span></a>, shown in <a class="reference internal" href="#fig-binarytreebfsvsdfs"><span class="std std-numref">Fig. 4.3</span></a>.</p>
+<figure class="align-default" id="fig-binarytreebfsvsdfs">
+<a class="reference internal image-reference" href="../../_images/BinaryTreeBFSvsDFS.png"><img alt="../../_images/BinaryTreeBFSvsDFS.png" src="../../_images/BinaryTreeBFSvsDFS.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">The difference between Breadth-First-Search (BFS – <strong>Left</strong>) and Depth-First-Search (DFS – <strong>Right</strong>) in a tree.  In BFS we start from a node and find all nodes distance <span class="math notranslate nohighlight">\(1\)</span>, then all nodes distance <span class="math notranslate nohighlight">\(2\)</span>, etc.  Each time we encounter a node, we record its degree.  In DFS we first travel down one branch recursively, “exhausting” each branch before looking at the next branch.</span><a class="headerlink" href="#fig-binarytreebfsvsdfs" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<p>Many people more naturally consider Depth-First-Search (DFS).  However, for us it will be useful to use Breadth-First-Search (BFS).  DFS can be considered similarly to how we might expect inheritance to travel in a Royal Family in Europe.  The king’s first son has priority, and that son’s sons come next, etc.  So long as there is at least one son along that branch of the family tree, the king’s second son is not considered.</p>
+<p>Many people more naturally consider Breadth-First-Search (BFS).  However, for us it will be useful to use Depth-First-Search (DFS).  DFS can be considered similarly to how we might expect inheritance to travel in a Royal Family in Europe.  The king’s first son has priority, and that son’s sons come next, etc.  So long as there is at least one son along that branch of the family tree, the king’s second son is not considered.</p>
 <p>The advantage for this in the proof we will be doing later is that in DFS, the offspring of a node immediately follow that node in the list.  In BFS, the location of a node’s offspring in the list depends on what happens in other parts of the tree.  It will be much easier to reconstruct a tree from its sequence of offspring counts in the DFS case than in the BFS case.</p>
 <p>The sequence of offspring counts in the DFS case is called a Łukasiewicz word:</p>
 <div class="proof definition admonition" id="def-LukWord">
@@ -583,7 +593,7 @@ define a cyclic permutation:</p>
 </div><div class="proof remark admonition" id="remark-3">
 <p class="admonition-title"><span class="caption-number">Remark 4.2 </span></p>
 <section class="remark-content" id="proof-content">
-<p>Note that in the trees above <span class="math notranslate nohighlight">\(k\)</span> was restricted to <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(2\)</span>, but the cycle lemma does not have this restriction.</p>
+<p>Note that in the trees above, <span class="math notranslate nohighlight">\(k\)</span> was restricted to <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(2\)</span>, but the cycle lemma does not have this restriction.</p>
 </section>
 </div><p>The proof will proceed by induction and create the unique tree whose Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.  Implicitly the inductive proof creates the following algorithm:</p>
 <div class="proof algorithm admonition" id="algorithm-GenerateTree">
@@ -598,15 +608,23 @@ define a cyclic permutation:</p>
 <li><p>The unique tree whose Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span></p></li>
 </ul>
 <p><strong>Steps</strong></p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>Place <span class="math notranslate nohighlight">\(j\)</span> nodes <span class="math notranslate nohighlight">\(u_1\)</span>, <span class="math notranslate nohighlight">\(u_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(u_j\)</span> clockwise around a circle with <span class="math notranslate nohighlight">\(u_1\)</span> at the top.</p></li>
 <li><p>Label each <span class="math notranslate nohighlight">\(u_i\)</span> with <span class="math notranslate nohighlight">\(s_i\)</span>.</p></li>
-<li><p>Repeat the following steps as long as more than one node remains:
-<strong>(i)</strong> Identify a pair of adjacent nodes so that the first has  <span class="math notranslate nohighlight">\(s_m&gt;0\)</span> and the following node has label equal to <span class="math notranslate nohighlight">\(s_n=0\)</span>  There may be multiple such pairs, the choice is arbitrary.
-<strong>(ii)</strong>  Add an edge from <span class="math notranslate nohighlight">\(u_m\)</span> to <span class="math notranslate nohighlight">\(u_n\)</span>.  Remove <span class="math notranslate nohighlight">\(u_n\)</span> from the cycle, and reduce <span class="math notranslate nohighlight">\(s_m\)</span> by <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+<li><p>Repeat the following steps as long as more than one node remains:</p>
+<p><strong>(i)</strong> Identify a pair of adjacent nodes so that the first has  <span class="math notranslate nohighlight">\(s_m&gt;0\)</span> and the following node has label equal to <span class="math notranslate nohighlight">\(s_n=0\)</span>  There may be multiple such pairs, the choice is arbitrary.</p>
+<p><strong>(ii)</strong>  Add an edge from <span class="math notranslate nohighlight">\(u_m\)</span> to <span class="math notranslate nohighlight">\(u_n\)</span>.  Remove <span class="math notranslate nohighlight">\(u_n\)</span> from the cycle, and reduce <span class="math notranslate nohighlight">\(s_m\)</span> by <span class="math notranslate nohighlight">\(1\)</span>.</p>
+</li>
 </ol>
 </section>
-</div><p>Note that each step of the algorithm reduces the total number of nodes in the cycle by <span class="math notranslate nohighlight">\(1\)</span> and reduces the sum of the <span class="math notranslate nohighlight">\(s_i\)</span> by <span class="math notranslate nohighlight">\(1\)</span>.  Thus the sum is always one less than the number of nodes.  This gurantees that there is always a pair of nodes for step (3.i) until only one node remains.</p>
+</div><figure class="align-default" id="fig-cyclelemalg">
+<a class="reference internal image-reference" href="../../_images/CycleLemAlg.png"><img alt="../../_images/CycleLemAlg.png" src="../../_images/CycleLemAlg.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">An illustration of the steps of the cycle lemma.  The algorithm begins with the sequence <span class="math notranslate nohighlight">\(S=(2,2,0,0,0,1,0,3,0)\)</span>.  After adding an edge from a node (<span class="math notranslate nohighlight">\(u_8\)</span>) with positive label to a node (<span class="math notranslate nohighlight">\(u_9\)</span>) with zero label, a new shorter sequence <span class="math notranslate nohighlight">\((2,2,0,0,0,1,0,2)\)</span> emerges.  Repeated steps results in a tree, but the root of the tree is not <span class="math notranslate nohighlight">\(u_1\)</span>, but rather <span class="math notranslate nohighlight">\(u_8\)</span>.  Taking the cyclic permutation of the sequence that begins at the root of the tree results in a Łukasiewicz word.  The choice of which <span class="math notranslate nohighlight">\(u_m\)</span>, <span class="math notranslate nohighlight">\(u_n\)</span> pair to consider at any step is arbitrary as long as <span class="math notranslate nohighlight">\(u_n\)</span> immediately follows <span class="math notranslate nohighlight">\(u_m\)</span> at the current step, <span class="math notranslate nohighlight">\(s_m&gt;0\)</span>, and <span class="math notranslate nohighlight">\(s_n=0\)</span>.</span><a class="headerlink" href="#fig-cyclelemalg" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Each step of the algorithm reduces the total number of nodes in the cycle by <span class="math notranslate nohighlight">\(1\)</span> and reduces the sum of the <span class="math notranslate nohighlight">\(s_i\)</span> by <span class="math notranslate nohighlight">\(1\)</span>.  Thus the sum is always one less than the number of nodes.  This gurantees that there is always a pair of nodes for step (3.i) until only one node remains.</p>
 <div class="proof admonition" id="proof">
 <p>Proof. Consider a length-<span class="math notranslate nohighlight">\(j\)</span> sequence <span class="math notranslate nohighlight">\(S = (s_1, s_2, \ldots, s_j)\)</span> of non-negative integers that sum to <span class="math notranslate nohighlight">\(j-1\)</span>.</p>
 <p>We will use induction on <span class="math notranslate nohighlight">\(j\)</span>.  If <span class="math notranslate nohighlight">\(j=1\)</span>, then <span class="math notranslate nohighlight">\(S=(0)\)</span>.  This is a Łukasiewicz word, and the corresponding tree is simply the isolated node <span class="math notranslate nohighlight">\(u_1\)</span> with no offspring.</p>
@@ -622,6 +640,11 @@ define a cyclic permutation:</p>
 <p>We consider a Galton-Watson tree as above with <span class="math notranslate nohighlight">\(p_0 = \frac{\gamma}{\beta+\gamma}\)</span> and <span class="math notranslate nohighlight">\(p_2 = \frac{\beta}{\beta+\gamma}\)</span>.  When we construct the Łukasiewicz word, at each stage the probability that the next node has <span class="math notranslate nohighlight">\(k=0\)</span> or <span class="math notranslate nohighlight">\(k=2\)</span> is an independent choice with probabilities <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span>.  This means that the probability of a tree with a specific length-<span class="math notranslate nohighlight">\(j\)</span> Łukasiewicz word is equal to the probability that a length-<span class="math notranslate nohighlight">\(j\)</span> sequence of values chosen independently from the offspring distribution is that Łukasiewicz word.</p>
 <p>We now consider the set of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span>.   Any two sequences that are cyclic permutations of one another have equal probability.  This means that the combined probability of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span> is <span class="math notranslate nohighlight">\(j\)</span> times the combined probability of all length-<span class="math notranslate nohighlight">\(j\)</span> Łukasiewicz words.</p>
 <p>Now we observe that the probability a length-<span class="math notranslate nohighlight">\(j\)</span> sequence sums to <span class="math notranslate nohighlight">\(j-1\)</span> is equal to the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> of the product <span class="math notranslate nohighlight">\(\hat{\mu}(x)^j\)</span>. So</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}[j \text{ nodes}] = \frac{1}{j} \left[x^{j-1}\right]\big( \hat{\mu}(x)^j\big)
+\]</div>
+<p>From this point on, the remainder of the proof is effectively just doing algebra to convert this to the probability of <span class="math notranslate nohighlight">\(\ell=(j+1)/2\)</span> infections:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \mathbb{P}[j \text{ nodes}] &amp;= \frac{1}{j} \left[x^{j-1}\right]\big( \hat{\mu}(x)^j\big)\\
@@ -639,9 +662,22 @@ define a cyclic permutation:</p>
 \mathbb{P}[\ell \text{ infections}] &amp;= \frac{1}{2\ell-1} \frac{1}{(\beta+\gamma)^{2\ell-1}} \binom{2\ell-1}{\ell} \gamma^\ell \beta^{\ell-1}\\
 &amp;= \frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \frac{1}{2\ell-1}\frac{(2\ell-1)!}{\ell! (\ell-1)!}\\
 &amp;= \frac{1}{\ell}\frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \frac{(2\ell-2)!}{(\ell-1)! (\ell-1)!}\\
-&amp;= \frac{1}{\ell}\frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
+&amp;= \frac{1}{\ell}\frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \binom{2\ell-2}{\ell-1}\\
+&amp;= \frac{1}{\ell}\frac{\gamma^\ell \beta^{\ell-1}}{\gamma^{2\ell-1}(\beta/\gamma+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}\\
+&amp;= \frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
 \end{align*}\]</div>
-<div class="proof example admonition" id="example-5">
+<p>where we introduced the variable <span class="math notranslate nohighlight">\(\mathcal{R}_0 = \beta/\gamma\)</span>.</p>
+<p>We have proven:</p>
+<div class="proof theorem admonition" id="theorem-ctsTimeSIS_SIR_SizeDist">
+<p class="admonition-title"><span class="caption-number">Theorem 4.2 </span> (Continuous-time SIS and SIR small outbreak size distribution)</p>
+<section class="theorem-content" id="proof-content">
+<p>Consider the SIS and SIR disease models with transmission rate <span class="math notranslate nohighlight">\(\beta\)</span> and recovery rate <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(\mathcal{R}_0 = \beta/\gamma\)</span>.  In the <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit, the probability an outbreak ends with exactly <span class="math notranslate nohighlight">\(\ell\)</span> infections is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
+\]</div>
+</section>
+</div><div class="proof example admonition" id="example-6">
 <p class="admonition-title"><span class="caption-number">Example 4.1 </span> (Small Outbreak Size Distribution if <span class="math notranslate nohighlight">\(\beta = 3\gamma/2\)</span>)</p>
 <section class="example-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\beta = 3 \gamma/2\)</span> as in the simulations performed in earlier sections, then</p>
@@ -664,7 +700,7 @@ define a cyclic permutation:</p>
 <td><p><span class="math notranslate nohighlight">\(12/125 =0.096\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(3\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(3^22^4/5^5 = 0.04608\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(3^2 2^4/5^5 = 0.04608\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -713,11 +749,11 @@ define a cyclic permutation:</p>
       </div>
     </a>
     <a class="right-next"
-       href="InfDisAsGaltWat.html"
+       href="InfDisGenBased.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4.5. </span>Early Outbreak Stage and Galton-Watson Processes</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>Generation-Based Infectious Disease Models</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

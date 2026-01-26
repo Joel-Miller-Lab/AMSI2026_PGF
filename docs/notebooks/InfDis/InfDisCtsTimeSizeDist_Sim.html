@@ -224,9 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisAsGaltWat.html">4.5. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSizeDist.html">4.6. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.7. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -603,7 +601,12 @@ document.write(`
 <section id="sis-simulations">
 <h2><span class="section-number">4.3.2. </span>SIS Simulations<a class="headerlink" href="#sis-simulations" title="Link to this heading">#</a></h2>
 <p>Now we look at SIS:</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -658,6 +661,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/03465dc06e500809c2ea723792ff5e34e56203e3a90a244b6b93c36bd088468b.png" src="../../_images/03465dc06e500809c2ea723792ff5e34e56203e3a90a244b6b93c36bd088468b.png" />
 <img alt="../../_images/d2bac80da15d2d829d12fd30a93c964e32d3b968295c6af99268cbb35497d8f9.png" src="../../_images/d2bac80da15d2d829d12fd30a93c964e32d3b968295c6af99268cbb35497d8f9.png" />
@@ -754,7 +758,7 @@ document.write(`
 <p>In the limit <span class="math notranslate nohighlight">\(N \to \infty\)</span>, <span class="math notranslate nohighlight">\(I(t)\)</span> for small outbreaks of continuous-time SIS and SIR diseases is indistinguishable from <span class="math notranslate nohighlight">\(X(t)\)</span> in continuous-time Galton-Watson processes with <span class="math notranslate nohighlight">\(r_0 = \gamma\)</span> and <span class="math notranslate nohighlight">\(r_2 = \beta\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. In the <span class="math notranslate nohighlight">\(N\)</span> \to \infty<span class="math notranslate nohighlight">\( limit, the probability that a transmission goes to an individual who is not susceptible goes to \)</span>0$.  As small outbreaks have a finite number of transmissions, we can assume that all transmissions go to susceptible individuals.</p>
+<p>Proof. In the <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit, the probability that a transmission goes to an individual who is not susceptible goes to <span class="math notranslate nohighlight">\(0\)</span>.  As small outbreaks have a finite number of transmissions, we can assume that all transmissions go to susceptible individuals.</p>
 <p>Then the transmission and recovery processes are identical.</p>
 </div>
 <p>Note that this theorem means that SIS and SIR are indistinguishable from each other for small outbreaks.</p>

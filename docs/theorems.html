@@ -224,9 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html">4.5. Early Outbreak Stage and Galton-Watson Processes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html">4.6. Distribution of Total Sizes of Extinct Disease Outbreaks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.7. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -472,9 +470,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-survival-survival-probability"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-Survival</span></code> — Survival Probability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lem-phitimesum-the-pgf-of-phi-x-t-1-t-2"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lem-PhiTimeSum</span></code> — The PGF of <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lem-pgfatdt-pgf-of-x-t-at-time-delta-t"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lem-PGFatDt</span></code> — PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">InfDisGaltWat</span></code> — Early stages of infectious-disease outbreaks are Galton-Watson Processes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-TotalSizeDist</span></code> — Distribution of Total Sizes of Galton-Watson Processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-largensmalloutbreak-small-outbreak-size-distribution-n-to-infty"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-LargeNSmallOutbreak</span></code> — Small outbreak size distribution (<span class="math notranslate nohighlight">\(N \to \infty\)</span>)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-ctstimesis-sir-sizedist-continuous-time-sis-and-sir-small-outbreak-size-distribution"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-ctsTimeSIS_SIR_SizeDist</span></code> — Continuous-time SIS and SIR small outbreak size distribution</a></li>
 </ul>
             </nav>
         </div>
@@ -653,35 +651,29 @@ s_n = \sum_{i=0}^n c_i
 \end{align*}\]</div>
 </div>
 </section>
-<section id="infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes">
-<h2><a class="reference internal" href="notebooks/InfDis/InfDisAsGaltWat.html#InfDisGaltWat">Theorem 4.2</a> — Early stages of infectious-disease outbreaks are Galton-Watson Processes<a class="headerlink" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes" title="Link to this heading">#</a></h2>
+<section id="theorem-largensmalloutbreak-small-outbreak-size-distribution-n-to-infty">
+<h2><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html#theorem-LargeNSmallOutbreak">Theorem 4.1</a> — Small outbreak size distribution (<span class="math notranslate nohighlight">\(N \to \infty\)</span>)<a class="headerlink" href="#theorem-largensmalloutbreak-small-outbreak-size-distribution-n-to-infty" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
-<p>If:</p>
-<ul class="simple">
-<li><p>an infectious disease outbreak begins with a single infected individual (the <em>index case</em> ) counted as generation <span class="math notranslate nohighlight">\(0\)</span>,</p></li>
-<li><p>the infections are separated by generation so that those infected by generation <span class="math notranslate nohighlight">\(g\)</span> are considered to be in generation <span class="math notranslate nohighlight">\(g+1\)</span>,</p></li>
-<li><p>the number of transmissions caused by each infected individual is independent of all others and has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p></li>
-<li><p>the population is large enough that every transmission goes to a new never-before infected individual,</p></li>
-</ul>
-<p>Then the number of infections at generation <span class="math notranslate nohighlight">\(g\)</span> forms a Galton-Watson process with offspring distribution <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  If we generate edges from infector to infectee, we get a Galton-Watson tree.</p>
-</div>
-</section>
-<section id="theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes">
-<h2><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html#theorem-TotalSizeDist">Theorem 4.3</a> — Distribution of Total Sizes of Galton-Watson Processes<a class="headerlink" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes" title="Link to this heading">#</a></h2>
-<div class="dropdown admonition">
-<p class="admonition-title">Statement</p>
-<p>Given a Galton-Watson Process whose offspring distribution PGF is <span class="math notranslate nohighlight">\(\mu(x)\)</span>, the probability that the process terminates after a finite cumulative count of exactly <span class="math notranslate nohighlight">\(\sum_{g=0}^\infty X_g = j\)</span> is given by</p>
-<div class="math notranslate nohighlight">
-\[ \mathbb{P}\left(j=\sum X_g\right) = \frac{1}{j} p_{j-1}^{(j)}\]</div>
-<p>where <span class="math notranslate nohighlight">\(p_{j-1}^{(j)}= [x^{j-1}]\left(\mu(x)^j\right)\)</span> denotes the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> in  <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.</p>
+<p>In the limit <span class="math notranslate nohighlight">\(N \to \infty\)</span>, <span class="math notranslate nohighlight">\(I(t)\)</span> for small outbreaks of continuous-time SIS and SIR diseases is indistinguishable from <span class="math notranslate nohighlight">\(X(t)\)</span> in continuous-time Galton-Watson processes with <span class="math notranslate nohighlight">\(r_0 = \gamma\)</span> and <span class="math notranslate nohighlight">\(r_2 = \beta\)</span>.</p>
 </div>
 </section>
 <section id="lemma-cyclelemma-cycle-lemma">
-<h2><a class="reference internal" href="notebooks/InfDis/InfDisSizeDist.html#lemma-CycleLemma">Lemma 4.2</a> — Cycle Lemma<a class="headerlink" href="#lemma-cyclelemma-cycle-lemma" title="Link to this heading">#</a></h2>
+<h2><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#lemma-CycleLemma">Lemma 4.1</a> — Cycle Lemma<a class="headerlink" href="#lemma-cyclelemma-cycle-lemma" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">Statement</p>
-<p>Given a sequence of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span>, there is exactly one cyclic permutation of the sequence that is a Łukasiewicz word.</p>
+<p>Given a sequence <span class="math notranslate nohighlight">\(S\)</span> of <span class="math notranslate nohighlight">\(j\)</span> non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span>, there is a unique tree whose Łukasiewicz word is one of the cyclic permutations of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</div>
+</section>
+<section id="theorem-ctstimesis-sir-sizedist-continuous-time-sis-and-sir-small-outbreak-size-distribution">
+<h2><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#theorem-ctsTimeSIS_SIR_SizeDist">Theorem 4.2</a> — Continuous-time SIS and SIR small outbreak size distribution<a class="headerlink" href="#theorem-ctstimesis-sir-sizedist-continuous-time-sis-and-sir-small-outbreak-size-distribution" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Consider the SIS and SIR disease models with transmission rate <span class="math notranslate nohighlight">\(\beta\)</span> and recovery rate <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(\mathcal{R}_0 = \beta/\gamma\)</span>.  In the <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit, the probability an outbreak ends with exactly <span class="math notranslate nohighlight">\(\ell\)</span> infections is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
+\]</div>
 </div>
 </section>
 </section>
@@ -764,9 +756,9 @@ s_n = \sum_{i=0}^n c_i
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-survival-survival-probability"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-Survival</span></code> — Survival Probability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lem-phitimesum-the-pgf-of-phi-x-t-1-t-2"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lem-PhiTimeSum</span></code> — The PGF of <span class="math notranslate nohighlight">\(\Phi(x,T_1+T_2)\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lem-pgfatdt-pgf-of-x-t-at-time-delta-t"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lem-PGFatDt</span></code> — PGF of <span class="math notranslate nohighlight">\(X(t)\)</span> at time <span class="math notranslate nohighlight">\(\Delta t\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infdisgaltwat-early-stages-of-infectious-disease-outbreaks-are-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">InfDisGaltWat</span></code> — Early stages of infectious-disease outbreaks are Galton-Watson Processes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-totalsizedist-distribution-of-total-sizes-of-galton-watson-processes"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-TotalSizeDist</span></code> — Distribution of Total Sizes of Galton-Watson Processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-largensmalloutbreak-small-outbreak-size-distribution-n-to-infty"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-LargeNSmallOutbreak</span></code> — Small outbreak size distribution (<span class="math notranslate nohighlight">\(N \to \infty\)</span>)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-ctstimesis-sir-sizedist-continuous-time-sis-and-sir-small-outbreak-size-distribution"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-ctsTimeSIS_SIR_SizeDist</span></code> — Continuous-time SIS and SIR small outbreak size distribution</a></li>
 </ul>
   </nav></div>
 
