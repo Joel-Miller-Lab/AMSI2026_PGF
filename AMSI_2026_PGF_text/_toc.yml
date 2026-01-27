@@ -69,6 +69,7 @@ parts:
     - file: notebooks/Assignments/AssignmentsIntro
       sections:
       - file: notebooks/Assignments/Asst1  
+      - file: notebooks/Assignments/Asst2  
     
     
     #- file: notebooks/BasicGenFxn/GenFxnsPartFrac
