@@ -51,7 +51,7 @@ parts:
       #- file: notebooks/InfDis/InfDisCumulativeSize
       #- file: notebooks/InfDis/InfDisTotalSize
       #- file: notebooks/InfDis/InfDisSizeDist
-      #- file: notebooks/InfDis/InfDisSmallPop
+      - file: notebooks/InfDis/InfDisSmallPop
   - caption: Simulations and Practice Problems
     numbered: True
     chapters:

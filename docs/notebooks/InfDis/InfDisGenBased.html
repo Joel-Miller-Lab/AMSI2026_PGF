@@ -58,10 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisGenBased';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5. Computer Simulation" href="../Simulation/SimulationIntro.html" />
+    <link rel="next" title="4.6. SIR outbreak sizes in small populations" href="InfDisSmallPop.html" />
     <link rel="prev" title="4.4. Total size distribution of Continuous-Time small outbreaks: \(N \to \infty\)" href="InfDisCtsTimeSizeDistAnal.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -223,6 +225,7 @@
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.5. Generation-Based Infectious Disease Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -481,7 +484,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -497,6 +502,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#size-distribution-of-small-outbreaks">4.5.1. Size distribution of small outbreaks</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -508,6 +521,48 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="generation-based-infectious-disease-models">
 <h1><span class="section-number">4.5. </span>Generation-Based Infectious Disease Models<a class="headerlink" href="#generation-based-infectious-disease-models" title="Link to this heading">#</a></h1>
+<p>When we switch to a generation-based framework, we allow a wider range of offspring distributions.  Now each infected individual transmits to <span class="math notranslate nohighlight">\(k\)</span> others, where <span class="math notranslate nohighlight">\(k\)</span> is a random variable and the recipients are chosen randomly from the population.  If the recipient is susceptible, he becomes infected.  Otherwise, it has no effect.</p>
+<p>As before, while <span class="math notranslate nohighlight">\(S/N\)</span> is approximately <span class="math notranslate nohighlight">\(1\)</span>, we can treat this as if it is a generation-based Galton-Watson process.  Thus all of our results for Galton-Watson processes apply to <span class="math notranslate nohighlight">\(I(g)\)</span>.</p>
+<section id="size-distribution-of-small-outbreaks">
+<h2><span class="section-number">4.5.1. </span>Size distribution of small outbreaks<a class="headerlink" href="#size-distribution-of-small-outbreaks" title="Link to this heading">#</a></h2>
+<p>The derivation we did showing that the probability a tree has <span class="math notranslate nohighlight">\(j\)</span> nodes is</p>
+<div class="math notranslate nohighlight">
+\[ 
+\mathbb{P}[\text{tree has $j$ nodes}] = \frac{1}{j} \left[x^{j-1}\right] \left(\mu(x)^j\right)
+\]</div>
+<p>applies immediately here.  The only difference is that for this model, each node represents a distinct infected individual.  Thus <span class="math notranslate nohighlight">\(j\)</span> is the size of the small outbreak.</p>
+<div class="proof example admonition" id="example-0">
+<p class="admonition-title"><span class="caption-number">Example 4.3 </span> (Continuous-time case from a generation-based perspective)</p>
+<section class="example-content" id="proof-content">
+<p>Consider the continuous-time SIS or SIR model with rates <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>. We will convert this to a generation-based framework and use this to calculate the probability distribution of outbreak sizes.</p>
+<p>The probability the next event from an individual is a recovery is <span class="math notranslate nohighlight">\(p = \gamma/(\beta+\gamma)\)</span> and the probability of transmission is <span class="math notranslate nohighlight">\(1-p\)</span>.  The probaiblity of exactly <span class="math notranslate nohighlight">\(k\)</span> transmissions before the recovery is</p>
+<div class="math notranslate nohighlight">
+\[
+p_k = p(1-p)^k
+\]</div>
+<p>By looking at the PGF for a geometric distribution, we could find <span class="math notranslate nohighlight">\(\mu(x)\)</span>, but for practice we calculate it directly</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu(x) &amp;= \sum_k p_k x^k\\
+  &amp;= p \sum_k (x(1-p))^k\\
+  &amp;= \frac{p}{1-x(1-p)}
+\end{align*}\]</div>
+<p>Thus the probability of exactly <span class="math notranslate nohighlight">\(j\)</span> infections in the outbreak is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[j \text{ infections}] &amp;= \frac{1}{j} \left[x^{j-1}\right] \left(\frac{p}{1-(1-p)x}\right)^j\\
+&amp;= \frac{1}{j} \left[x^{j-1}\right]\left(\sum_{N=0}^\infty \binom{N+j-1}{N} p^j (1-p)^N x^N\right)\\
+&amp;= \frac{1}{j} \binom{2j-2}{j-1} p^j (1-p)^{j-1}
+\end{align*}\]</div>
+<p>(we used the expansion for the negative binomial distribution here, from <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-NegBinPGF">Example 1.11</a>). Substituting <span class="math notranslate nohighlight">\(p=\gamma/(\beta+\gamma)\)</span> we find</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[j \text{ infections}] &amp;= \frac{1}{j} \binom{2j-2}{j-1} \frac{\beta^j\gamma^{j-1}}{(\beta+\gamma)^{2j-1}}\\
+&amp;= \frac{1}{j} \binom{2j-2}{j-1} \frac{\mathcal{R}_0^j}{(1+\mathcal{R}_0)^{2j-1}}
+\end{align*}\]</div>
+<p>which is what we derived for the continuous-time case.</p>
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -550,11 +605,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../Simulation/SimulationIntro.html"
+       href="InfDisSmallPop.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Computer Simulation</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>SIR outbreak sizes in small populations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -564,6 +619,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#size-distribution-of-small-outbreaks">4.5.1. Size distribution of small outbreaks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

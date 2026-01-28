@@ -225,6 +225,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -242,6 +243,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Assignments/AssignmentsIntro.html">7. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst1.html">7.1. Assignment 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst2.html">7.2. Assignment 2</a></li>
 </ul>
 </details></li>
 </ul>
@@ -612,7 +614,12 @@ document.write(`
 <p>Similar reasoning applies to event <span class="math notranslate nohighlight">\(2\)</span>, so the probabilities of events <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span> are <span class="math notranslate nohighlight">\(r_1/(r_1+r_2)\)</span> and <span class="math notranslate nohighlight">\(r_2/(r_1+r_2)\)</span>.  The probability of both events in the same time interval (given that at least one occurs) is proportional to <span class="math notranslate nohighlight">\(\Delta t\)</span> which approaches <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
 </div>
 <p>The code below simulates two Poisson processes starting at time <span class="math notranslate nohighlight">\(0\)</span>, with rates <span class="math notranslate nohighlight">\(0.2\)</span> and <span class="math notranslate nohighlight">\(0.3\)</span>.  It steps forward in time by amounts <span class="math notranslate nohighlight">\(\Delta t\)</span>, until the first time that at least one event occurs.  It then calculates the probability of different outcomes in the time step.  These are plotted for different <span class="math notranslate nohighlight">\(\Delta t\)</span> showing that the probabilities are as predicted.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -673,6 +680,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/5e3c2e914004125638664fdc8dd85afe77a223625bba3fbf49f301b9039352e6.png" src="../../_images/5e3c2e914004125638664fdc8dd85afe77a223625bba3fbf49f301b9039352e6.png" />
 </div>

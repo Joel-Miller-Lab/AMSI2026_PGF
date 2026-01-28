@@ -225,6 +225,7 @@
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -506,8 +507,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cycle-lemma">4.4.1. The Cycle Lemma</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-probability-of-a-galton-watson-tree-with-j-nodes">4.4.2. Finding the probability of a Galton-Watson tree with <span class="math notranslate nohighlight">\(j\)</span> nodes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cycle-lemma">4.4.1. The Cycle Lemma</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-proof">4.4.1.1. First proof</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-proof">4.4.1.2. Second proof</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-probability-that-a-galton-watson-tree-has-j-nodes">4.4.2. Finding the probability that a Galton-Watson tree has <span class="math notranslate nohighlight">\(j\)</span> nodes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.4.3. Self-test</a></li>
 </ul>
             </nav>
@@ -597,7 +602,9 @@ define a cyclic permutation:</p>
 <section class="remark-content" id="proof-content">
 <p>Note that in the trees above, <span class="math notranslate nohighlight">\(k\)</span> was restricted to <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(2\)</span>, but the cycle lemma does not have this restriction.</p>
 </section>
-</div><p>The proof will proceed by induction and create the unique tree whose Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.  Implicitly the inductive proof creates the following algorithm:</p>
+</div><p>The proof will proceed by induction and create the unique tree whose Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.  I am giving two related proofs, both of which are based on algoriths that reconstruct the unique three.  The first is the way I set this up originally when I developed this proof.  I think the second approach may be more intuitive.  Both of them result in the same tree (because there is only one tree possible), but it is perhaps more obvious that the second algorithm really has no alternative outcome.</p>
+<section id="first-proof">
+<h3><span class="section-number">4.4.1.1. </span>First proof<a class="headerlink" href="#first-proof" title="Link to this heading">#</a></h3>
 <div class="proof algorithm admonition" id="algorithm-GenerateTree">
 <p class="admonition-title"><span class="caption-number">Algorithm 4.2 </span> (Constructing a tree from <span class="math notranslate nohighlight">\(S\)</span>)</p>
 <section class="algorithm-content" id="proof-content">
@@ -623,7 +630,7 @@ define a cyclic permutation:</p>
 <a class="reference internal image-reference" href="../../_images/CycleLemAlg.png"><img alt="../../_images/CycleLemAlg.png" src="../../_images/CycleLemAlg.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">An illustration of the steps of the cycle lemma.  The algorithm begins with the sequence <span class="math notranslate nohighlight">\(S=(2,2,0,0,0,1,0,3,0)\)</span>.  After adding an edge from a node (<span class="math notranslate nohighlight">\(u_8\)</span>) with positive label to a node (<span class="math notranslate nohighlight">\(u_9\)</span>) with zero label, a new shorter sequence <span class="math notranslate nohighlight">\((2,2,0,0,0,1,0,2)\)</span> emerges.  Repeated steps results in a tree, but the root of the tree is not <span class="math notranslate nohighlight">\(u_1\)</span>, but rather <span class="math notranslate nohighlight">\(u_8\)</span>.  Taking the cyclic permutation of the sequence that begins at the root of the tree results in a Łukasiewicz word.  The choice of which <span class="math notranslate nohighlight">\(u_m\)</span>, <span class="math notranslate nohighlight">\(u_n\)</span> pair to consider at any step is arbitrary as long as <span class="math notranslate nohighlight">\(u_n\)</span> immediately follows <span class="math notranslate nohighlight">\(u_m\)</span> at the current step, <span class="math notranslate nohighlight">\(s_m&gt;0\)</span>, and <span class="math notranslate nohighlight">\(s_n=0\)</span>.</span><a class="headerlink" href="#fig-cyclelemalg" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">An illustration of the steps of the algorithm.  The algorithm begins with the sequence <span class="math notranslate nohighlight">\(S=(2,2,0,0,0,1,0,3,0)\)</span>.  After adding an edge from a node (<span class="math notranslate nohighlight">\(u_8\)</span>) with positive label to a node (<span class="math notranslate nohighlight">\(u_9\)</span>) with zero label, a new shorter sequence <span class="math notranslate nohighlight">\((2,2,0,0,0,1,0,2)\)</span> emerges.  Repeated steps results in a tree, but the root of the tree is not <span class="math notranslate nohighlight">\(u_1\)</span>, but rather <span class="math notranslate nohighlight">\(u_8\)</span>.  Taking the cyclic permutation of the sequence that begins at the root of the tree results in a Łukasiewicz word.  The choice of which <span class="math notranslate nohighlight">\(u_m\)</span>, <span class="math notranslate nohighlight">\(u_n\)</span> pair to consider at any step is arbitrary as long as <span class="math notranslate nohighlight">\(u_n\)</span> immediately follows <span class="math notranslate nohighlight">\(u_m\)</span> at the current step, <span class="math notranslate nohighlight">\(s_m&gt;0\)</span>, and <span class="math notranslate nohighlight">\(s_n=0\)</span>.</span><a class="headerlink" href="#fig-cyclelemalg" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Each step of the algorithm reduces the total number of nodes in the cycle by <span class="math notranslate nohighlight">\(1\)</span> and reduces the sum of the <span class="math notranslate nohighlight">\(s_i\)</span> by <span class="math notranslate nohighlight">\(1\)</span>.  Thus the sum is always one less than the number of nodes.  This gurantees that there is always a pair of nodes for step (3.i) until only one node remains.</p>
@@ -637,19 +644,130 @@ define a cyclic permutation:</p>
 <p>We find the (unique) root of this tree <span class="math notranslate nohighlight">\(u_\ell\)</span>, and create the sequence <span class="math notranslate nohighlight">\((s_\ell, s_{\ell+1}, \ldots, s_j, s_1, \ldots, s_{\ell-1})\)</span>.  This is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span> and it is a Łukasiewicz word.</p>
 </div>
 </section>
-<section id="finding-the-probability-of-a-galton-watson-tree-with-j-nodes">
-<h2><span class="section-number">4.4.2. </span>Finding the probability of a Galton-Watson tree with <span class="math notranslate nohighlight">\(j\)</span> nodes<a class="headerlink" href="#finding-the-probability-of-a-galton-watson-tree-with-j-nodes" title="Link to this heading">#</a></h2>
+<section id="second-proof">
+<h3><span class="section-number">4.4.1.2. </span>Second proof<a class="headerlink" href="#second-proof" title="Link to this heading">#</a></h3>
+<p>We provide a second algorithm to reconstruct the tree.  It lays out the nodes in the same way, but goes about the construction differently.  I think with this algorithm it is more obvious that this algorithm must produce a tree and that there is only one tree that can be created.</p>
+<div class="proof algorithm admonition" id="algorithm-GenerateTreeAlt">
+<p class="admonition-title"><span class="caption-number">Algorithm 4.3 </span> (Equivalent Algorithm for constructing a tree from <span class="math notranslate nohighlight">\(S\)</span>)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Input</strong></p>
+<ul class="simple">
+<li><p>A length-<span class="math notranslate nohighlight">\(j\)</span> sequence <span class="math notranslate nohighlight">\(S\)</span> of non-negative integers summing to <span class="math notranslate nohighlight">\(j-1\)</span></p></li>
+</ul>
+<p><strong>Output</strong></p>
+<ul class="simple">
+<li><p>The unique tree whose Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span></p></li>
+</ul>
+<p><strong>Steps</strong></p>
+<ol class="arabic">
+<li><p>Place <span class="math notranslate nohighlight">\(j\)</span> nodes <span class="math notranslate nohighlight">\(u_1\)</span>, <span class="math notranslate nohighlight">\(u_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(u_j\)</span> clockwise around a circle with <span class="math notranslate nohighlight">\(u_1\)</span> at the top (as in <a class="reference internal" href="#algorithm-GenerateTree">Algorithm 4.2</a>).</p></li>
+<li><p>Label each <span class="math notranslate nohighlight">\(u_i\)</span> with <span class="math notranslate nohighlight">\(s_i\)</span>.</p></li>
+<li><p>Repeat the following steps as long as more than one node remains:</p>
+<p><strong>(i)</strong> Choose the first node (clockwise from top) with a nonzero label <span class="math notranslate nohighlight">\(s_i\)</span>.</p>
+<p><strong>(ii)</strong> Fill in the descendents of <span class="math notranslate nohighlight">\(u_i\)</span> from the nodes following it in the clockwise direction.  The sequence of <span class="math notranslate nohighlight">\(s_m\)</span> going clockwise from <span class="math notranslate nohighlight">\(u_i\)</span> must correspond to a Depth-First-Search.</p>
+<p>Step (ii) will terminate once all of the descendents of <span class="math notranslate nohighlight">\(u_i\)</span> have been added to the tree.  This occurs the at the first <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(n\)</span> nodes (including <span class="math notranslate nohighlight">\(u_i\)</span>) have been added for which the sum of <span class="math notranslate nohighlight">\(n\)</span> values <span class="math notranslate nohighlight">\(s_m\)</span> is <span class="math notranslate nohighlight">\(n-1\)</span>.</p>
+<p><strong>(iii)</strong> Replace <span class="math notranslate nohighlight">\(s_i\)</span> with <span class="math notranslate nohighlight">\(0\)</span> (representing the fact that there are <span class="math notranslate nohighlight">\(0\)</span> additional offspring to add to it) and remove all descendents of <span class="math notranslate nohighlight">\(u_i\)</span> from the cycle.</p>
+</li>
+<li><p>Once step (3) is complete, all “parent”-“offspring” edges will have been created.  We put the subtrees created in each pass through (3.ii) into their appropriate positions to complete the final tree.</p></li>
+</ol>
+<p>(note, in hindsight, orienting everything counter-clockwise would make the ordering of offspring more consistent with a natural left to right ordering, but I don’t want to make any changes after showing this to students.)</p>
+</section>
+</div><p>Note that the list of nodes after replacing <span class="math notranslate nohighlight">\(s_i\)</span> with <span class="math notranslate nohighlight">\(0\)</span> and removing all descendents of <span class="math notranslate nohighlight">\(u_i\)</span> from the cycle preserves the property that the number remaining in the cycle is one more than the sum of the labels.  This guarantees that until only one node remains it is possible to find a node with a positive value.</p>
+<div class="proof example admonition" id="example-GenerateTreeAlt">
+<p class="admonition-title"><span class="caption-number">Example 4.1 </span> (Demonstration of <a class="reference internal" href="#algorithm-GenerateTreeAlt">Algorithm 4.3</a>)</p>
+<section class="example-content" id="proof-content">
+<figure class="align-right" id="fig-generatetreealt">
+<a class="reference internal image-reference" href="../../_images/GenerateTreeAlt.png"><img alt="../../_images/GenerateTreeAlt.png" src="../../_images/GenerateTreeAlt.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.5 </span><span class="caption-text">The steps of the Algorithm applied to <span class="math notranslate nohighlight">\(S = (1,3,0,0,0,1,1,0,2)\)</span>.</span><a class="headerlink" href="#fig-generatetreealt" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider the sequence <span class="math notranslate nohighlight">\(S = (1,3, 0,0,0, 1, 1, 0, 2)\)</span>.  We put the nodes around a cycle, labelled by their offspring counts.</p>
+<p>We are now ready to do the repetitive steps in (3).</p>
+<ul class="simple">
+<li><p>The first nonzero entry is the first node.</p></li>
+<li><p>After the first pass, the entire branch descending from node <span class="math notranslate nohighlight">\(u_1\)</span> has been constructed.  The sequence of the remaining nodes is
+<span class="math notranslate nohighlight">\(\hat{S} = (0, 1, 1, 0, 2)\)</span>.</p></li>
+<li><p>After the second pass, the new sequence is  <span class="math notranslate nohighlight">\(\hat{\hat{S}} = (0, 2, 0)\)</span>.</p></li>
+<li><p>After the thrid pass, the sequence is <span class="math notranslate nohighlight">\(\hat{\hat{\hat{S}}}=(0)\)</span>.</p></li>
+</ul>
+<p>The process is finished, and the remaining node is the root of the resulting tree.  In this case it is the sixth node of the original sequence.  We can construct the  Łukasiewicz word <span class="math notranslate nohighlight">\((2, 1, 3, 0, 0, 0, 1, 1, 0)\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Short proof based on <a class="reference internal" href="#algorithm-GenerateTreeAlt">Algorithm 4.3</a></p>
+<p>We show that if the sum of <span class="math notranslate nohighlight">\(S\)</span> is one less than its length, then of all of the cyclic permutations of <span class="math notranslate nohighlight">\(S\)</span>, there is exactly one that is the Łukasiewicz word of a tree, and that tree is unique.</p>
+<p>We prove by induction on <span class="math notranslate nohighlight">\(j\)</span>, the length of <span class="math notranslate nohighlight">\(S\)</span>.  If we have a sequence with <span class="math notranslate nohighlight">\(j=1\)</span> and <span class="math notranslate nohighlight">\(\sum_i s_i = 0\)</span>, then <span class="math notranslate nohighlight">\(S = (0)\)</span> is the sequence and the single node is a unique tree.</p>
+<p>If <span class="math notranslate nohighlight">\(j&gt;1\)</span>, then there is a positive <span class="math notranslate nohighlight">\(s_i\)</span> somewhere, and the algorithm can proceed.  On the first pass through, it finds a node <span class="math notranslate nohighlight">\(u_i\)</span> with at least one offspring.  It creates a sub-tree of nodes that descends from <span class="math notranslate nohighlight">\(u_i\)</span>.  Given the properties of depth-first-searches, the ordering of these labels after <span class="math notranslate nohighlight">\(s_i\)</span> uniquely determines the structure of that sub-tree.  That is, there is no freedom in how these nodes are joined – whether by this algorithm or by any other method – this exact subtree must end up descending from <span class="math notranslate nohighlight">\(u_i\)</span>.</p>
+<p>When we remove the descendents’ labels from the cycle and reduce <span class="math notranslate nohighlight">\(s_i\)</span> to <span class="math notranslate nohighlight">\(0\)</span>, the labels in the new cycle have the property that they sum to one less than the number of labels.  So by induction<a class="footnote-reference brackets" href="#induction" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> we can assume that there is exactly one cyclic permutation of these labels that is the Łukasiewicz word of a tree, and that tree is unique.</p>
+<p>We can assume the tree on these remaining labels has been constructed and then add the descendents of <span class="math notranslate nohighlight">\(u_i\)</span> under <span class="math notranslate nohighlight">\(u_i\)</span>.  The resulting tree has a Łukasiewicz word that is a cyclic permutation of the original sequence <span class="math notranslate nohighlight">\(S\)</span>.  This completes the rigorous proof.</p>
+</div>
+<p>In practice rather than calling to “induction” at the final step, we repeat the algorithm until it is complete.  We may construct multiple sub-trees before we finally arrive at the root and then construct the entire tree.</p>
+<p>I recommend that you consider what happens if you take the original sequence in <a class="reference internal" href="#example-GenerateTreeAlt">Example 4.1</a>, and start the algorithm from the beginning, except that in step (3) you use the root node as the starting point.  You should see that every time you generate the subtree descending from any one node, there is no freedom at all.  If you don’t start at the root, you simply construct a subtree of the entire tree.</p>
+</section>
+</section>
+<section id="finding-the-probability-that-a-galton-watson-tree-has-j-nodes">
+<h2><span class="section-number">4.4.2. </span>Finding the probability that a Galton-Watson tree has <span class="math notranslate nohighlight">\(j\)</span> nodes<a class="headerlink" href="#finding-the-probability-that-a-galton-watson-tree-has-j-nodes" title="Link to this heading">#</a></h2>
 <p>We consider a Galton-Watson tree as above with <span class="math notranslate nohighlight">\(p_0 = \frac{\gamma}{\beta+\gamma}\)</span> and <span class="math notranslate nohighlight">\(p_2 = \frac{\beta}{\beta+\gamma}\)</span>.  When we construct the Łukasiewicz word, at each stage the probability that the next node has <span class="math notranslate nohighlight">\(k=0\)</span> or <span class="math notranslate nohighlight">\(k=2\)</span> is an independent choice with probabilities <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span>.  This means that the probability of a tree with a specific length-<span class="math notranslate nohighlight">\(j\)</span> Łukasiewicz word is equal to the probability that a length-<span class="math notranslate nohighlight">\(j\)</span> sequence of values chosen independently from the offspring distribution is that Łukasiewicz word.</p>
-<p>We now consider the set of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span>.   Any two sequences that are cyclic permutations of one another have equal probability.  This means that the combined probability of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span> is <span class="math notranslate nohighlight">\(j\)</span> times the combined probability of all length-<span class="math notranslate nohighlight">\(j\)</span> Łukasiewicz words.</p>
-<p>Now we observe that the probability a length-<span class="math notranslate nohighlight">\(j\)</span> sequence sums to <span class="math notranslate nohighlight">\(j-1\)</span> is equal to the coefficient of <span class="math notranslate nohighlight">\(x^{j-1}\)</span> of the product <span class="math notranslate nohighlight">\(\hat{\mu}(x)^j\)</span>. So</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbb{P}[j \text{ nodes}] = \frac{1}{j} \left[x^{j-1}\right]\big( \hat{\mu}(x)^j\big)
-\]</div>
-<p>From this point on, the remainder of the proof is effectively just doing algebra to convert this to the probability of <span class="math notranslate nohighlight">\(\ell=(j+1)/2\)</span> infections:</p>
+<p>The probability that a Galton-Watson process will terminate after exactly <span class="math notranslate nohighlight">\(j\)</span> nodes is equal to the sum of the probabilities of all such trees.  This in turn is equal to the sum of the probabilities of each Łukasiewicz word.  In other words,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\mathbb{P}[j \text{ nodes}] &amp;= \frac{1}{j} \left[x^{j-1}\right]\big( \hat{\mu}(x)^j\big)\\
+\mathbb{P}\left[\begin{array}{c} \text{Process ends with}\\ \text{exactly $j$ nodes}\end{array}\right] 
+&amp;= \sum_{\begin{array}{c}\text{trees with}\\ \text{$j$ nodes}\end{array}} \mathbb{P}[\text{tree}]\\
+&amp;= \sum_{\begin{array}{c}\text{trees with}\\ \text{$j$ nodes}\end{array}} \mathbb{P}[\text{Łukasiewicz word of tree}]\\
+\end{align*}\]</div>
+<p>We don’t have a direct way to sum the probabilities of the Łukasiewicz words.  However, we do have a way to calculate the probability that a sequence of <span class="math notranslate nohighlight">\(j\)</span> numbers sums to <span class="math notranslate nohighlight">\(j-1\)</span> (it is <span class="math notranslate nohighlight">\([x^{j-1}]\hat{\mu}(x)^j\)</span>).  We now find a way to express the sum of the probabilities of the Łukasiewicz words in terms of this.</p>
+<p>Consider a Łukasiewicz word and all of its cyclic permutations.  Call this the <strong>orbit of the Łukasiewicz word</strong>. The cycle lemma says that each length-<span class="math notranslate nohighlight">\(j\)</span> sequence that sums to <span class="math notranslate nohighlight">\(j-1\)</span> is in the orbit of exactly one Łukasiewicz word.  Or in other words, the orbits of Łukasiewicz words exactly partition the set of length-<span class="math notranslate nohighlight">\(j\)</span> sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span>. This gives hope that we can find the combined probability of the Łukasiewicz words in terms of the known probability that a length-<span class="math notranslate nohighlight">\(j\)</span> sequence sums to <span class="math notranslate nohighlight">\(j-1\)</span>.</p>
+<p>Because each sequence in the orbit has the same numbers in it (just in a different order), they all have the same probability.  Thus the probability a randomly-generated sequence is in the orbit of a given Łukasiewicz word is equal to <span class="math notranslate nohighlight">\(j\)</span> times the probability of that Łukasiewicz word.  Or, equivalently, the probability of a given Łukasiewicz word is equal to <span class="math notranslate nohighlight">\(1/j\)</span> times the combined probability of all the sequences in its orbit.  We now have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}\left[\begin{array}{c} \text{Process ends with}\\ \text{exactly $j$ nodes}\end{array}\right] 
+&amp;=\sum_{\begin{array}{c} \text{trees with}\\\text{$j$ nodes}\end{array}} 
+       \mathbb{P}[\text{Łukasiewicz word of tree}]\\
+&amp;= \sum_{\begin{array}{c} \text{trees with}\\ \text{$j$ nodes}\end{array}} 
+     \frac{1}{j} 
+     \mathbb{P}\left[\begin{array}{c} \text{a random length-$j$ sequence is in}\\ \text{orbit of Łukasiewicz word of tree} \end{array}\right]
+\end{align*}\]</div>
+<p>We now do some Algebra and use the fact that the orbits of Łukasiewicz words form a partition of the set of length-<span class="math notranslate nohighlight">\(j\)</span> sequences that sum to <span class="math notranslate nohighlight">\(j-1\)</span>.  We first change our sums to be over the Łukasiewicz words rather than over the trees.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}\left[\begin{array}{c} \text{Process ends with}\\ \text{exactly $j$ nodes}\end{array}\right] 
+&amp;= \frac{1}{j} 
+   \sum_{\begin{array}{c}\text{length $j$}\\ 
+           \text{Łukasiewicz words}\end{array}} 
+       \mathbb{P}\left[\begin{array}{c} \text{a   random length-$j$ sequence is in} \\ 
+       \text{the orbit of the Łukasiewicz word}\end{array}\right]\\
+&amp;= \frac{1}{j} \mathbb{P}\left[\begin{array}{c}\text{a random length-$j$ sequence is in}\\ \text{the orbit of some Łukasiewicz word}\end{array}\right]\\
+&amp;= \frac{1}{j} \mathbb{P}\left[\begin{array}{c} \text{a random length-$j$ sequence}\\ \text{sums to $j-1$} \end{array}\right]
+\end{align*}\]</div>
+<ul>
+<li><p>To get the second line, we used the <em>law of total probability</em>.</p></li>
+<li><p>To get the third line we used the fact that a length-<span class="math notranslate nohighlight">\(j\)</span> sequence sums to <span class="math notranslate nohighlight">\(j-1\)</span> iff it is in the orbit of a Łukasiewicz word which means</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \left\{
+  \begin{array}{c}\text{length-$j$ sequences in the}\\ \text{orbit of some Łukasiewicz word}\end{array}
+  \right\}
+  =
+  \left\{
+  \begin{array}{c} \text{length-$j$ sequences}\\ \text{that sum to $j-1$} \end{array}
+  \right\}
+  \end{split}\]</div>
+<p>Since the sets are the same, their probabilities are the same.</p>
+</li>
+</ul>
+<p>Now consider the set of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences that satisfy the constraint of summing to <span class="math notranslate nohighlight">\(j-1\)</span>. This has combined probability <span class="math notranslate nohighlight">\([x^{j-1}]\hat{\mu}(x)^j\)</span> by <a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html#cor-PGFPower">Corollary 1.2</a>.</p>
+<p>Thus we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}\left[\begin{array}{c} \text{Process ends with}\\ \text{exactly $j$ nodes}\end{array}\right]  &amp;=\frac{1}{j} \mathbb{P}\left[\begin{array}{c}\text{a random length-$j$}\\ \text{sequence sums to $j-1$}\end{array}\right]\\
+&amp;= \frac{1}{j} \left[x^{j-1}\right]\left(\hat{\mu}(x)^j\right)
+\end{align*}\]</div>
+<p>We’re now done with the major ideas of the proof.  From this point on, the ramaining steps are effectively just doing algebra to convert the probability of <span class="math notranslate nohighlight">\(j\)</span> nodes to the probability of <span class="math notranslate nohighlight">\(\ell\)</span> infections.  We have already noted that if there are <span class="math notranslate nohighlight">\(j\)</span> nodes in the tree as constructed, then the number of infections in the SIS or SIR process is <span class="math notranslate nohighlight">\(\ell = (j+1)/2\)</span>.  We first calculate the probability of <span class="math notranslate nohighlight">\(j\)</span> nodes using <span class="math notranslate nohighlight">\(\hat{\mu}(x) = \frac{\gamma}{\beta+\gamma} + \frac{\beta}{\beta+\gamma}x^2\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}\left[\begin{array}{c} \text{Process ends with}\\ \text{exactly $j$ nodes}\end{array}\right] 
+&amp;= \frac{1}{j} \left[x^{j-1}\right]\big( \hat{\mu}(x)^j\big)\\
    &amp;= \frac{1}{j} \left[x^{j-1}\right] \left(\left(\frac{\gamma}{\beta+\gamma} + \frac{\beta}{\beta+\gamma} x^2 \right)^j\right)\\
    &amp;= \frac{1}{j} \left[x^{j-1}\right] \sum_{k=0}^j  \binom{j}{k} \frac{\gamma^k}{(\beta+\gamma)^k} \frac{\beta^{j-k} x^{2(j-k)}}{(\beta+\gamma)^{j-k}}\\
    &amp;= \frac{1}{j} \frac{1}{(\beta+\gamma)^j}\left[x^{j-1}\right] \sum_{k=0}^j  \binom{j}{k} \gamma^k\beta^{j-k}x^{2(j-k)}\\
@@ -663,12 +781,13 @@ define a cyclic permutation:</p>
 \[\begin{align*}
 \mathbb{P}[\ell \text{ infections}] &amp;= \frac{1}{2\ell-1} \frac{1}{(\beta+\gamma)^{2\ell-1}} \binom{2\ell-1}{\ell} \gamma^\ell \beta^{\ell-1}\\
 &amp;= \frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \frac{1}{2\ell-1}\frac{(2\ell-1)!}{\ell! (\ell-1)!}\\
-&amp;= \frac{1}{\ell}\frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \frac{(2\ell-2)!}{(\ell-1)! (\ell-1)!}\\
-&amp;= \frac{1}{\ell}\frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \binom{2\ell-2}{\ell-1}\\
+&amp;= \frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}}\frac{1}{\ell} \frac{(2\ell-2)!}{(\ell-1)! (\ell-1)!}\\
+&amp;=\frac{\gamma^\ell \beta^{\ell-1}}{(\beta+\gamma)^{2\ell-1}} \frac{1}{\ell}\binom{2\ell-2}{\ell-1}\\
 &amp;= \frac{1}{\ell}\frac{\gamma^\ell \beta^{\ell-1}}{\gamma^{2\ell-1}(\beta/\gamma+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}\\
 &amp;= \frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
 \end{align*}\]</div>
 <p>where we introduced the variable <span class="math notranslate nohighlight">\(\mathcal{R}_0 = \beta/\gamma\)</span>.</p>
+<p>It’s natural to wonder why I converted <span class="math notranslate nohighlight">\(\frac{1}{2\ell-1} \binom{2\ell-1}{\ell}\)</span> to <span class="math notranslate nohighlight">\(\frac{1}{\ell} \binom{2\ell-2}{\ell-1}\)</span>.  I did this because I’ve looked ahead at the more general formula we will see when we look at a “generation-based” perspective and the connections are more obvious if it is written this way.</p>
 <p>We have proven:</p>
 <div class="proof theorem admonition" id="theorem-ctsTimeSIS_SIR_SizeDist">
 <p class="admonition-title"><span class="caption-number">Theorem 4.2 </span> (Continuous-time SIS and SIR small outbreak size distribution)</p>
@@ -679,8 +798,8 @@ define a cyclic permutation:</p>
 \mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
 \]</div>
 </section>
-</div><div class="proof example admonition" id="example-6">
-<p class="admonition-title"><span class="caption-number">Example 4.1 </span> (Small Outbreak Size Distribution if <span class="math notranslate nohighlight">\(\beta = 3\gamma/2\)</span>)</p>
+</div><div class="proof example admonition" id="example-8">
+<p class="admonition-title"><span class="caption-number">Example 4.2 </span> (Small Outbreak Size Distribution if <span class="math notranslate nohighlight">\(\beta = 3\gamma/2\)</span>)</p>
 <section class="example-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\beta = 3 \gamma/2\)</span> as in the simulations performed in earlier sections, then</p>
 <div class="amsmath math notranslate nohighlight">
@@ -711,15 +830,26 @@ define a cyclic permutation:</p>
 </div></section>
 <section id="self-test">
 <h2><span class="section-number">4.4.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Stirling’s approximation states that</p></li>
-</ol>
+<ol class="arabic">
+<li><p>Consider <span class="math notranslate nohighlight">\(S = (1, 0, 0, 2, 1, 0)\)</span> use both algorithms to construct a tree and find the Łukasiewicz word.  Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Now consider the first proof and first algorithm of the Cycle Lemma.  Take <span class="math notranslate nohighlight">\(S = (1,0,0,3,0,1,0)\)</span>.  By looking at the <span class="math notranslate nohighlight">\((3,0)\)</span> pair and your answer to (1), perform the inductive step of the proof.  That is, consider the sequence after adding the edge for the <span class="math notranslate nohighlight">\((3,0)\)</span> pair.  Match this with your answer to (1) and then update your tree to include this edge.  Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Now consider the second proof and algorithm for the Cycle Lemma.  Take <span class="math notranslate nohighlight">\(S = (2,1,0,0,1,0,0,3,0,1)\)</span>.  After the first step, this should be a cyclic permuation of the sequence in (1).  Starting with your tree for (1), do the inductive step of the second proof to create the tree.    Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Stirling’s approximation states that</p>
 <div class="math notranslate nohighlight">
 \[
-n! \tilde \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
-\]</div>
-<p>(the <span class="math notranslate nohighlight">\(\tilde\)</span> means that the ratio tends to <span class="math notranslate nohighlight">\(1\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>)</p>
-<p>Use this to estimate <span class="math notranslate nohighlight">\(\binom{2(\ell-1)}{\ell-1}\)</span> for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+    n! \sim \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
+    \]</div>
+<p>(the <span class="math notranslate nohighlight">\(\sim\)</span> means that the ratio tends to <span class="math notranslate nohighlight">\(1\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>)</p>
+<p><strong>(a)</strong> Use this to estimate <span class="math notranslate nohighlight">\(\frac{1}{\ell}\binom{2(\ell-1)}{\ell-1}\)</span> for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+</li>
+</ol>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="induction" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Note that you were likely first taught induction where we take <span class="math notranslate nohighlight">\(n\)</span> and then prove <span class="math notranslate nohighlight">\(n+1\)</span> in terms of <span class="math notranslate nohighlight">\(n\)</span> and then <span class="math notranslate nohighlight">\(n+2\)</span> in terms of <span class="math notranslate nohighlight">\(n+1\)</span>, etc.  In this case we have our given size <span class="math notranslate nohighlight">\(j\)</span>, and we construct something smaller than <span class="math notranslate nohighlight">\(j\)</span>.  It might be <span class="math notranslate nohighlight">\(j-1\)</span>, but it could easily be smaller (it was smaller than <span class="math notranslate nohighlight">\(j-1\)</span> in the example).  This is still fine with induction — when we are proving it for <span class="math notranslate nohighlight">\(j\)</span> we can assume it is true for <em>any</em> non-negative value smaller than <span class="math notranslate nohighlight">\(j\)</span>. This is technically called <em>strong induction</em></p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -787,8 +917,12 @@ n! \tilde \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cycle-lemma">4.4.1. The Cycle Lemma</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-probability-of-a-galton-watson-tree-with-j-nodes">4.4.2. Finding the probability of a Galton-Watson tree with <span class="math notranslate nohighlight">\(j\)</span> nodes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cycle-lemma">4.4.1. The Cycle Lemma</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-proof">4.4.1.1. First proof</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-proof">4.4.1.2. Second proof</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-probability-that-a-galton-watson-tree-has-j-nodes">4.4.2. Finding the probability that a Galton-Watson tree has <span class="math notranslate nohighlight">\(j\)</span> nodes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.4.3. Self-test</a></li>
 </ul>
   </nav></div>

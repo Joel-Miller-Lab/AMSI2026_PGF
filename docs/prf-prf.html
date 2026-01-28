@@ -229,6 +229,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
 </ul>
 </details></li>
 </ul>
@@ -404,6 +405,7 @@ document.write(`
    <div class="modindex-jumpbox">
    <a href="#cap-Alg-Gillespie"><strong>Alg-Gillespie</strong></a> | 
    <a href="#cap-algorithm-GenerateTree"><strong>algorithm-GenerateTree</strong></a> | 
+   <a href="#cap-algorithm-GenerateTreeAlt"><strong>algorithm-GenerateTreeAlt</strong></a> | 
    <a href="#cap-algorithm-ctsTimeInfDis"><strong>algorithm-ctsTimeInfDis</strong></a> | 
    <a href="#cap-cor-PGFPower"><strong>cor-PGFPower</strong></a> | 
    <a href="#cap-corrPGFprod"><strong>corrPGFprod</strong></a> | 
@@ -418,6 +420,7 @@ document.write(`
    <a href="#cap-def-GaltonWatson"><strong>def-GaltonWatson</strong></a> | 
    <a href="#cap-def-LukWord"><strong>def-LukWord</strong></a> | 
    <a href="#cap-def-MalthPar"><strong>def-MalthPar</strong></a> | 
+   <a href="#cap-def-OutComponent"><strong>def-OutComponent</strong></a> | 
    <a href="#cap-def-PoissonProcess"><strong>def-PoissonProcess</strong></a> | 
    <a href="#cap-def-RandStopSum"><strong>def-RandStopSum</strong></a> | 
    <a href="#cap-def-SmallOutbreak"><strong>def-SmallOutbreak</strong></a> | 
@@ -433,8 +436,8 @@ document.write(`
    <a href="#cap-example-1"><strong>example-1</strong></a> | 
    <a href="#cap-example-3"><strong>example-3</strong></a> | 
    <a href="#cap-example-5"><strong>example-5</strong></a> | 
-   <a href="#cap-example-6"><strong>example-6</strong></a> | 
    <a href="#cap-example-7"><strong>example-7</strong></a> | 
+   <a href="#cap-example-8"><strong>example-8</strong></a> | 
    <a href="#cap-example-BinExp"><strong>example-BinExp</strong></a> | 
    <a href="#cap-example-BinomPGF"><strong>example-BinomPGF</strong></a> | 
    <a href="#cap-example-CashMachine"><strong>example-CashMachine</strong></a> | 
@@ -442,6 +445,7 @@ document.write(`
    <a href="#cap-example-DiffPoissonClothesLine"><strong>example-DiffPoissonClothesLine</strong></a> | 
    <a href="#cap-example-ExtGeomDist"><strong>example-ExtGeomDist</strong></a> | 
    <a href="#cap-example-ForwKolmPureBirth"><strong>example-ForwKolmPureBirth</strong></a> | 
+   <a href="#cap-example-GenerateTreeAlt"><strong>example-GenerateTreeAlt</strong></a> | 
    <a href="#cap-example-GeomPGF"><strong>example-GeomPGF</strong></a> | 
    <a href="#cap-example-InfectiousDice"><strong>example-InfectiousDice</strong></a> | 
    <a href="#cap-example-NegBinPGF"><strong>example-NegBinPGF</strong></a> | 
@@ -499,6 +503,14 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#algorithm-GenerateTree"><code class="xref">algorithm-GenerateTree</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-algorithm-GenerateTreeAlt"><td></td><td>
+       <strong>algorithm-GenerateTreeAlt</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#algorithm-GenerateTreeAlt"><code class="xref">algorithm-GenerateTreeAlt</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-algorithm-ctsTimeInfDis"><td></td><td>
@@ -613,6 +625,14 @@ document.write(`
        <a href="notebooks/CtsTime/CtsTimeForwKolm.html#def-MalthPar"><code class="xref">def-MalthPar</code></a> <em>(notebooks/CtsTime/CtsTimeForwKolm)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-def-OutComponent"><td></td><td>
+       <strong>def-OutComponent</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisSmallPop.html#def-OutComponent"><code class="xref">def-OutComponent</code></a> <em>(notebooks/InfDis/InfDisSmallPop)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-def-PoissonProcess"><td></td><td>
        <strong>def-PoissonProcess</strong></td><td></td></tr>
      <tr>
@@ -706,7 +726,7 @@ document.write(`
      <tr>
        <td></td>
        <td>
-       <a href="notebooks/BasicGenFxn/GenFxnsProveIdent.html#example-0"><code class="xref">example-0</code></a> <em>(notebooks/BasicGenFxn/GenFxnsProveIdent)</em></td><td>
+       <a href="notebooks/InfDis/InfDisGenBased.html#example-0"><code class="xref">example-0</code></a> <em>(notebooks/InfDis/InfDisGenBased)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-1"><td></td><td>
@@ -733,20 +753,20 @@ document.write(`
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#example-5"><code class="xref">example-5</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-6"><td></td><td>
-       <strong>example-6</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#example-6"><code class="xref">example-6</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-7"><td></td><td>
        <strong>example-7</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#example-7"><code class="xref">example-7</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-8"><td></td><td>
+       <strong>example-8</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#example-8"><code class="xref">example-8</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-BinExp"><td></td><td>
@@ -803,6 +823,14 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/CtsTime/CtsTimeForwKolm.html#example-ForwKolmPureBirth"><code class="xref">example-ForwKolmPureBirth</code></a> <em>(notebooks/CtsTime/CtsTimeForwKolm)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-GenerateTreeAlt"><td></td><td>
+       <strong>example-GenerateTreeAlt</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#example-GenerateTreeAlt"><code class="xref">example-GenerateTreeAlt</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-GeomPGF"><td></td><td>
