@@ -531,7 +531,10 @@ document.write(`
    \]</div>
 <p>Find <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.  Looking at the PGF of the negative binomial distribution in the nodes, find
 <span class="math notranslate nohighlight">\(\mathbb{P}[\text{outbreak size }j]\)</span>.</p>
-<p>Compare this with the formula in the notes for the probability a continuous-time infectious disease model results in <span class="math notranslate nohighlight">\(\ell\)</span> infections.</p>
+<p>Compare this with the formula in the notes for the probability a continuous-time infectious disease model results in <span class="math notranslate nohighlight">\(\ell\)</span> infections:</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}    \]</div>
 </li>
 <li><p>In the online notes at https://joel-miller-lab.github.io/AMSI2026_PGF/notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html, there are two algorithms given to produce a tree from a length-<span class="math notranslate nohighlight">\(j\)</span> sequence of non-negative integers that sum to <span class="math notranslate nohighlight">\(j\)</span>.</p>
 <p>Consider <span class="math notranslate nohighlight">\(S = (1, 0, 0, 2, 1, 0)\)</span> use both algorithms to construct a tree and find the Łukasiewicz word.  Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p>
@@ -560,11 +563,12 @@ document.write(`
     n! \sim \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
     \]</div>
 <p>(the <span class="math notranslate nohighlight">\(\sim\)</span> means that the ratio tends to <span class="math notranslate nohighlight">\(1\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>)</p>
-<p>Consider the continuous-time epidemic model for which
-$<span class="math notranslate nohighlight">\(
-\mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
-\)</span>$</p>
-<p><strong>(a)</strong> Use Stirling’s approximation to estimate <span class="math notranslate nohighlight">\(\frac{1}{\ell}\binom{2(\ell-1)}{\ell-1}\)</span> for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<p>Consider the continuous-time epidemic model for which</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
+    \]</div>
+<p><strong>(a)</strong> Use Stirling’s approximation to estimate <span class="math notranslate nohighlight">\(\frac{1}{\ell}\binom{2\ell-2}{\ell-1}\)</span> for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
 <p><strong>(b)</strong> If <span class="math notranslate nohighlight">\(\mathcal{R}_0=1\)</span>, estimate the probability of <span class="math notranslate nohighlight">\(\ell\)</span> infections for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
 <p><strong>(c)</strong> If <span class="math notranslate nohighlight">\(\mathcal{R}_0&lt;1\)</span>, show that as <span class="math notranslate nohighlight">\(\ell\)</span> grows, the probability of <span class="math notranslate nohighlight">\(\ell\)</span> infections decays <em>much</em> faster than for <span class="math notranslate nohighlight">\(\mathcal{R}_0=1\)</span>.</p>
 <p><strong>(d)</strong> Repeat (c), but for <span class="math notranslate nohighlight">\(\mathcal{R}_0&gt;1\)</span>.</p>
