@@ -529,7 +529,7 @@ document.write(`
 \[ 
    \mathbb{P}[\text{outbreak size }j] = \frac{1}{j} [x^{j-1}] \left(\mu(x)\right)^j
    \]</div>
-<p>Find <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.  Looking at the PGF of the negative binomial distribution in the notes: <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">example-NegBinPGF</span> </code>, find
+<p>Find <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.  Looking at the PGF of the negative binomial distribution in the notes, <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-NegBinPGF">Example 1.11</a>, find
 <span class="math notranslate nohighlight">\(\mathbb{P}[\text{outbreak size }j]\)</span>.</p>
 <p>Compare this with the formula in the notes for the probability a continuous-time infectious disease model results in <span class="math notranslate nohighlight">\(\ell\)</span> infections:</p>
 <div class="math notranslate nohighlight">
@@ -544,13 +544,13 @@ document.write(`
 <li><p>Now consider the second proof and algorithm for the Cycle Lemma.  Take <span class="math notranslate nohighlight">\(S = (2,1,0,0,1, 1,0,0,3)\)</span>.  After the first step, this should be a cyclic permuation of the sequence in (4).  Using just this first step and your tree for (4), do the inductive step of the second proof to create the tree.    Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
 <li><p>Consider the offspring distribution PGF <span class="math notranslate nohighlight">\(\hat{\mu}(x)=0.25 + 0.75x^2\)</span>. We will revisit the derivation of the probability of trees of size <span class="math notranslate nohighlight">\(j\)</span> (assuming the cycle lemma is already proven).  We will consider the case <span class="math notranslate nohighlight">\(j=5\)</span>.</p>
 <p><strong>(a)</strong> Write out all length-<span class="math notranslate nohighlight">\(5\)</span> sequences made up of <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(2\)</span> and sum up to <span class="math notranslate nohighlight">\(4\)</span>.</p>
-<p><strong>(b)</strong> Group this set of sequences into orbits of cyclic permutations.</p>
+<p><strong>(b)</strong> Group this set of sequences into orbits of cyclic permutations (that is, put them into subsets where each subset is made up of the cyclic permutations of one sequence).</p>
 <p><strong>(c)</strong> For each orbit, find the Łukasiewicz word.</p>
 <p><strong>(d)</strong> In this case each such sequence has the same probability.  Calculate this probability.</p>
 <p><strong>(e)</strong> Confirm that the probability of each Łukasiewicz word is <span class="math notranslate nohighlight">\(1/5\)</span> times the probability of its orbit.</p>
 <p><strong>(f)</strong> Confirm that the probability of all of the Łukasiewicz word sequences is <span class="math notranslate nohighlight">\((1/5) [x^4]\hat{\mu}(x)^5\)</span>.</p>
 </li>
-<li><p>Revisit (7), but this time with length-<span class="math notranslate nohighlight">\(3\)</span> sequences that sum to <span class="math notranslate nohighlight">\(2\)</span> where we have <span class="math notranslate nohighlight">\(\mu(x) = 1/4 + x/4 + 2x^2/4\)</span>.  Unlike in (7) the sequences do not all have the same probabilities.</p>
+<li><p>Revisit (7), but this time with length-<span class="math notranslate nohighlight">\(4\)</span> sequences that sum to <span class="math notranslate nohighlight">\(3\)</span> where we have <span class="math notranslate nohighlight">\(\mu(x) = 1/4 + x/4 + 2x^2/4\)</span>.  Unlike in (7) the sequences do not all have the same probabilities.</p>
 <p><strong>(a)</strong> Write out all length-<span class="math notranslate nohighlight">\(4\)</span> sequences made up of <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(1\)</span>, and/or <span class="math notranslate nohighlight">\(2\)</span> and sum up to <span class="math notranslate nohighlight">\(3\)</span>. (there are 16 such sequences)</p>
 <p><strong>(b)</strong> Group this set of sequences into orbits of cyclic permutations.</p>
 <p><strong>(c)</strong> For each orbit, find the Łukasiewicz word.</p>
