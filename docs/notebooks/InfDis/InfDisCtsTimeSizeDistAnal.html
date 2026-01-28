@@ -735,7 +735,7 @@ define a cyclic permutation:</p>
 &amp;= \frac{1}{j} 
    \sum_{\begin{array}{c}\text{length $j$}\\ 
            \text{Łukasiewicz words}\end{array}} 
-       \mathbb{P}\left[\begin{array}{c} \text{a   random length-$j$ sequence is in} \\ 
+       \mathbb{P}\left[\begin{array}{c} \text{a random length-$j$ sequence is in} \\ 
        \text{the orbit of the Łukasiewicz word}\end{array}\right]\\
 &amp;= \frac{1}{j} \mathbb{P}\left[\begin{array}{c}\text{a random length-$j$ sequence is in}\\ \text{the orbit of some Łukasiewicz word}\end{array}\right]\\
 &amp;= \frac{1}{j} \mathbb{P}\left[\begin{array}{c} \text{a random length-$j$ sequence}\\ \text{sums to $j-1$} \end{array}\right]
@@ -756,7 +756,7 @@ define a cyclic permutation:</p>
 <p>Since the sets are the same, their probabilities are the same.</p>
 </li>
 </ul>
-<p>Now consider the set of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences that satisfy the constraint of summing to <span class="math notranslate nohighlight">\(j-1\)</span>. This has combined probability <span class="math notranslate nohighlight">\([x^{j-1}]\hat{\mu}(x)^j\)</span> by <a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html#cor-PGFPower">Corollary 1.2</a>.</p>
+<p>Now consider the set of all length-<span class="math notranslate nohighlight">\(j\)</span> sequences that satisfy the constraint of summing to <span class="math notranslate nohighlight">\(j-1\)</span>. This has combined probability <span class="math notranslate nohighlight">\([x^{j-1}]\hat{\mu}(x)^j\)</span> by <a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html#cor-PGFPower">Corollary 1.2</a> (this is the step that justifies including this result in a subject on PGFs).</p>
 <p>Thus we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -834,6 +834,25 @@ define a cyclic permutation:</p>
 <li><p>Consider <span class="math notranslate nohighlight">\(S = (1, 0, 0, 2, 1, 0)\)</span> use both algorithms to construct a tree and find the Łukasiewicz word.  Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
 <li><p>Now consider the first proof and first algorithm of the Cycle Lemma.  Take <span class="math notranslate nohighlight">\(S = (1,0,0,3,0,1,0)\)</span>.  By looking at the <span class="math notranslate nohighlight">\((3,0)\)</span> pair and your answer to (1), perform the inductive step of the proof.  That is, consider the sequence after adding the edge for the <span class="math notranslate nohighlight">\((3,0)\)</span> pair.  Match this with your answer to (1) and then update your tree to include this edge.  Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
 <li><p>Now consider the second proof and algorithm for the Cycle Lemma.  Take <span class="math notranslate nohighlight">\(S = (2,1,0,0,1,0,0,3,0,1)\)</span>.  After the first step, this should be a cyclic permuation of the sequence in (1).  Starting with your tree for (1), do the inductive step of the second proof to create the tree.    Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Consider the probability of <span class="math notranslate nohighlight">\(j=5\)</span> nodes with the offspring distribution PGF <span class="math notranslate nohighlight">\(0.25 + 0.75x^2\)</span>. We will revisit the derivation of the probability of this (assuming the cycle lemma is already proven)</p>
+<p><strong>(a)</strong> Write out all length-<span class="math notranslate nohighlight">\(5\)</span> sequences made up of <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(2\)</span> and sum up to <span class="math notranslate nohighlight">\(4\)</span>.</p>
+<p><strong>(b)</strong> Group this set of sequences into orbits of cyclic permutations.</p>
+<p><strong>(c)</strong> For each orbit, find the Łukasiewicz word.</p>
+<p><strong>(d)</strong> In this case each such sequence has the same probability.  Calculate this probability.</p>
+<p><strong>(e)</strong> Confirm that the probability of the Łukasiewicz word is <span class="math notranslate nohighlight">\(1/5\)</span> times the probability of its orbit.</p>
+<p><strong>(f)</strong> Confirm that the probability of all of the Łukasiewicz word sequences is <span class="math notranslate nohighlight">\((1/5) [x^4]\hat{\mu}(x)^5\)</span>.</p>
+</li>
+<li><p>Revisit (4), but this time with length-<span class="math notranslate nohighlight">\(3\)</span> sequences that sum to <span class="math notranslate nohighlight">\(2\)</span> where we have <span class="math notranslate nohighlight">\(\mu(x) = 1/4 + x/4 + 2x^2/4\)</span>.  You should see that the sequences do not all have the same probabilities.</p>
+<p><strong>(a)</strong> Write out all length-<span class="math notranslate nohighlight">\(4\)</span> sequences made up of <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(1\)</span>, and/or <span class="math notranslate nohighlight">\(2\)</span> and sum up to <span class="math notranslate nohighlight">\(3\)</span>. (there are 16 such sequences)</p>
+<p><strong>(b)</strong> Group this set of sequences into orbits of cyclic permutations.</p>
+<p><strong>(c)</strong> For each orbit, find the Łukasiewicz word.</p>
+<p><strong>(d)</strong> For each orbit, find the probability of the sequences.</p>
+<p><strong>(e)</strong> Confirm that the probability of the Łukasiewicz word is <span class="math notranslate nohighlight">\(1/4\)</span> times the probability of all of the sequences in its orbit.</p>
+<p><strong>(f)</strong> Confirm that the probability of all of the Łukasiewicz word sequences is <span class="math notranslate nohighlight">\((1/4) [x^3]\mu(x)^4\)</span>.</p>
+</li>
+<li><p>The proofs of the cycle lemma allow for entries that are not <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(2\)</span>.  However, for the continuous-time SIS and SIR model, we know that all entries are <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p>Imagine we restricted the lemma to sequences of just <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(2\)</span>.  Show that the inductive step in the first proof technique would fail, but the inductive step in the second technique would not.</p>
+</li>
 <li><p>Stirling’s approximation states that</p>
 <div class="math notranslate nohighlight">
 \[
@@ -841,6 +860,9 @@ define a cyclic permutation:</p>
     \]</div>
 <p>(the <span class="math notranslate nohighlight">\(\sim\)</span> means that the ratio tends to <span class="math notranslate nohighlight">\(1\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>)</p>
 <p><strong>(a)</strong> Use this to estimate <span class="math notranslate nohighlight">\(\frac{1}{\ell}\binom{2(\ell-1)}{\ell-1}\)</span> for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<p><strong>(b)</strong> If <span class="math notranslate nohighlight">\(\mathcal{R}_0=1\)</span>, estimate the probability of <span class="math notranslate nohighlight">\(\ell\)</span> infections for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<p><strong>(c)</strong> If <span class="math notranslate nohighlight">\(\mathcal{R}_0&lt;1\)</span>, show that as <span class="math notranslate nohighlight">\(\ell\)</span> grows, the probability of <span class="math notranslate nohighlight">\(\ell\)</span> infections decays <em>much</em> faster than for <span class="math notranslate nohighlight">\(\mathcal{R}_0=1\)</span>.</p>
+<p><strong>(d)</strong> Repeat (c), but for <span class="math notranslate nohighlight">\(\mathcal{R}_0&gt;1\)</span>.</p>
 </li>
 </ol>
 <hr class="footnotes docutils" />
