@@ -239,6 +239,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac2.html">6.2. Probability Generating Functions, Practical Class 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac3.html">6.3. Probability Generating Functions, Practical Class 3</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Assignments/AssignmentsIntro.html">7. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -716,12 +717,18 @@ p_N = p\binom{N+r-1}{N} p^{r-1}(1-p)^N
 &amp;= \left(\frac{p}{1-(1-p)x}\right)^r
 \end{align*}\]</div>
 <p>We can extend the Negative Binomial to non-integer values of <span class="math notranslate nohighlight">\(r\)</span>.  The distribution loses the interpretation as a number of successes and failures.  This provides a family of distributions with two parameters which is valuable in parameter fitting because it is mathematically tractible and can have a wide range of shapes.</p>
-<p>With non-integer <span class="math notranslate nohighlight">\(r\)</span>, we get</p>
+<p>With integer powers <span class="math notranslate nohighlight">\(r\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+p_N = \binom{N+r-1}{N} p^{r}(1-p)^N
+\]</div>
+<p>while with
+non-integer <span class="math notranslate nohighlight">\(r\)</span>, we get</p>
 <div class="math notranslate nohighlight">
 \[
 p_N = \frac{\Gamma(N+r)}{N!\Gamma(r)}p^r (1-p)^N
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\Gamma(x)\)</span> is the Gamma Function which is the analytic extension of the Factorial function to non-integer numbers, with <span class="math notranslate nohighlight">\(\Gamma(N+1)=N!\)</span> for <span class="math notranslate nohighlight">\(N=0,1,2,\ldots\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(\Gamma(x)\)</span> is the Gamma Function which is the analytic extension of the Factorial function to non-integer numbers, with <span class="math notranslate nohighlight">\(\Gamma(N+1)=N!\)</span> for <span class="math notranslate nohighlight">\(N=0,1,2,\ldots\)</span>. (you aren’t expected to know how to calculate this - most programming languages provide a function to calculate it).</p>
 <p>We still find the same form of the PGF</p>
 <div class="math notranslate nohighlight">
 \[\mu(x) = \left(\frac{p}{1-(1-p)x}\right)^r\]</div>
