@@ -523,13 +523,13 @@ document.write(`
 </li>
 <li><p>In a generation-based framework, we care about the number of infections an individual causes before recovery.  Consider the continuous-time framework where individuals transmit with rate <span class="math notranslate nohighlight">\(\beta\)</span> and recover with rate <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
 <p><strong>(a)</strong> Derive the probability that the next event for an individual is transmission or recovery.</p>
-<p><strong>(b)</strong> Find the probability <span class="math notranslate nohighlight">\(p_k\)</span> that an individual transmits exactly <span class="math notranslate nohighlight">\(k\)</span> times before recovering.  Use this to write down the PGF <span class="math notranslate nohighlight">\(\mu(x) = \sum_k p_kx^k\)</span>.</p>
+<p><strong>(b)</strong> Find the probability <span class="math notranslate nohighlight">\(p_k\)</span> that an individual transmits exactly <span class="math notranslate nohighlight">\(k\)</span> times before recovering.  Use this to write down the PGF <span class="math notranslate nohighlight">\(\mu(x) = \sum_k p_kx^k\)</span>.  To keep later algebra simple, set <span class="math notranslate nohighlight">\(p = \gamma/(\beta+\gamma)\)</span> and <span class="math notranslate nohighlight">\(1-p = \beta/(\beta+\gamma)\)</span>.</p>
 <p><strong>(c)</strong> Using the generation-based framework, the probability of an outbreak of size <span class="math notranslate nohighlight">\(j\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[ 
    \mathbb{P}[\text{outbreak size }j] = \frac{1}{j} [x^{j-1}] \left(\mu(x)\right)^j
    \]</div>
-<p>Find <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.  Looking at the PGF of the negative binomial distribution in the nodes, find
+<p>Find <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.  Looking at the PGF of the negative binomial distribution in the notes: <code class="xref prf prf-ref docutils literal notranslate"><span class="pre">example-NegBinPGF</span> </code>, find
 <span class="math notranslate nohighlight">\(\mathbb{P}[\text{outbreak size }j]\)</span>.</p>
 <p>Compare this with the formula in the notes for the probability a continuous-time infectious disease model results in <span class="math notranslate nohighlight">\(\ell\)</span> infections:</p>
 <div class="math notranslate nohighlight">
