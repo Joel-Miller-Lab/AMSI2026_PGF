@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Practice Classes &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>6.3. Probability Generating Functions, Practical Class 3 &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -60,11 +60,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/PracticeClasses/PracIntro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/PracticeClasses/Prac3';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6.1. Probability Generating Functions, Practical Class 1." href="Prac1.html" />
-    <link rel="prev" title="5.2. Computer-based exploration of Galton-Watson Processes" href="../Simulation/GaltonWatsonExploration.html" />
+    <link rel="next" title="7. Assignments" href="../Assignments/AssignmentsIntro.html" />
+    <link rel="prev" title="6.2. Probability Generating Functions, Practical Class 2" href="Prac2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -236,10 +236,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">5.2. Computer-based exploration of Galton-Watson Processes</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">6. Practice Classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="PracIntro.html">6. Practice Classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Prac2.html">6.2. Probability Generating Functions, Practical Class 2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Prac3.html">6.3. Probability Generating Functions, Practical Class 3</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.3. Probability Generating Functions, Practical Class 3</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Assignments/AssignmentsIntro.html">7. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -301,7 +301,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/main?urlpath=lab/tree/AMSI_2026_PGF_text/notebooks/PracticeClasses/PracIntro.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/main?urlpath=lab/tree/AMSI_2026_PGF_text/notebooks/PracticeClasses/Prac3.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -367,7 +367,7 @@
       
       
       
-      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/PracticeClasses/PracIntro.ipynb" target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/PracticeClasses/Prac3.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -384,7 +384,7 @@
       
       
       
-      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/PracticeClasses/PracIntro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/PracticeClasses/Prac3.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,7 +414,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/PracticeClasses/PracIntro.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/PracticeClasses/Prac3.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -496,7 +496,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Practice Classes</h1>
+    <h1>Probability Generating Functions, Practical Class 3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -510,11 +510,66 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="practice-classes">
-<h1><span class="section-number">6. </span>Practice Classes<a class="headerlink" href="#practice-classes" title="Link to this heading">#</a></h1>
-<p>THis is intended for your practice classes.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="probability-generating-functions-practical-class-3">
+<h1><span class="section-number">6.3. </span>Probability Generating Functions, Practical Class 3<a class="headerlink" href="#probability-generating-functions-practical-class-3" title="Link to this heading">#</a></h1>
+<p><strong>AMSI 2026</strong></p>
+<ol class="arabic">
+<li><p>Consider a continuous-time Galton-Watson process with <span class="math notranslate nohighlight">\(X(t)\)</span> individuals at time <span class="math notranslate nohighlight">\(t\)</span>.  We know that each individual dies (through a Poisson process) with rate <span class="math notranslate nohighlight">\(r\)</span> and is replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals with probability <span class="math notranslate nohighlight">\(p_k\)</span>.</p>
+<p>Explain why this is equivalent to assuming that there is a Poisson process with rate <span class="math notranslate nohighlight">\(rX(t)\)</span> in which a randomly-selected individual is removed and replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals with probability <span class="math notranslate nohighlight">\(p_k\)</span>.  This is the observation that underlies the Gillespie algorithm.</p>
+</li>
+<li><p>The notes describe a continuous-time infectious disease model where infected individuals transmit at rate <span class="math notranslate nohighlight">\(\beta\)</span> and recover at rate <span class="math notranslate nohighlight">\(\gamma\)</span>. In a very large, well-mixed population, each transmission targets a uniformly random individual.</p>
+<p><strong>(a)</strong> Suppose the number of infected/recovered individuals at time <span class="math notranslate nohighlight">\(t\)</span> is small compared to the total population size <span class="math notranslate nohighlight">\(N\)</span>. Explain why the probability that a given transmission event leads to a <strong>new infection</strong> can be approximated as <span class="math notranslate nohighlight">\(1\)</span>. Using this, justify why <span class="math notranslate nohighlight">\(S(t)/N\approx 1\)</span> during the early stages of an outbreak.</p>
+<p><strong>(b)</strong> Using your reasoning from part (a), argue why the <strong>early spread</strong> of infection can be approximated by a <em>branching process</em>. In particular, identify what the “offspring distribution” represents in this epidemic context, and write down its <strong>probability generating function (PGF)</strong> in terms of <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+</li>
+<li><p>In a generation-based framework, we care about the number of infections an individual causes before recovery.  Consider the continuous-time framework where individuals transmit with rate <span class="math notranslate nohighlight">\(\beta\)</span> and recover with rate <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<p><strong>(a)</strong> Derive the probability that the next event for an individual is transmission or recovery.</p>
+<p><strong>(b)</strong> Find the probability <span class="math notranslate nohighlight">\(p_k\)</span> that an individual transmits exactly <span class="math notranslate nohighlight">\(k\)</span> times before recovering.  Use this to write down the PGF <span class="math notranslate nohighlight">\(\mu(x) = \sum_k p_kx^k\)</span>.</p>
+<p><strong>(c)</strong> Using the generation-based framework, the probability of an outbreak of size <span class="math notranslate nohighlight">\(j\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[ 
+   \mathbb{P}[\text{outbreak size }j] = \frac{1}{j} [x^{j-1}] \left(\mu(x)\right)^j
+   \]</div>
+<p>Find <span class="math notranslate nohighlight">\(\mu(x)^j\)</span>.  Looking at the PGF of the negative binomial distribution in the nodes, find
+<span class="math notranslate nohighlight">\(\mathbb{P}[\text{outbreak size }j]\)</span>.</p>
+<p>Compare this with the formula in the notes for the probability a continuous-time infectious disease model results in <span class="math notranslate nohighlight">\(\ell\)</span> infections.</p>
+</li>
+<li><p>In the online notes at https://joel-miller-lab.github.io/AMSI2026_PGF/notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html, there are two algorithms given to produce a tree from a length-<span class="math notranslate nohighlight">\(j\)</span> sequence of non-negative integers that sum to <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>Consider <span class="math notranslate nohighlight">\(S = (1, 0, 0, 2, 1, 0)\)</span> use both algorithms to construct a tree and find the Łukasiewicz word.  Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</li>
+<li><p>Now consider the first proof and first algorithm of the Cycle Lemma.  Take <span class="math notranslate nohighlight">\(S = (1,0,0,3,0,1,0)\)</span>.  By looking at the <span class="math notranslate nohighlight">\((3,0)\)</span> pair and your answer to (4), perform the inductive step of the proof.  That is, consider the sequence after adding the edge for the <span class="math notranslate nohighlight">\((3,0)\)</span> pair.  Match this with your answer to (1) and then update your tree to include this edge.  Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Now consider the second proof and algorithm for the Cycle Lemma.  Take <span class="math notranslate nohighlight">\(S = (2,1,0,0,1,0,0,3,0,1)\)</span>.  After the first step, this should be a cyclic permuation of the sequence in (4).  Using just this first step and your tree for (4), do the inductive step of the second proof to create the tree.    Verify that the Łukasiewicz word is a cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Consider the offspring distribution PGF <span class="math notranslate nohighlight">\(\hat{\mu}(x)=0.25 + 0.75x^2\)</span>. We will revisit the derivation of the probability of trees of size <span class="math notranslate nohighlight">\(j\)</span> (assuming the cycle lemma is already proven).  We will consider the case <span class="math notranslate nohighlight">\(j=5\)</span>.</p>
+<p><strong>(a)</strong> Write out all length-<span class="math notranslate nohighlight">\(5\)</span> sequences made up of <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(2\)</span> and sum up to <span class="math notranslate nohighlight">\(4\)</span>.</p>
+<p><strong>(b)</strong> Group this set of sequences into orbits of cyclic permutations.</p>
+<p><strong>(c)</strong> For each orbit, find the Łukasiewicz word.</p>
+<p><strong>(d)</strong> In this case each such sequence has the same probability.  Calculate this probability.</p>
+<p><strong>(e)</strong> Confirm that the probability of each Łukasiewicz word is <span class="math notranslate nohighlight">\(1/5\)</span> times the probability of its orbit.</p>
+<p><strong>(f)</strong> Confirm that the probability of all of the Łukasiewicz word sequences is <span class="math notranslate nohighlight">\((1/5) [x^4]\hat{\mu}(x)^5\)</span>.</p>
+</li>
+<li><p>Revisit (7), but this time with length-<span class="math notranslate nohighlight">\(3\)</span> sequences that sum to <span class="math notranslate nohighlight">\(2\)</span> where we have <span class="math notranslate nohighlight">\(\mu(x) = 1/4 + x/4 + 2x^2/4\)</span>.  Unlike in (7) the sequences do not all have the same probabilities.</p>
+<p><strong>(a)</strong> Write out all length-<span class="math notranslate nohighlight">\(4\)</span> sequences made up of <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(1\)</span>, and/or <span class="math notranslate nohighlight">\(2\)</span> and sum up to <span class="math notranslate nohighlight">\(3\)</span>. (there are 16 such sequences)</p>
+<p><strong>(b)</strong> Group this set of sequences into orbits of cyclic permutations.</p>
+<p><strong>(c)</strong> For each orbit, find the Łukasiewicz word.</p>
+<p><strong>(d)</strong> For each orbit, find the probability of the sequences.</p>
+<p><strong>(e)</strong> Confirm that the probability of each Łukasiewicz word is <span class="math notranslate nohighlight">\(1/4\)</span> times the probability of all of the sequences in its orbit.</p>
+<p><strong>(f)</strong> Confirm that the probability of all of the Łukasiewicz word sequences is <span class="math notranslate nohighlight">\((1/4) [x^3]\mu(x)^4\)</span>.</p>
+</li>
+<li><p>Stirling’s approximation states that</p>
+<div class="math notranslate nohighlight">
+\[
+    n! \sim \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
+    \]</div>
+<p>(the <span class="math notranslate nohighlight">\(\sim\)</span> means that the ratio tends to <span class="math notranslate nohighlight">\(1\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>)</p>
+<p>Consider the continuous-time epidemic model for which
+$<span class="math notranslate nohighlight">\(
+\mathbb{P}[\ell \text{ infections}]=\frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}
+\)</span>$</p>
+<p><strong>(a)</strong> Use Stirling’s approximation to estimate <span class="math notranslate nohighlight">\(\frac{1}{\ell}\binom{2(\ell-1)}{\ell-1}\)</span> for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<p><strong>(b)</strong> If <span class="math notranslate nohighlight">\(\mathcal{R}_0=1\)</span>, estimate the probability of <span class="math notranslate nohighlight">\(\ell\)</span> infections for large <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<p><strong>(c)</strong> If <span class="math notranslate nohighlight">\(\mathcal{R}_0&lt;1\)</span>, show that as <span class="math notranslate nohighlight">\(\ell\)</span> grows, the probability of <span class="math notranslate nohighlight">\(\ell\)</span> infections decays <em>much</em> faster than for <span class="math notranslate nohighlight">\(\mathcal{R}_0=1\)</span>.</p>
+<p><strong>(d)</strong> Repeat (c), but for <span class="math notranslate nohighlight">\(\mathcal{R}_0&gt;1\)</span>.</p>
+</li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -548,20 +603,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Simulation/GaltonWatsonExploration.html"
+       href="Prac2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5.2. </span>Computer-based exploration of Galton-Watson Processes</p>
+        <p class="prev-next-title"><span class="section-number">6.2. </span>Probability Generating Functions, Practical Class 2</p>
       </div>
     </a>
     <a class="right-next"
-       href="Prac1.html"
+       href="../Assignments/AssignmentsIntro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6.1. </span>Probability Generating Functions, Practical Class 1.</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Assignments</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
