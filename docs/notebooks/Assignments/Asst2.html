@@ -238,6 +238,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">6. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">6.1. Probability Generating Functions, Practical Class 1.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac2.html">6.2. Probability Generating Functions, Practical Class 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac3.html">6.3. Probability Generating Functions, Practical Class 3</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="AssignmentsIntro.html">7. Assignments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -564,6 +565,7 @@ document.write(`
 <section id="problem-set">
 <h2><span class="section-number">7.2.2. </span>Problem set<a class="headerlink" href="#problem-set" title="Link to this heading">#</a></h2>
 <p><strong>Any edits since the assignment was released are in bold</strong></p>
+<p><strong>(29 Jan 4pm)</strong> I screwed up a correction.  Please attempt Q5 and not Q4.  Follow the derivation of the expected size given in the forward kolmogorov section of the notes for Q5.  On Q3, do not attempt the backward Kolmogorov part</p>
 <ol class="arabic">
 <li><p>Let us assume we are waiting for some event (<em>e.g.</em>, death of a single bacterium or a red light turning green).  We make the assumption that if the event hasn’t happened prior to time <span class="math notranslate nohighlight">\(t\)</span>, then for any fixed <span class="math notranslate nohighlight">\(\Delta t\)</span>, the probability that it occurs between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is the same for any <span class="math notranslate nohighlight">\(t\)</span>.  This means that we assume that the knowledge of how long it has “survived” so far does not give us any extra information.  In other words, we are making the assumption that the distribution is <em>memoryless</em></p>
 <p><strong>(a)</strong>  Let <span class="math notranslate nohighlight">\(s(t)\)</span> denote the probability that it has survived to time <span class="math notranslate nohighlight">\(t\)</span>, with <span class="math notranslate nohighlight">\(s(0)=1\)</span>.  Show that <span class="math notranslate nohighlight">\(s(t_0+t_1) = s(t_0)s(t_1)\)</span> for any positive <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t_1\)</span>.</p>
@@ -582,11 +584,11 @@ document.write(`
 <p><strong>(b)</strong> Find the Forward Kolmogorov Equations if <span class="math notranslate nohighlight">\(X(0)=2\)</span>.</p>
 <p><strong>(c)</strong> Find the Backward Kolmogorov Equations if <span class="math notranslate nohighlight">\(X(0)=2\)</span>.  <strong>Do not attempt this part yet</strong></p>
 </li>
-<li><p>Using Question 3:</p>
+<li><p>Using Question 3: <strong>Do not attempt this question yet</strong></p>
 <p><strong>(a)</strong> Find a differential equation for <span class="math notranslate nohighlight">\(\alpha(t|X(0)=2)\)</span>, the probability of extinction at time <span class="math notranslate nohighlight">\(t\)</span> given that <span class="math notranslate nohighlight">\(X(0)=2\)</span>.  Use this differential equation and the differential equation we have previously found for <span class="math notranslate nohighlight">\(\alpha(t|X(0)=1)\)</span> to show that <span class="math notranslate nohighlight">\(\alpha(t|X(0)=2) = \alpha(t|X(0)=1)^2\)</span>.</p>
 <p><strong>(b)</strong> Give an alternative derivation of <span class="math notranslate nohighlight">\(\alpha(t|X(0)=2) = \alpha(t|X(0)=1)^2\)</span> based on the assumption that each of the initial individuals is independent.</p>
 </li>
-<li><p>Using Question 3:  <strong>Do not attempt this question yet</strong></p>
+<li><p>Using Question 3:</p>
 <p><strong>(a)</strong> Find a differential equation for <span class="math notranslate nohighlight">\(\langle X(t|X(0)=2)\rangle\)</span>, the explected size given that <span class="math notranslate nohighlight">\(X(0)=2\)</span>.  Use this to show that <span class="math notranslate nohighlight">\(\langle X(t|X(0)=2)\rangle = 2\langle X(t|X(0)=1)\rangle\)</span>.</p>
 <p><strong>(b)</strong> Give an alternative derivation of <span class="math notranslate nohighlight">\(\langle X(t|X(0)=2)\rangle = 2\langle X(t|X(0)=1)\rangle\)</span> based on the assumption that each of the initial individuals is independent.</p>
 </li>
