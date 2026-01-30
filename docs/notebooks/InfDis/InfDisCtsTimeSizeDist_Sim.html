@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4.3. Statistics of small outbreaks &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>4.3. Small outbreaks in large populations &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -222,7 +222,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Small outbreaks in large populations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
@@ -498,7 +498,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Statistics of small outbreaks</h1>
+    <h1>Small outbreaks in large populations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,10 +527,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="statistics-of-small-outbreaks">
-<h1><span class="section-number">4.3. </span>Statistics of small outbreaks<a class="headerlink" href="#statistics-of-small-outbreaks" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="small-outbreaks-in-large-populations">
+<h1><span class="section-number">4.3. </span>Small outbreaks in large populations<a class="headerlink" href="#small-outbreaks-in-large-populations" title="Link to this heading">#</a></h1>
 <p>We now study the statitistics of final sizes of outbreaks for both SIS and SIR models.</p>
-<p>We use the same Gillespie simulations algorithms as in the previous section, but take them from the package of tools included with this text.</p>
+<p>We quickly define</p>
+<div class="proof definition admonition" id="def-FinalSize">
+<p class="admonition-title"><span class="caption-number">Definition 4.3 </span> (Final size)</p>
+<section class="definition-content" id="proof-content">
+<p>The <strong>final size</strong> of an outbreak is the total number of individual infections that occur.</p>
+</section>
+</div><p>We first use some numerical simulations to illustrate the total number infected.  We use the same Gillespie simulation algorithms as in the previous section (These are provided in the <code class="docutils literal notranslate"><span class="pre">AMSI_2026_PGF_tools</span></code> provided with this github repository).  We are focused only on the total number infected, so we run many simulations and then plot the observed distribution of final sizes.</p>
 <section id="sir-simulations">
 <h2><span class="section-number">4.3.1. </span>SIR simulations<a class="headerlink" href="#sir-simulations" title="Link to this heading">#</a></h2>
 <p>For the SIR case, we plot the probability distribution of the total number of infections to occur <span class="math notranslate nohighlight">\(R(\infty)\)</span>.  We show how these depend on the total population size <span class="math notranslate nohighlight">\(N\)</span>.</p>
@@ -543,7 +549,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gillespie_SIR_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gillespie_SIR_model</span>  <span class="c1">#same algorithm as in previous section</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">gammas</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">750</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">ylim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.003</span><span class="p">)):</span>
 

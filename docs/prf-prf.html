@@ -226,7 +226,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Small outbreaks in large populations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
@@ -405,17 +405,20 @@ document.write(`
 
    <div class="modindex-jumpbox">
    <a href="#cap-Alg-Gillespie"><strong>Alg-Gillespie</strong></a> | 
+   <a href="#cap-alg-TransNet"><strong>alg-TransNet</strong></a> | 
    <a href="#cap-algorithm-GenerateTree"><strong>algorithm-GenerateTree</strong></a> | 
    <a href="#cap-algorithm-GenerateTreeAlt"><strong>algorithm-GenerateTreeAlt</strong></a> | 
    <a href="#cap-algorithm-ctsTimeInfDis"><strong>algorithm-ctsTimeInfDis</strong></a> | 
    <a href="#cap-cor-PGFPower"><strong>cor-PGFPower</strong></a> | 
    <a href="#cap-corrPGFprod"><strong>corrPGFprod</strong></a> | 
+   <a href="#cap-def-BallMatrices"><strong>def-BallMatrices</strong></a> | 
    <a href="#cap-def-CTGW-XFocused"><strong>def-CTGW-XFocused</strong></a> | 
    <a href="#cap-def-CTGW-treelike"><strong>def-CTGW-treelike</strong></a> | 
    <a href="#cap-def-ConvComb"><strong>def-ConvComb</strong></a> | 
    <a href="#cap-def-CtsOffspringPGF"><strong>def-CtsOffspringPGF</strong></a> | 
    <a href="#cap-def-CtsTimeX"><strong>def-CtsTimeX</strong></a> | 
    <a href="#cap-def-Epidemic"><strong>def-Epidemic</strong></a> | 
+   <a href="#cap-def-FinalSize"><strong>def-FinalSize</strong></a> | 
    <a href="#cap-def-FuncComp"><strong>def-FuncComp</strong></a> | 
    <a href="#cap-def-GWTree"><strong>def-GWTree</strong></a> | 
    <a href="#cap-def-GaltonWatson"><strong>def-GaltonWatson</strong></a> | 
@@ -461,6 +464,8 @@ document.write(`
    <a href="#cap-example-xddxPoissonClothesLine"><strong>example-xddxPoissonClothesLine</strong></a> | 
    <a href="#cap-lem-PGFatDt"><strong>lem-PGFatDt</strong></a> | 
    <a href="#cap-lem-PhiTimeSum"><strong>lem-PhiTimeSum</strong></a> | 
+   <a href="#cap-lemma-2"><strong>lemma-2</strong></a> | 
+   <a href="#cap-lemma-3"><strong>lemma-3</strong></a> | 
    <a href="#cap-lemma-CycleLemma"><strong>lemma-CycleLemma</strong></a> | 
    <a href="#cap-remark-1"><strong>remark-1</strong></a> | 
    <a href="#cap-remark-2"><strong>remark-2</strong></a> | 
@@ -497,6 +502,14 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/CtsTime/CtsTimeSim.html#Alg-Gillespie"><code class="xref">Alg-Gillespie</code></a> <em>(notebooks/CtsTime/CtsTimeSim)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-alg-TransNet"><td></td><td>
+       <strong>alg-TransNet</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisSmallPop.html#alg-TransNet"><code class="xref">alg-TransNet</code></a> <em>(notebooks/InfDis/InfDisSmallPop)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-algorithm-GenerateTree"><td></td><td>
@@ -538,6 +551,14 @@ document.write(`
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsMult.html#corrPGFprod"><code class="xref">corrPGFprod</code></a> <em>(notebooks/BasicGenFxn/GenFxnsMult)</em></td><td>
        <em>corollary</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-def-BallMatrices"><td></td><td>
+       <strong>def-BallMatrices</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisSmallPop.html#def-BallMatrices"><code class="xref">def-BallMatrices</code></a> <em>(notebooks/InfDis/InfDisSmallPop)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-def-CTGW-XFocused"><td></td><td>
        <strong>def-CTGW-XFocused</strong></td><td></td></tr>
@@ -585,6 +606,14 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/InfDis/InfDisCtsTime.html#def-Epidemic"><code class="xref">def-Epidemic</code></a> <em>(notebooks/InfDis/InfDisCtsTime)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-def-FinalSize"><td></td><td>
+       <strong>def-FinalSize</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisCtsTimeSizeDist_Sim.html#def-FinalSize"><code class="xref">def-FinalSize</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDist_Sim)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-def-FuncComp"><td></td><td>
@@ -945,6 +974,22 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/CtsTime/CtsTimeGaltWat.html#lem-PhiTimeSum"><code class="xref">lem-PhiTimeSum</code></a> <em>(notebooks/CtsTime/CtsTimeGaltWat)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-2"><td></td><td>
+       <strong>lemma-2</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisSmallPop.html#lemma-2"><code class="xref">lemma-2</code></a> <em>(notebooks/InfDis/InfDisSmallPop)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-3"><td></td><td>
+       <strong>lemma-3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/InfDis/InfDisSmallPop.html#lemma-3"><code class="xref">lemma-3</code></a> <em>(notebooks/InfDis/InfDisSmallPop)</em></td><td>
        <em>lemma</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-lemma-CycleLemma"><td></td><td>

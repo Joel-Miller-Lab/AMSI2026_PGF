@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4.5. Generation-Based Infectious Disease Models" href="InfDisGenBased.html" />
-    <link rel="prev" title="4.3. Statistics of small outbreaks" href="InfDisCtsTimeSizeDist_Sim.html" />
+    <link rel="prev" title="4.3. Small outbreaks in large populations" href="InfDisCtsTimeSizeDist_Sim.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -222,7 +222,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Small outbreaks in large populations</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
@@ -571,7 +571,7 @@ document.write(`
 <p>The advantage for this in the proof we will be doing later is that in DFS, the offspring of a node immediately follow that node in the list.  In BFS, the location of a node’s offspring in the list depends on what happens in other parts of the tree.  It will be much easier to reconstruct a tree from its sequence of offspring counts in the DFS case than in the BFS case.</p>
 <p>The sequence of offspring counts in the DFS case is called a Łukasiewicz word:</p>
 <div class="proof definition admonition" id="def-LukWord">
-<p class="admonition-title"><span class="caption-number">Definition 4.3 </span> (Łukasiewicz word.)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.4 </span> (Łukasiewicz word.)</p>
 <section class="definition-content" id="proof-content">
 <p>If we find a list of nodes <span class="math notranslate nohighlight">\(v_1, \ldots, v_j\)</span> through a Depth-First search of a Galton-Watson tree, then the sequence <span class="math notranslate nohighlight">\(\mathcal{S}=k_1, \ldots, k_j\)</span> where <span class="math notranslate nohighlight">\(k_i\)</span> is the number of offspring of <span class="math notranslate nohighlight">\(v_i\)</span> is called a <strong>Łukasiewicz word</strong>.</p>
 </section>
@@ -580,7 +580,7 @@ document.write(`
 <p>An important part of our proof is the Cycle Lemma.  Before giving it, we must
 define a cyclic permutation:</p>
 <div class="proof definition admonition" id="definition-CyclicPerm">
-<p class="admonition-title"><span class="caption-number">Definition 4.4 </span> (Cyclic Permutation)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.5 </span> (Cyclic Permutation)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a sequence <span class="math notranslate nohighlight">\(\mathcal{S} = (s_1, s_2, \ldots, s_j)\)</span>, the <span class="math notranslate nohighlight">\(j\)</span> cyclic permutations of <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> are:</p>
 <div class="amsmath math notranslate nohighlight">
@@ -912,7 +912,7 @@ define a cyclic permutation:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4.3. </span>Statistics of small outbreaks</p>
+        <p class="prev-next-title"><span class="section-number">4.3. </span>Small outbreaks in large populations</p>
       </div>
     </a>
     <a class="right-next"

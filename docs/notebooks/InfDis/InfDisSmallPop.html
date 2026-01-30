@@ -222,7 +222,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Statistics of small outbreaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Small outbreaks in large populations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">4.6. SIR outbreak sizes in small populations</a></li>
@@ -508,16 +508,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.6.1. Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">4.6.2. Conversion to a directed graph.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">4.6.3. Partitioning the network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">4.6.4. Building the equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">4.6.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">4.6.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">4.6.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">4.6.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrative-simulations">4.6.1. Illustrative simulations:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.6.2. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">4.6.3. Conversion to a directed graph.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-the-equations">4.6.4. Derivation of the equations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">4.6.5. Full equations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">4.6.6. Examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">4.6.7. Extension</a></li>
@@ -536,113 +530,209 @@ document.write(`
 <h1><span class="section-number">4.6. </span>SIR outbreak sizes in small populations<a class="headerlink" href="#sir-outbreak-sizes-in-small-populations" title="Link to this heading">#</a></h1>
 <p><strong>This section is still under construction</strong></p>
 <p>Now we consider an SIR disease spreading in a small population of <span class="math notranslate nohighlight">\(N\)</span> individuals where even at early time <span class="math notranslate nohighlight">\(N\)</span> is not large enough that we can assume each transmission goes to a new recipient.  The assumptions leading to a Galton-Watson process break down in this limit.  However, perhaps remarkably PGFs still play a role in the calculation of the outbreak size distribution.</p>
+<section id="illustrative-simulations">
+<h2><span class="section-number">4.6.1. </span>Illustrative simulations:<a class="headerlink" href="#illustrative-simulations" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">AMSI_2026_PGF_tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gillespie_SIR_model</span>  <span class="c1">#same algorithm as in previous section</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">gammas</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,),</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">750</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">ylim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.003</span><span class="p">),</span> <span class="n">insets</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">mainax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">insets</span><span class="p">:</span>
+        <span class="n">inset_ax1</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim1</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim1</span><span class="p">)</span>
+        <span class="n">inset_ax2</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.55</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.25</span><span class="p">],</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim2</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="n">gammas</span><span class="p">:</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">R0</span> <span class="o">*</span> <span class="n">gamma</span>
+        <span class="n">I0</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">final_sizes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numsims</span><span class="p">):</span>
+            <span class="n">t</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">Gillespie_SIR_model</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">I0</span><span class="p">,</span> <span class="n">I0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+            <span class="n">final_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">final_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Probability: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">insets</span><span class="p">:</span>
+            <span class="n">inset_ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+            <span class="n">inset_ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">final_sizes</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+
+        <span class="c1">#modifying cumulative dist plot followinghttps://stackoverflow.com/a/50711003/2966723</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">mainax</span><span class="o">.</span><span class="n">findobj</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span><span class="o">.</span><span class="n">vertices</span>
+
+        <span class="c1"># Keep everything above y == 0. You can define this mask however</span>
+        <span class="c1"># you need, if you want to be more careful in your selection.</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+        <span class="c1"># Construct new polygon from these &quot;good&quot; vertices</span>
+        <span class="n">new_poly</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">closed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">edgecolor</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_edgecolor</span><span class="p">(),</span>
+                               <span class="n">linewidth</span><span class="o">=</span><span class="n">poly</span><span class="o">.</span><span class="n">get_linewidth</span><span class="p">(),</span> 
+                               <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cumulative Distribution: $</span><span class="se">\\</span><span class="s1">beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">, </span><span class="se">\\</span><span class="s1">gamma=</span><span class="si">{</span><span class="n">gamma</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+        <span class="n">poly</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">new_poly</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">insets</span><span class="p">:</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax1</span><span class="p">)</span>
+        <span class="n">mainax</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">inset_ax2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Total Number Infected&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$N=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">ylim2</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.05</span><span class="p">),</span><span class="n">insets</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">ylim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.02</span><span class="p">),</span> <span class="n">insets</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">xlim1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="n">xlim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">400</span><span class="p">),</span> <span class="n">ylim1</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">ylim2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.005</span><span class="p">),</span> <span class="n">insets</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">simulate_and_plot_SIR_final_size</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">numsims</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">insets</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#simulate_and_plot_SIR_final_size(10000, numsims = 10000, xlim2=(5000,6500), ylim2=(0,0.002))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/ee3792e4908a2e214e96b4dc8f9b02464f6cb1eababc40d7a1740580f85e8289.png" src="../../_images/ee3792e4908a2e214e96b4dc8f9b02464f6cb1eababc40d7a1740580f85e8289.png" />
+<img alt="../../_images/a5a372181663fe8110651489be536edb6d1b012e0701f05638c7b9ec0c843c83.png" src="../../_images/a5a372181663fe8110651489be536edb6d1b012e0701f05638c7b9ec0c843c83.png" />
+<img alt="../../_images/b970b4f984fb5ec05d58dc461b72286e4601d087e3feed1ce400544fcf6af38f.png" src="../../_images/b970b4f984fb5ec05d58dc461b72286e4601d087e3feed1ce400544fcf6af38f.png" />
+<img alt="../../_images/124c98c5e887430b84e89a7aac011167af6fa654d315ad62ae63ecbe4c0bf013.png" src="../../_images/124c98c5e887430b84e89a7aac011167af6fa654d315ad62ae63ecbe4c0bf013.png" />
+<img alt="../../_images/06b9b47dd10386e9576a3c925837befaba17eae40eaa47c99da350e4dab4d418.png" src="../../_images/06b9b47dd10386e9576a3c925837befaba17eae40eaa47c99da350e4dab4d418.png" />
+<img alt="../../_images/a97b1af260c445ca2f72a636cf3829a8a01a5c391b187e8ce0ab975ba95839a2.png" src="../../_images/a97b1af260c445ca2f72a636cf3829a8a01a5c391b187e8ce0ab975ba95839a2.png" />
+</div>
+</div>
+</section>
 <section id="setup">
-<h2><span class="section-number">4.6.1. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
-<p>We will use <span class="math notranslate nohighlight">\(k\)</span> to be the total number of transmissions an individual causes.  We assume that <span class="math notranslate nohighlight">\(k\)</span> is chosen independently from the “offspring distribution” which has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
+<h2><span class="section-number">4.6.2. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>We will derive a system of <span class="math notranslate nohighlight">\(N\)</span> equations that we can use to calculate the probability <span class="math notranslate nohighlight">\(q_\ell\)</span> that exactly <span class="math notranslate nohighlight">\(\ell\)</span> individuals are eventually infected by the end of an outbreak, following a single introduction.</p>
+<p>We will use <span class="math notranslate nohighlight">\(k\)</span> to be the total number of transmissions an individual causes.  We assume that for each infected individual, <span class="math notranslate nohighlight">\(k\)</span> is chosen independently from the “offspring distribution” which has PGF <span class="math notranslate nohighlight">\(\mu(x)= \sum p_k x^k\)</span>.</p>
 <p>We assume that each time an individual transmits, the recipient is chosen randomly from the remainder of the population uniformly at random and with replacement (so <span class="math notranslate nohighlight">\(u\)</span> may transmit to <span class="math notranslate nohighlight">\(v\)</span> multiple times, but <span class="math notranslate nohighlight">\(u\)</span> cannot transmit to itself).</p>
-<p>We define <span class="math notranslate nohighlight">\(q_k\)</span> to be the probability that exactly <span class="math notranslate nohighlight">\(k\)</span> individuals are infected, including the index case.</p>
 <p>We will number the individuals <span class="math notranslate nohighlight">\(u_1, u_2, u_3, \ldots, u_N\)</span>.  We can assume without loss of generality that infection is introduced in <span class="math notranslate nohighlight">\(u_1\)</span>.</p>
 </section>
 <section id="conversion-to-a-directed-graph">
-<h2><span class="section-number">4.6.2. </span>Conversion to a directed graph.<a class="headerlink" href="#conversion-to-a-directed-graph" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.6.3. </span>Conversion to a directed graph.<a class="headerlink" href="#conversion-to-a-directed-graph" title="Link to this heading">#</a></h2>
 <figure class="align-right" id="fates">
 <a class="reference internal image-reference" href="../../_images/Fates.png"><img alt="../../_images/Fates.png" src="../../_images/Fates.png" style="width: 300px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 4.6 </span><span class="caption-text">The Fates</span><a class="headerlink" href="#fates" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.6 </span><span class="caption-text">The Fates of Greek mythology determined the course of each person’s life, spinning a thread and eventually cutting it.</span><a class="headerlink" href="#fates" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Usually when we simulate infectious disease spread, we assume that who an individual transmits to is not determined until after becoming infected.  However, it will be useful for us to adopt a fatalistic interpretation.  Prior to disease introduction, for every <span class="math notranslate nohighlight">\(u_i\)</span> it is pre-determined who <span class="math notranslate nohighlight">\(u_i\)</span> would transmit to if ever infected.</p>
-<p>This fatalistic approach produces identical outcomes to the usual approach(otherwise, it would be possible to tell if all decisions are pre-determined or if humans have free will, resolving many philosophical discussions).  However, it comes with the benefit that we can represent the information in a directed network and then study properties of that network.</p>
-<p>Prior to an outbreak we determine how many transmiisions <span class="math notranslate nohighlight">\(u_i\)</span> will cause and who will receive these.  We generate a directed graph with nodes <span class="math notranslate nohighlight">\(u_1, \ldots, u_N\)</span> where an edge from <span class="math notranslate nohighlight">\(u_i\)</span> to <span class="math notranslate nohighlight">\(u_j\)</span> represents the fact that <span class="math notranslate nohighlight">\(u_i\)</span> will transmit to <span class="math notranslate nohighlight">\(u_j\)</span> if <span class="math notranslate nohighlight">\(u_i\)</span> is ever infected.  If <span class="math notranslate nohighlight">\(u_j\)</span> is susceptible when this happens then <span class="math notranslate nohighlight">\(u_j\)</span> will become infected.  Note that an edge from <span class="math notranslate nohighlight">\(u_i\)</span> to <span class="math notranslate nohighlight">\(u_j\)</span> exists independently of whether there is an edge from <span class="math notranslate nohighlight">\(u_j\)</span> to <span class="math notranslate nohighlight">\(u_i\)</span>.</p>
-<p><strong>Note to Self Draw a directed graph — Give network a name</strong></p>
-<p>The nodes that are eventually infected if <span class="math notranslate nohighlight">\(u_1\)</span> is the index case are the nodes that can be reached by following the directed edges in the network.</p>
+<p>This fatalistic approach produces identical outcomes to the usual approach.  There is no way that an outside observe can determine whether these random outcomes are chosen in advance or when they occur.  This approach comes with the benefit that we can represent the outbreak events in a static directed network and then study properties of that network.</p>
+<div class="proof algorithm admonition" id="alg-TransNet">
+<p class="admonition-title"><span class="caption-number">Algorithm 4.4 </span> (Generation of directed transmission network)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Inputs</strong></p>
+<ul class="simple">
+<li><p>Distribution of number of transmissions caused <span class="math notranslate nohighlight">\(p_k\)</span></p></li>
+<li><p>Number of nodes</p></li>
+</ul>
+<p><strong>Procedure</strong></p>
+<ol class="arabic simple">
+<li><p>Create <span class="math notranslate nohighlight">\(N\)</span> nodes <span class="math notranslate nohighlight">\(u_1, \ldots, u_N\)</span>.</p></li>
+<li><p>For each node <span class="math notranslate nohighlight">\(u_i\)</span> choose <span class="math notranslate nohighlight">\(k\)</span> from the distribution.</p></li>
+<li><p>Assign <span class="math notranslate nohighlight">\(k\)</span> directed edges from <span class="math notranslate nohighlight">\(u_i\)</span> to nodes.  Choose each recipient uniformly from the <span class="math notranslate nohighlight">\(N-1\)</span> nodes other than <span class="math notranslate nohighlight">\(u_i\)</span>, with replacement.</p></li>
+</ol>
+</section>
+</div><p><a class="reference internal" href="#alg-TransNet">Algorithm 4.4</a> describes how the transmission network is created.  In this network, an edge from <span class="math notranslate nohighlight">\(u_i\)</span> to <span class="math notranslate nohighlight">\(u_j\)</span> implies that if <span class="math notranslate nohighlight">\(u_i\)</span> is ever infected, it will transmit to <span class="math notranslate nohighlight">\(u_j\)</span>.  If <span class="math notranslate nohighlight">\(u_j\)</span> is susceptible when this happens then <span class="math notranslate nohighlight">\(u_j\)</span> will become infected.  Note that an edge from <span class="math notranslate nohighlight">\(u_i\)</span> to <span class="math notranslate nohighlight">\(u_j\)</span> exists independently of whether there is an edge from <span class="math notranslate nohighlight">\(u_j\)</span> to <span class="math notranslate nohighlight">\(u_i\)</span>.</p>
+<p>To simulate an outbreak using this network, we choose the initial node and then simply follow edges out from it.  The nodes that are eventually infected if <span class="math notranslate nohighlight">\(u_1\)</span> is the index case are the nodes that can be reached by following the directed edges in the network.</p>
 <div class="proof definition admonition" id="def-OutComponent">
-<p class="admonition-title"><span class="caption-number">Definition 4.5 </span> (Outcomponent)</p>
+<p class="admonition-title"><span class="caption-number">Definition 4.6 </span> (Outcomponent)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a directed network <span class="math notranslate nohighlight">\(G\)</span> and a node <span class="math notranslate nohighlight">\(u\)</span>, the <strong>out-component</strong> of <span class="math notranslate nohighlight">\(u\)</span> is the set of nodes that can be reached from <span class="math notranslate nohighlight">\(u\)</span> by following the edges of the network in the assigned direction (including <span class="math notranslate nohighlight">\(u\)</span>).</p>
 <p>Given a directed network <span class="math notranslate nohighlight">\(G\)</span> and a set of nodes <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span>, the <strong>out-component</strong> of <span class="math notranslate nohighlight">\(X\)</span> is the set of nodes that can be reached from any node in <span class="math notranslate nohighlight">\(X\)</span> following the edges of the network in the assigned direction (including nodes in <span class="math notranslate nohighlight">\(X\)</span>).</p>
 </section>
 </div></section>
-<section id="partitioning-the-network">
-<h2><span class="section-number">4.6.3. </span>Partitioning the network<a class="headerlink" href="#partitioning-the-network" title="Link to this heading">#</a></h2>
-<p>An important step in our calculations will be determining the probability that the nodes <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span> have no edges to <span class="math notranslate nohighlight">\(u_{M+1}, \ldots, u_N\)</span> in the directed network (we do not care if there are edges in the opposite direction).  In other words, the out-component of <span class="math notranslate nohighlight">\(X\)</span> is just <span class="math notranslate nohighlight">\(X\)</span>.</p>
-<p><strong>draw picture</strong></p>
-<p>First we calculate the probability that all edges from a node <span class="math notranslate nohighlight">\(u_j \in X\)</span> reach only within <span class="math notranslate nohighlight">\(X\)</span>.  recall that <span class="math notranslate nohighlight">\(X\)</span> has <span class="math notranslate nohighlight">\(M-1\)</span> nodes other than <span class="math notranslate nohighlight">\(u_j\)</span>), so the probability a single edge from <span class="math notranslate nohighlight">\(u_j\)</span> remains within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\((M-1)/(N-1)\)</span>.  So the probability that all edges from <span class="math notranslate nohighlight">\(u_j\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is</p>
+<section id="derivation-of-the-equations">
+<h2><span class="section-number">4.6.4. </span>Derivation of the equations<a class="headerlink" href="#derivation-of-the-equations" title="Link to this heading">#</a></h2>
+<p>We will find the outbreak size distribution using a common method of proving combinatorial identities.  We look for two different ways to answer the same question.  This gives us an equation.</p>
+<p>In our case, the question we ask is:</p>
+<p><em>What is the probability that all edges from nodes in  <span class="math notranslate nohighlight">\(X=\{u_1, u_2, \ldots, u_M\}\)</span> have no edges to any node in <span class="math notranslate nohighlight">\(Y=\{u_{M+1}, u_{M+2}, \ldots, u_N\}\)</span>?</em></p>
+<p>We will answer this question for <span class="math notranslate nohighlight">\(M=1, 2, \ldots, N\)</span>.</p>
+<p>Then we ask an equivalent question:</p>
+<p><em>What is the probability that the out-component of <span class="math notranslate nohighlight">\(u_1\)</span> is in <span class="math notranslate nohighlight">\(X\)</span> and all other nodes in <span class="math notranslate nohighlight">\(X\)</span> have edges only to other nodes in <span class="math notranslate nohighlight">\(X\)</span>?</em></p>
+<p>, to yield <span class="math notranslate nohighlight">\(N\)</span> equations for <span class="math notranslate nohighlight">\(q_1\)</span>, <span class="math notranslate nohighlight">\(q_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(q_N\)</span>.</p>
+<p>We can find one answer to this equation in a relatively straightforward way.</p>
+<div class="proof lemma admonition" id="lemma-2">
+<p class="admonition-title"><span class="caption-number">Lemma 4.2 </span></p>
+<section class="lemma-content" id="proof-content">
+<p>The probability that all edges from a node <span class="math notranslate nohighlight">\(u_i \in X=\{u_1, u_2, \ldots, u_M\}\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(\mu\left(\frac{M-1}{N-1}\right)\)</span> and the probability that all edges from all nodes in <span class="math notranslate nohighlight">\(X\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[
-\mu\left(\frac{M-1}{N-1}\right) = p_0 + p_1 \frac{M-1}{N-1} + p_2 \left( \frac{M-1}{N-1}\right)^2 + p_3 \left( \frac{M-1}{M-1}\right)^3 + \cdots
-\]</div>
-<p>The probability that edges from any node in <span class="math notranslate nohighlight">\(X\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(\left[\mu\left( \frac{M-1}{N-1}\right)\right]^M\)</span>.</p>
-<p>Now we will look for another way to calculate this, in terms of the probabilities of outbreak sizes (or equivalently out-component sizes).</p>
+\[\begin{split}
+\mathbb{P}\left[\begin{array}{c}\text{all edges from nodes in $X$}\\[-1ex]\text{go to other nodes in $X$}\end{array}\right] = \left(\mu\left(\frac{M-1}{N-1}\right)\right)^M$.
+\end{split}\]</div>
 </section>
-<section id="building-the-equations">
-<h2><span class="section-number">4.6.4. </span>Building the equations<a class="headerlink" href="#building-the-equations" title="Link to this heading">#</a></h2>
-<p>We will start by looking at the probability the outbreak affects <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(2\)</span>, or <span class="math notranslate nohighlight">\(3\)</span> nodes before we start to build up to larger numbers.</p>
-<p>We assume that <span class="math notranslate nohighlight">\(u_1\)</span> is the initial infection (without loss of generality).  We are looking for its out-component sizes.</p>
-<section id="the-probability-of-a-1-node-outbreak">
-<h3><span class="section-number">4.6.4.1. </span>The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-1-node-outbreak" title="Link to this heading">#</a></h3>
-<p>The probability that <span class="math notranslate nohighlight">\(u_1\)</span> does not transmit to anyone is <span class="math notranslate nohighlight">\(\mu(0)\)</span>.  This is <span class="math notranslate nohighlight">\(q_1\)</span>, the probability of an outbreak of size <span class="math notranslate nohighlight">\(1\)</span>.</p>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To prove the single node case we note that the probability that an edge from <span class="math notranslate nohighlight">\(u_i \in X=\{u_1, u_2, \ldots, u_M\}\)</span> reaches another node in <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\((M-1)/(N-1)\)</span> because there are <span class="math notranslate nohighlight">\(M-1\)</span> nodes available within <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(N-1\)</span> available within all nodes (in both cases the <span class="math notranslate nohighlight">\(-1\)</span> is due to excluding <span class="math notranslate nohighlight">\(u_i\)</span>).</p>
+<p>If <span class="math notranslate nohighlight">\(u_i\)</span> has <span class="math notranslate nohighlight">\(k\)</span> edges, then the probability that all of these remain within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(\left(\frac{M-1}{N-1}\right)^k\)</span>.  Taking the average over all possible <span class="math notranslate nohighlight">\(k\)</span>, the probability all edges from <span class="math notranslate nohighlight">\(u_i\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is
+<span class="math notranslate nohighlight">\(\mu\left(\frac{M-1}{N-1}\right) = \sum_k p_k \left(\frac{M-1}{N-1}\right)^k\)</span></p>
+<p>Now looking at keeping all edges from all <span class="math notranslate nohighlight">\(M\)</span> nodes in <span class="math notranslate nohighlight">\(X\)</span> to remain within <span class="math notranslate nohighlight">\(X\)</span> we get that this probability is</p>
 <div class="math notranslate nohighlight">
-\[ q_1 = \mu(0)\]</div>
+\[\begin{split}
+\mathbb{P}\left[\begin{array}{c}\text{all edges from nodes in $X$}\\[-1ex]\text{go to other nodes in $X$}\end{array}\right] = \left(\mu\left(\frac{M-1}{N-1}\right)\right)^M
+\end{split}\]</div>
+</div>
+<p>We now show</p>
+<div class="proof lemma admonition" id="lemma-3">
+<p class="admonition-title"><span class="caption-number">Lemma 4.3 </span></p>
+<section class="lemma-content" id="proof-content">
+<p>The probability that the out-component of <span class="math notranslate nohighlight">\(u_1\)</span> is contained within <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span> and all other nodes in <span class="math notranslate nohighlight">\(X\)</span> have edges only to nodes in <span class="math notranslate nohighlight">\(X\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbb{P}\left[\begin{array}{c}\text{the out-component of $u_1$ is in $X$}\\[-1ex]\text{and all other nodes in $X$ have edges}\\[-1ex] \text{only to other nodes in $X$}\end{array}\right] = \sum_{\ell=1}^M q_\ell \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{M-\ell}\frac{\binom{M-1}{\ell-1}}{\binom{N-1}{\ell-1}}
+\end{split}\]</div>
 </section>
-<section id="the-probability-of-a-2-node-outbreak">
-<h3><span class="section-number">4.6.4.2. </span>The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-2-node-outbreak" title="Link to this heading">#</a></h3>
-<p>To calculate the probability of an outbreak of size <span class="math notranslate nohighlight">\(2\)</span> starting from node <span class="math notranslate nohighlight">\(u_1\)</span>, we’ll take an indirect route.  We will directly calculate the probability that <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> have no edges to <span class="math notranslate nohighlight">\(u_3, \ldots, u_N\)</span> and then we’ll calculate this same probability in terms of <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span>.</p>
-<ul class="simple">
-<li><p>First we recall that the probability all transmissions involving nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> reach only within nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> is <span class="math notranslate nohighlight">\(\mu(1/(N-1))^2\)</span>.</p></li>
-<li><p>Next we recall that the probability that only node <span class="math notranslate nohighlight">\(1\)</span> gets infected is <span class="math notranslate nohighlight">\(q_1\)</span>.  The joint probability that node <span class="math notranslate nohighlight">\(u_1\)</span> gets infected and node <span class="math notranslate nohighlight">\(u_2\)</span> has no edges to nodes <span class="math notranslate nohighlight">\(u_3, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\(q_1 \mu(1/(N-1))\)</span>.</p></li>
-<li><p>Next, the probability that only node <span class="math notranslate nohighlight">\(u_1\)</span> and node <span class="math notranslate nohighlight">\(u_2\)</span> get infected is the probability of an outbreak of size <span class="math notranslate nohighlight">\(2\)</span> times the probability that the other node is <span class="math notranslate nohighlight">\(u_2\)</span> given that the outbreak has size <span class="math notranslate nohighlight">\(2\)</span>.  This is <span class="math notranslate nohighlight">\(q_2 (1/(N-1))\)</span>.</p></li>
-</ul>
-<p>Putting these together the probability the outbreak is confined entirely within nodes <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> is <span class="math notranslate nohighlight">\(\mu(1/(N-1))^2\)</span>, but it is also <span class="math notranslate nohighlight">\(q_1\mu(1/(N-1)) + q_2 (1/(N-1))\)</span>.  So once we know <span class="math notranslate nohighlight">\(q_1\)</span> we can solve for <span class="math notranslate nohighlight">\(q_2\)</span> from the equation</p>
+</div><div class="proof admonition" id="proof">
+<p>Proof. To prove this we look at all possible out-component sizes for <span class="math notranslate nohighlight">\(u_1\)</span> in the transmission network.</p>
+<p>The probability that <span class="math notranslate nohighlight">\(u_1\)</span> has an out-component of size <span class="math notranslate nohighlight">\(\ell\)</span> is <span class="math notranslate nohighlight">\(q_\ell\)</span>.  The probability that the other <span class="math notranslate nohighlight">\(\ell-1\)</span> nodes in this out-component are amongst the other <span class="math notranslate nohighlight">\(M-1\)</span> nodes in <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(\frac{\binom{M-1}{\ell-1}}{\binom{N-1}{\ell-1}}\)</span>.  So</p>
 <div class="math notranslate nohighlight">
-\[q_1\mu(1/N-1) + q_2 \frac{1}{N-1} = \mu(1/(N-1))^2\]</div>
-</section>
-<section id="the-probability-of-a-3-node-outbreak">
-<h3><span class="section-number">4.6.4.3. </span>The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak<a class="headerlink" href="#the-probability-of-a-3-node-outbreak" title="Link to this heading">#</a></h3>
-<p>To calculate the probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak, we follow the method for <span class="math notranslate nohighlight">\(2\)</span>-nodes.  We calculate the probability that <span class="math notranslate nohighlight">\(X=\{u_1, u_2, u_3\}\)</span> has no edges to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> directly and then recalculate it in terms of <span class="math notranslate nohighlight">\(q_1\)</span>, <span class="math notranslate nohighlight">\(q_2\)</span>, and <span class="math notranslate nohighlight">\(q_3\)</span>.</p>
-<ul class="simple">
-<li><p>The probability of no edges from <span class="math notranslate nohighlight">\(X\)</span> to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\([\mu(2/(N-1))]^3\)</span></p></li>
-<li><p>The probability that only <span class="math notranslate nohighlight">\(u_1\)</span> gets infected is <span class="math notranslate nohighlight">\(q_1\)</span>.  The joint probability that only <span class="math notranslate nohighlight">\(u_1\)</span> gets infected and the other two nodes in <span class="math notranslate nohighlight">\(X\)</span> also have no edges to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\(q_1 [\mu(2/N-1)]^2\)</span>.</p></li>
-<li><p>The probability that only <span class="math notranslate nohighlight">\(u_1\)</span> and one of <span class="math notranslate nohighlight">\(u_2\)</span> and <span class="math notranslate nohighlight">\(u_3\)</span> get infected is <span class="math notranslate nohighlight">\(q_2 \frac{\binom{2}{1}}{\binom{N-1}{1}}\)</span> That is, there are <span class="math notranslate nohighlight">\(\binom{2}{1}\)</span> ways to choose <span class="math notranslate nohighlight">\(1\)</span> node from <span class="math notranslate nohighlight">\(u_2\)</span> and <span class="math notranslate nohighlight">\(u_3\)</span> while there are a total of <span class="math notranslate nohighlight">\(\binom{N-1}{1}\)</span> ways to choose one other node from the entire network.  So the probability the second node is <span class="math notranslate nohighlight">\(u_2\)</span> or <span class="math notranslate nohighlight">\(u_3\)</span> is <span class="math notranslate nohighlight">\(\frac{\binom{2}{1}}{\binom{N-1}{1}}\)</span>.  The probability that the other node also does not have edges to <span class="math notranslate nohighlight">\(u_4, \ldots, u_N\)</span> is <span class="math notranslate nohighlight">\(\mu(2/(N-1))\)</span>.  So the total probability of an outbreak of size <span class="math notranslate nohighlight">\(2\)</span> contained within <span class="math notranslate nohighlight">\(X\)</span> and no other edges out of <span class="math notranslate nohighlight">\(X\)</span> is</p></li>
-</ul>
+\[\begin{split}
+\mathbb{P}\left[\begin{array}{c} \text{$u_1$ has an out-component of size $\ell$}\\[-1ex]\text{which is contained within $X$}\end{array}\right] = q_\ell\frac{\binom{M-1}{\ell-1}}{\binom{N-1}{\ell-1}}
+\end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(u_1\)</span> has such an out-component, the probability that the  <span class="math notranslate nohighlight">\(M-\ell\)</span> nodes in <span class="math notranslate nohighlight">\(X \setminus \mathrm{out\text{-}component}(u_1)\)</span> have all of their edges remaining within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(\left(\mu\left(\frac{M-1}{N-1}\right)\right)^{M-\ell}\)</span> (following the proof of the previous lemma).</p>
+<p>Thus, the probability that <span class="math notranslate nohighlight">\(u_1\)</span> has an out-component of size <span class="math notranslate nohighlight">\(\ell\)</span> which lies within <span class="math notranslate nohighlight">\(X\)</span> and all edges from other nodes in <span class="math notranslate nohighlight">\(X\)</span> remain within <span class="math notranslate nohighlight">\(X\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[
-q_2 \frac{\binom{2}{1}}{\binom{N-1}{1}} \mu\left(\frac{2}{N-1}\right)
-\]</div>
-<ul class="simple">
-<li><p>The probability that only <span class="math notranslate nohighlight">\(u_1\)</span>, <span class="math notranslate nohighlight">\(u_2\)</span>, and <span class="math notranslate nohighlight">\(u_3\)</span> get infected is <span class="math notranslate nohighlight">\(q_3/\binom{N-1}{2}\)</span>.</p></li>
-</ul>
-<p>Putting these together</p>
+\[\begin{split}
+\mathbb{P}\left[\begin{array}{c} \text{$u_1$ has an out-component of size $\ell$}\\[-1ex]\text{which is contained within $X$ and all}\\[-1ex]\text{edges from other nodes in $X$ remain in $X$}\end{array}\right] = q_\ell \frac{\binom{M-1}{\ell-1}}{\binom{N-1}{\ell-1}}\left(\mu\left(\frac{M-1}{N-1}\right)\right)^{M-\ell}
+\end{split}\]</div>
+<p>We now sum this over all possible <span class="math notranslate nohighlight">\(\ell\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbb{P}\left[\begin{array}{c}\text{the out-component of $u_1$ is in $X$}\\[-1ex]\text{and all other nodes in $X$ have edges}\\[-1ex] \text{only to other nodes in $X$}\end{array}\right] = \sum_{\ell=1}^M q_\ell \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{M-\ell}\frac{\binom{M-1}{\ell-1}}{\binom{N-1}{\ell-1}}
+\end{split}\]</div>
+</div>
+<p>We now note that the two lemmas address exactly the same question.  All edges from nodes in <span class="math notranslate nohighlight">\(X\)</span> go to other nodes in <span class="math notranslate nohighlight">\(X\)</span> if and only if the out-component of <span class="math notranslate nohighlight">\(u_1\)</span> is in <span class="math notranslate nohighlight">\(X\)</span> and all nodes in <span class="math notranslate nohighlight">\(X\setminus\mathrm{out\text{-}component}(u_1)\)</span> have edges only to other nodes in <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>Thus we have <span class="math notranslate nohighlight">\(N\)</span> equations</p>
 <div class="math notranslate nohighlight">
 \[
-\left [\mu\left(\frac{2}{N-1}\right)\right]^3 = q_1 \left[\mu\left(\frac{2}{N-1}\right)\right]^2 + q_2 \frac{\binom{2}{1}}{\binom{N-1}{1}} \mu\left(\frac{2}{N-1}\right) + q_3 \frac{1}{\binom{N-1}{2}}
+\left(\mu\left(\frac{M-1}{N-1}\right)\right)^M = 
+\sum_{\ell=1}^M q_\ell \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{M-\ell}\frac{\binom{M-1}{\ell-1}}{\binom{N-1}{\ell-1}}
 \]</div>
-</section>
-<section id="the-probability-of-an-m-node-outbreak">
-<h3><span class="section-number">4.6.4.4. </span>The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.<a class="headerlink" href="#the-probability-of-an-m-node-outbreak" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>The probability of no edges from <span class="math notranslate nohighlight">\(X=\{u_1, \ldots, u_M\}\)</span> to <span class="math notranslate nohighlight">\(u_{M+1}, \ldots, u_N\)</span> is
-<span class="math notranslate nohighlight">\(\left[\mu\left(\frac{M-1}{N-1}\right)\right]^M\)</span>.</p></li>
-<li><p>The probability an outbreak starting from <span class="math notranslate nohighlight">\(u_1\)</span> is of size <span class="math notranslate nohighlight">\(k\)</span> and contained entirely within <span class="math notranslate nohighlight">\(X\)</span> is <span class="math notranslate nohighlight">\(q_k \frac{\binom{M-1}{k-1}}{\binom{N-1}{k-1}}\)</span>. The probability that the other <span class="math notranslate nohighlight">\(M-k\)</span> nodes have no edges to <span class="math notranslate nohighlight">\(q_{M+1}, \ldots, q_N\)</span> is  <span class="math notranslate nohighlight">\(\left[\mu\left(\frac{M-1}{N-1}\right)\right]^{M-k}\)</span></p></li>
-</ul>
-<p>So we have</p>
-<div class="math notranslate nohighlight">
-\[
-\left[\mu\left(\frac{M-1}{N-1}\right)\right]^M = \sum_{k=1}^M q_k \frac{\binom{M-1}{k-1}}{\binom{N-1}{k-1}} \left[\mu\left(\frac{M-1}{N-1}\right)\right]^{M-k}
-\]</div>
-<p>Rearranging:</p>
-<div class="math notranslate nohighlight">
-\[
-1 = \sum_{k=1}^M c_{M,k} q_k
-\]</div>
+<p>Doing some Algebra:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1 &amp;= \sum_{\ell=1}^M q_\ell \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-\ell}\frac{(M-1)!/(\ell-1)!(M-\ell)!}{(N-1)!/(\ell-1)!(N-\ell)!}\\
+&amp;= \sum_{\ell=1}^M q_\ell \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-\ell}\frac{(M-1)!/(M-\ell)!}{(N-1)!/(N-\ell)!}\\
+&amp;=\sum_{\ell=1}^M q_\ell \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-\ell}\prod_{j=1}^{\ell-1}\frac{M-j}{N-j}\\
+&amp;= \sum_{\ell=1}^M c_{M,\ell} q_\ell
+\end{align*}\]</div>
 <p>where</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-c_{M,k} &amp;= \left[\mu\left(\frac{M-1}{N-1}\right)\right]^{-k} \frac{\binom{M-1}{k-1}}{\binom{N-1}{k-1}}\\
- &amp;= \left[\mu\left(\frac{M-1}{N-1}\right)\right]^{-k} \prod_{j=1}^{k-1} \frac{M-j}{N-j}
+c_{M,\ell} &amp;= \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-\ell}\prod_{j=1}^{\ell-1}\frac{M-j}{N-j}\\
+&amp;= \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-1} \frac{M-\ell+1}{N-\ell+1} c_{M,\ell-1}
 \end{align*}\]</div>
-</section>
+<p>with <span class="math notranslate nohighlight">\(c_{M,1}=\left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-1}\)</span>.</p>
 </section>
 <section id="full-equations">
 <h2><span class="section-number">4.6.5. </span>Full equations<a class="headerlink" href="#full-equations" title="Link to this heading">#</a></h2>
@@ -681,13 +771,215 @@ q_N
 \end{pmatrix}
 \end{split}\]</div>
 <p>This can be solved efficiently.</p>
+<div class="proof definition admonition" id="def-BallMatrices">
+<p class="admonition-title"><span class="caption-number">Definition 4.7 </span> (Ball matrices)</p>
+<section class="definition-content" id="proof-content">
+<p>The matrices</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+c_{1,1} &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+c_{1,2} &amp; c_{2,2} &amp; 0 &amp; \ddots &amp; 0\\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp;\vdots\\
+c_{N-1,1} &amp; c_{N-1,2} &amp; c_{N-1,3} &amp; \ddots &amp; 0\\
+c_{N,1} &amp; c_{N,2} &amp; c_{N,3} &amp; \cdots &amp; c_{N,N}
+\end{pmatrix}
+\end{split}\]</div>
+<p>are called <strong>Ball Matrices</strong> after Frank Ball who developed this approach (with a very different proof).</p>
 </section>
+</div></section>
 <section id="examples">
 <h2><span class="section-number">4.6.6. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_q_forward_real</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Real-valued solver for q_1,...,q_N in:</span>
+<span class="sd">        1 = sum_{l=1}^M q_l c_{M,l},   M=1..N</span>
+<span class="sd">    with</span>
+<span class="sd">        c_{M,l} = mu((M-1)/(N-1))^{-l} * prod_{j=1}^{l-1} (M-j)/(N-j)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    N : int</span>
+<span class="sd">        System size.</span>
+<span class="sd">    mu : callable</span>
+<span class="sd">        PGF mu(x). Should return real values for x in [0,1].</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    q : np.ndarray shape (N,), dtype float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;N must be &gt;= 1&quot;</span><span class="p">)</span>
+
+    <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+
+    <span class="k">if</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mu0</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;mu(0)=0 =&gt; c_{1,1} undefined&quot;</span><span class="p">)</span>
+        <span class="c1"># 1 = q1 * mu(0)^(-1)  =&gt; q1 = mu(0)</span>
+        <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mu0</span>
+        <span class="k">return</span> <span class="n">q</span>
+
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">xM</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">muM</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span><span class="n">xM</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">muM</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mu(</span><span class="si">{</span><span class="n">xM</span><span class="si">}</span><span class="s2">)=0 =&gt; coefficients undefined for M=</span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># prod_{j=1}^{l-1} (M-j)/(N-j), starting at l=1 is 1</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="c1"># sum_{l=1}^{M-1} q_l c_{M,l}</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+            <span class="n">cMl</span> <span class="o">=</span> <span class="p">(</span><span class="n">muM</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">l</span><span class="p">))</span> <span class="o">*</span> <span class="n">prod</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cMl</span>
+            <span class="n">prod</span> <span class="o">*=</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span>
+
+        <span class="n">cMM</span> <span class="o">=</span> <span class="p">(</span><span class="n">muM</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="p">))</span> <span class="o">*</span> <span class="n">prod</span>
+        <span class="k">if</span> <span class="n">cMM</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c_</span><span class="se">{{</span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="se">}}</span><span class="s2">=0 =&gt; cannot solve (check mu, N)&quot;</span><span class="p">)</span>
+        <span class="n">q</span><span class="p">[</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">cMM</span>
+
+    <span class="k">return</span> <span class="n">q</span>
+
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">gamma</span><span class="o">/</span><span class="p">(</span><span class="n">beta</span><span class="o">+</span><span class="n">gamma</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">beta</span><span class="o">/</span><span class="p">(</span><span class="n">beta</span><span class="o">+</span><span class="n">gamma</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">N</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">solve_q_forward_real</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#plt.plot(ell, q)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">ell</span><span class="p">,</span>                 <span class="c1"># integer centers</span>
+    <span class="n">q</span><span class="p">,</span>                   <span class="c1"># probabilities q_ell</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>           <span class="c1"># same unit-width bins</span>
+    <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Theory&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;BarContainer object of 50 artists&gt;
+</pre></div>
+</div>
+<img alt="../../_images/56fc8e5b8d3b5cb15824357d11912a5aa7c118bc1a8d1f881c5ced8223dfd3bd.png" src="../../_images/56fc8e5b8d3b5cb15824357d11912a5aa7c118bc1a8d1f881c5ced8223dfd3bd.png" />
+</div>
+</div>
+<p>This works reasonably well (and matches simulation), but numerical precision issues arise if <span class="math notranslate nohighlight">\(N\)</span> gets too large.  Using a few tricks we can extend <span class="math notranslate nohighlight">\(N\)</span> further by using higher precision and turning the products into logarithms which can be used to prevent repeated multiplication of very small numbers.</p>
+<p>However, there is a fundamental problem when <span class="math notranslate nohighlight">\(N\)</span> gets large and “epidemics” separate out from “small outbreaks”.  To find the probability of the larger outbreak sizes by this method, we need to find the probability of all smaller sizes.  Once epidemics and small outbreaks separate, the intermediate sizes are are extremely rare, so <span class="math notranslate nohighlight">\(q_\ell\)</span> in this range will be subject to lots of round-off errors, which prevents accurate calculation of the probabilities of the epidemic sizes.</p>
+<p>That said, the key benefit of the Ball matrices is that they allow us to study small <span class="math notranslate nohighlight">\(N\)</span> settings.  So difficulty at large <span class="math notranslate nohighlight">\(N\)</span> is not such an issue.</p>
+<p>The code below works for slightly larger <span class="math notranslate nohighlight">\(N\)</span> but it is still limited.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mpmath</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mp</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_q_forward_mp</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">dps</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    High-precision solver for q_1..q_N (real case) using mpmath.</span>
+
+<span class="sd">    Solves:</span>
+<span class="sd">        1 = sum_{l=1}^M q_l c_{M,l},   M=1..N</span>
+<span class="sd">    with</span>
+<span class="sd">        c_{M,l} = mu((M-1)/(N-1))^{-l} * prod_{j=1}^{l-1} (M-j)/(N-j)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    N : int</span>
+<span class="sd">    mu : callable returning real (float or mp.mpf) for x in [0,1]</span>
+<span class="sd">    dps : int</span>
+<span class="sd">        Decimal digits of precision to use.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    q : list of mp.mpf, length N</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mp</span><span class="o">.</span><span class="n">mp</span><span class="o">.</span><span class="n">dps</span> <span class="o">=</span> <span class="n">dps</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="n">mu</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">mu0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;mu(0)=0&quot;</span><span class="p">)</span>
+        <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mu0</span>
+        <span class="k">return</span> <span class="n">q</span>
+
+    <span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">xM</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">muM</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="n">mu</span><span class="p">(</span><span class="n">xM</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">muM</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Need mu(</span><span class="si">{</span><span class="n">xM</span><span class="si">}</span><span class="s2">)&gt;0 for log-based mp solver; got </span><span class="si">{</span><span class="n">muM</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">log_muM</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">muM</span><span class="p">)</span>
+
+        <span class="c1"># Build logc_l for l=1..M using mp.loggamma</span>
+        <span class="c1"># logA = log((M-1)!/(M-l)!) - log((N-1)!/(N-l)!)</span>
+        <span class="n">logc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">log_num</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">loggamma</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">-</span> <span class="n">mp</span><span class="o">.</span><span class="n">loggamma</span><span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">log_den</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">loggamma</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">-</span> <span class="n">mp</span><span class="o">.</span><span class="n">loggamma</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">logA</span> <span class="o">=</span> <span class="n">log_num</span> <span class="o">-</span> <span class="n">log_den</span>
+            <span class="n">logc_l</span> <span class="o">=</span> <span class="o">-</span><span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">*</span> <span class="n">log_muM</span> <span class="o">+</span> <span class="n">logA</span>
+            <span class="n">logc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logc_l</span><span class="p">)</span>
+
+        <span class="c1"># row scaling</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">logc</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="n">mp</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="n">lc</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">lc</span> <span class="ow">in</span> <span class="n">logc</span><span class="p">]</span>    <span class="c1"># w_l = c_l / exp(s)</span>
+        <span class="n">rhs_scaled</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">s</span><span class="p">)</span>               <span class="c1"># because sum q_l w_l = exp(-s)</span>
+
+        <span class="k">if</span> <span class="n">M</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rhs_scaled</span> <span class="o">/</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">partial</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">fsum</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="p">))</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rhs_scaled</span> <span class="o">-</span> <span class="n">partial</span><span class="p">)</span> <span class="o">/</span> <span class="n">w</span><span class="p">[</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">q</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">gamma</span><span class="o">/</span><span class="p">(</span><span class="n">beta</span><span class="o">+</span><span class="n">gamma</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">beta</span><span class="o">/</span><span class="p">(</span><span class="n">beta</span><span class="o">+</span><span class="n">gamma</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">N</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">solve_q_forward_mp</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#plt.plot(ell, q)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">ell</span><span class="p">,</span>                 <span class="c1"># integer centers</span>
+    <span class="n">q</span><span class="p">,</span>                   <span class="c1"># probabilities q_ell</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>           <span class="c1"># same unit-width bins</span>
+    <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Theory&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;BarContainer object of 100 artists&gt;
+</pre></div>
+</div>
+<img alt="../../_images/b5e7fafc852e03fa2989e1dd6c056cfd6e805e6bbc915e5ba45ab9ff5ffe8581.png" src="../../_images/b5e7fafc852e03fa2989e1dd6c056cfd6e805e6bbc915e5ba45ab9ff5ffe8581.png" />
+</div>
+</div>
 </section>
 <section id="extension">
 <h2><span class="section-number">4.6.7. </span>Extension<a class="headerlink" href="#extension" title="Link to this heading">#</a></h2>
-<p>For fixed <span class="math notranslate nohighlight">\(M\)</span>, as <span class="math notranslate nohighlight">\(N\)</span> gets large, <span class="math notranslate nohighlight">\(q_M\)</span> must converge to the result of previous section.  I’ve looked at it, but haven’t managed to find a direct proof.  I would particuarly like to be able to estimate the magnitue of the error</p>
+<p>For fixed <span class="math notranslate nohighlight">\(M\)</span>, as <span class="math notranslate nohighlight">\(N\)</span> gets large, <span class="math notranslate nohighlight">\(q_M\)</span> must converge to the result of previous section <span class="math notranslate nohighlight">\(\frac{1}{M} [x^{M-1}] \mu(x)^M\)</span>, because they are solving the same thing.  I looked at it years ago, but didn’t manage to find a direct proof.  I would particuarly like to be able to estimate the magnitue of the error.</p>
+<p>I have some ideas how a proof of this might work.</p>
 </section>
 </section>
 
@@ -755,16 +1047,10 @@ q_N
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.6.1. Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">4.6.2. Conversion to a directed graph.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-network">4.6.3. Partitioning the network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-equations">4.6.4. Building the equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-1-node-outbreak">4.6.4.1. The probability of a <span class="math notranslate nohighlight">\(1\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-2-node-outbreak">4.6.4.2. The probability of a <span class="math notranslate nohighlight">\(2\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-a-3-node-outbreak">4.6.4.3. The probability of a <span class="math notranslate nohighlight">\(3\)</span>-node outbreak</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-of-an-m-node-outbreak">4.6.4.4. The probability of an <span class="math notranslate nohighlight">\(M\)</span>-node outbreak.</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrative-simulations">4.6.1. Illustrative simulations:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">4.6.2. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-a-directed-graph">4.6.3. Conversion to a directed graph.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-the-equations">4.6.4. Derivation of the equations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-equations">4.6.5. Full equations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">4.6.6. Examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension">4.6.7. Extension</a></li>
