@@ -528,10 +528,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="sir-outbreak-sizes-in-small-populations">
 <h1><span class="section-number">4.6. </span>SIR outbreak sizes in small populations<a class="headerlink" href="#sir-outbreak-sizes-in-small-populations" title="Link to this heading">#</a></h1>
-<p><strong>This section is still under construction</strong></p>
 <p>Now we consider an SIR disease spreading in a small population of <span class="math notranslate nohighlight">\(N\)</span> individuals where even at early time <span class="math notranslate nohighlight">\(N\)</span> is not large enough that we can assume each transmission goes to a new recipient.  The assumptions leading to a Galton-Watson process break down in this limit.  However, perhaps remarkably PGFs still play a role in the calculation of the outbreak size distribution.</p>
 <section id="illustrative-simulations">
 <h2><span class="section-number">4.6.1. </span>Illustrative simulations:<a class="headerlink" href="#illustrative-simulations" title="Link to this heading">#</a></h2>
+<p>We look at the same simulations we did earlier, but for smaller population sizes.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -790,6 +790,17 @@ c_{N,1} &amp; c_{N,2} &amp; c_{N,3} &amp; \cdots &amp; c_{N,N}
 </div></section>
 <section id="examples">
 <h2><span class="section-number">4.6.6. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<p>For the simulations at the top of this page, we have an offspring distribution of</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(x) = \frac{\gamma}{\beta+\gamma} \frac{1}{1- \frac{\beta x}{\beta+\gamma}}
+\]</div>
+<p>This can be simplified to</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(x) = \frac{\gamma}{\beta+\gamma-\beta x}
+\]</div>
+<p>The code below builds the Ball matrix and solves for the outbreak size probability, using this input function <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
