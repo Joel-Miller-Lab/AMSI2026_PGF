@@ -769,7 +769,7 @@ P(Z_g=0) = 0.782641
 <li><p>Mast cells: may divide producing (in each generation):</p>
 <ul>
 <li><p>2 mast cells with probability <span class="math notranslate nohighlight">\(p_m^2\)</span></p></li>
-<li><p>1 stem and 1 mast cell with probability <span class="math notranslate nohighlight">\(2p_m(1-p_m)\)</span></p></li>
+<li><p>1 mast and 1 end cell with probability <span class="math notranslate nohighlight">\(2p_m(1-p_m)\)</span></p></li>
 <li><p>or 2 end cells with probablity <span class="math notranslate nohighlight">\(p_m^2\)</span>.</p></li>
 </ul>
 </li>
@@ -782,9 +782,9 @@ P(Z_g=0) = 0.782641
 <p>Using <span class="math notranslate nohighlight">\(x\)</span> to represent stem cells, <span class="math notranslate nohighlight">\(y\)</span> to represent mast cells, and <span class="math notranslate nohighlight">\(z\)</span> to represent end cells, the offspring PGFs are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\xi_s(x,y,z) &amp;= p_s^2 x^2 + 2 p_s(1-p_s) xy + (1-p_s)y^2 \\
+\xi_s(x,y,z) &amp;= p_s^2 x^2 + 2 p_s(1-p_s) xy + (1-p_s)^2y^2 \\
              &amp;= (p_s x + (1-p_s)y)^2\\
-\xi_m(x,y,z) &amp;= p_m^2 y^2 + 2 p_m(1-p_m)yz + (1-p_m)z^2\\
+\xi_m(x,y,z) &amp;= p_m^2 y^2 + 2 p_m(1-p_m)yz + (1-p_m)^2z^2\\
              &amp;= (p_m y + (1-p_m)z)^2\\
 \xi_e(x,y,z) &amp;= z
 \end{align*}\]</div>
