@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.4. The Backward Kolmogorov Equation &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>4.7. SIR disease in Heterogeneous Populations &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -60,11 +60,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/CtsTime/CtsTimeBackKolm';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/InfDis/InfDisHetMeanField';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3.5. Simulating a Poisson Process" href="CtsTimeSim.html" />
-    <link rel="prev" title="3.3. Forward Kolmogorov Equations" href="CtsTimeForwKolm.html" />
+    <link rel="next" title="5. MultiType Galton-Watson Processes" href="../MultiType/MultiTypeIntro.html" />
+    <link rel="prev" title="4.6. SIR outbreak sizes in small populations" href="InfDisSmallPop.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -212,21 +212,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at Successive Generations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.4. The Backward Kolmogorov Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
 
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Small outbreaks in large populations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisHetMeanField.html">4.7. SIR disease in Heterogeneous Populations</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="InfDisIntro.html">4. Infectious Diseases</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDist_Sim.html">4.3. Small outbreaks in large populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.7. SIR disease in Heterogeneous Populations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../MultiType/MultiTypeIntro.html">5. MultiType Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -307,7 +307,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/main?urlpath=lab/tree/AMSI_2026_PGF_text/notebooks/CtsTime/CtsTimeBackKolm.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/main?urlpath=lab/tree/AMSI_2026_PGF_text/notebooks/InfDis/InfDisHetMeanField.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -373,7 +373,7 @@
       
       
       
-      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/CtsTime/CtsTimeBackKolm.ipynb" target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/InfDis/InfDisHetMeanField.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -390,7 +390,7 @@
       
       
       
-      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/CtsTime/CtsTimeBackKolm.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/InfDis/InfDisHetMeanField.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -420,7 +420,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/CtsTime/CtsTimeBackKolm.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/InfDis/InfDisHetMeanField.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -504,7 +504,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>The Backward Kolmogorov Equation</h1>
+    <h1>SIR disease in Heterogeneous Populations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -514,8 +514,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability-by-time-t">3.4.1. Extinction probability by time <span class="math notranslate nohighlight">\(t\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.2. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-setup">4.7.1. Mathematical setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-the-number-of-equations">4.7.2. Reducing the number of equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-approach">4.7.2.1. Naive approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-approach">4.7.2.2. Improved approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.7.3. Self-test</a></li>
 </ul>
             </nav>
         </div>
@@ -527,64 +532,162 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="the-backward-kolmogorov-equation">
-<h1><span class="section-number">3.4. </span>The Backward Kolmogorov Equation<a class="headerlink" href="#the-backward-kolmogorov-equation" title="Link to this heading">#</a></h1>
-<p>The backward Kolmogorov equation along similar lines to the forward Kolmogorov equation.  We assume we know <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> and <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span> and we want to determine <span class="math notranslate nohighlight">\(\Phi(x, t + \Delta t)\)</span>.</p>
-<p>However, instead of taking the PGF for time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> and stepping forward an amount <span class="math notranslate nohighlight">\(\Delta t\)</span> using <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span> as we did in deriving the Forward Kolmogorov Equations, we take the PGF for time <span class="math notranslate nohighlight">\(\Delta t\)</span> from <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.2</a> and step forward an amount <span class="math notranslate nohighlight">\(t\)</span> using <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  This will arrive at a different partial differential equation for <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  However, both equations will yield the same solution <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.  Each equation gives insight into different properties of <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span>.</p>
-<p>Given <span class="math notranslate nohighlight">\(\Phi(x,0)= x\)</span>, that is, there is one individual at time <span class="math notranslate nohighlight">\(t=0\)</span>, <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.2</a> tells us</p>
-<div class="math notranslate nohighlight">
-\[
-\Phi(x,\Delta t) = (1-r\Delta t)x + r\Delta t \hat{\mu}(x)
-\]</div>
-<p>To determine <span class="math notranslate nohighlight">\(\Phi(x,\Delta t + t)\)</span>, we now use <a class="reference internal" href="CtsTimeGaltWat.html#lem-PhiTimeSum">Lemma 3.1</a> with <span class="math notranslate nohighlight">\(T_1=\Delta t\)</span> and <span class="math notranslate nohighlight">\(T_2=t\)</span>.  So</p>
-<div class="math notranslate nohighlight">
-\[
-\Phi(x,t+\Delta t) = (1-r\Delta t) \Phi(x,t) + r \Delta t \hat{\mu}(\Phi(x,t))
-\]</div>
-<p>This is illustrated in <a class="reference internal" href="#fig-backkolcomp"><span class="std std-numref">Fig. 3.6</span></a></p>
-<figure class="align-default" id="fig-backkolcomp">
-<a class="reference internal image-reference" href="../../_images/BackwardKolmComposition.png"><img alt="../../_images/BackwardKolmComposition.png" src="../../_images/BackwardKolmComposition.png" style="width: 600px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">Illustration of the  derivation of <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span> using function composition.  We start from the PGF for <span class="math notranslate nohighlight">\(X(\Delta t)\)</span> and then step forward in time by a large amount <span class="math notranslate nohighlight">\(t\)</span>.  By <a class="reference internal" href="CtsTimeGaltWat.html#lem-PGFatDt">Lemma 3.2</a> and <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a>, we substitute <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> for <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\Phi(x,\Delta t) = (1-r\Delta t)x + (r\Delta t)(\hat{\mu}(x))\)</span>.  This yields  <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t) = (1-r\Delta t) \Phi(x,t) + r \Delta t \hat{\mu}(\Phi(x,t))\)</span>.</span><a class="headerlink" href="#fig-backkolcomp" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Calculating the <span class="math notranslate nohighlight">\(t\)</span> derivative of <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="sir-disease-in-heterogeneous-populations">
+<h1><span class="section-number">4.7. </span>SIR disease in Heterogeneous Populations<a class="headerlink" href="#sir-disease-in-heterogeneous-populations" title="Link to this heading">#</a></h1>
+<p>We now consider an SIR infectious disease spreading in a large population made up of heterogeneous individuals having varying contact rates.  That is, some individuals have more interactions per unit time than others.</p>
+<p>The entire population consists of <span class="math notranslate nohighlight">\(N\)</span> individuals.
+Each individual has a contact rate <span class="math notranslate nohighlight">\(k\)</span>, which we will assume is an integer.  Additionally we assume that the only changes that happen during the outbreak is infection and recovery.  Individuals with a given contact rate maintain that contact rate for the duration of the outbreak.</p>
+<section id="mathematical-setup">
+<h2><span class="section-number">4.7.1. </span>Mathematical setup<a class="headerlink" href="#mathematical-setup" title="Link to this heading">#</a></h2>
+<p>We will divide the susceptible, infected, and recovered individuals by their contact rate:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\frac{\partial}{\partial t} \Phi(x,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi(x,t+\Delta t)-\Phi(x,t)}{\Delta t}\\
-&amp;=\lim_{\Delta t \to 0} \frac{(1-r\Delta t) \Phi(x,t) + r \Delta t \hat{\mu}(\Phi(x,t)) - \Phi(x,t)}{\Delta t}\\
-&amp;= -r\Phi(x,t) + r \hat{\mu}(\Phi(x,t)) \\
-&amp;= r (\hat{\mu}(\Phi(x,t))-\Phi(x,t))
-\end{align*} \]</div>
-<p>This yields the Backward Kolmogorov Equation</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial}{\partial t} \Phi(x,t) = r (\hat{\mu}(\Phi(x,t))-\Phi(x,t))
-\]</div>
-<section id="extinction-probability-by-time-t">
-<h2><span class="section-number">3.4.1. </span>Extinction probability by time <span class="math notranslate nohighlight">\(t\)</span><a class="headerlink" href="#extinction-probability-by-time-t" title="Link to this heading">#</a></h2>
-<p>The probability of extinction by time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(\alpha(t) = q_{0}(t) = \Phi(0,t)\)</span>.  The Backward Kolmogorov Equation gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-\alpha'(t) &amp;= \left[\frac{\partial}{\partial t} \Phi(x,t)\right]_{x=0}\\
-&amp;= r(\hat{\mu}(\Phi(0,t)-\Phi(0,t)))\\
-&amp;= r\left(\hat{\mu}(\alpha(t))-\alpha(t)\right)
+S &amp;= S_0 + S_1 + \cdots\\
+I &amp;= I_0 + I_1 + \cdots\\
+R &amp;= R_0 + R_1 + \cdots
 \end{align*}\]</div>
-<p>with the initial condition <span class="math notranslate nohighlight">\(\alpha(0)=0\)</span>.</p>
-<p>If <span class="math notranslate nohighlight">\(\hat{\mu}(0)=0\)</span>, then the extinction probability remains <span class="math notranslate nohighlight">\(0\)</span>.</p>
-<p>Otherwise, <span class="math notranslate nohighlight">\(\hat{\mu}(0)&gt;0\)</span> and so initially <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> is increasing.  It continues to increase and it approaches the smallest value of <span class="math notranslate nohighlight">\(x&gt;0\)</span> for which <span class="math notranslate nohighlight">\(\hat{\mu}(x)=x\)</span>.  This is the final extinction probability.</p>
+<p>Because individuals never change contact rate, the total number of people with each contact rate can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+N_k = S_k+I_k + R_k
+\]</div>
+<p>and the total population <span class="math notranslate nohighlight">\(N\)</span> satisfies</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+N &amp;= N_0 + N_1 + \cdots\\
+  &amp;= S+I+R
+\end{align*}\]</div>
+<p>We take <span class="math notranslate nohighlight">\(p_k\)</span> to be the proportion of the population with a given <span class="math notranslate nohighlight">\(k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+p_k = N_k/N
+\]</div>
+<p>We introduce the probabiilty generating function</p>
+<div class="math notranslate nohighlight">
+\[
+\psi(x) = \sum_k p_k x^k
+\]</div>
+<p>Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_{k} k N_k &amp;= \sum_k k p_k N\\
+&amp;= N \sum_k kp_k\\
+&amp;= N \sum_k  k p_k 1^{k-1}\\
+&amp;= N \psi'(1)
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\psi'(1)= \sum_k kp_k\)</span> is the average contact rate.</p>
+<p>Each individual in <span class="math notranslate nohighlight">\(I_{\hat{k}}\)</span> transmits at rate <span class="math notranslate nohighlight">\(\beta \hat{k}\)</span>, which is proportional to its contact rate.  So using superposition, the total rate of transmissions is</p>
+<div class="math notranslate nohighlight">
+\[
+\text{combined transmission rate} = \beta \sum_{\hat{k}}\hat{k} I_{\hat{k}}
+\]</div>
+<p>When a transmission occurs, the recipient is chosen randomly from the population with probability proportional to its contact rate.  So the probability of choosing a specific individual with contact rate <span class="math notranslate nohighlight">\(k\)</span> is <span class="math notranslate nohighlight">\(\frac{k}{\sum_{\hat{k}} \hat{k}N_{\hat{k}}}= k/N\psi'(1)\)</span>.  The probability that the recipient is both susceptible and has contact rate <span class="math notranslate nohighlight">\(k\)</span> is the product of the overall transmission rate with the probability the recipient is one of the <span class="math notranslate nohighlight">\(S_k\)</span> individuals with contact rate <span class="math notranslate nohighlight">\(k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{combined rate of infection of individuals in $S_k$} = \beta\sum_{\hat{k}}\hat{k} I_{\hat{k}} \frac{k S_k}{N\psi'(1)}
+\]</div>
+<p>For simplicity of notation we now  introduce</p>
+<div class="math notranslate nohighlight">
+\[
+\pi_I =  \frac{ \sum_{\hat{k}} \hat{k} I_k}{N\psi'(1)}
+\]</div>
+<p>which is the probability that a partner chosen randomly from the population is infected.  So</p>
+<div class="math notranslate nohighlight">
+\[
+\text{combined rate of infection of individuals in $S_k$} = \beta \pi_I k S_k
+\]</div>
+<p>The per-individual recovery rate is <span class="math notranslate nohighlight">\(\gamma\)</span>, so the combined rate at which infected individuals with contact rate <span class="math notranslate nohighlight">\(k\)</span> recover is <span class="math notranslate nohighlight">\(\gamma I_k\)</span>.</p>
+<p>We now wave hands slightly and say that</p>
+<p><em>if the numbers are large enough, it is reasonable to assume that noise due to stochastic effects is small compared to the expected change of the variables.</em></p>
+<p>Then we can neglect stochastic effects and conclude that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d}{dt} S_k &amp;= - \beta \pi_I k S_k\\
+\frac{d}{dt} I_k &amp;= \beta \pi_I k S_k - \gamma I_k\\
+\frac{d}{dt} R_k &amp;= \gamma I_k\\
+\pi_I &amp;= \frac{\sum_k k I_k}{N\psi'(1)}
+\end{align*}\]</div>
+</section>
+<section id="reducing-the-number-of-equations">
+<h2><span class="section-number">4.7.2. </span>Reducing the number of equations<a class="headerlink" href="#reducing-the-number-of-equations" title="Link to this heading">#</a></h2>
+<section id="naive-approach">
+<h3><span class="section-number">4.7.2.1. </span>Naive approach<a class="headerlink" href="#naive-approach" title="Link to this heading">#</a></h3>
+<p>The current system of equations is infinite.  One way to attempt to solve them is to truncate the system, ignoring values of <span class="math notranslate nohighlight">\(k\)</span> larger than some threshold <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<p>However, looking at the original biological problem, the individuals with high degree get infected sooner and transmit more.  So at early times, the probability of being infected is proportional to <span class="math notranslate nohighlight">\(k\)</span> and the contribution to new infections is also proportional to <span class="math notranslate nohighlight">\(k\)</span>.  Thus these individuals play a role in the dynamics that is proportional to <span class="math notranslate nohighlight">\(k^2\)</span>.  Disregarding the highest degree individuals is only reasonable if <span class="math notranslate nohighlight">\(\sum_{k&gt;K} k^2 p_k\)</span> is very small.  So typically we must choose <span class="math notranslate nohighlight">\(K\)</span> to be quite large and in some cases, (<em>e.g.</em>, where <span class="math notranslate nohighlight">\(p_k\)</span> decays like <span class="math notranslate nohighlight">\(1/k^2\)</span>) the impact of large values of <span class="math notranslate nohighlight">\(k\)</span> is never negligible.</p>
+</section>
+<section id="improved-approach">
+<h3><span class="section-number">4.7.2.2. </span>Improved approach<a class="headerlink" href="#improved-approach" title="Link to this heading">#</a></h3>
+<p>We can avoid truncating the system at all, and still arrive at a small number of equations.  We start with the equations for <span class="math notranslate nohighlight">\(dS_k/dt\)</span> and rewrite them</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dt} S_k + \beta k \pi_I S_k = 0
+\]</div>
+<p>We multiply this equation by <span class="math notranslate nohighlight">\(Q(t)= e^{\beta k\int_0^t \pi_I(\tau)\, d\tau }\)</span>.  If you have seen integrating factors before, this is how <span class="math notranslate nohighlight">\(Q\)</span> this factor was chosen.  If you have not seen integrating factors before, the key reason for this choice is that we are chosing <span class="math notranslate nohighlight">\(Q(t)\)</span> so that it’s derivative will satisfy <span class="math notranslate nohighlight">\(dQ/dt = \beta k \pi_I Q(t)\)</span>.  Thus</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+Q(t) \frac{d}{dt} S_k(t) + Q(t) \beta k \pi_I S_k &amp;=0\\
+Q(t) \frac{d}{dt} S_k(t) + \left(\frac{d}{dt} Q(t)\right) S_k(t) &amp;= 0\\
+\frac{d}{dt} \left(Q(t) S_k(t)\right) &amp;=0
+\end{align*}\]</div>
+<p>using the product rule in reverse in the final line.  The choice of <span class="math notranslate nohighlight">\(Q\)</span> made the last step possible.  Integrating both sides</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+Q(t) S_k(t) &amp;= C\\
+S_k(t) &amp;= C\frac{1}{Q(t)}\\
+ &amp;= C e^{-k \beta \int_0^t \pi_I(\tau) \, d\tau}\\
+ &amp;= C \theta(t)^k
+\end{align*}\]</div>
+<p>where we set <span class="math notranslate nohighlight">\(\theta(t) = e^{-\beta \int_0^t \pi_I(\tau) \, d\tau}\)</span> and note that <span class="math notranslate nohighlight">\(\theta(0)=1\)</span>.  Then</p>
+<div class="math notranslate nohighlight">
+\[
+S_k(t) = S_k(0) \theta(t)^k
+\]</div>
+<p>If we assume that <span class="math notranslate nohighlight">\(S_k(0) = (1-\rho) N_k\)</span> which corresponds to infecting a proportion <span class="math notranslate nohighlight">\(\rho\)</span> chosen uniformly at random from the population at time <span class="math notranslate nohighlight">\(0\)</span>, we conclude</p>
+<div class="math notranslate nohighlight">
+\[
+S_k(t) = (1-\rho) N_k \theta(t)^k = N (1-\rho) p_k \theta(t)^k
+\]</div>
+<p>So</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S(t) &amp;= \sum_k S_k(t)\\
+     &amp;= (1-\rho) N\sum_k p_k \theta(t)^k\\
+     &amp;= (1-\rho) N \psi(\theta(t))
+\end{align*}\]</div>
+<p>We also find</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d}{dt} \theta(t)&amp;= - \beta \pi_I(t)\theta(t)\\
+\frac{d}{dt} I(t) &amp;= -\frac{d}{dt} S(t) - \gamma I(t)\\
+                  &amp;= -(1-\rho) N \psi'(\theta(t)) \theta'(t) - \gamma I(t)\\
+                  &amp;= -(1-\rho) N \psi'(\theta(t)) \left(-\beta \pi_I(t)\right) \theta(t) - \gamma I(t)\\
+                  &amp;= \beta(1-\rho)N\pi_I(t)\theta(t)\psi'(\theta(t))- \gamma I(t)\\
+\frac{d}{dt} R(t) &amp;= \gamma I(t)\\
+\pi_I(t) &amp;= \frac{\sum_k k I_k}{N\psi'(1)}
+\end{align*}\]</div>
+<p>There are a few options that will save us from trying to calculate the infinite sum <span class="math notranslate nohighlight">\(\sum_k k I_k\)</span> at each time.  One of these is to write down a differential equation for <span class="math notranslate nohighlight">\(\pi_I(t)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d}{dt} \pi_I(t) &amp;= \frac{\sum_k k \frac{d I_k}{dt}}{N\psi'(1)}\\
+&amp;= \frac{\sum_k k (-\frac{d S_k}{dt} - \gamma I_k)}{N\psi'(1)}\\
+&amp;= \frac{-\sum_k k N (1-\rho) p_k k \theta(t)^{k-1}\theta'(t)}{N\psi'(1)} - \gamma \frac{\sum_k k I_k}{N\psi'(1)}\\
+&amp;=  \frac{\beta \pi_I N(1-\rho)\sum_k k^2p_k \theta^k}{N\psi'(1)} - \gamma \pi_I\\
+&amp;= \beta \pi_I (1-\rho)\frac{ \theta \frac{d}{d\theta} (\theta\psi'(\theta))}{\psi'(1)} - \gamma \pi_I
+\end{align*}\]</div>
+<p>So our final system is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d}{dt} I &amp;= \beta(1-\rho)N\pi_I\theta\psi'(\theta)- \gamma I\\
+\frac{d}{dt} \pi_I &amp;= \beta \pi_I (1-\rho)\frac{ \theta \frac{d}{d\theta} (\theta\psi'(\theta))}{\psi'(1)} - \gamma \pi_I\\
+\frac{d}{dt} \theta &amp;= - \beta \pi_I\theta\\
+S &amp;= (1-\rho)N\psi(\theta)\\
+R &amp;= N-I-S
+\end{align*}\]</div>
+<p>Where we’ve used <span class="math notranslate nohighlight">\(N=S+I+R\)</span> to remove the <span class="math notranslate nohighlight">\(dR/dt\)</span> equation.  The initial conditions are <span class="math notranslate nohighlight">\(\theta(0)=1\)</span>, <span class="math notranslate nohighlight">\(I(0) = \rho N\)</span> and <span class="math notranslate nohighlight">\(\pi_I(0) = \rho\)</span> which comes from choosing a fraction <span class="math notranslate nohighlight">\(\rho\)</span> uniformly at random to infect at time <span class="math notranslate nohighlight">\(0\)</span>.</p>
+</section>
 </section>
 <section id="self-test">
-<h2><span class="section-number">3.4.2. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
-<ol class="arabic">
-<li><p>We noted that if <span class="math notranslate nohighlight">\(\hat{\mu}(0)=0\)</span>, then extinction is impossible.  Under what conditions is <span class="math notranslate nohighlight">\(\hat{\mu}(0)=0\)</span>?</p></li>
-<li><p>Define <span class="math notranslate nohighlight">\(\alpha\)</span> to be the eventual extinction probability.  Following our derivation of <span class="math notranslate nohighlight">\(\alpha\)</span> in the generation-based case:</p>
-<p><strong>(a)</strong> Explain why <span class="math notranslate nohighlight">\(\alpha\)</span> must be equal to the probability that when the first event happens, the individual either is removed or is replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals, all of whom lead to eventual extinction.</p>
-<p><strong>(b)</strong> Show that the explanation above implies <span class="math notranslate nohighlight">\(\alpha = \hat{\mu}(\alpha)\)</span>.</p>
-<p><strong>(c)</strong> Explain how we should address the case of multiple solutions to <span class="math notranslate nohighlight">\(\alpha = \hat{\mu}(\alpha)\)</span>.</p>
-</li>
-</ol>
+<h2><span class="section-number">4.7.3. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -601,7 +704,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks\CtsTime"
+            path: "./notebooks\InfDis"
         },
         predefinedOutput: true
     }
@@ -619,20 +722,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="CtsTimeForwKolm.html"
+       href="InfDisSmallPop.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3.3. </span>Forward Kolmogorov Equations</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>SIR outbreak sizes in small populations</p>
       </div>
     </a>
     <a class="right-next"
-       href="CtsTimeSim.html"
+       href="../MultiType/MultiTypeIntro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.5. </span>Simulating a Poisson Process</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>MultiType Galton-Watson Processes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -652,8 +755,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability-by-time-t">3.4.1. Extinction probability by time <span class="math notranslate nohighlight">\(t\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">3.4.2. Self-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-setup">4.7.1. Mathematical setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-the-number-of-equations">4.7.2. Reducing the number of equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-approach">4.7.2.1. Naive approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-approach">4.7.2.2. Improved approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">4.7.3. Self-test</a></li>
 </ul>
   </nav></div>
 
