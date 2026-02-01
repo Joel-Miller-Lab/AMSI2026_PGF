@@ -52,6 +52,12 @@ parts:
       #- file: notebooks/InfDis/InfDisTotalSize
       #- file: notebooks/InfDis/InfDisSizeDist
       - file: notebooks/InfDis/InfDisSmallPop
+      - file: notebooks/InfDis/InfDisHetMeanField
+    - file: notebooks/MultiType/MultiTypeIntro
+      sections:
+      - file: notebooks/MultiType/MultiTypePGFs
+      - file: notebooks/MultiType/StemCells
+
   - caption: Simulations and Practice Problems
     numbered: True
     chapters:
