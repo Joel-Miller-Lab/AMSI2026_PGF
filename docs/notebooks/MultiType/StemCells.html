@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5.2. Stem Cells &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>5.4. Stem Cells &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -58,11 +58,13 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/MultiType/StemCells';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6. Computer Simulation" href="../Simulation/SimulationIntro.html" />
-    <link rel="prev" title="5.1. Multivariate Probability Generating Functions" href="MultiTypePGFs.html" />
+    <link rel="prev" title="5.3. Continuous-time framework" href="MultiTypeGWCtsTime.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -227,9 +229,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisHetMeanField.html">4.7. SIR disease in Heterogeneous Populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="MultiTypeIntro.html">5. MultiType Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="MultiTypeIntro.html">5. Introduction to MultiType Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="MultiTypePGFs.html">5.1. Multivariate Probability Generating Functions</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">5.2. Stem Cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiTypeGWGenBased.html">5.2. MultiType Galton-Watson processes: Generation-based framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiTypeGWCtsTime.html">5.3. Continuous-time framework</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5.4. Stem Cells</a></li>
 </ul>
 </details></li>
 </ul>
@@ -489,7 +493,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -505,6 +511,22 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-till-model">5.4.1. The Till model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vogel-model">5.4.2. Vogel Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macken-perelson">5.4.3. Macken-Perelson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size">5.4.3.1. Expected size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability">5.4.3.2. Extinction probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colony-size-at-completion">5.4.3.3. Colony size at completion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colony-size-if-complete-by-generation-g">5.4.3.4. Colony size if complete by generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -515,8 +537,559 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="stem-cells">
-<h1><span class="section-number">5.2. </span>Stem Cells<a class="headerlink" href="#stem-cells" title="Link to this heading">#</a></h1>
-<p>t</p>
+<h1><span class="section-number">5.4. </span>Stem Cells<a class="headerlink" href="#stem-cells" title="Link to this heading">#</a></h1>
+<p>Cells in the body typically either</p>
+<ul class="simple">
+<li><p>have a specific job to do, and typically don’t reproduce</p></li>
+<li><p>or have the ability to divide and eventually become a cell with a specific job.</p></li>
+</ul>
+<p>The latter cells are called “stem cells”.  The full complexity of stem cells is beyond our scope here.  We will start with some of the earliest mathematical models of stem cells which were used to help understand their properties.</p>
+<p>We begin with some experimental observations.  Individual cells are taken from a spleen and allowed to reproduce.  It is observed that some cells do very little reproduction.  Other cells lead to rapidly growing colonies (referred to as <em>colony-forming cells</em>).  Within these large colonies, some cells are colony-forming cells, but many are not.</p>
+<section id="the-till-model">
+<h2><span class="section-number">5.4.1. </span>The Till model<a class="headerlink" href="#the-till-model" title="Link to this heading">#</a></h2>
+<p>Experiments (described above) and analysis by Till showed the existence of stem-cells.</p>
+<p>In the original model it is assumed that there are just two types of cells: “stem cells” (or colony-forming cells / colony-forming units) and “differentiated cells”.</p>
+<p>Experimentally, a number of colonies were formed that each started with one cell.  These grew for some number of days (10 or 12).  The number of colony-forming cells within each of these colonies was found to vary widely.</p>
+<figure class="align-left" id="tillexptcd1">
+<a class="reference internal image-reference" href="../../_images/TillExptCD1.png"><img alt="../../_images/TillExptCD1.png" src="../../_images/TillExptCD1.png" style="width: 45%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Experimental data from Till <em>et al</em>, showing the number of colony-forming cells (colony-forming units) in colonies after 10 days.</span><a class="headerlink" href="#tillexptcd1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-right" id="tillexptcd">
+<a class="reference internal image-reference" href="../../_images/TillExptCD.png"><img alt="../../_images/TillExptCD.png" src="../../_images/TillExptCD.png" style="width: 45%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Experimental data from Till <em>et al</em>, showing the number of colony-forming cells (colony-forming units) in colonies after 12 days.</span><a class="headerlink" href="#tillexptcd" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A stem cell can either divide into two stem cells with probability <span class="math notranslate nohighlight">\(p_2\)</span>, or it can become a differentiated cell with probability <span class="math notranslate nohighlight">\(p_0\)</span>.  The differentiated cells never return to being stem cells.  In the model by Till, we count only stem cells, so we can treat differentiated cells as “dead”.</p>
+<figure class="align-default" id="tillexpts">
+<a class="reference internal image-reference" href="../../_images/TillExpts.png"><img alt="../../_images/TillExpts.png" src="../../_images/TillExpts.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">The model of Till <em>et al</em>, as well as some stochastic simulations.</span><a class="headerlink" href="#tillexpts" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The offspring distribution of a stem cell in this model has PGF <span class="math notranslate nohighlight">\(\mu(x) = p_0 + p_2 x^2\)</span>.</p>
+<p>Using simulations Till found</p>
+<figure class="align-default" id="tillsims">
+<a class="reference internal image-reference" href="../../_images/TillSims.png"><img alt="../../_images/TillSims.png" src="../../_images/TillSims.png" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Simulation results</span><a class="headerlink" href="#tillsims" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Below is the exact calculation for the cumulative distribution with these parameters (the plot is conditional on at least one colony forming unit).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">phi_g_distribution_via_roots_of_unity</span><span class="p">(</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Galton–Watson generation g with offspring PGF mu(x) = p0 + p2 x^2 (p2=1-p0),</span>
+<span class="sd">    starting from 1 individual.</span>
+
+<span class="sd">    Notation:</span>
+<span class="sd">        Phi_g(x) = PGF of Z_g</span>
+<span class="sd">        Phi_0(x) = x</span>
+<span class="sd">        Phi_{g+1}(x) = mu(Phi_g(x)) = p0 + p2*(Phi_g(x))^2</span>
+
+<span class="sd">    Numerics:</span>
+<span class="sd">        Evaluate Phi_g(z_m) for z_m = exp(2π i m/M), m=0,...,M-1,</span>
+<span class="sd">        then recover P(Z_g = k) via inverse FFT.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">p0</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;p0 must be in [0,1].&quot;</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">p0</span>
+
+    <span class="n">max_deg</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">g</span>
+    <span class="k">if</span> <span class="n">M</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># FFT-friendly; ensure M &gt; max_deg</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">M</span> <span class="o">&lt;=</span> <span class="n">max_deg</span><span class="p">:</span>
+            <span class="n">M</span> <span class="o">*=</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">M</span> <span class="o">&lt;=</span> <span class="n">max_deg</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;M must be &gt; 2^g = </span><span class="si">{</span><span class="n">max_deg</span><span class="si">}</span><span class="s2">. Got M=</span><span class="si">{</span><span class="n">M</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">m</span> <span class="o">/</span> <span class="n">M</span><span class="p">)</span>
+
+    <span class="c1"># Phi_0(z) = z</span>
+    <span class="n">Phi</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Phi_{g+1}(z) = p0 + p2 * Phi_g(z)^2</span>
+    <span class="k">for</span> <span class="n">ctr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+        
+        <span class="c1">#print(f&quot;  Iteration {ctr} / {g}&quot;)</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">mu</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span><span class="c1">#p0 + p2 * (Phi * Phi)</span>
+        
+
+    <span class="c1"># Recover coefficients by inverse DFT (ifft)</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">M</span>  <span class="c1"># tiny imaginary parts are numerical noise</span>
+
+    <span class="c1"># Clean &amp; normalize</span>
+    <span class="n">probs</span><span class="p">[</span><span class="n">probs</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">probs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;All probabilities are zero after numerical cleanup.&quot;</span><span class="p">)</span>
+    <span class="n">probs</span> <span class="o">/=</span> <span class="n">s</span>
+
+    <span class="c1"># True support is k=0..2^g; truncate</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">probs</span><span class="p">[:</span> <span class="n">max_deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">max_deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">k</span><span class="p">,</span> <span class="n">probs</span>
+
+
+
+
+<span class="n">g</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">max_k_to_plot</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">phi_g_distribution_via_roots_of_unity</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">p0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;g=</span><span class="si">{</span><span class="n">g</span><span class="si">}</span><span class="s2">, p0=</span><span class="si">{</span><span class="n">p0</span><span class="si">}</span><span class="s2">, p2=</span><span class="si">{</span><span class="mi">1</span><span class="o">-</span><span class="n">p0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;deg(Phi_g) = </span><span class="si">{</span><span class="mi">2</span><span class="o">**</span><span class="n">g</span><span class="si">}</span><span class="s2">, computed probs length = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sum probs = </span><span class="si">{</span><span class="n">probs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">.16f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(Z_g=0) = </span><span class="si">{</span><span class="n">probs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.6g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">probs</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">probs</span> <span class="o">/=</span> <span class="n">probs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">max_k_to_plot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">max_k_to_plot</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_k_to_plot</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">[:</span> <span class="n">max_k_to_plot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">cdf</span><span class="p">[:</span> <span class="n">max_k_to_plot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$P(Z_</span><span class="si">{20}</span><span class="s2"> ≤ k)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g=20, p0=0.4, p2=0.6
+deg(Phi_g) = 1048576, computed probs length = 1048577
+sum probs = 0.9999999999999430
+P(Z_g=0) = 0.664827
+</pre></div>
+</div>
+<img alt="../../_images/32260920934e1cb62ed55dc9f7ad67d4e2f7e60082360482b778c71f801725ee.png" src="../../_images/32260920934e1cb62ed55dc9f7ad67d4e2f7e60082360482b778c71f801725ee.png" />
+</div>
+</div>
+</section>
+<section id="vogel-model">
+<h2><span class="section-number">5.4.2. </span>Vogel Model<a class="headerlink" href="#vogel-model" title="Link to this heading">#</a></h2>
+<p>A later model, known as the Vogel model assumed that stem cells either divide into two stem cells (with probabilty <span class="math notranslate nohighlight">\(p\)</span>), divide into two differentiated cells (with probability <span class="math notranslate nohighlight">\(q\)</span>), or divide into a stem cell and a differentiated cell (with probability <span class="math notranslate nohighlight">\(r\)</span>).</p>
+<figure class="align-default" id="fig-vogelmodel">
+<a class="reference internal image-reference" href="../../_images/VogelModel.png"><img alt="../../_images/VogelModel.png" src="../../_images/VogelModel.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">The Vogel Model</span><a class="headerlink" href="#fig-vogelmodel" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-vogelextinction">
+<a class="reference internal image-reference" href="../../_images/VogelExtinction.png"><img alt="../../_images/VogelExtinction.png" src="../../_images/VogelExtinction.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">A claim by Vogel about calculating extinction probability and probability of a given size.</span><a class="headerlink" href="#fig-vogelextinction" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">r</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">p</span><span class="o">=</span><span class="mf">0.4</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span> <span class="n">r</span><span class="o">-</span> <span class="n">p</span>
+<span class="n">max_k_to_plot</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">phi_g_distribution_via_roots_of_unity</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">p</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span><span class="n">q</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">probs</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">probs</span> <span class="o">/=</span> <span class="n">probs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">max_k_to_plot</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">max_k_to_plot</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_k_to_plot</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">[:</span> <span class="n">max_k_to_plot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">cdf</span><span class="p">[:</span> <span class="n">max_k_to_plot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$P(Z_</span><span class="si">{20}</span><span class="s2"> ≤ k)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g=20, p0=0.4, p2=0.6
+deg(Phi_g) = 1048576, computed probs length = 1048577
+sum probs = 0.9999999999999772
+P(Z_g=0) = 0.782641
+</pre></div>
+</div>
+<img alt="../../_images/004f5c965eed9ed26044922c1651c9fa20775d8078400c1d92130376279cc54a.png" src="../../_images/004f5c965eed9ed26044922c1651c9fa20775d8078400c1d92130376279cc54a.png" />
+</div>
+</div>
+</section>
+<section id="macken-perelson">
+<h2><span class="section-number">5.4.3. </span>Macken-Perelson<a class="headerlink" href="#macken-perelson" title="Link to this heading">#</a></h2>
+<p>Now we follow Catherine Macken and Alan Perelson (<em>Stem Cell Proliferation and Differentiation</em>).  In this model they study “stem cells” (<span class="math notranslate nohighlight">\(S\)</span>), “macrophage progenitors” (<span class="math notranslate nohighlight">\(M\)</span>), and “end cells” (<span class="math notranslate nohighlight">\(E\)</span>).</p>
+<ul class="simple">
+<li><p>Stem cells: may divide arbitarily many times producing (in each generation)</p>
+<ul>
+<li><p>2 new stem cells with probability <span class="math notranslate nohighlight">\(p_s^2\)</span></p></li>
+<li><p>1 stem and 1 mast cell with probability <span class="math notranslate nohighlight">\(2p_s(1-p_s)\)</span></p></li>
+<li><p>or 2 mast cells with probability <span class="math notranslate nohighlight">\((1-p_s)^2\)</span></p></li>
+</ul>
+</li>
+<li><p>Mast cells: may divide producing (in each generation):</p>
+<ul>
+<li><p>2 mast cells with probability <span class="math notranslate nohighlight">\(p_m^2\)</span></p></li>
+<li><p>1 stem and 1 mast cell with probability <span class="math notranslate nohighlight">\(2p_m(1-p_m)\)</span></p></li>
+<li><p>or 2 end cells with probablity <span class="math notranslate nohighlight">\(p_m^2\)</span>.</p></li>
+</ul>
+</li>
+<li><p>End cells: do not divide and remain until the end. This is modeled as producing</p>
+<ul>
+<li><p>1 end cell with probablity <span class="math notranslate nohighlight">\(1\)</span> in each generation.</p></li>
+</ul>
+</li>
+</ul>
+<p>Using <span class="math notranslate nohighlight">\(x\)</span> to represent stem cells, <span class="math notranslate nohighlight">\(y\)</span> to represent mast cells, and <span class="math notranslate nohighlight">\(z\)</span> to represent end cells, the offspring PGFs are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\xi_s(x,y,z) &amp;= p_s^2 x^2 + 2 p_s(1-p_s) xy + (1-p_s)y^2 \\
+             &amp;= (p_s x + (1-p_s)y)^2\\
+\xi_m(x,y,z) &amp;= p_m^2 y^2 + 2 p_m(1-p_m)yz + (1-p_m)z^2\\
+             &amp;= (p_m y + (1-p_m)z)^2\\
+\xi_e(x,y,z) &amp;= z
+\end{align*}\]</div>
+<p>If we begin with one stem cell, then the initial PGF is</p>
+<div class="math notranslate nohighlight">
+\[
+f_0(x,y,z)=x
+\]</div>
+<p>The PGF for generation <span class="math notranslate nohighlight">\(1\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+f_1(x,y,z) = \xi_s(x,y,z) = (p_s x + (1-p_s)y)^2
+\]</div>
+<p>We note that</p>
+<div class="math notranslate nohighlight">
+\[
+f_1(x,y,z) = f_0(\xi_s(x,y), \xi_m(y,z), \xi_e(z))
+\]</div>
+<p>and more generally</p>
+<div class="math notranslate nohighlight">
+\[
+f_{g+1}(x,y,z) = f_g(\xi_s(x,y), \xi_m(y,z), \xi_e(z))
+\]</div>
+<p>Iteration here starts to be difficult because we find <span class="math notranslate nohighlight">\(f_1\)</span> and then need to substitute in the function for <span class="math notranslate nohighlight">\(x,y,z\)</span>.  It is better to define</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\vec{\Phi}_{g+1}(x,y,z) &amp;= \left(\xi_s(\vec{\Phi}_g(x,y,z)), \xi_m(\vec{\Phi}_g(x,y,z)), \xi_e(\vec{\Phi}_g(x,y,z))\right)
+%\vec{\Phi}_{g+1}(x,y,z| (0,1,0)) &amp;= \left(\xi_s(\vec{\Phi}_g(x,y,z|(0,1,0))), \xi_m(\vec{\Phi}_g(x,y,z|(0,1,0))), \xi_e(x,y,z|(0,1.0))%\right)\\
+%\vec{\Phi}_{g+1}(x,y,z| (0,0,1)) &amp;= \left(\xi_s(\vec{\Phi}_g(x,y,z|(0,0,1))), \xi_m(\vec{\Phi}_g(x,y,z|(0,0,1))), \xi_e(x,y,z|(0,0,1))%\right)
+\end{align*}\]</div>
+<p>with</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\vec{\Phi}_0(x,y,z) &amp;= (x,y,z)
+\end{align*}\]</div>
+<p>This would then convert the <span class="math notranslate nohighlight">\(f_g(x,y,z)\)</span> above, which corresponds to one initial stem cell, into <span class="math notranslate nohighlight">\(f_{g}(x,y,z) = \mu_s(\vec{\Phi}_{g-1}(x,y,z))\)</span>.  Alternately, we can consider other initial conditions easily.</p>
+<section id="expected-size">
+<h3><span class="section-number">5.4.3.1. </span>Expected size<a class="headerlink" href="#expected-size" title="Link to this heading">#</a></h3>
+<p>Extending our earlier results the expected number at generation <span class="math notranslate nohighlight">\(g\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+\mathbb{E}[X_g|\vec{v}_0]\\
+\mathbb{E}[Y_g|\vec{v}_0]\\
+\mathbb{E}[Z_g|\vec{v}_0]
+\end{pmatrix} = M^g \vec{v}_0
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{v}_0  = \in\{ (1,0,0), (0,1,0), (0,0,1) \}\)</span> captures the the initial condition and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M = \begin{pmatrix} 
+2 p_s  &amp; 2(1-p_s) &amp; 0\\
+0 &amp; 2 p_m &amp; 2(1-p_m)\\
+0 &amp; 0 &amp; 1
+\end{pmatrix}
+\end{split}\]</div>
+<p>The triangular nature of this matrix allows makes it possible to calculate these analytically if desired.</p>
+</section>
+<section id="extinction-probability">
+<h3><span class="section-number">5.4.3.2. </span>Extinction probability<a class="headerlink" href="#extinction-probability" title="Link to this heading">#</a></h3>
+<p>We will define “extinction probability” to mean no stem or mast cells.  We study the reduced model of just stem and mast cells (which corresponds to setting <span class="math notranslate nohighlight">\(z=1\)</span>).</p>
+<p>We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\xi_s(x,y) &amp;= p_s^2 x^2 + 2 p_s(1-p_s) xy + (1-p_s)y^2 \\
+             &amp;= (p_s x + (1-p_s)y)^2\\
+\xi_m(x,y) &amp;= p_m^2 y^2 + 2 p_m(1-p_m)y + (1-p_m)\\
+             &amp;= (p_m y + (1-p_m))^2\\
+\end{align*}\]</div>
+<p>Following our earlier calculation of extinction probabilities, we define <span class="math notranslate nohighlight">\(\vec{\alpha}(g) = (\alpha(g|(1,0)), \alpha(g|(0,1)))\)</span> to be a vector of extinction probaiblities given that the inital cell is a stem or mast cell.  Then by <a class="reference internal" href="MultiTypeGWGenBased.html#thm-TwoTypeExtinct">Theorem 5.5</a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\alpha}(g)= (\alpha_s(g), \alpha_m(g)) = \left(\xi_s(\vec{\alpha}(g-1)), \quad\xi_m(\vec{\alpha}(g-1))\right)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\vec{\alpha}(0) = (0,0)\)</span>.  Due to the dependence of <span class="math notranslate nohighlight">\(\xi_m\)</span> on only <span class="math notranslate nohighlight">\(y\)</span>, we can see that</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_m(g) = (p_m \alpha_m(g-1) + (1-p_m))^2
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha_m(0)=0\)</span>.  Taking the limit <span class="math notranslate nohighlight">\(g \to \infty\)</span> and setting <span class="math notranslate nohighlight">\(\alpha_m = \lim_{g\to\infty} \alpha_m(g)\)</span> we know</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\alpha_m &amp;= p_m^2 \alpha_m^2 + 2p_m(1-p_m)\alpha_m + (1-p_m)^2\\
+\Rightarrow 0 &amp;= p_m^2\alpha_m^2 + (-1 + 2p_m-2p_m^2) \alpha_m + (1-p_m)^2\\
+\Rightarrow 0 &amp;= \alpha_m^2 + \frac{-1+2p_m-2p_m^2}{p_m^2}\alpha_m + \frac{(1-p_m)^2}{p_m^2}
+\end{align*}\]</div>
+<p>One root of this must be <span class="math notranslate nohighlight">\(\alpha_m=1\)</span> (WHY??).  We want the other root.  Guided by the fact that <span class="math notranslate nohighlight">\(\alpha_m-1\)</span> factors this, we find</p>
+<div class="math notranslate nohighlight">
+\[
+0  = (\alpha_m-1)\left(\alpha_m- \frac{(1-p_m)^2}{p_m^2}\right)
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(p_m\leq 0.5\)</span> then this other root is <span class="math notranslate nohighlight">\(\geq 1\)</span>.<br />
+So the extinction probability starting from a mast cell is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\alpha_m = \begin{cases} 1 &amp; 0 \leq p_m \leq 05\\
+            \left( \frac{1-p_m}{p_m}\right)^2 &amp; 0.5&lt;p_m \leq 1
+            \end{cases}
+\end{split}\]</div>
+<p>Turning now to <span class="math notranslate nohighlight">\(\alpha_s = \lim_{g\to\infty} \alpha_s(g)\)</span> and using the now known value of <span class="math notranslate nohighlight">\(\alpha_m\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha_s = p_s^2 \alpha_s^2 + 2p_s(1-p_s) \alpha_s \alpha_m + (1-p_s)^2 \alpha_m^2
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(\alpha_m=1\)</span>, then this is equivalent to the equation we already solved for <span class="math notranslate nohighlight">\(\alpha_m\)</span>.  Otherwise <span class="math notranslate nohighlight">\(\alpha_m = \left(\frac{1-p_m}{p_m}\right)^2\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+0 = \alpha_s^2 + \frac{2 p_s(1-p_s)\left(\frac{1-p_m}{p_m}\right)^2- 1}{p_s^2} \alpha_s + \frac{(1-p_s)^2 \alpha_m^2}{p_s^2}
+\]</div>
+<p>This can be solved using the quadratic formula</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\alpha_s = \begin{cases} 1 &amp; 0 \leq p_s \leq 0.5 , \: 0 \leq p_m \leq 0.5\\
+      \left(\frac{1-p_s}{p_s}\right)^2 &amp; 0.5 &lt; p_s \leq 1\\
+      \frac{1}{2p_s^2} - \frac{1-p_s}{p_s}\left(\frac{1-p_m}{p_m}\right)^2 - \frac{1}{p_s} \sqrt{\frac{1}{4p_s^2} - \frac{1-p_s}{p_s}\left(\frac{1-p_m}{p_m}\right)^2} &amp; 0 &lt; p_s \leq 1 , \: 0.5\leq p_m \leq 1\\ 
+\end{cases}
+\end{split}\]</div>
+</section>
+<section id="colony-size-at-completion">
+<h3><span class="section-number">5.4.3.3. </span>Colony size at completion<a class="headerlink" href="#colony-size-at-completion" title="Link to this heading">#</a></h3>
+<p>A quantity that can be measured reasonably easily for colonies that stop growth is the number of end cells at completion.  This is useful to estimate parameters in the model.  We can numerically calculate the probablity of a final size <span class="math notranslate nohighlight">\(Z=\ell\)</span> by first calculating <span class="math notranslate nohighlight">\(\lim_{g\to\infty} \vec{\Phi}_g(0,0,z)\)</span> which gives the generating function <span class="math notranslate nohighlight">\(\sum_{\ell=0}^\infty p_{0,0,\ell}z^\ell\)</span> for those cases that terminate.  Then using a Cauchy integral (which may need to careful if the extinction probability is less than <span class="math notranslate nohighlight">\(1\)</span>) we could numerically estimate the value.</p>
+<p>Remarkably though, this can be calculated exactly.</p>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Omega_s(\theta) = \sum_\ell q_\ell(s) \theta^\ell\)</span> be the PGF for the final size if the initial cell is a stem cell,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Omega_m(\theta) = \sum_\ell q_\ell(m) \theta^\ell\)</span> be the PGF if the initial cell is a mast cell, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Omega_e(\theta) = \theta\)</span> be the PGF if the initial cell is an end cell.</p></li>
+</ul>
+<p>Then we can conclude recursively that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Omega_s(\theta) &amp;= \xi_s(\Omega_s(\theta),\Omega_m(\theta),0)\\
+\Omega_m(\theta) &amp;= \xi_m(0 , \Omega_m(\theta), \Omega_e(\theta))\\
+\Omega_e(\theta) &amp;= \theta
+\end{align*}\]</div>
+<p>From the equation for <span class="math notranslate nohighlight">\(\Omega_m(\theta)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_{\ell=0}^\infty q_\ell(m) \theta^\ell &amp;= (p_m\psi_m(\theta) + (1-p_m)\theta)^2\\
+&amp;= p_m^2 \left[ \sum_{\ell} q_\ell(m) \theta^\ell\right]^2 + 2 p_m(1-p_m) \sum_\ell q_\ell(m)\theta^{\ell+1} + (1-p_m)^2 \theta^2\\
+&amp;= p_m^2 \left[ \sum_j q_j(m) \theta^j\right]\left[ \sum_k q_k(m) \theta^k\right] + 2 p_m(1-p_m) \sum_\ell q_\ell(m)\theta^{\ell+1} + (1-p_m)^2 \theta^2\\
+&amp;= p_m^2 \sum_{\ell=0}^\infty \sum_{j+k=\ell} q_j(m)q_{k}(m) \theta^\ell + 2p_m(1-p_m) \sum_\ell q_\ell(m) \theta^{\ell+1} + (1-p_m)^2 \theta^2\\
+&amp;=p_m^2 \sum_{\ell=0}^\infty \sum_{j=0}^\ell q_j(m)q_{\ell-j}(m) \theta^\ell + 2p_m(1-p_m) \sum_{\ell=0}^\infty q_\ell(m) \theta^{\ell+1} + (1-p_m)^2 \theta^2
+\end{align*}\]</div>
+<p>It is not possible to end with <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> end cells if starting with one mast cell.  So <span class="math notranslate nohighlight">\(q_0(m)=q_1(m)=0\)</span>.  Then for <span class="math notranslate nohighlight">\(\ell = 2\)</span> matching coefficients of <span class="math notranslate nohighlight">\(\theta^2\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[
+q_2(m) = (1-p_m)^2
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(\ell&gt;2\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+q_\ell(m) = \sum_{j=2}^{\ell-2} q_j(m) q_{\ell-j}(m) + 2 p_m (1-p_m) q_{\ell-1}(m)
+\]</div>
+<p>Repeating this process with <span class="math notranslate nohighlight">\(\psi_s(\theta)\)</span> can be used to find the final size of the colony if it stops growing.</p>
+</section>
+<section id="colony-size-if-complete-by-generation-g">
+<h3><span class="section-number">5.4.3.4. </span>Colony size if complete by generation <span class="math notranslate nohighlight">\(g\)</span><a class="headerlink" href="#colony-size-if-complete-by-generation-g" title="Link to this heading">#</a></h3>
+<figure class="align-default" id="fig-mackenperelsonfinalsizeclaim">
+<a class="reference internal image-reference" href="../../_images/MackenPerelsonFinalSizeClaim.png"><img alt="../../_images/MackenPerelsonFinalSizeClaim.png" src="../../_images/MackenPerelsonFinalSizeClaim.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Quote from Macken and Perelson about the importance of estimating the probability of completion at a given size by a particular generation.  (In their notation, <span class="math notranslate nohighlight">\(Pr(Z_n=(0,0,k)|Z_0)\)</span> is the probability of extinction with size <span class="math notranslate nohighlight">\(k\)</span> at generation <span class="math notranslate nohighlight">\(n\)</span>).</span><a class="headerlink" href="#fig-mackenperelsonfinalsizeclaim" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To find the colony size if it goes extinct by generation <span class="math notranslate nohighlight">\(g\)</span> for different initial condtions, we can calculate <span class="math notranslate nohighlight">\(\vec{\Phi}_g(0,0,z)\)</span> and using Caucy integrals to calculate the coefficients of the components <span class="math notranslate nohighlight">\(\xi_s(\vec{\Phi}_{g-1}(0,0,z))\)</span> and <span class="math notranslate nohighlight">\(\xi_m(\vec{\Phi}_{g-1}(0,0,z))\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.usetex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">xi_s</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p_s</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">p_s</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">xi_m</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_m</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p_m</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">p_m</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">iterate_vector_phi_on_roots_of_unity</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">p_s</span><span class="p">,</span> <span class="n">p_m</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    vec{Phi}_{t+1}(z) = (xi_s(Phi_t), xi_m(Phi_t), z)</span>
+<span class="sd">    with Phi_0(z) = (0,0,z), evaluated on roots of unity z_m = exp(2π i m/M).</span>
+
+<span class="sd">    Returns Phi_s_vals (M,), Phi_m_vals (M,).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">m</span> <span class="o">/</span> <span class="n">M</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="n">Phi_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">Phi_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">Phi_e</span> <span class="o">=</span> <span class="n">z</span>  <span class="c1"># always z</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+        <span class="n">Phi_s_new</span> <span class="o">=</span> <span class="n">xi_s</span><span class="p">(</span><span class="n">Phi_s</span><span class="p">,</span> <span class="n">Phi_m</span><span class="p">,</span> <span class="n">Phi_e</span><span class="p">,</span> <span class="n">p_s</span><span class="p">)</span>
+        <span class="n">Phi_m_new</span> <span class="o">=</span> <span class="n">xi_m</span><span class="p">(</span><span class="n">Phi_s</span><span class="p">,</span> <span class="n">Phi_m</span><span class="p">,</span> <span class="n">Phi_e</span><span class="p">,</span> <span class="n">p_m</span><span class="p">)</span>
+        <span class="n">Phi_s</span><span class="p">,</span> <span class="n">Phi_m</span> <span class="o">=</span> <span class="n">Phi_s_new</span><span class="p">,</span> <span class="n">Phi_m_new</span>
+
+    <span class="k">return</span> <span class="n">Phi_s</span><span class="p">,</span> <span class="n">Phi_m</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">coeffs_from_samples</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    If samples are f(z_m) for z_m = exp(2π i m/M), then</span>
+<span class="sd">        a_k = (1/M) * sum_m f(z_m) z_m^{-k}</span>
+<span class="sd">    is given by:</span>
+<span class="sd">        a = FFT(samples) / M</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">/</span> <span class="n">M</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">[:</span><span class="n">K</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_to_real</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+    <span class="c1"># zero tiny values (both real/imag)</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="c1"># drop tiny imaginary parts if they are just roundoff</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">imag</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">tol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">real</span>
+    <span class="k">return</span> <span class="n">a</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_first_K_coeffs_over_g</span><span class="p">(</span><span class="n">gmax</span><span class="p">,</span> <span class="n">p_s</span><span class="p">,</span> <span class="n">p_m</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For g = 0..gmax, compute first K coefficients of Phi_s,g and Phi_m,g.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        coeffs_s: shape (gmax+1, K)</span>
+<span class="sd">        coeffs_m: shape (gmax+1, K)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coeffs_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">coeffs_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">Phi_s_vals</span><span class="p">,</span> <span class="n">Phi_m_vals</span> <span class="o">=</span> <span class="n">iterate_vector_phi_on_roots_of_unity</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">p_s</span><span class="p">,</span> <span class="n">p_m</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+
+        <span class="n">a_s</span> <span class="o">=</span> <span class="n">clean_to_real</span><span class="p">(</span><span class="n">coeffs_from_samples</span><span class="p">(</span><span class="n">Phi_s_vals</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+        <span class="n">a_m</span> <span class="o">=</span> <span class="n">clean_to_real</span><span class="p">(</span><span class="n">coeffs_from_samples</span><span class="p">(</span><span class="n">Phi_m_vals</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+
+        <span class="c1"># If still complex (shouldn&#39;t be), store real part</span>
+        <span class="n">coeffs_s</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">a_s</span><span class="p">)</span>
+        <span class="n">coeffs_m</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">a_m</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">coeffs_s</span><span class="p">,</span> <span class="n">coeffs_m</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_coeffs_vs_g</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    coeffs has shape (gmax+1, K). Plot each k=0..K-1 as a curve vs g.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">coeffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gvals</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">[:,</span> <span class="n">k</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># -----------------------------</span>
+    <span class="c1"># User-set parameters</span>
+    <span class="c1"># -----------------------------</span>
+    <span class="n">p_s</span> <span class="o">=</span> <span class="mf">0.7</span>
+    <span class="n">p_m</span> <span class="o">=</span> <span class="mf">0.4</span>
+
+    <span class="n">gmax</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="c1"># M must be &gt; max degree you want without wrap-around.</span>
+    <span class="c1"># Since you only want first K=10 coefficients, just make M comfortably larger.</span>
+    <span class="c1"># A power of 2 is convenient for FFT.</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">14</span>  <span class="c1"># 16384 is plenty for K=10</span>
+
+    <span class="n">coeffs_s</span><span class="p">,</span> <span class="n">coeffs_m</span> <span class="o">=</span> <span class="n">compute_first_K_coeffs_over_g</span><span class="p">(</span><span class="n">gmax</span><span class="o">=</span><span class="n">gmax</span><span class="p">,</span> <span class="n">p_s</span><span class="o">=</span><span class="n">p_s</span><span class="p">,</span> <span class="n">p_m</span><span class="o">=</span><span class="n">p_m</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">)</span>
+
+    <span class="c1"># -----------------------------</span>
+    <span class="c1"># Plots</span>
+    <span class="c1"># -----------------------------</span>
+    <span class="n">plot_coeffs_vs_g</span><span class="p">(</span>
+        <span class="n">coeffs_s</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;First </span><span class="si">{</span><span class="n">K</span><span class="si">}</span><span class="s2"> coefficients of $\Phi_s$ vs $g$ (p_s=</span><span class="si">{</span><span class="n">p_s</span><span class="si">}</span><span class="s2">, p_m=</span><span class="si">{</span><span class="n">p_m</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\left[z^k\right]\Phi_{s,g}(z)$&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">plot_coeffs_vs_g</span><span class="p">(</span>
+        <span class="n">coeffs_m</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;First </span><span class="si">{</span><span class="n">K</span><span class="si">}</span><span class="s2"> coefficients of $\Phi_m$ vs $g$ (p_s=</span><span class="si">{</span><span class="n">p_s</span><span class="si">}</span><span class="s2">, p_m=</span><span class="si">{</span><span class="n">p_m</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$[z^k]\Phi_{m,g}(z)$&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -550,12 +1123,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="MultiTypePGFs.html"
+       href="MultiTypeGWCtsTime.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5.1. </span>Multivariate Probability Generating Functions</p>
+        <p class="prev-next-title"><span class="section-number">5.3. </span>Continuous-time framework</p>
       </div>
     </a>
     <a class="right-next"
@@ -573,6 +1146,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-till-model">5.4.1. The Till model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vogel-model">5.4.2. Vogel Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macken-perelson">5.4.3. Macken-Perelson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size">5.4.3.1. Expected size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability">5.4.3.2. Extinction probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colony-size-at-completion">5.4.3.3. Colony size at completion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colony-size-if-complete-by-generation-g">5.4.3.4. Colony size if complete by generation <span class="math notranslate nohighlight">\(g\)</span></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

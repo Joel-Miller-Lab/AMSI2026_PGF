@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.2. MultiType Galton-Watson processes: Generation-based framework &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/MultiType/MultiTypeGWGenBased';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.3. Continuous-time framework" href="MultiTypeGWCtsTime.html" />
+    <link rel="prev" title="5.1. Multivariate Probability Generating Functions" href="MultiTypePGFs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Probability Generating Functions and Biological Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../GaltonWatson/GaltWat.html">2. The Galton-Watson Process</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at Successive Generations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Small outbreaks in large populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisHetMeanField.html">4.7. SIR disease in Heterogeneous Populations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="MultiTypeIntro.html">5. Introduction to MultiType Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MultiTypePGFs.html">5.1. Multivariate Probability Generating Functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5.2. MultiType Galton-Watson processes: Generation-based framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiTypeGWCtsTime.html">5.3. Continuous-time framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StemCells.html">5.4. Stem Cells</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">6. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">6.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">6.2. Computer-based exploration of Galton-Watson Processes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">7. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">7.1. Probability Generating Functions, Practical Class 1.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac2.html">7.2. Probability Generating Functions, Practical Class 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac3.html">7.3. Probability Generating Functions, Practical Class 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Assignments/AssignmentsIntro.html">8. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst1.html">8.1. Assignment 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst2.html">8.2. Assignment 2</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/main?urlpath=lab/tree/AMSI_2026_PGF_text/notebooks/MultiType/MultiTypeGWGenBased.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/MultiType/MultiTypeGWGenBased.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MultiType/MultiTypeGWGenBased.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/MultiType/MultiTypeGWGenBased.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>MultiType Galton-Watson processes: Generation-based framework</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-pgf">5.2.1. Joint PGF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-approach">5.2.1.1. Backward approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-approach">5.2.1.2. Forward Approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability">5.2.2. Extinction Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size">5.2.3. Expected size</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="multitype-galton-watson-processes-generation-based-framework">
+<h1><span class="section-number">5.2. </span>MultiType Galton-Watson processes: Generation-based framework<a class="headerlink" href="#multitype-galton-watson-processes-generation-based-framework" title="Link to this heading">#</a></h1>
+<p>Consider a Galton-Watson process with two types, in which we think of offspring as occuring in discrete generations.  In principle, each type may have some number of offspring of either type.</p>
+<p>We use</p>
+<div class="math notranslate nohighlight">
+\[
+\xi_1(x,y) = \sum_{j=0}^\infty \sum_{k=0}^\infty p_{j,k}x^jy^k
+\]</div>
+<p>to denote the offspring distribution of the first type and</p>
+<div class="math notranslate nohighlight">
+\[
+\xi_2(x,y) = \sum_{j=0}^\infty \sum_{k=0}^\infty q_{j,k}x^jy^k
+\]</div>
+<p>to denote the offspring distribution of the second type.</p>
+<section id="joint-pgf">
+<h2><span class="section-number">5.2.1. </span>Joint PGF<a class="headerlink" href="#joint-pgf" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\((X_g,Y_g)\)</span> represent <span class="math notranslate nohighlight">\(X_g\)</span> individuals of the first type and <span class="math notranslate nohighlight">\(Y_g\)</span> individuals of the second type at generation <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>We assume that the process begins with a single individual of one of the two types.  The PGF of the distribution at generation <span class="math notranslate nohighlight">\(g\)</span> given a single initial individual of the first type is written</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_g(x,y|(1,0)) = \sum_{j,k} p_{j,k}(g) x^jy^k
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+p_{j,k}(g)=\mathbb{P}[X_g=j, Y_g=k | X_0=1, Y_0=0]
+\]</div>
+<p>Similarly we write the PGF given a single individual of the second type</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_g(x,y|(0,1)) = \sum_{j,k} q_{j,k}(g) x^jy^k
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+q_{j,k}(g)=\mathbb{P}[X_g=j, Y_g=k | X_0=0, Y_0=1]
+\]</div>
+<p>This notation <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> overlaps with the coefficients listed for <span class="math notranslate nohighlight">\(\xi_1\)</span> and <span class="math notranslate nohighlight">\(\xi_2\)</span>.  We will see that in terms of the coefficients of the PGFs <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span>, we have <span class="math notranslate nohighlight">\(p_{j,k}(1) = p_{j,k}\)</span> and <span class="math notranslate nohighlight">\(q_{j,k}(1)=q_{j,k}\)</span>.</p>
+<p>We use <span class="math notranslate nohighlight">\(\vec{\Phi}_g(x,y)\)</span> to denote <span class="math notranslate nohighlight">\(\left(\Phi_g(x,y|(1,0)), \quad\Phi_g(x,y|(0,1))\right)\)</span>.  We find that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_1(x,y|(1,0)) &amp;= \xi_1(x,y)\\
+\Phi_2(x,y|(0,1)) &amp;= \xi_2(x,y)
+\end{align*}\]</div>
+<p>So</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_1(x,y) = (\xi_1(x,y), \xi_2(x,y))
+\]</div>
+<p>As commented above, this gives that <span class="math notranslate nohighlight">\(p_{j,k}(1) = p_{j,k}\)</span> and <span class="math notranslate nohighlight">\(q_{j,k}(1) = q_{j,k}\)</span>.</p>
+<p>To go to higher generations we have two options.</p>
+<section id="backward-approach">
+<h3><span class="section-number">5.2.1.1. </span>Backward approach<a class="headerlink" href="#backward-approach" title="Link to this heading">#</a></h3>
+<p>Our first method resembles the Backward Kolmogorov Equation derivation.  We consider first <span class="math notranslate nohighlight">\(\Phi_{g+1}(x,y|(1,0))\)</span>.  We know that the PGF for generation <span class="math notranslate nohighlight">\(1\)</span> from this initial state is <span class="math notranslate nohighlight">\(\Phi_{1}(x,y|(1,0)) = \xi_1(x,y)\)</span>.  That is, the joint distribution of <span class="math notranslate nohighlight">\(X_1, Y_1\)</span>, the numbers of each type at generation <span class="math notranslate nohighlight">\(1\)</span> has PGF <span class="math notranslate nohighlight">\(\Phi_1(x,y|(1,0))\)</span>.  Each individual of type <span class="math notranslate nohighlight">\(1\)</span> produces a number of descendents <span class="math notranslate nohighlight">\(g\)</span> generations later (<em>i.e.,</em> at generation g+1) whose PGF is <span class="math notranslate nohighlight">\(\Phi_{g}(x,y|(1,0))\)</span>.  Similarly each individual of type <span class="math notranslate nohighlight">\(2\)</span> produces a number whose PGF is <span class="math notranslate nohighlight">\(\Phi_g(x,y|(0,1))\)</span>.  Taking the randomly-stopped sum of offspring from <span class="math notranslate nohighlight">\(X_1\)</span> individuals of type <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(Y_1\)</span> individuals of type <span class="math notranslate nohighlight">\(2\)</span> yields the PGF</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_{g+1}(x,y|(1,0)) &amp;= \xi_1\left(\Phi_{g}(x,y|(1,0)),\quad \Phi_{g}(x,y|(0,1))\right)\\
+&amp;= \xi_1(\vec{\Phi}_{g-1}(x,y))
+\end{align*}\]</div>
+<p>and similarly <span class="math notranslate nohighlight">\(\Phi_g(x,y|(0,1)) = \xi_2(\vec{\Phi}_{g-1}(x,y))\)</span>.  Thus we can recursively define</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_g(x,y) = \left(\xi_1(\vec{\Phi}_{g-1}(x,y)), \quad \xi_2(\vec{\Phi}_{g-1}(x,y))\right)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\vec{\Phi}_0(x,y) = (x,y)\)</span>.</p>
+<p>In particular, this means that</p>
+<div class="proof theorem admonition" id="thm-BackwardTwoTypeGenBased">
+<p class="admonition-title"><span class="caption-number">Theorem 5.3 </span> (PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Backward version))</p>
+<section class="theorem-content" id="proof-content">
+<p>Given a two-type Galton-Watson process, with offspring distributions <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span>, the PGFs for the distribution at generation <span class="math notranslate nohighlight">\(g\)</span> can be found by recursively solving</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_{g+1}(x,y) = \left(\xi_1(\vec{\Phi}_{g}(x,y)),\quad \xi_2(\vec{\Phi}_{g}(x,y))\right)
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_0(x,y) = (x,y) 
+\]</div>
+</section>
+</div><div class="proof example admonition" id="example-IRJointDistBackward">
+<p class="admonition-title"><span class="caption-number">Example 5.1 </span> (Joint distribution of number infected or recovered at generation <span class="math notranslate nohighlight">\(g\)</span>)</p>
+<section class="example-content" id="proof-content">
+<p>Assume that an outbreak begins with a single infected individual in a large enough population that we can assume the Galton-Watson assumptions hold at least through generation <span class="math notranslate nohighlight">\(g\)</span>.  We let <span class="math notranslate nohighlight">\(p_{j,k}(g)\)</span> denote the probability of <span class="math notranslate nohighlight">\(j\)</span> active infections and <span class="math notranslate nohighlight">\(k\)</span> recoveries by generation <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>Assume also that the number of infections for the next generation caused by an infected individual has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  The infected individual recovers at the next generation, producing one recovered individual.  So the PGF for the offspring distribution counting infections and recoveries at the next generations is <span class="math notranslate nohighlight">\(\xi_1(x,y) = y\mu(x)\)</span>.</p>
+<p>A recovered individual at one generation remains a recovered individual at the next generation, so <span class="math notranslate nohighlight">\(\xi_2(x,y)=y\)</span>.</p>
+<p>Thus <span class="math notranslate nohighlight">\(\vec{\Phi}_g(x,y) = \left(\xi_1(\vec{\Phi}_{g-1}(x,y)),\quad \mu_2(\vec{\Phi}_{g-1}(x,y))\right)\)</span>.  Looking at the first few generations, taking <span class="math notranslate nohighlight">\(\xi_1(x,y) = y\mu(x)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)=y\)</span> we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\vec{\Phi}_0(x,y) &amp;= (x,y)\\
+\vec{\Phi}_1(x,y) &amp;= \left(\xi_1(\vec{\Phi}_0(x,y)),\quad \xi_2(\vec{\Phi}_0(x,y))\right)\\
+                  &amp;= (\xi_1(x,y),\xi_2(x,y))\\
+                  &amp;= (y\mu(x),y)\\
+\vec{\Phi}_2(x,y) &amp;= \left(\xi_1(\vec{\Phi}_1(x,y)),\quad \xi_2(\vec{\Phi}_1(x,y))\right)\\
+                  &amp;= \left(\xi_1(y\mu(x),y),\quad \xi_2(y \mu(x),y)\right)\\
+                  &amp;= (y \mu(y\mu(x)), \quad y)\\
+&amp; \: \vdots 
+\end{align*}\]</div>
+<p>So <span class="math notranslate nohighlight">\(\Phi_g(x,y|(1,0)) = y \mu\left(\Phi_{g-1}(x,y|(1,0))\right)\)</span>.</p>
+<p>If we want the PGF of the number recovered at generation <span class="math notranslate nohighlight">\(g\)</span>, we have <span class="math notranslate nohighlight">\(\Phi_g(1,y|(1,0)) = y \mu(\Phi_{g-1}(1,y|(1,0)))= y\mu(y\mu(\cdots y\mu(1) \cdots))\)</span>.</p>
+</section>
+</div></section>
+<section id="forward-approach">
+<h3><span class="section-number">5.2.1.2. </span>Forward Approach<a class="headerlink" href="#forward-approach" title="Link to this heading">#</a></h3>
+<p>The second method resembles the Forward Kolmogorov Equation derivation.  We consider first <span class="math notranslate nohighlight">\(\Phi_{g+1}(x,y|(1,0))\)</span>.  We know that the PGF for generation <span class="math notranslate nohighlight">\(g\)</span> is <span class="math notranslate nohighlight">\(\Phi_g(x,y|(1,0))\)</span>.  This means that the joint distribution of <span class="math notranslate nohighlight">\(X_g,Y_g\)</span>, the numbers of each type at generation <span class="math notranslate nohighlight">\(g\)</span> has PGF <span class="math notranslate nohighlight">\(\Phi_g(x,y|(1,0))\)</span>.  Each of these produces a random number at generation <span class="math notranslate nohighlight">\(g+1\)</span> whose PGFs are <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span> for type <span class="math notranslate nohighlight">\(1\)</span> or type <span class="math notranslate nohighlight">\(2\)</span> respectively.  Thus the PGF for the randomly-stopped sum of offspring from <span class="math notranslate nohighlight">\(X_g\)</span> individuals of type <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(Y_g\)</span> of type <span class="math notranslate nohighlight">\(2\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_{g+1}(x,y|(1,0)) = \Phi_g(\xi_1(x,y), \xi_2(x,y) | (1,0))
+\]</div>
+<p>Symmetrically appling this to <span class="math notranslate nohighlight">\(\Phi_g(x,y|(0,1))\)</span> we conclude</p>
+<div class="proof theorem admonition" id="example-IRJointDistForward">
+<p class="admonition-title"><span class="caption-number">Theorem 5.4 </span> (PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Forward version))</p>
+<section class="theorem-content" id="proof-content">
+<p>Given a two-type Galton-Watson process, with offspring distributions <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span>, the PGFs for the distribution at generation <span class="math notranslate nohighlight">\(g\)</span> can be found by recursively solving</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_{g+1}(x,y) = \vec{\Phi}_g(\xi_1(x,y), \xi_2(x,y))
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_0(x,y) = (x,y)
+\]</div>
+</section>
+</div><div class="proof example admonition" id="example-IRJointDistForward">
+<p class="admonition-title"><span class="caption-number">Example 5.2 </span> (Joint distribution of number infected or recovered at generation <span class="math notranslate nohighlight">\(g\)</span>)</p>
+<section class="example-content" id="proof-content">
+<p>Assume that an outbreak begins with a single infected individual in a large enough population that we can assume the Galton-Watson assumptions hold at least through generation <span class="math notranslate nohighlight">\(g\)</span>.  We let <span class="math notranslate nohighlight">\(p_{j,k}(g)\)</span> denote the probability of <span class="math notranslate nohighlight">\(j\)</span> active infections and <span class="math notranslate nohighlight">\(k\)</span> recoveries by generation <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>Assume also that the number of infections for the next generation caused by an infected individual has PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  The infected individual recovers at the next generation, producing one recovered individual.  So the PGF for the offspring distribution counting infections and recoveries at the next generations is <span class="math notranslate nohighlight">\(\xi_1(x,y) = y\mu(x)\)</span>.</p>
+<p>A recovered individual at one generation remains a recovered individual at the next generation, so <span class="math notranslate nohighlight">\(\xi_2(x,y)=y\)</span>.</p>
+<p>Thus <span class="math notranslate nohighlight">\(\vec{\Phi}_g(x,y) = \vec{\Phi}_{g-1}(\xi_1(x,y),\xi_2(x,y)) = \vec{\Phi}_{g-1}(y\mu(x),y)\)</span> with <span class="math notranslate nohighlight">\(\Phi_0(x,y) = (x,y)\)</span>.  We conclude</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\vec{\Phi}_0(x,y) &amp;= (x,y)\\
+\vec{\Phi}_1(x,y) &amp;= \vec{\Phi}_0\left(\xi_1(x,y),\quad\xi_2(x,y)\right)\\
+                  &amp;= \vec{\Phi}_0(y\mu(x), y)\\
+                  &amp;= (y \mu(x), y)\\
+\vec{\Phi}_2(x,y) &amp;= \vec{\Phi}_1\left(\xi_1(x,y),\quad\xi_2(x,y)\right)\\
+                  &amp;= \vec{\Phi}_1(y \mu(x),y)\\
+                  &amp;= (y \mu(y\mu(x)), y)\\
+                  &amp; \:\vdots
+\end{align*}\]</div>
+<p>So <span class="math notranslate nohighlight">\(\Phi_{g}(x,y|(1,0)) = \Phi_{g-1}(\mu(x),y|(1,0))  = y\mu(y\mu(\cdots y\mu(x,y) \cdots))\)</span>.</p>
+</section>
+</div></section>
+</section>
+<section id="extinction-probability">
+<h2><span class="section-number">5.2.2. </span>Extinction Probability<a class="headerlink" href="#extinction-probability" title="Link to this heading">#</a></h2>
+<p>In this context, extinction can have multiple meanings.  We may mean extinction of either type or extinction of both types.</p>
+<p>We begin by thinking of extinction of both types.  We assume, without loss of generatlity that the outbreak begins with a single individual of type <span class="math notranslate nohighlight">\(1\)</span>.  If <span class="math notranslate nohighlight">\(\Phi_g(x,y|(1,0)) = \sum_{j,k} p_{j,k} x^jy^k\)</span> then the probability that both types are extinct by generation <span class="math notranslate nohighlight">\(g\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[\text{extinction of both types by generation $g$}|(1,0)] &amp;= p_{0,0}(g)\\ 
+&amp;= \sum_{j,k} p_{j,k}0^j0^k\\
+&amp;= \Phi_g(0,0|(1,0))
+\end{align*}\]</div>
+<p>and similarly given the initial individual being of type <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p>Using the Backward framework, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_g(0,0)= \left(\xi_1(\vec{\Phi}_{g-1}(0,0)), \quad \xi_2(\vec{\Phi}_{g-1}(0,0))\right)
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(\vec{\alpha}(g) = \vec{\Phi}_g(0,0)\)</span>,
+this can be solved iteratively:</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\alpha}(g) = \left(\xi_1(\vec{\alpha}(g-1)), \quad\xi_2(\vec{\alpha}(g-1))\right)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\vec{\alpha}(0) = (0,0)\)</span>.</p>
+<p>Using the Forward framework, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\vec{\Phi}_g(0,0) &amp;= \vec{\Phi}_{g-1}\left(\xi_1(0,0), \xi_2(0,0)\right)\\
+       &amp;= \vec{\Phi}_{g-1}(p_{0,0}, q_{0,0})
+\end{align*}\]</div>
+<p>This cannot be solved iteratively.</p>
+<div class="proof theorem admonition" id="thm-TwoTypeExtinct">
+<p class="admonition-title"><span class="caption-number">Theorem 5.5 </span> (Probability of complete extinction of two-type Galton-Watson Process)</p>
+<section class="theorem-content" id="proof-content">
+<p>The probabilities of extinction of both types by generation <span class="math notranslate nohighlight">\(g\)</span>, depending on initial condition is
+<span class="math notranslate nohighlight">\(\vec{\alpha}(g) = (\alpha(g|(1,0)), \alpha(g|(0,1)))\)</span>.  This is found by
+iteratively solving</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\alpha}(g)= \left(\xi_1(\vec{\alpha}(g-1)), \quad\xi_2(\vec{\alpha}(g-1))\right)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\vec{\alpha}(0) = (0,0)\)</span>.</p>
+</section>
+</div><p><strong>Note - I want to come back to this following bit about 1 type going extinct — but I want to wait until I see if it’s really a useful result for later applications</strong></p>
+<p>If we just want the extinction of one type, we restrict our attention to the case where the other type has only itself for offspring.  That is, we do not consider extinction of just one type if it could reappear as offspring of the other type.  So we assume that if we are interested in extinction of type <span class="math notranslate nohighlight">\(1\)</span>, we must have <span class="math notranslate nohighlight">\(\xi_2(x,y) = \sum_{j,k} q_{j,k} x^j y^k\)</span> is independent of <span class="math notranslate nohighlight">\(x\)</span>.  So <span class="math notranslate nohighlight">\(q_{j,k} = 0\)</span> for any <span class="math notranslate nohighlight">\(j&gt;0\)</span>.  We write <span class="math notranslate nohighlight">\(\xi_2(x,y) =\xi_2(y)= \sum_{k} q_{0,k} y^k\)</span></p>
+<p>In this case we want to find <span class="math notranslate nohighlight">\(\vec{\Phi}_g(0,y)\)</span>.  Again the backward version is more useful.  We know that if the initial individual is of type <span class="math notranslate nohighlight">\(2\)</span> then type <span class="math notranslate nohighlight">\(1\)</span> is immediately extinct and remains extinct.  Thus setting <span class="math notranslate nohighlight">\(\alpha(g;1)\)</span> to be the extinction probability of type <span class="math notranslate nohighlight">\(1\)</span> if the initial individual is of type <span class="math notranslate nohighlight">\(1\)</span> we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\alpha &amp;= \Phi_g(0,y|(1,0))\\
+  &amp;= \xi_1(\alpha(g-1;1),1)
+\end{align*}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha(0;1)=0\)</span>.</p>
+<div class="proof theorem admonition" id="thm-TwoTypeHalfExtinct">
+<p class="admonition-title"><span class="caption-number">Theorem 5.6 </span> (Probability of extinction of one type in a two-type Galton-Watson Process)</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span> can be written <span class="math notranslate nohighlight">\(\xi_2(y)\)</span>, then the probabilities of extinction of type <span class="math notranslate nohighlight">\(1\)</span> by generation <span class="math notranslate nohighlight">\(g\)</span> assuming an initial individual of type <span class="math notranslate nohighlight">\(1\)</span> is <span class="math notranslate nohighlight">\(\alpha(g;1)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha(g;1) = \xi_1(\alpha(g-1;1),1)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha(0;1) = 0\)</span>.</p>
+<p>The symmetric result holds for <span class="math notranslate nohighlight">\(\alpha(g;2)\)</span>, the probability that the second type goes extinct assuming that <span class="math notranslate nohighlight">\(\xi_1(x,y) = \xi_1(x)\)</span> and the initial individual is of type <span class="math notranslate nohighlight">\(2\)</span>.</p>
+</section>
+</div></section>
+<section id="expected-size">
+<h2><span class="section-number">5.2.3. </span>Expected size<a class="headerlink" href="#expected-size" title="Link to this heading">#</a></h2>
+<p>We look at the matrix of expected values <span class="math notranslate nohighlight">\(\mathbb{E}[X_g]\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E}[Y_g]\)</span> assuming <span class="math notranslate nohighlight">\((X_0,Y_0)\)</span> is <span class="math notranslate nohighlight">\((1,0)\)</span> and <span class="math notranslate nohighlight">\((0,1)\)</span>.  We could work this out without going through generating functions.  In hindsight, that is probably easier than what I did below.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix} \mathbb{E}[X_g|(1,0)],\quad \mathbb{E}[X_g|(0,1)]\\ 
+\mathbb{E}[Y_g|(1,0)],\quad \mathbb{E}[Y_g|(0,1)] \end{pmatrix}
+=&amp; 
+\begin{pmatrix} \left[\frac{\partial}{\partial x} \Phi_{g}(x,1 |(1,0))\right|_{x=1}&amp; \left[\frac{\partial}{\partial x} \Phi_{g}(x,1 |(0,1))\right|_{x=1}\\ 
+\left[\frac{\partial}{\partial y} \Phi_{g}(1,y|(1,0))\right|_{y=1} &amp; \left[\frac{\partial}{\partial y} \Phi_{g}(1,y|(0,1))\right|_{y=1}\end{pmatrix}\\
+%
+%=&amp; 
+%\begin{pmatrix} \left[\frac{\partial}{\partial x} \vec{\Phi}_{g-1} \left( \xi_1(x,1), \xi_2(x,1)\right)\right|_{x=1}\\
+%\left[\frac{\partial}{\partial y} \vec{\Phi}_{g-1} \left( \xi_1(1,y), \xi_2(1,y)\right)\right|_{y=1}\end{pmatrix}\\
+\end{align*}\]</div>
+<p>We now focus just on the first column, giving the probabilities assuming the first individual is of type <span class="math notranslate nohighlight">\(1\)</span>.  We note that the second column follows through symmetry.  We use the Forward version of the equations for which <span class="math notranslate nohighlight">\(\Phi_g(x,y|(1,0)) = \Phi_{g-1}(\xi_1(x,y), \xi_2(x,y)|(1,0))\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\begin{pmatrix}\mathbb{E}[X_g|(1,0)] \\ \mathbb{E}[Y_g|(1,0)]\end{pmatrix}
+%
+=&amp;
+%
+\begin{pmatrix} \left[\frac{\partial}{\partial x} \Phi_{g-1}(\xi_1(x,1),\xi_2(x,1)|(1,0))\right|_{x=1}\\ 
+\left[\frac{\partial}{\partial y} \Phi_{g-1}(\xi_1(1,y),\xi_2(1,y)|(1,0))\right|_{y=1}
+\end{pmatrix}\\
+%
+=&amp;
+\begin{pmatrix} \left[\left(\frac{\partial}{\partial \xi_1},\frac{\partial}{\partial \xi_2} \right) \Phi_{g-1} \left( \xi_1(x,1), \xi_2(x,1)|(1,0) \right)  \cdot \frac{\partial}{\partial x} \left(\xi_1(x,1), \xi_2(x,1)\right)\right|_{x=1}\\
+\left[\left(\frac{\partial}{\partial \xi_1},\frac{\partial}{\partial \xi_2} \right) \Phi_{g-1} \left( \xi_1(1,y), \xi_2(1,y)|(1,0) \right)  \cdot \frac{\partial}{\partial y} \left(\xi_1(1,y), \xi_2(1,y)\right)\right|_{y=1}\end{pmatrix}\\
+%
+=&amp; 
+\begin{pmatrix} \left[\left(\frac{\partial}{\partial \xi_1},\frac{\partial}{\partial \xi_2} \right) \Phi_{g-1} \left( \xi_1, \xi_2|(1,0) \right)\right|_{\xi_1,\xi_2=1,1}  \cdot \left[\frac{\partial}{\partial x} \left(\xi_1(x,1), \xi_2(x,1)\right)\right|_{x=1}\\
+\left[\left(\frac{\partial}{\partial \xi_1},\frac{\partial}{\partial \xi_2} \right) \Phi_{g-1} \left( \xi_1, \xi_2|(1,0) \right)\right|_{\xi_1,\xi_2=1,1}  \cdot \left[\frac{\partial}{\partial y} \left(\xi_1(1,y), \xi_2(1,y)\right)\right|_{y=1}\end{pmatrix}\\
+%
+=&amp;\begin{pmatrix}\left[\frac{\partial}{\partial x} \xi_1(x,1)\right|_{x=1} &amp; \left[\frac{\partial}{\partial x} \xi_2(x,1)\right|_{x=1}\\
+\left[\frac{\partial}{\partial y} \xi_1(1,y)\right|_{y=1}&amp; \left[\frac{\partial}{\partial y}\xi_2(1,y)\right|_{y=1}\end{pmatrix} \begin{pmatrix}\left[\frac{\partial}{\partial \xi_1} \Phi_{g-1}(\xi_1,1|(1,0))\right|_{\xi_1=1}\\
+\left[\frac{\partial}{\partial \xi_2} \Phi_{g-1}(1,\xi_2|(1,0))\right|_{\xi_2=1}\end{pmatrix}
+\\
+%
+=&amp;\begin{pmatrix}\mathbb{E}[X|(1,0)]&amp; \mathbb{E}[X|(0,1)]\\
+\mathbb{E}[Y|(1,0)]&amp; \mathbb{E}[Y|(0,1)]\end{pmatrix} \begin{pmatrix}\mathbb{E}[X_{g-1}|(1,0)]\\ \mathbb{E}[Y_{g-1}|(1,0)]\end{pmatrix}\\
+=&amp; \begin{pmatrix}\mathbb{E}[X|(1,0)]&amp; \mathbb{E}[X|(0,1)]\\
+\mathbb{E}[Y|(1,0)]&amp; \mathbb{E}[Y|(0,1)]\end{pmatrix}^g \begin{pmatrix}\mathbb{E}[X_{0}|(1,0)]\\ \mathbb{E}[Y_{0}|(1,0)]\end{pmatrix}\\
+=&amp; \begin{pmatrix}\mathbb{E}[X|(1,0)]&amp; \mathbb{E}[X|(0,1)]\\
+\mathbb{E}[Y|(1,0)]&amp; \mathbb{E}[Y|(0,1)]\end{pmatrix}^g \begin{pmatrix}1\\0\end{pmatrix}
+\end{align*}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\mathbb{E}[X|(1,0)]\)</span> is the expected number of direct <span class="math notranslate nohighlight">\(X\)</span> offspring of one <span class="math notranslate nohighlight">\(X\)</span> individual, etc.</p>
+<p>So including the second column, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix} \mathbb{E}[X_g|(1,0)],\quad \mathbb{E}[X_g|(0,1)]\\ 
+\mathbb{E}[Y_g|(1,0)],\quad \mathbb{E}[Y_g|(0,1)] \end{pmatrix}= \begin{pmatrix}\mathbb{E}[X|(1,0)]&amp; \mathbb{E}[X|(0,1)]\\
+\mathbb{E}[Y|(1,0)]&amp; \mathbb{E}[Y|(0,1)]\end{pmatrix}^g \begin{pmatrix}1 &amp; 0\\0 &amp;1\end{pmatrix}
+\end{split}\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Joel-Miller-Lab/AMSI2026_PGF",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\MultiType"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="MultiTypePGFs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.1. </span>Multivariate Probability Generating Functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="MultiTypeGWCtsTime.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.3. </span>Continuous-time framework</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-pgf">5.2.1. Joint PGF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-approach">5.2.1.1. Backward approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-approach">5.2.1.2. Forward Approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extinction-probability">5.2.2. Extinction Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-size">5.2.3. Expected size</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Joel C. Miller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

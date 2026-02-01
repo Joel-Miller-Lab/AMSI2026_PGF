@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/MultiType/MultiTypePGFs';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.2. Stem Cells" href="StemCells.html" />
-    <link rel="prev" title="5. MultiType Galton-Watson Processes" href="MultiTypeIntro.html" />
+    <link rel="next" title="5.2. MultiType Galton-Watson processes: Generation-based framework" href="MultiTypeGWGenBased.html" />
+    <link rel="prev" title="5. Introduction to MultiType Galton-Watson Processes" href="MultiTypeIntro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -229,9 +229,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisHetMeanField.html">4.7. SIR disease in Heterogeneous Populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="MultiTypeIntro.html">5. MultiType Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="MultiTypeIntro.html">5. Introduction to MultiType Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">5.1. Multivariate Probability Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="StemCells.html">5.2. Stem Cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiTypeGWGenBased.html">5.2. MultiType Galton-Watson processes: Generation-based framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiTypeGWCtsTime.html">5.3. Continuous-time framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StemCells.html">5.4. Stem Cells</a></li>
 </ul>
 </details></li>
 </ul>
@@ -529,7 +531,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="multivariate-probability-generating-functions">
 <h1><span class="section-number">5.1. </span>Multivariate Probability Generating Functions<a class="headerlink" href="#multivariate-probability-generating-functions" title="Link to this heading">#</a></h1>
 <p>We now consider PGFs that depend on multiple variables</p>
-<p>Let us assume that we have some distribution joint distribution of two non-negative integer random variables <span class="math notranslate nohighlight">\(p_{j,k} = P(J=j, K=k)\)</span>.  Then we define a two-variable PGF</p>
+<p>Let us assume that we have some distribution joint distribution of two non-negative integer random variables <span class="math notranslate nohighlight">\(p_{j,k} = \mathbb{P}[X=j, Y=k]\)</span>.  Then we define a two-variable PGF</p>
 <div class="math notranslate nohighlight">
 \[
 \mu(x,y) = \sum_{j=0}^\infty \sum_{k=0}^\infty p_{j,k} x^j y^k
@@ -542,27 +544,49 @@ document.write(`
 <p>Next, if we just set <span class="math notranslate nohighlight">\(x=1\)</span> or <span class="math notranslate nohighlight">\(y=1\)</span> we get the PGFs of the marginal distributions of <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(j\)</span> respectively</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\mu(1,y) &amp;= \sum_{k} \left(\sum_j p_{j,k}\right) y^k = \sum_k P(K=k) y^k\\
-\mu(x,1) &amp;= \sum_j P(J=j) x^j 
+\mu(1,y) &amp;= \sum_{k} \left(\sum_j p_{j,k}\right) y^k = \sum_k \mathbb{P}[Y=k] y^k\\
+\mu(x,1) &amp;= \sum_j \mathbb{P}[X=j] x^j 
 \end{align*}\]</div>
 <p>We can find the expected values of <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(k\)</span> through differentiation:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\frac{\partial}{\partial x} \mu(1,1) &amp;= \sum_j \sum_k j p_{j,k}1^{j-1}1^k = \mathbb{E}[j]\\
-\frac{\partial}{\partial y} \mu(1,1) &amp;= \mathbb{E}[k]
+\left[\frac{\partial}{\partial x} \mu(x,y) \right|_{(x,y)=(1,1)} &amp;= \sum_j \sum_k j p_{j,k}1^{j-1}1^k = \mathbb{E}[j]\\
+\left[\frac{\partial}{\partial y} \mu(x,y) \right|_{(x,y)=(1,1)} &amp;= \mathbb{E}[k]
 \end{align*}\]</div>
 <p>and the expected value of the product is</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{\partial^2}{\partial x \partial y} \mu(1,1) = \sum_j \sum_k jk p_{j,k}1^{j-1}1^{k-1} = \mathbb{E}[jk]
+\left[\frac{\partial^2}{\partial x \partial y} \mu(x,y) \right]_{(x,y)=(1,1)} = \sum_j \sum_k jk p_{j,k}1^{j-1}1^{k-1} = \mathbb{E}[jk]
 \]</div>
+<p>The expected value of the sum <span class="math notranslate nohighlight">\(X+Y\)</span> is found by taking <span class="math notranslate nohighlight">\(y=x\)</span> and taking <span class="math notranslate nohighlight">\(\frac{d}{dx}\)</span> of the result:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left[\frac{d}{dx} \mu(x,x) \right|_{x=1} &amp;= \left[ \frac{d}{dx} \sum_j\sum_k p_{j,k} x^{j}x^k\right|_{x=1}\\
+&amp;= \left[\sum_{j} \sum_k p_{j,k} (j+k) x^{j+k-1} \right|_{x=1}\\
+&amp; = \sum_{j,k} p_{j,k} (j+k)\\
+&amp;= \mathbb{E}[X+Y]
+\end{align*}\]</div>
 <p>These expressions generalize to joint distributions of more than two random variables.</p>
 <section id="sums-of-random-variables">
 <h2><span class="section-number">5.1.1. </span>Sums of random variables<a class="headerlink" href="#sums-of-random-variables" title="Link to this heading">#</a></h2>
-<p>We saw earlier that given a probability distribution of non-negative integers <span class="math notranslate nohighlight">\(j\)</span> with PGF <span class="math notranslate nohighlight">\(\mu(x) = \sum_j p_j x^j\)</span>, the PGF for the sum of sum exactly <span class="math notranslate nohighlight">\(k\)</span> numbers <span class="math notranslate nohighlight">\(\sum_{i=1}^k J_i\)</span> chosen independently from that distribution is <span class="math notranslate nohighlight">\(\mu(x)^k\)</span>.  Further, if the number of terms <span class="math notranslate nohighlight">\(k\)</span> is itself a random variable, then the PGF for the “randomly-stopped sum” <span class="math notranslate nohighlight">\(\sum_{i=1}^k J_i\)</span> is <span class="math notranslate nohighlight">\(\psi(\mu(x))\)</span> where <span class="math notranslate nohighlight">\(\psi(x)\)</span> is the PGF for <span class="math notranslate nohighlight">\(k\)</span>.</p>
-<p>This generalizes to pairs of random non-negative integers.  Let us assume that we have a PGF <span class="math notranslate nohighlight">\(\mu(x,y)\)</span> for the joint distribution of a pair of non-negative integers <span class="math notranslate nohighlight">\((j,k)\)</span>.  The PGF of the joint distribution of their sums <span class="math notranslate nohighlight">\(\sum_{i=1}^\ell (X_i, K_i)\)</span> is <span class="math notranslate nohighlight">\(\mu(x,y)^k\)</span>.  If <span class="math notranslate nohighlight">\(k\)</span> itself is a random variable with PGF <span class="math notranslate nohighlight">\(\psi(x)\)</span>, then the PGF for the joint distribution of the sums is <span class="math notranslate nohighlight">\(\psi(\mu(x,y))\)</span>.</p>
-<p>If we have two different joint distributions <span class="math notranslate nohighlight">\(p_{j,k}\)</span> and <span class="math notranslate nohighlight">\(q_{j,k}\)</span> with PGFs <span class="math notranslate nohighlight">\(\mu_1(x,y)\)</span>, <span class="math notranslate nohighlight">\(\mu_2(x,y)\)</span> and we want to take <span class="math notranslate nohighlight">\(\ell\)</span> pairs <span class="math notranslate nohighlight">\((J_i,K_i)\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots, \ell\)</span> and another <span class="math notranslate nohighlight">\(m\)</span> pairs <span class="math notranslate nohighlight">\((J_{\ell+i}, K_{\ell+i})\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots, m\)</span> then the PGF of the sum of all of these pairs is <span class="math notranslate nohighlight">\(\mu_1(x,y)^\ell \mu_2(x,y)^m\)</span>.  If in turn <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are random variables whose joint distribution has PGF <span class="math notranslate nohighlight">\(\psi(x,y)\)</span>, then the PGF for the sum is <span class="math notranslate nohighlight">\(\psi(\mu_1(x,y),\mu_2(x,y))\)</span>.</p>
+<p>We saw earlier that given a probability distribution of non-negative integers <span class="math notranslate nohighlight">\(j\)</span> with PGF <span class="math notranslate nohighlight">\(\mu(x) = \sum_j p_j x^j\)</span>, the PGF for the sum of sum exactly <span class="math notranslate nohighlight">\(k\)</span> numbers <span class="math notranslate nohighlight">\(\sum_{i=1}^k X_i\)</span> chosen independently from that distribution is <span class="math notranslate nohighlight">\(\mu(x)^k\)</span>.  Further, if the number of terms <span class="math notranslate nohighlight">\(k\)</span> is itself a random variable, then the PGF for the “randomly-stopped sum” <span class="math notranslate nohighlight">\(\sum_{i=1}^k X_i\)</span> is <span class="math notranslate nohighlight">\(\psi(\mu(x))\)</span> where <span class="math notranslate nohighlight">\(\psi(x)\)</span> is the PGF for <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>This generalizes to pairs of random non-negative integers.  Let us assume that we have a PGF <span class="math notranslate nohighlight">\(\mu(x,y)\)</span> and we want to find the sum <span class="math notranslate nohighlight">\(\sum_{i=1}^k (X_i,Y_i)\)</span> we get</p>
+<div class="proof theorem admonition" id="thm-jointPGFProducts">
+<p class="admonition-title"><span class="caption-number">Theorem 5.1 </span> (Composition of PGFs and randomly-stopped sums)</p>
+<section class="theorem-content" id="proof-content">
+<p>Given a PGF <span class="math notranslate nohighlight">\(\mu(x,y)\)</span> for the joint distribution of a pair of non-negative integers <span class="math notranslate nohighlight">\((X,Y)\)</span>.</p>
+<p>The PGF of the joint distribution of their sums <span class="math notranslate nohighlight">\(\sum_{i=1}^\ell (X_i, Y_i)\)</span> is <span class="math notranslate nohighlight">\(\xi(x,y)^k\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(k\)</span> itself is a random variable with PGF <span class="math notranslate nohighlight">\(\psi(x)\)</span>, then the PGF for the joint distribution of the sums is <span class="math notranslate nohighlight">\(\psi(\xi(x,y))\)</span>.</p>
 </section>
+</div><p>This generalizes to the case where <span class="math notranslate nohighlight">\(\psi\)</span> is a function of two variables, corresponding to taking the sum of <span class="math notranslate nohighlight">\(\ell\)</span> pairs <span class="math notranslate nohighlight">\((X_i,Y_i)\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots, \ell\)</span> from one distribution and another <span class="math notranslate nohighlight">\(m\)</span> pairs <span class="math notranslate nohighlight">\((X_{i}, Y_{i})\)</span>, <span class="math notranslate nohighlight">\(i=\ell+1,\ldots, \ell+m\)</span> from another distribution where <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are random values having some joint distribution.</p>
+<div class="proof theorem admonition" id="thm-jointPGFComposition">
+<p class="admonition-title"><span class="caption-number">Theorem 5.2 </span> (Composition of PGFs and sums of randomly-stopped sums)</p>
+<section class="theorem-content" id="proof-content">
+<p>Given two joint distributions of non-negative integers <span class="math notranslate nohighlight">\(p_{j,k}\)</span> and <span class="math notranslate nohighlight">\(q_{j,k}\)</span> with PGFs <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span>, <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span>.</p>
+<p>If we take <span class="math notranslate nohighlight">\(\ell\)</span> pairs <span class="math notranslate nohighlight">\((X_i,Y_i)\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots, \ell\)</span> and another <span class="math notranslate nohighlight">\(m\)</span> pairs <span class="math notranslate nohighlight">\((X_{i}, Y_{i})\)</span>, <span class="math notranslate nohighlight">\(i=\ell+1,\ldots, \ell+m\)</span> then the PGF of the sum <span class="math notranslate nohighlight">\(\sum_{i=1}^{\ell+m} (X_i,Y_i)\)</span> of all of these pairs is <span class="math notranslate nohighlight">\(\xi_1(x,y)^\ell \xi_2(x,y)^m\)</span>.</p>
+<p>If in turn <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are random variables whose joint distribution has PGF <span class="math notranslate nohighlight">\(\psi(x,y)\)</span>, then the PGF for the randomly-stopped sum is <span class="math notranslate nohighlight">\(\psi(\xi_1(x,y),\xi_2(x,y))\)</span>.</p>
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -601,15 +625,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>MultiType Galton-Watson Processes</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Introduction to MultiType Galton-Watson Processes</p>
       </div>
     </a>
     <a class="right-next"
-       href="StemCells.html"
+       href="MultiTypeGWGenBased.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.2. </span>Stem Cells</p>
+        <p class="prev-next-title"><span class="section-number">5.2. </span>MultiType Galton-Watson processes: Generation-based framework</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

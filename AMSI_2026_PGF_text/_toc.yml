@@ -56,6 +56,8 @@ parts:
     - file: notebooks/MultiType/MultiTypeIntro
       sections:
       - file: notebooks/MultiType/MultiTypePGFs
+      - file: notebooks/MultiType/MultiTypeGWGenBased
+      - file: notebooks/MultiType/MultiTypeGWCtsTime
       - file: notebooks/MultiType/StemCells
 
   - caption: Simulations and Practice Problems

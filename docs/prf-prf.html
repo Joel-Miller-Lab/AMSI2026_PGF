@@ -233,9 +233,11 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisHetMeanField.html">4.7. SIR disease in Heterogeneous Populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/MultiType/MultiTypeIntro.html">5. MultiType Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/MultiType/MultiTypeIntro.html">5. Introduction to MultiType Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/MultiTypePGFs.html">5.1. Multivariate Probability Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/StemCells.html">5.2. Stem Cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/MultiTypeGWGenBased.html">5.2. MultiType Galton-Watson processes: Generation-based framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/MultiTypeGWCtsTime.html">5.3. Continuous-time framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/StemCells.html">5.4. Stem Cells</a></li>
 </ul>
 </details></li>
 </ul>
@@ -458,6 +460,8 @@ document.write(`
    <a href="#cap-example-ForwKolmPureBirth"><strong>example-ForwKolmPureBirth</strong></a> | 
    <a href="#cap-example-GenerateTreeAlt"><strong>example-GenerateTreeAlt</strong></a> | 
    <a href="#cap-example-GeomPGF"><strong>example-GeomPGF</strong></a> | 
+   <a href="#cap-example-IRJointDistBackward"><strong>example-IRJointDistBackward</strong></a> | 
+   <a href="#cap-example-IRJointDistForward"><strong>example-IRJointDistForward</strong></a> | 
    <a href="#cap-example-InfectiousDice"><strong>example-InfectiousDice</strong></a> | 
    <a href="#cap-example-NegBinPGF"><strong>example-NegBinPGF</strong></a> | 
    <a href="#cap-example-PoissonDiscreteLimitRate1"><strong>example-PoissonDiscreteLimitRate1</strong></a> | 
@@ -493,10 +497,15 @@ document.write(`
    <a href="#cap-theorem-PGFRandSum"><strong>theorem-PGFRandSum</strong></a> | 
    <a href="#cap-theorem-Survival"><strong>theorem-Survival</strong></a> | 
    <a href="#cap-theorem-ctsTimeSIS_SIR_SizeDist"><strong>theorem-ctsTimeSIS_SIR_SizeDist</strong></a> | 
+   <a href="#cap-thm-BackwardTwoTypeGenBased"><strong>thm-BackwardTwoTypeGenBased</strong></a> | 
    <a href="#cap-thm-ExpectedSize"><strong>thm-ExpectedSize</strong></a> | 
    <a href="#cap-thm-GWExtinctThresh"><strong>thm-GWExtinctThresh</strong></a> | 
    <a href="#cap-thm-GWTisGWP"><strong>thm-GWTisGWP</strong></a> | 
    <a href="#cap-thm-PGFLinComb"><strong>thm-PGFLinComb</strong></a> | 
+   <a href="#cap-thm-TwoTypeExtinct"><strong>thm-TwoTypeExtinct</strong></a> | 
+   <a href="#cap-thm-TwoTypeHalfExtinct"><strong>thm-TwoTypeHalfExtinct</strong></a> | 
+   <a href="#cap-thm-jointPGFComposition"><strong>thm-jointPGFComposition</strong></a> | 
+   <a href="#cap-thm-jointPGFProducts"><strong>thm-jointPGFProducts</strong></a> | 
    <a href="#cap-thm-partialsums"><strong>thm-partialsums</strong></a>
    </div>
 
@@ -886,6 +895,22 @@ document.write(`
        <a href="notebooks/BasicGenFxn/GenFxnsExamples.html#example-GeomPGF"><code class="xref">example-GeomPGF</code></a> <em>(notebooks/BasicGenFxn/GenFxnsExamples)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-IRJointDistBackward"><td></td><td>
+       <strong>example-IRJointDistBackward</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/MultiType/MultiTypeGWGenBased.html#example-IRJointDistBackward"><code class="xref">example-IRJointDistBackward</code></a> <em>(notebooks/MultiType/MultiTypeGWGenBased)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-IRJointDistForward"><td></td><td>
+       <strong>example-IRJointDistForward</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/MultiType/MultiTypeGWGenBased.html#example-IRJointDistForward"><code class="xref">example-IRJointDistForward</code></a> <em>(notebooks/MultiType/MultiTypeGWGenBased)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-InfectiousDice"><td></td><td>
        <strong>example-InfectiousDice</strong></td><td></td></tr>
      <tr>
@@ -1166,6 +1191,14 @@ document.write(`
        <a href="notebooks/InfDis/InfDisCtsTimeSizeDistAnal.html#theorem-ctsTimeSIS_SIR_SizeDist"><code class="xref">theorem-ctsTimeSIS_SIR_SizeDist</code></a> <em>(notebooks/InfDis/InfDisCtsTimeSizeDistAnal)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-thm-BackwardTwoTypeGenBased"><td></td><td>
+       <strong>thm-BackwardTwoTypeGenBased</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/MultiType/MultiTypeGWGenBased.html#thm-BackwardTwoTypeGenBased"><code class="xref">thm-BackwardTwoTypeGenBased</code></a> <em>(notebooks/MultiType/MultiTypeGWGenBased)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm-ExpectedSize"><td></td><td>
        <strong>thm-ExpectedSize</strong></td><td></td></tr>
      <tr>
@@ -1196,6 +1229,38 @@ document.write(`
        <td></td>
        <td>
        <a href="notebooks/BasicGenFxn/GenFxnsAdd.html#thm-PGFLinComb"><code class="xref">thm-PGFLinComb</code></a> <em>(notebooks/BasicGenFxn/GenFxnsAdd)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-thm-TwoTypeExtinct"><td></td><td>
+       <strong>thm-TwoTypeExtinct</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/MultiType/MultiTypeGWGenBased.html#thm-TwoTypeExtinct"><code class="xref">thm-TwoTypeExtinct</code></a> <em>(notebooks/MultiType/MultiTypeGWGenBased)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-thm-TwoTypeHalfExtinct"><td></td><td>
+       <strong>thm-TwoTypeHalfExtinct</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/MultiType/MultiTypeGWGenBased.html#thm-TwoTypeHalfExtinct"><code class="xref">thm-TwoTypeHalfExtinct</code></a> <em>(notebooks/MultiType/MultiTypeGWGenBased)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-thm-jointPGFComposition"><td></td><td>
+       <strong>thm-jointPGFComposition</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/MultiType/MultiTypePGFs.html#thm-jointPGFComposition"><code class="xref">thm-jointPGFComposition</code></a> <em>(notebooks/MultiType/MultiTypePGFs)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-thm-jointPGFProducts"><td></td><td>
+       <strong>thm-jointPGFProducts</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="notebooks/MultiType/MultiTypePGFs.html#thm-jointPGFProducts"><code class="xref">thm-jointPGFProducts</code></a> <em>(notebooks/MultiType/MultiTypePGFs)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-thm-partialsums"><td></td><td>

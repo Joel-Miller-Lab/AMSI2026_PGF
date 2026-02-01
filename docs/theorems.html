@@ -229,9 +229,11 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/InfDis/InfDisHetMeanField.html">4.7. SIR disease in Heterogeneous Populations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/MultiType/MultiTypeIntro.html">5. MultiType Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/MultiType/MultiTypeIntro.html">5. Introduction to MultiType Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/MultiTypePGFs.html">5.1. Multivariate Probability Generating Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/StemCells.html">5.2. Stem Cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/MultiTypeGWGenBased.html">5.2. MultiType Galton-Watson processes: Generation-based framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/MultiTypeGWCtsTime.html">5.3. Continuous-time framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/MultiType/StemCells.html">5.4. Stem Cells</a></li>
 </ul>
 </details></li>
 </ul>
@@ -482,6 +484,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-largensmalloutbreak-small-outbreak-size-distribution-n-to-infty"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-LargeNSmallOutbreak</span></code> — Small outbreak size distribution (<span class="math notranslate nohighlight">\(N \to \infty\)</span>)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-ctstimesis-sir-sizedist-continuous-time-sis-and-sir-small-outbreak-size-distribution"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-ctsTimeSIS_SIR_SizeDist</span></code> — Continuous-time SIS and SIR small outbreak size distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-jointpgfproducts-composition-of-pgfs-and-randomly-stopped-sums"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-jointPGFProducts</span></code> — Composition of PGFs and randomly-stopped sums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-jointpgfcomposition-composition-of-pgfs-and-sums-of-randomly-stopped-sums"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-jointPGFComposition</span></code> — Composition of PGFs and sums of randomly-stopped sums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-backwardtwotypegenbased-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-backward-version"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-BackwardTwoTypeGenBased</span></code> — PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Backward version)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-irjointdistforward-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-forward-version"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">example-IRJointDistForward</span></code> — PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Forward version)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-twotypeextinct-probability-of-complete-extinction-of-two-type-galton-watson-process"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-TwoTypeExtinct</span></code> — Probability of complete extinction of two-type Galton-Watson Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-twotypehalfextinct-probability-of-extinction-of-one-type-in-a-two-type-galton-watson-process"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-TwoTypeHalfExtinct</span></code> — Probability of extinction of one type in a two-type Galton-Watson Process</a></li>
 </ul>
             </nav>
         </div>
@@ -685,6 +693,83 @@ s_n = \sum_{i=0}^n c_i
 \]</div>
 </div>
 </section>
+<section id="thm-jointpgfproducts-composition-of-pgfs-and-randomly-stopped-sums">
+<h2><a class="reference internal" href="notebooks/MultiType/MultiTypePGFs.html#thm-jointPGFProducts">Theorem 5.1</a> — Composition of PGFs and randomly-stopped sums<a class="headerlink" href="#thm-jointpgfproducts-composition-of-pgfs-and-randomly-stopped-sums" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Given a PGF <span class="math notranslate nohighlight">\(\mu(x,y)\)</span> for the joint distribution of a pair of non-negative integers <span class="math notranslate nohighlight">\((X,Y)\)</span>.</p>
+<p>The PGF of the joint distribution of their sums <span class="math notranslate nohighlight">\(\sum_{i=1}^\ell (X_i, Y_i)\)</span> is <span class="math notranslate nohighlight">\(\xi(x,y)^k\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(k\)</span> itself is a random variable with PGF <span class="math notranslate nohighlight">\(\psi(x)\)</span>, then the PGF for the joint distribution of the sums is <span class="math notranslate nohighlight">\(\psi(\xi(x,y))\)</span>.</p>
+</div>
+</section>
+<section id="thm-jointpgfcomposition-composition-of-pgfs-and-sums-of-randomly-stopped-sums">
+<h2><a class="reference internal" href="notebooks/MultiType/MultiTypePGFs.html#thm-jointPGFComposition">Theorem 5.2</a> — Composition of PGFs and sums of randomly-stopped sums<a class="headerlink" href="#thm-jointpgfcomposition-composition-of-pgfs-and-sums-of-randomly-stopped-sums" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Given two joint distributions of non-negative integers <span class="math notranslate nohighlight">\(p_{j,k}\)</span> and <span class="math notranslate nohighlight">\(q_{j,k}\)</span> with PGFs <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span>, <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span>.</p>
+<p>If we take <span class="math notranslate nohighlight">\(\ell\)</span> pairs <span class="math notranslate nohighlight">\((X_i,Y_i)\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots, \ell\)</span> and another <span class="math notranslate nohighlight">\(m\)</span> pairs <span class="math notranslate nohighlight">\((X_{i}, Y_{i})\)</span>, <span class="math notranslate nohighlight">\(i=\ell+1,\ldots, \ell+m\)</span> then the PGF of the sum <span class="math notranslate nohighlight">\(\sum_{i=1}^{\ell+m} (X_i,Y_i)\)</span> of all of these pairs is <span class="math notranslate nohighlight">\(\xi_1(x,y)^\ell \xi_2(x,y)^m\)</span>.</p>
+<p>If in turn <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(m\)</span> are random variables whose joint distribution has PGF <span class="math notranslate nohighlight">\(\psi(x,y)\)</span>, then the PGF for the randomly-stopped sum is <span class="math notranslate nohighlight">\(\psi(\xi_1(x,y),\xi_2(x,y))\)</span>.</p>
+</div>
+</section>
+<section id="thm-backwardtwotypegenbased-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-backward-version">
+<h2><a class="reference internal" href="notebooks/MultiType/MultiTypeGWGenBased.html#thm-BackwardTwoTypeGenBased">Theorem 5.3</a> — PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Backward version)<a class="headerlink" href="#thm-backwardtwotypegenbased-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-backward-version" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Given a two-type Galton-Watson process, with offspring distributions <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span>, the PGFs for the distribution at generation <span class="math notranslate nohighlight">\(g\)</span> can be found by recursively solving</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_{g+1}(x,y) = \left(\xi_1(\vec{\Phi}_{g}(x,y)),\quad \xi_2(\vec{\Phi}_{g}(x,y))\right)
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_0(x,y) = (x,y) 
+\]</div>
+</div>
+</section>
+<section id="example-irjointdistforward-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-forward-version">
+<h2><a class="reference internal" href="notebooks/MultiType/MultiTypeGWGenBased.html#example-IRJointDistForward">Example 5.2</a> — PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Forward version)<a class="headerlink" href="#example-irjointdistforward-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-forward-version" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>Given a two-type Galton-Watson process, with offspring distributions <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span>, the PGFs for the distribution at generation <span class="math notranslate nohighlight">\(g\)</span> can be found by recursively solving</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_{g+1}(x,y) = \vec{\Phi}_g(\xi_1(x,y), \xi_2(x,y))
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\Phi}_0(x,y) = (x,y)
+\]</div>
+</div>
+</section>
+<section id="thm-twotypeextinct-probability-of-complete-extinction-of-two-type-galton-watson-process">
+<h2><a class="reference internal" href="notebooks/MultiType/MultiTypeGWGenBased.html#thm-TwoTypeExtinct">Theorem 5.5</a> — Probability of complete extinction of two-type Galton-Watson Process<a class="headerlink" href="#thm-twotypeextinct-probability-of-complete-extinction-of-two-type-galton-watson-process" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>The probabilities of extinction of both types by generation <span class="math notranslate nohighlight">\(g\)</span>, depending on initial condition is
+<span class="math notranslate nohighlight">\(\vec{\alpha}(g) = (\alpha(g|(1,0)), \alpha(g|(0,1)))\)</span>.  This is found by
+iteratively solving</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{\alpha}(g)= \left(\xi_1(\vec{\alpha}(g-1)), \quad\xi_2(\vec{\alpha}(g-1))\right)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\vec{\alpha}(0) = (0,0)\)</span>.</p>
+</div>
+</section>
+<section id="thm-twotypehalfextinct-probability-of-extinction-of-one-type-in-a-two-type-galton-watson-process">
+<h2><a class="reference internal" href="notebooks/MultiType/MultiTypeGWGenBased.html#thm-TwoTypeHalfExtinct">Theorem 5.6</a> — Probability of extinction of one type in a two-type Galton-Watson Process<a class="headerlink" href="#thm-twotypehalfextinct-probability-of-extinction-of-one-type-in-a-two-type-galton-watson-process" title="Link to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">Statement</p>
+<p>If <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span> can be written <span class="math notranslate nohighlight">\(\xi_2(y)\)</span>, then the probabilities of extinction of type <span class="math notranslate nohighlight">\(1\)</span> by generation <span class="math notranslate nohighlight">\(g\)</span> assuming an initial individual of type <span class="math notranslate nohighlight">\(1\)</span> is <span class="math notranslate nohighlight">\(\alpha(g;1)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha(g;1) = \xi_1(\alpha(g-1;1),1)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha(0;1) = 0\)</span>.</p>
+<p>The symmetric result holds for <span class="math notranslate nohighlight">\(\alpha(g;2)\)</span>, the probability that the second type goes extinct assuming that <span class="math notranslate nohighlight">\(\xi_1(x,y) = \xi_1(x)\)</span> and the initial individual is of type <span class="math notranslate nohighlight">\(2\)</span>.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -768,6 +853,12 @@ s_n = \sum_{i=0}^n c_i
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-largensmalloutbreak-small-outbreak-size-distribution-n-to-infty"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-LargeNSmallOutbreak</span></code> — Small outbreak size distribution (<span class="math notranslate nohighlight">\(N \to \infty\)</span>)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemma-cyclelemma-cycle-lemma"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">lemma-CycleLemma</span></code> — Cycle Lemma</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theorem-ctstimesis-sir-sizedist-continuous-time-sis-and-sir-small-outbreak-size-distribution"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">theorem-ctsTimeSIS_SIR_SizeDist</span></code> — Continuous-time SIS and SIR small outbreak size distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-jointpgfproducts-composition-of-pgfs-and-randomly-stopped-sums"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-jointPGFProducts</span></code> — Composition of PGFs and randomly-stopped sums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-jointpgfcomposition-composition-of-pgfs-and-sums-of-randomly-stopped-sums"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-jointPGFComposition</span></code> — Composition of PGFs and sums of randomly-stopped sums</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-backwardtwotypegenbased-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-backward-version"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-BackwardTwoTypeGenBased</span></code> — PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Backward version)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-irjointdistforward-pgf-of-size-distribution-of-two-type-galton-watson-process-at-generation-g-forward-version"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">example-IRJointDistForward</span></code> — PGF of size distribution of two-type Galton-Watson process at generation <span class="math notranslate nohighlight">\(g\)</span> (Forward version)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-twotypeextinct-probability-of-complete-extinction-of-two-type-galton-watson-process"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-TwoTypeExtinct</span></code> — Probability of complete extinction of two-type Galton-Watson Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thm-twotypehalfextinct-probability-of-extinction-of-one-type-in-a-two-type-galton-watson-process"><code class="xref prf prf-ref docutils literal notranslate"><span class="pre">thm-TwoTypeHalfExtinct</span></code> — Probability of extinction of one type in a two-type Galton-Watson Process</a></li>
 </ul>
   </nav></div>
 
