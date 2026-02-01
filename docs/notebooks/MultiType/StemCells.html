@@ -947,18 +947,19 @@ q_\ell(m) = \sum_{j=2}^{\ell-2} q_j(m) q_{\ell-j}(m) + 2 p_m (1-p_m) q_{\ell-1}(
 <a class="reference internal image-reference" href="../../_images/MackenPerelsonFinalSizeClaim.png"><img alt="../../_images/MackenPerelsonFinalSizeClaim.png" src="../../_images/MackenPerelsonFinalSizeClaim.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Quote from Macken and Perelson about the importance of estimating the probability of completion at a given size by a particular generation.  (In their notation, <span class="math notranslate nohighlight">\(Pr(Z_n=(0,0,k)|Z_0)\)</span> is the probability of extinction with size <span class="math notranslate nohighlight">\(k\)</span> at generation <span class="math notranslate nohighlight">\(n\)</span>).</span><a class="headerlink" href="#fig-mackenperelsonfinalsizeclaim" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Quote from Macken and Perelson about the importance of estimating the probability of completion at a given size by a particular generation.  (In their notation, <span class="math notranslate nohighlight">\(Pr(Z_n=(0,0,k)|Z_0)\)</span> is the probability of extinction with size <span class="math notranslate nohighlight">\(k\)</span> at generation <span class="math notranslate nohighlight">\(n\)</span>).  This was written in 1980, so the numerical methods available then were more limited.</span><a class="headerlink" href="#fig-mackenperelsonfinalsizeclaim" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To find the colony size if it goes extinct by generation <span class="math notranslate nohighlight">\(g\)</span> for different initial condtions, we can calculate <span class="math notranslate nohighlight">\(\vec{\Phi}_g(0,0,z)\)</span> and using Caucy integrals to calculate the coefficients of the components <span class="math notranslate nohighlight">\(\xi_s(\vec{\Phi}_{g-1}(0,0,z))\)</span> and <span class="math notranslate nohighlight">\(\xi_m(\vec{\Phi}_{g-1}(0,0,z))\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
-
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.usetex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.family&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">xi_s</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p_s</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">p_s</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">p_s</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
@@ -1048,7 +1049,8 @@ q_\ell(m) = \sum_{j=2}^{\ell-2} q_j(m) q_{\ell-j}(m) + 2 p_m (1-p_m) q_{\ell-1}(
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -1060,13 +1062,13 @@ q_\ell(m) = \sum_{j=2}^{\ell-2} q_j(m) q_{\ell-j}(m) + 2 p_m (1-p_m) q_{\ell-1}(
     <span class="n">p_s</span> <span class="o">=</span> <span class="mf">0.7</span>
     <span class="n">p_m</span> <span class="o">=</span> <span class="mf">0.4</span>
 
-    <span class="n">gmax</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">K</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">gmax</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="mi">20</span>
 
     <span class="c1"># M must be &gt; max degree you want without wrap-around.</span>
     <span class="c1"># Since you only want first K=10 coefficients, just make M comfortably larger.</span>
     <span class="c1"># A power of 2 is convenient for FFT.</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">14</span>  <span class="c1"># 16384 is plenty for K=10</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">15</span> 
 
     <span class="n">coeffs_s</span><span class="p">,</span> <span class="n">coeffs_m</span> <span class="o">=</span> <span class="n">compute_first_K_coeffs_over_g</span><span class="p">(</span><span class="n">gmax</span><span class="o">=</span><span class="n">gmax</span><span class="p">,</span> <span class="n">p_s</span><span class="o">=</span><span class="n">p_s</span><span class="p">,</span> <span class="n">p_m</span><span class="o">=</span><span class="n">p_m</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">)</span>
 
@@ -1086,6 +1088,11 @@ q_\ell(m) = \sum_{j=2}^{\ell-2} q_j(m) q_{\ell-j}(m) + 2 p_m (1-p_m) q_{\ell-1}(
     <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/90c297488c06610f02d9c2c9e79dd090f93cf38c66706c719787be9d2f1cd123.png" src="../../_images/90c297488c06610f02d9c2c9e79dd090f93cf38c66706c719787be9d2f1cd123.png" />
+<img alt="../../_images/b78b1397bda4fe6fa2b92800c52d6620bd16c96b9925ca9cdecc08ea9f2462a2.png" src="../../_images/b78b1397bda4fe6fa2b92800c52d6620bd16c96b9925ca9cdecc08ea9f2462a2.png" />
 </div>
 </div>
 </section>
