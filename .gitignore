@@ -2,3 +2,4 @@
 _build
 *.log
 
+*_ignore.ipynb

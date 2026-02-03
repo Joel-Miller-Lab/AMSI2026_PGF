@@ -58,9 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Assignments/Asst3';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="8.2. Assignment 2" href="Asst2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -526,10 +527,256 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <ol class="arabic simple">
-<li><p>MLE question.  Generate some data.  Try to fit with Neg-Bin.  Show some Neg-Bin to demonstrate diversity of shapes.  Log-likelihood.</p></li>
-<li><p>Update Q to Bayesian.  Give 4 possible parameter sets (multiverse idea), with uninformative priors.  Generate 1 piece of data.  Calculate posterior.  Then generate 2nd piece of data.  Recalc posterior.  Next calc P(both data|prior) and show same final posterior.</p></li>
+  <ol class="arabic">
+<li><p>Consider an infectious disease which has recently been introduced into a very large population from wildlife.  It is believed that the offspring distribution can be well-approximated by a Negative-Binomial distribution of unknown parameters.  There have been five known independent introductions into the population.  So far all outbreaks have died out, but there is concern that the reproduction number (the mean of the offspring distribution) may be larger than <span class="math notranslate nohighlight">\(1\)</span>.  We will use the parametrization of the Negative Binomial distribution from <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-NegBinPGF">Example 1.11</a>.</p>
+<p><strong>(a)</strong> Find the probability of an outbreak of size <span class="math notranslate nohighlight">\(L\)</span> for a given <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (<span class="math notranslate nohighlight">\(r\)</span> may not be an integer).  Your expression should be given in terms of the Gamma function <span class="math notranslate nohighlight">\(\Gamma(x)\)</span> — replace all factorials <span class="math notranslate nohighlight">\(M!\)</span> with <span class="math notranslate nohighlight">\(\Gamma(M+1)\)</span>.  It will be helpful to observe that if <span class="math notranslate nohighlight">\(\mu_{r,p}(x)\)</span> is the PGF of the distribution, then <span class="math notranslate nohighlight">\(\mu_{r,p}(x)^N\)</span> is the PGF for another Negative Binomial distribution.</p>
+<p><strong>(b)</strong> Find a reasonably simplified formula for the probability that <span class="math notranslate nohighlight">\(M\)</span> outbreaks have sizes <span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(L_M\)</span> for given parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (expressed in terms of Gamma functions)</p>
+<p>The probability of observing data for a given set of parameters is called the <em>likelihood</em> of the parameters.  The <em>log-likelihood</em> is the logarithm of the likelihood.  The parameters that maximize the likelihood will also maximize the log-likelihood, but maximization is often easier with log-likelihood, and also much easier to use computationally.  In Python, we can calculate <span class="math notranslate nohighlight">\(\ln \Gamma(x)\)</span> using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">gammaln</span>  <span class="c1">#put this at the top</span>
+
+<span class="n">gammaln</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>(c)</strong> Find the log-likelihood of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> given <span class="math notranslate nohighlight">\(L_1, \ldots, L_M\)</span>.</p>
+<p><strong>(d)</strong> Using <span class="math notranslate nohighlight">\(A = \sum L_i\)</span>, find a function <span class="math notranslate nohighlight">\(\hat{p}(r)\)</span> that maximizes the likelihood given <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<p><strong>(e)</strong> Write down a function in terms of only <span class="math notranslate nohighlight">\(r\)</span> to maximize to find <span class="math notranslate nohighlight">\((p^*,r^*)\)</span> that maximizes the likelihood.  Remove any terms that do not depend on <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<p><strong>(f)</strong> One way to estimate paramters is “Maximum Likelihood Estimation” (MLE).  We simply find the parameters that have the highest likelihood.</p>
+<p>The following code simulates <code class="docutils literal notranslate"><span class="pre">numsims</span></code><span class="math notranslate nohighlight">\(=5\)</span> outbreaks with a negative binomial offspring distribution having <span class="math notranslate nohighlight">\(r=1\)</span>, <span class="math notranslate nohighlight">\(p=0.6\)</span>.  Then it uses maximum likelihood estimation to estimate <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<ul class="simple">
+<li><p>Using your answers above, modify <code class="docutils literal notranslate"><span class="pre">Function_to_maximize</span></code> so that it performs the correct calculation.  Also modify the expression for <code class="docutils literal notranslate"><span class="pre">p_est</span></code>.  Run the code.</p></li>
+<li><p>Play around with <code class="docutils literal notranslate"><span class="pre">numsims</span></code> to get an idea of how many simulations are needed for this to perform well at estimating the parameters.  Also play around with <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (the code will insist that the simulations be guaraneed to finish, so it will refuse to run if <span class="math notranslate nohighlight">\(\nathcal{R}_0=\mu'(1)=(1-p)r/p&gt;1\)</span>.).</p></li>
+<li><p>Looking at the plot of <span class="math notranslate nohighlight">\(p_k\)</span>, the offspring distribution, comment on whether <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> need to be known exactly to make good predictions.</p></li>
+</ul>
+<p>Reflect on your observations.  What happens if <code class="docutils literal notranslate"><span class="pre">numsims</span></code> is small?  What if <span class="math notranslate nohighlight">\(\mathcal{R}_0\)</span> is close to 1?</p>
+</li>
 </ol>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">gammaln</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize_scalar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">numsims</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">if</span>    <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Warning: mean must be less than 1 for extinction to be certain&quot;</span><span class="p">)</span>
+
+
+<span class="n">L</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numsims</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="k">while</span> <span class="n">X</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">newX</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+            <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">cumulative</span> <span class="o">+=</span> <span class="n">U</span>
+            <span class="n">newX</span> <span class="o">+=</span> <span class="n">U</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">newX</span>
+    <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cumulative</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;observed sizes: &quot;</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;student-created function is needed here, using default&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">F_to_maximize</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">-</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="c1">#You need to fill in the correct expression here.</span>
+
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">F_to_minimize</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">F_to_maximize</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">minimize_scalar</span><span class="p">(</span><span class="n">F_to_minimize</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-8</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bounded&quot;</span><span class="p">)</span>
+
+<span class="n">r_est</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;student-created function is needed here, using default&quot;</span><span class="p">)</span>
+<span class="n">p_est</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#fill in correct expression here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated r:&quot;</span><span class="p">,</span> <span class="n">r_est</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated p:&quot;</span><span class="p">,</span> <span class="n">p_est</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">nbinom</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nbinom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r_est</span><span class="p">,</span> <span class="n">p_est</span> <span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Estimated: (r, p, R_0) = (</span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.6f</span><span class="s2">)&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">r_est</span><span class="p">,</span><span class="n">p_est</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_est</span><span class="p">)</span><span class="o">*</span><span class="n">r_est</span><span class="o">/</span><span class="n">p_est</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nbinom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">p</span> <span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True: (r, p, R_0) = (</span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.6f</span><span class="s2">)&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="n">p</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 1, 6, 2, 1]
+student created function is needed here, using default
+student created function is needed here, using default
+Estimated r: 5.064601742789742e-06
+Estimated p: 2
+</pre></div>
+</div>
+<img alt="../../_images/8a1621fad7455fce3be1b84e5a97f8ec4d886e20b503005b40e43afc30e883f3.png" src="../../_images/8a1621fad7455fce3be1b84e5a97f8ec4d886e20b503005b40e43afc30e883f3.png" />
+</div>
+</div>
+<ol class="arabic" start="2">
+<li><p>The code below performs <code class="docutils literal notranslate"><span class="pre">numsims</span></code> simulations of SIR disease in a population of <span class="math notranslate nohighlight">\(N=10\)</span> individuals, assuming a negative-binomial offspring distribution with <span class="math notranslate nohighlight">\(r=1\)</span>, <span class="math notranslate nohighlight">\(p=0.3\)</span>.  It plots a histogram of the resulting outbreak sizes.  Let <span class="math notranslate nohighlight">\(q_\ell\)</span> be the probability of size <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<p><strong>(a)</strong> The values <span class="math notranslate nohighlight">\(q_1\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(q_N\)</span> satisfy a system of <span class="math notranslate nohighlight">\(N\)</span> equations of the form</p>
+<div class="math notranslate nohighlight">
+\[
+   1 = \sum_{\ell=1}^M c_{M,\ell} q_\ell
+   \]</div>
+<p>For this offspring distribution, write down what <span class="math notranslate nohighlight">\(c_{M,\ell}\)</span> is.</p>
+<p><strong>(b)</strong> The example in the text used a relatively sophisticated method to calculate <span class="math notranslate nohighlight">\(q_\ell\)</span> because of error accumulation for very small values of <span class="math notranslate nohighlight">\(q_\ell\)</span>.  However, this smaller population does not have such issues.  A simpler matrix solver is used here.  Enter your expression into the code below into <code class="docutils literal notranslate"><span class="pre">c_formula</span></code>, which will be used to create the matrix.  Then it uses the <code class="docutils literal notranslate"><span class="pre">linalg</span></code> basic solve to solve the matrix equation <span class="math notranslate nohighlight">\(C \vec{q} = \vec{1}\)</span>.  Confirm that the solution matches the simulations.</p>
+<p><strong>(c)</strong> Briefly discuss how one could use this approach and Maximum Likelihood Estimation to infer <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> given some observed outbreaks in several small closed populations.</p>
+</li>
+</ol>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">gammaln</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize_scalar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="n">numsims</span> <span class="o">=</span> <span class="mi">5000</span>
+
+<span class="n">L</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numsims</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">N</span><span class="o">-</span><span class="n">X</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="k">while</span> <span class="n">X</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">newX</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+            <span class="n">U</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">negative_binomial</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">U</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">S</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="n">newX</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">cumulative</span> <span class="o">+=</span> <span class="n">newX</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">newX</span>
+    <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cumulative</span><span class="p">)</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;student created function is needed here, using default&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">c_formula</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">ell</span><span class="p">,):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Student-defined formula for c_{M, ell}.</span>
+<span class="sd">    Replace this with the desired expression.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ell</span> <span class="o">&lt;=</span> <span class="n">M</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">0</span>
+
+
+<span class="c1"># Build lower-triangular matrix</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ell</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ell</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_formula</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span>
+
+<span class="c1"># Right-hand side</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="c1"># Solve C q = b</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#plt.plot(ell, q)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>student created function is needed here, using default
+</pre></div>
+</div>
+<img alt="../../_images/fa5a69d61a9db2d115f1d6193d66114b9ffd306f58c6bc2c47199ad07f14f955.png" src="../../_images/fa5a69d61a9db2d115f1d6193d66114b9ffd306f58c6bc2c47199ad07f14f955.png" />
+<img alt="../../_images/ede71d59f0d53e3690bdc848dd4ea1666bcd7e43a3399409301b72096e2a68a1.png" src="../../_images/ede71d59f0d53e3690bdc848dd4ea1666bcd7e43a3399409301b72096e2a68a1.png" />
+</div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Consider the Till model of stem cells with some <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2=1-p_0\)</span>.</p>
+<p><strong>(a)</strong> Compare this to the infectious-disease model in continuous-time.  Explain why this is analagous and use the results we have about the continuous-time infectious disease model to calculate the probability that the Till model comes to completion with exactly <span class="math notranslate nohighlight">\(\ell\)</span> differentiated cells (and zero stem cells) in terms of <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span>.  It will help if you make the offspring distribution PGFs identical and use this to determine <span class="math notranslate nohighlight">\(\mathcal{R}_0=\beta/\gamma\)</span> and <span class="math notranslate nohighlight">\(1+\mathcal{R}_0\)</span> in terms of <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span>.</p>
+<p><em>Now we will explore an alternate way to derive the final size that does not depend on the Cycle Lemma proof.</em></p>
+<p><em>Let <span class="math notranslate nohighlight">\(\Phi_g(x,y)\)</span> be the PGF for the number of stem cells and differentiated cells at generation <span class="math notranslate nohighlight">\(g\)</span>.  Assume that differentiated cells persist for each generation (or equivalently, that at each generation they are replaced by an identical differentiated cell).</em></p>
+<p><strong>(b)</strong> Find the PGF of the offspring distribution for both stem cells and differentiated cells.</p>
+<p><strong>(c)</strong> Using the backward Kolmogorov approach, derive a recursive formula for <span class="math notranslate nohighlight">\(\Phi_g(x,y)\)</span>.</p>
+<p><strong>(d)</strong> What information is contained in the coefficients of the function <span class="math notranslate nohighlight">\(\omega_g(y) = \Phi_g(0,y)\)</span>?</p>
+<p><strong>(e)</strong> What recursive relation does <span class="math notranslate nohighlight">\(\omega_g(y)\)</span> solve?  Assume <span class="math notranslate nohighlight">\(\omega_g(y) \to \omega(y)\)</span> converges as <span class="math notranslate nohighlight">\(g \to \infty\)</span>.  What quadratic (in <span class="math notranslate nohighlight">\(\omega\)</span>) equation does the recursive relation become in this limit?</p>
+<p><strong>(f)</strong> Solve the quadratic equation for <span class="math notranslate nohighlight">\(\omega(y)\)</span>.  There should be two options.  Based on our knowledge of the system, what is <span class="math notranslate nohighlight">\(\omega(0)\)</span>?  Use this to choose the correct result.  Your result should have a <span class="math notranslate nohighlight">\(\sqrt{1-4p_0p_2y}\)</span> in it,</p>
+<p><strong>(g)</strong> Write out the first 4 terms of <span class="math notranslate nohighlight">\((1-4p_0p_2y)^{1/2}\)</span> using the binomial theorem (for non-integer exponents):</p>
+<div class="math notranslate nohighlight">
+\[
+   (a+b)^r = a^r + ra^{r-1}b + \frac{r(r-1)}{2!} a^{r-2}b^2  + \frac{r(r-1)(r-2)}{3!} a^{r-3}b^3 + \cdots
+   \]</div>
+<p>I don’t see a quick way for me to guide you to the form of the general coefficient, but if you can find it, that would be useful.</p>
+<p><strong>(h)</strong> Use this to write out the first 3 terms of the expansion for <span class="math notranslate nohighlight">\(\omega(y)\)</span>.  Verify that they agree with the result calculated in <strong>(a)</strong>.</p>
+</li>
+<li><p>Consider a continuous-time version of the Macken-Perelson model.  Assume stem cells divide with rate <span class="math notranslate nohighlight">\(r_s\)</span> and the mast cells divide with rate <span class="math notranslate nohighlight">\(r_m\)</span>.  Assume the system begins with a single stem cell.  Let <span class="math notranslate nohighlight">\(\Phi(x,y,z,t)\)</span> be the PGF for the number of each type at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><strong>(a)</strong> Derive a backward Kolmogorov equation for <span class="math notranslate nohighlight">\(\Phi(x,y,z,t)\)</span></p>
+<p><strong>(b)</strong> Derive a forward Kolmogorov equation for <span class="math notranslate nohighlight">\(\Phi(x,y,z,t)\)</span>.</p>
+<p><strong>(c)</strong> How can we interpret <span class="math notranslate nohighlight">\(\Phi(0,0,1,t)\)</span>?  Use one of the Kolmogorov equations to write down an ordinary differential equation (that is, just <span class="math notranslate nohighlight">\(t\)</span> derivatives) that we can use to solve for this.  What is the appropriate initial condition?</p>
+</li>
+<li><p>Write a 1+ page summary of one of the following papers.</p></li>
+</ol>
+<ul class="simple">
+<li><p>Explain the basic problem the researchers are studying.</p></li>
+<li><p>What did the PGF in the paper represent?</p></li>
+<li><p>Explain the equations governing their PGF (how did they determine how it changes in time?  What is its initial condition?)</p></li>
+<li><p>How did they use it to analyze their problem?</p></li>
+<li><p>What were their conclusions?</p></li>
+</ul>
+<p>Here are the papers to choose from:</p>
+<ul class="simple">
+<li><p>Fixation Probabilities When Generation Times Are Variable: The Burst–Death Model</p></li>
+<li><p>Gestational mutations and carcinogenesis</p></li>
+<li><p>Stochasticity, invasions, and branching random walks</p></li>
+<li><p>Quantifying uncertainty in a predictive model for popularity dynamics</p></li>
+<li><p>Superspreading and the effect of individual variation on disease emergence</p></li>
+<li><p>Second look at the spread of epidemics on networks</p></li>
+<li><p>https://arxiv.org/pdf/0707.0080</p></li>
+<li><p>A generating function perspective on the transmission forest</p></li>
+</ul>
+<p>If there is a different paper you would like to study, please let me know.</p>
+<p>Many of these define a PGF in terms of <span class="math notranslate nohighlight">\(\mathbb{E}[x^S]\)</span> where <span class="math notranslate nohighlight">\(S\)</span> is a random (non-negative valued variable).  This may look unusual to you as I have not used that notation, but this is simply <span class="math notranslate nohighlight">\(\mathbb{E}[x^S] = \sum_k \mathbb{P}[S=k] x^k = \sum_k p_k x^k\)</span>.</p>
 
     <script type="text/x-thebe-config">
     {
@@ -561,6 +808,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Asst2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8.2. </span>Assignment 2</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
