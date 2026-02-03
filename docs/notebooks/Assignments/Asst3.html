@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+    <title>8.3. Assignment 3 &#8212; Applications of Probability Generating Functions to Biological Systems</title>
   
   
   
@@ -237,7 +237,7 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">6. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">6.1. Simulation of a Galton-Watson Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">6.2. Computer-based exploration of Galton-Watson Processes</a></li>
@@ -249,9 +249,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac3.html">7.3. Probability Generating Functions, Practical Class 3</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="AssignmentsIntro.html">8. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="AssignmentsIntro.html">8. Assignments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Asst1.html">8.1. Assignment 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Asst2.html">8.2. Assignment 2</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.3. Assignment 3</a></li>
 </ul>
 </details></li>
 </ul>
@@ -492,9 +493,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -505,19 +504,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Assignment 3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -527,7 +518,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <ol class="arabic">
+  <section class="tex2jax_ignore mathjax_ignore" id="assignment-3">
+<h1><span class="section-number">8.3. </span>Assignment 3<a class="headerlink" href="#assignment-3" title="Link to this heading">#</a></h1>
+<p>Same instructions as past assignments</p>
+<ol class="arabic">
 <li><p>Consider an infectious disease which has recently been introduced into a very large population from wildlife.  It is believed that the offspring distribution can be well-approximated by a Negative-Binomial distribution of unknown parameters.  There have been five known independent introductions into the population.  So far all outbreaks have died out, but there is concern that the reproduction number (the mean of the offspring distribution) may be larger than <span class="math notranslate nohighlight">\(1\)</span>.  We will use the parametrization of the Negative Binomial distribution from <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-NegBinPGF">Example 1.11</a>.</p>
 <p><strong>(a)</strong> Find the probability of an outbreak of size <span class="math notranslate nohighlight">\(L\)</span> for a given <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (<span class="math notranslate nohighlight">\(r\)</span> may not be an integer).  Your expression should be given in terms of the Gamma function <span class="math notranslate nohighlight">\(\Gamma(x)\)</span> — replace all factorials <span class="math notranslate nohighlight">\(M!\)</span> with <span class="math notranslate nohighlight">\(\Gamma(M+1)\)</span>.  It will be helpful to observe that if <span class="math notranslate nohighlight">\(\mu_{r,p}(x)\)</span> is the PGF of the distribution, then <span class="math notranslate nohighlight">\(\mu_{r,p}(x)^N\)</span> is the PGF for another Negative Binomial distribution.</p>
 <p><strong>(b)</strong> Find a reasonably simplified formula for the probability that <span class="math notranslate nohighlight">\(M\)</span> outbreaks have sizes <span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(L_M\)</span> for given parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (expressed in terms of Gamma functions)</p>
@@ -777,6 +771,7 @@ Estimated p: 2
 </ul>
 <p>If there is a different paper you would like to study, please let me know.</p>
 <p>Many of these define a PGF in terms of <span class="math notranslate nohighlight">\(\mathbb{E}[x^S]\)</span> where <span class="math notranslate nohighlight">\(S\)</span> is a random (non-negative valued variable).  This may look unusual to you as I have not used that notation, but this is simply <span class="math notranslate nohighlight">\(\mathbb{E}[x^S] = \sum_k \mathbb{P}[S=k] x^k = \sum_k p_k x^k\)</span>.</p>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -823,21 +818,6 @@ Estimated p: 2
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
