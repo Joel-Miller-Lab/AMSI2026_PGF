@@ -248,6 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">7.1. Probability Generating Functions, Practical Class 1.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac2.html">7.2. Probability Generating Functions, Practical Class 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac3.html">7.3. Probability Generating Functions, Practical Class 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac4.html">7.4. Probability Generating Functions, Practical Class 4</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Assignments/AssignmentsIntro.html">8. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -670,7 +671,7 @@ document.write(`
 <p>We will answer this question for <span class="math notranslate nohighlight">\(M=1, 2, \ldots, N\)</span>.</p>
 <p>Then we ask an equivalent question:</p>
 <p><em>What is the probability that the out-component of <span class="math notranslate nohighlight">\(u_1\)</span> is in <span class="math notranslate nohighlight">\(X\)</span> and all other nodes in <span class="math notranslate nohighlight">\(X\)</span> have edges only to other nodes in <span class="math notranslate nohighlight">\(X\)</span>?</em></p>
-<p>, to yield <span class="math notranslate nohighlight">\(N\)</span> equations for <span class="math notranslate nohighlight">\(q_1\)</span>, <span class="math notranslate nohighlight">\(q_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(q_N\)</span>.</p>
+<p>to yield <span class="math notranslate nohighlight">\(N\)</span> equations for <span class="math notranslate nohighlight">\(q_1\)</span>, <span class="math notranslate nohighlight">\(q_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(q_N\)</span>.</p>
 <p>We can find one answer to this equation in a relatively straightforward way.</p>
 <div class="proof lemma admonition" id="lemma-2">
 <p class="admonition-title"><span class="caption-number">Lemma 4.2 </span></p>
@@ -742,6 +743,7 @@ c_{M,\ell} &amp;= \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-\ell}\prod_{j=1
 &amp;= \left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-1} \frac{M-\ell+1}{N-\ell+1} c_{M,\ell-1}
 \end{align*}\]</div>
 <p>with <span class="math notranslate nohighlight">\(c_{M,1}=\left(\mu\left(\frac{M-1}{N-1}\right)\right)^{-1}\)</span>.</p>
+<p>The steps above break down in the <span class="math notranslate nohighlight">\(M=1\)</span> case if <span class="math notranslate nohighlight">\(\mu(0)=0\)</span> (every node transmits to at least one other node).  In this case <span class="math notranslate nohighlight">\(q_1=0\)</span>, and we can use the remaining <span class="math notranslate nohighlight">\((N-1)\times(N-1)\)</span> matrix to find <span class="math notranslate nohighlight">\(q_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(q_N\)</span>.</p>
 </section>
 <section id="full-equations">
 <h2><span class="section-number">4.6.5. </span>Full equations<a class="headerlink" href="#full-equations" title="Link to this heading">#</a></h2>

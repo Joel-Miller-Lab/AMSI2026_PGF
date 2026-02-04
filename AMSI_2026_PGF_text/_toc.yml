@@ -73,7 +73,7 @@ parts:
       - file: notebooks/PracticeClasses/Prac1
       - file: notebooks/PracticeClasses/Prac2
       - file: notebooks/PracticeClasses/Prac3
-      
+      - file: notebooks/PracticeClasses/Prac4
       
     - file: notebooks/Assignments/AssignmentsIntro
       sections:
