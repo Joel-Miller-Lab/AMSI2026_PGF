@@ -607,6 +607,36 @@ Qualitatively, how would you expect the <em>early epidemic growth</em> (via <spa
 <p>where <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(m\)</span> have joint PGF <span class="math notranslate nohighlight">\(\psi(x,y)\)</span>.</p>
 <p><strong>(c)</strong> Give a concrete example (described mathematically or in words) of a random sum that can be analysed using <a class="reference internal" href="../MultiType/MultiTypePGFs.html#thm-jointPGFComposition">Theorem 5.2</a>, identifying the roles of <span class="math notranslate nohighlight">\(\xi_1\)</span>, <span class="math notranslate nohighlight">\(\xi_2\)</span>, <span class="math notranslate nohighlight">\(\ell\)</span>, and <span class="math notranslate nohighlight">\(m\)</span>.</p>
 </li>
+<li><p>In the two-type generation-based Galton-Watson process, let <span class="math notranslate nohighlight">\(\xi_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)\)</span> be the offspring PGFs for a type-1 and type-2 individual respectively, where</p>
+<div class="math notranslate nohighlight">
+\[
+   \xi_1(x,y)=\sum_{j,k\ge 0}p_{j,k}x^jy^k,
+   \qquad
+   \xi_2(x,y)=\sum_{j,k\ge 0}q_{j,k}x^jy^k.
+   \]</div>
+<p>Let <span class="math notranslate nohighlight">\(\vec{\Phi}_g(x,y)=(\Phi_g(x,y|(1,0)),\,\Phi_g(x,y|(0,1)))\)</span> denote the joint PGFs for the numbers of type-1 and type-2 individuals at generation <span class="math notranslate nohighlight">\(g\)</span> given a single initial individual of either type.</p>
+<p><strong>(a)</strong> Write down the recursive “backward approach” update that expresses <span class="math notranslate nohighlight">\(\vec{\Phi}_{g+1}(x,y)\)</span> in terms of <span class="math notranslate nohighlight">\(\vec{\Phi}_g(x,y)\)</span> and the offspring PGFs.</p>
+<p><strong>(b)</strong> Explain why <span class="math notranslate nohighlight">\(\vec{\Phi}_0(x,y)=(x,y)\)</span>.</p>
+<p><strong>(c)</strong> For a simple example where <span class="math notranslate nohighlight">\(\xi_1(x,y)=x^2\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)=y\)</span>, compute <span class="math notranslate nohighlight">\(\vec{\Phi}_1(x,y)\)</span> and <span class="math notranslate nohighlight">\(\vec{\Phi}_2(x,y)\)</span> using the backward recursion.</p>
+</li>
+<li><p>The probability that <strong>both types are extinct by generation <span class="math notranslate nohighlight">\(g\)</span></strong> given an initial type-1 individual is</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathbb{P}[\text{extinct both types by }g \mid (1,0)] = \Phi_g(0,0 \mid (1,0)).
+   \]</div>
+<p>Define <span class="math notranslate nohighlight">\(\vec{\alpha}(g)=(\alpha_1(g),\alpha_2(g))=\vec{\Phi}_g(0,0)\)</span>.</p>
+<p><strong>(a)</strong> Show that <span class="math notranslate nohighlight">\(\vec{\alpha}(g)\)</span> satisfies the iterative equation
+$<span class="math notranslate nohighlight">\(
+\vec{\alpha}(g)=\big(\xi_1(\vec{\alpha}(g-1)),\;\xi_2(\vec{\alpha}(g-1))\big),
+\)</span><span class="math notranslate nohighlight">\(
+with \)</span>\vec{\alpha}(0)=(0,0)$.</p>
+<p><strong>(b)</strong> Explain why the <strong>long–time extinction probabilities</strong> <span class="math notranslate nohighlight">\((\alpha_1,\alpha_2)\)</span> must satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+   (\alpha_1,\alpha_2)=\big(\xi_1(\alpha_1,\alpha_2),\;\xi_2(\alpha_1,\alpha_2)\big).
+   \]</div>
+<p><strong>(c)</strong> Suppose <span class="math notranslate nohighlight">\(\xi_1(x,y)=0.4x+0.6y\)</span> and <span class="math notranslate nohighlight">\(\xi_2(x,y)=0.5x^2+0.5y\)</span>. Find the fixed point(s) of the extinction equations in part (b). Which fixed point corresponds to the <strong>extinction probability</strong>?</p>
+</li>
 </ol>
 </section>
 
