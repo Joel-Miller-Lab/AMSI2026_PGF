@@ -577,8 +577,7 @@ document.write(`
 <p><strong>(c)</strong> The text describes a “naive approach” that truncates the system by ignoring classes <span class="math notranslate nohighlight">\(k&gt;K\)</span> for some cutoff <span class="math notranslate nohighlight">\(K\)</span>.
 Explain why this can be inaccurate when <span class="math notranslate nohighlight">\(\sum_{k&gt;K} k^2 p_k\)</span> is not small, and give an example (in words) of a degree distribution where large <span class="math notranslate nohighlight">\(k\)</span> cannot be neglected.</p>
 </li>
-<li><p>Using the reductions in the notebook, the dynamics can be written in terms of <span class="math notranslate nohighlight">\((I(t),\pi_I(t),\theta(t))\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span>.</p></li>
-</ol>
+<li><p>Using the reductions in the section, the dynamics can be written in terms of <span class="math notranslate nohighlight">\((I(t),\pi_I(t),\theta(t))\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span>.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \frac{d}{dt} I &amp;= \beta(1-\rho)N\pi_I\theta\psi'(\theta)- \gamma I\\
@@ -587,10 +586,12 @@ Explain why this can be inaccurate when <span class="math notranslate nohighligh
 S &amp;= (1-\rho)N\psi(\theta)\\
 R &amp;= N-I-S
 \end{align*}\]</div>
-<p><strong>(a)</strong> Focus on the <span class="math notranslate nohighlight">\(d\pi_I/dt\)</span> equation.  Assuming that at early time <span class="math notranslate nohighlight">\(\theta(t)\)</span> remains approximately <span class="math notranslate nohighlight">\(1\)</span> for a long period, estimate <span class="math notranslate nohighlight">\(\pi_I\)</span>.</p>
+<p><strong>(a)</strong> Focus on the <span class="math notranslate nohighlight">\(d\pi_I/dt\)</span> equation.  Assuming that at early time <span class="math notranslate nohighlight">\(\theta(t)\)</span> remains approximately <span class="math notranslate nohighlight">\(1\)</span> for a long period, estimate <span class="math notranslate nohighlight">\(\pi_I(t)\)</span> during this early phase.</p>
 <p><strong>(b)</strong> Consider two populations with the same mean contact rate <span class="math notranslate nohighlight">\(\psi'(1)\)</span> but different contact-rate distributions, one narrow and the other heavy-tailed (<span class="math notranslate nohighlight">\(p_k\)</span> decays slowly for large <span class="math notranslate nohighlight">\(k\)</span>).
 Qualitatively, how would you expect the <em>early epidemic growth</em> (via <span class="math notranslate nohighlight">\(\pi_I\)</span>) to differ between them?</p>
 <p><strong>(c)</strong> How does this relate to the statement in the text about the significance of large <span class="math notranslate nohighlight">\(k\)</span> individuals?</p>
+</li>
+</ol>
 <p>The next question relates to <a class="reference internal" href="../MultiType/MultiTypePGFs.html#sec-multivarpgfs"><span class="std std-ref">Multivariate Probability Generating Functions</span></a></p>
 <ol class="arabic" start="6">
 <li><p>Let <span class="math notranslate nohighlight">\((X_i,Y_i)\)</span>, <span class="math notranslate nohighlight">\(i=1,2,\ldots\)</span>, be independent and identically distributed random pairs with joint PGF <span class="math notranslate nohighlight">\(\mu(x,y)\)</span>, and let <span class="math notranslate nohighlight">\(K\)</span> be a non-negative integer-valued random variable with PGF <span class="math notranslate nohighlight">\(\psi(x)\)</span>, independent of the pairs.</p>
@@ -625,11 +626,12 @@ Qualitatively, how would you expect the <em>early epidemic growth</em> (via <spa
    \mathbb{P}[\text{extinct both types by }g \mid (1,0)] = \Phi_g(0,0 \mid (1,0)).
    \]</div>
 <p>Define <span class="math notranslate nohighlight">\(\vec{\alpha}(g)=(\alpha_1(g),\alpha_2(g))=\vec{\Phi}_g(0,0)\)</span>.</p>
-<p><strong>(a)</strong> Show that <span class="math notranslate nohighlight">\(\vec{\alpha}(g)\)</span> satisfies the iterative equation
-$<span class="math notranslate nohighlight">\(
-\vec{\alpha}(g)=\big(\xi_1(\vec{\alpha}(g-1)),\;\xi_2(\vec{\alpha}(g-1))\big),
-\)</span><span class="math notranslate nohighlight">\(
-with \)</span>\vec{\alpha}(0)=(0,0)$.</p>
+<p><strong>(a)</strong> Show that <span class="math notranslate nohighlight">\(\vec{\alpha}(g)\)</span> satisfies the iterative equation</p>
+<div class="math notranslate nohighlight">
+\[
+   \vec{\alpha}(g)=\big(\xi_1(\vec{\alpha}(g-1)),\;\xi_2(\vec{\alpha}(g-1))\big),
+   \]</div>
+<p>with <span class="math notranslate nohighlight">\(\vec{\alpha}(0)=(0,0)\)</span>.</p>
 <p><strong>(b)</strong> Explain why the <strong>long–time extinction probabilities</strong> <span class="math notranslate nohighlight">\((\alpha_1,\alpha_2)\)</span> must satisfy</p>
 <div class="math notranslate nohighlight">
 \[
