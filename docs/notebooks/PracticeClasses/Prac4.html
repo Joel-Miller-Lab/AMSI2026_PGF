@@ -523,11 +523,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="probability-generating-functions-practical-class-4">
 <h1><span class="section-number">7.4. </span>Probability Generating Functions, Practical Class 4<a class="headerlink" href="#probability-generating-functions-practical-class-4" title="Link to this heading">#</a></h1>
 <p><strong>AMSI 2026</strong></p>
-<p>The first 3 questions relate to <span class="xref std std-ref">sec:SIRSmallPop</span></p>
+<p>The first 3 questions relate to <a class="reference internal" href="../InfDis/InfDisSmallPop.html#sec-sirsmallpop"><span class="std std-ref">SIR outbreak sizes in small populations</span></a>.</p>
 <ol class="arabic">
 <li><p>An SIR outbreak occurs in a small closed population of size <span class="math notranslate nohighlight">\(N\)</span>. Let <span class="math notranslate nohighlight">\(q_\ell\)</span> denote the probability that exactly <span class="math notranslate nohighlight">\(\ell\)</span> individuals (including the index case) are ever infected.</p>
 <p><strong>(a)</strong> In the transmission network interpretation used, individuals are nodes and directed edges represent potential transmission. Explain why the final outbreak size is equal to the size of the out-component of the initially infected individual.</p>
-<p><strong>(b)</strong> For a population of size <span class="math notranslate nohighlight">\(N=3\)</span>, write down the system of equations that determines <span class="math notranslate nohighlight">\(q_1,\ldots,q_3\)</span> using the ball-matrix approach. You do not need to solve the system.</p>
+<p><strong>(b)</strong> For a population of size <span class="math notranslate nohighlight">\(N=3\)</span>, write down the system of equations that determines <span class="math notranslate nohighlight">\(q_1,\ldots,q_3\)</span> using the Ball-matrix approach. You do not need to solve the system.</p>
 </li>
 <li><p>Consider the SIR model with transmission rate <span class="math notranslate nohighlight">\(\beta\)</span> and recovery rate <span class="math notranslate nohighlight">\(\gamma\)</span>, for which the offspring PGF is</p>
 <div class="math notranslate nohighlight">
@@ -541,10 +541,10 @@ document.write(`
 <li><p>The text compares simulated outbreak size distributions with the theoretical probabilities <span class="math notranslate nohighlight">\(q_\ell\)</span>.</p>
 <p><strong>(a)</strong> For a fixed population size <span class="math notranslate nohighlight">\(N=50\)</span>, describe how you expect the distribution of outbreak sizes to change as <span class="math notranslate nohighlight">\(R_0=\beta/\gamma\)</span> increases from below 1 to above 1.</p>
 <p><strong>(b)</strong> Explain why, even when <span class="math notranslate nohighlight">\(R_0&gt;1\)</span>, there is still a substantial probability of small outbreaks in a small population.</p>
-<p><strong>(c)</strong> Give one advantage and one limitation of the ball-matrix method for computing outbreak size distributions as <span class="math notranslate nohighlight">\(N\)</span> becomes large.</p>
+<p><strong>(c)</strong> Give one advantage and one limitation of the Ball matrix method for computing outbreak size distributions as <span class="math notranslate nohighlight">\(N\)</span> becomes large.</p>
 </li>
 </ol>
-<p>The next 2 questions relate to <span class="xref std std-ref">sec:HMF</span>:</p>
+<p>The next 2 questions relate to <a class="reference internal" href="../InfDis/InfDisHetMeanField.html#sec-hmf"><span class="std std-ref">SIR disease in Heterogeneous Populations</span></a>:</p>
 <ol class="arabic" start="4">
 <li><p>In the heterogeneous mean-field SIR model, individuals are grouped by contact rate <span class="math notranslate nohighlight">\(k\in\{0,1,2,\ldots\}\)</span>, and we track <span class="math notranslate nohighlight">\((S_k(t),I_k(t),R_k(t))\)</span> for each <span class="math notranslate nohighlight">\(k\)</span>. Define</p>
 <div class="math notranslate nohighlight">
@@ -591,7 +591,7 @@ R &amp;= N-I-S
 <p><strong>(b)</strong> Consider two populations with the same mean contact rate <span class="math notranslate nohighlight">\(\psi'(1)\)</span> but different contact-rate distributions, one narrow and the other heavy-tailed (<span class="math notranslate nohighlight">\(p_k\)</span> decays slowly for large <span class="math notranslate nohighlight">\(k\)</span>).
 Qualitatively, how would you expect the <em>early epidemic growth</em> (via <span class="math notranslate nohighlight">\(\pi_I\)</span>) to differ between them?</p>
 <p><strong>(c)</strong> How does this relate to the statement in the text about the significance of large <span class="math notranslate nohighlight">\(k\)</span> individuals?</p>
-<p>The next question relates to <span class="xref std std-ref">sec:multivarPGFs</span></p>
+<p>The next question relates to <a class="reference internal" href="../MultiType/MultiTypePGFs.html#sec-multivarpgfs"><span class="std std-ref">Multivariate Probability Generating Functions</span></a></p>
 <ol class="arabic" start="6">
 <li><p>Let <span class="math notranslate nohighlight">\((X_i,Y_i)\)</span>, <span class="math notranslate nohighlight">\(i=1,2,\ldots\)</span>, be independent and identically distributed random pairs with joint PGF <span class="math notranslate nohighlight">\(\mu(x,y)\)</span>, and let <span class="math notranslate nohighlight">\(K\)</span> be a non-negative integer-valued random variable with PGF <span class="math notranslate nohighlight">\(\psi(x)\)</span>, independent of the pairs.</p>
 <p><strong>(a)</strong> Using <a class="reference internal" href="../MultiType/MultiTypePGFs.html#thm-jointPGFProducts">Theorem 5.1</a> find the PGF of of the joint distribution of</p>
