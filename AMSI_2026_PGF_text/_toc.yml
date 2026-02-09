@@ -59,6 +59,7 @@ parts:
       - file: notebooks/MultiType/MultiTypeGWGenBased
       - file: notebooks/MultiType/MultiTypeGWCtsTime
       - file: notebooks/MultiType/StemCells
+      - file: notebooks/MultiType/MultiTypeCarcinogenisis
 
   - caption: Simulations and Practice Problems
     numbered: True

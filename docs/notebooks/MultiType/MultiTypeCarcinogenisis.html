@@ -1,0 +1,924 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.5. Development of cancer (Carcinogenesis) &#8212; Applications of Probability Generating Functions to Biological Systems</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/MultiType/MultiTypeCarcinogenisis';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. Computer Simulation" href="../Simulation/SimulationIntro.html" />
+    <link rel="prev" title="5.4. Stem Cells" href="StemCells.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Applications of Probability Generating Functions to Biological Systems - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Probability Generating Functions and Biological Applications
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foreword</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theorems.html">List of Theorems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematical Properties of Generating Functions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BasicGenFxn/GenFxns.html">1. Generating Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsParadigm.html">1.2. A paradigm change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsNotation.html">1.3. Some notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html">1.4. Generating Function Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProveIdent.html">1.5. Using Generating Functions to Prove Identities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsDiff.html">1.6. Differentiation of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsAdd.html">1.7. Linear Combinations of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsMult.html">1.8. Multiplication of Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html">1.9. Composition of PGFs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html">1.10. Numerical Calculation of PGF coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BasicGenFxn/GenFxnsProperties.html">1.11. Properties of Generating functions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Biological Applications of Generating Functions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../GaltonWatson/GaltWat.html">2. The Galton-Watson Process</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinct.html">2.2. Extinction of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatDiff.html">2.3. Differentiation and the Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatExtinctByGen.html">2.4. Extinction probability over time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../GaltonWatson/GaltWatSizeOverTime.html">2.5. Size Distribution at Successive Generations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../CtsTime/CtsTimeIntro.html">3. Continuous-Time Galton-Watson Processes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeGaltWat.html">3.2. Continuous Time Galton Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html">3.3. Forward Kolmogorov Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeBackKolm.html">3.4. The Backward Kolmogorov Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CtsTime/CtsTimeSim.html">3.5. Simulating a Poisson Process</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../InfDis/InfDisIntro.html">4. Infectious Diseases</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTime.html">4.2. Infectious Diseases in Continuous Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDist_Sim.html">4.3. Small outbreaks in large populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDistAnal.html">4.4. Total size distribution of Continuous-Time small outbreaks: <span class="math notranslate nohighlight">\(N \to \infty\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisGenBased.html">4.5. Generation-Based Infectious Disease Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisSmallPop.html">4.6. SIR outbreak sizes in small populations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InfDis/InfDisHetMeanField.html">4.7. SIR disease in Heterogeneous Populations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="MultiTypeIntro.html">5. Introduction to MultiType Galton-Watson Processes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MultiTypePGFs.html">5.1. Multivariate Probability Generating Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiTypeGWGenBased.html">5.2. MultiType Galton-Watson processes: Generation-based framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MultiTypeGWCtsTime.html">5.3. Continuous-time framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StemCells.html">5.4. Stem Cells</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5.5. Development of cancer (Carcinogenesis)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Simulations and Practice Problems</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Simulation/SimulationIntro.html">6. Computer Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltWatSimulation.html">6.1. Simulation of a Galton-Watson Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Simulation/GaltonWatsonExploration.html">6.2. Computer-based exploration of Galton-Watson Processes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PracticeClasses/PracIntro.html">7. Practice Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac1.html">7.1. Probability Generating Functions, Practical Class 1.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac2.html">7.2. Probability Generating Functions, Practical Class 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac3.html">7.3. Probability Generating Functions, Practical Class 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PracticeClasses/Prac4.html">7.4. Probability Generating Functions, Practical Class 4</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Assignments/AssignmentsIntro.html">8. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst1.html">8.1. Assignment 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst2.html">8.2. Assignment 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Assignments/Asst3.html">8.3. Assignment 3</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Joel-Miller-Lab/AMSI2026_PGF/main?urlpath=lab/tree/AMSI_2026_PGF_text/notebooks/MultiType/MultiTypeCarcinogenisis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/edit/main/AMSI_2026_PGF_text/notebooks/MultiType/MultiTypeCarcinogenisis.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Joel-Miller-Lab/AMSI2026_PGF/issues/new?title=Issue%20on%20page%20%2Fnotebooks/MultiType/MultiTypeCarcinogenisis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/MultiType/MultiTypeCarcinogenisis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Development of cancer (Carcinogenesis)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-assumptions">5.5.1. Modeling assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-equations">5.5.2. Model equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-results">5.5.3. Simulation results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">5.5.4. Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">5.5.5. Self-test</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="development-of-cancer-carcinogenesis">
+<h1><span class="section-number">5.5. </span>Development of cancer (Carcinogenesis)<a class="headerlink" href="#development-of-cancer-carcinogenesis" title="Link to this heading">#</a></h1>
+<p>We now investigate <em>carcinogenesis</em> the process under which cells become cancerous.</p>
+<p>In addition to exploring how mutations accumulate in cells, we will look at how different strategies can impact how soon cancer emerges.  A few biological facts are relevant:</p>
+<ul class="simple">
+<li><p>It typically requires multiple mutations before a cell is altered enough to become cancerous.</p></li>
+<li><p>Mutations typically occur during divisions.</p></li>
+</ul>
+<p>Our focus will be on determining the probability that cancer has developed by a given time <span class="math notranslate nohighlight">\(t\)</span> under different assumptions about how stem cells divide into end cells.  Specifically we will investigate whether the proportion of stem cells that divide into one of each type (stem and end) as opposed to two stem or two end cells affects the risk of cancer.</p>
+<section id="modeling-assumptions">
+<h2><span class="section-number">5.5.1. </span>Modeling assumptions<a class="headerlink" href="#modeling-assumptions" title="Link to this heading">#</a></h2>
+<p>In our model we will explore stem cells undergoing division with occasional mutation.
+We assume:</p>
+<ul class="simple">
+<li><p>At division a stem cell creates two new stem cells with probabilty <span class="math notranslate nohighlight">\(p_{ss}\)</span>, one stem cell and one end cell with probability <span class="math notranslate nohighlight">\(p_{se}\)</span> and two end cells with probability <span class="math notranslate nohighlight">\(p_{ee}\)</span>.</p></li>
+<li><p>Cells divide with rate <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+<li><p>These probabilities and the associated rate ensure that the stem cell population is preserved (on average) and provide new end cells at the appropriate rate required by the body.</p></li>
+<li><p>A stem cell inherits a mutations of its parent and may gain one additional mutation in the division that creates it.</p></li>
+<li><p>The probability of a new mutation in a new stem cell is <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
+<li><p>Once <span class="math notranslate nohighlight">\(N\)</span> mutations have accumulated in a stem cell it becomes cancerous and remains cancerous.</p></li>
+</ul>
+<p>We assume that we start with a large number of stem cells at <span class="math notranslate nohighlight">\(t=0\)</span>, but we focus on the descendents of a single cell.  We partition the stem cells into groups represented by <span class="math notranslate nohighlight">\(S_i\)</span> where <span class="math notranslate nohighlight">\(i\)</span> represents the number of mutations that have occurred.  In our PGFs, we will use <span class="math notranslate nohighlight">\(x_i\)</span> to represent the dummy variable corresponding to <span class="math notranslate nohighlight">\(S_i\)</span>.  We will use the vector <span class="math notranslate nohighlight">\(\vec{x} = (x_0, x_1, \ldots, x_N)\)</span>.</p>
+</section>
+<section id="model-equations">
+<h2><span class="section-number">5.5.2. </span>Model equations<a class="headerlink" href="#model-equations" title="Link to this heading">#</a></h2>
+<p>Our assumption that the stem cells need to be (approximately) preserved lead to the conclusion that <span class="math notranslate nohighlight">\(2p_{ss}+p_{se}=1\)</span>.  Further the probabilities sum to one: <span class="math notranslate nohighlight">\(p_{ss}+p_{se} + p_{ee}=1\)</span>.  Together these imply that</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p_{ss}\)</span> ranges from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(0.5\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{ee} = p_{ss}\)</span>, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{se} = 1 - 2p_{ss}\)</span>.</p></li>
+</ul>
+<p>By our assumptions, a new daughter of a cell of type <span class="math notranslate nohighlight">\(S_i\)</span> for <span class="math notranslate nohighlight">\(i&lt;N\)</span> is of type <span class="math notranslate nohighlight">\(S_i\)</span> with probability <span class="math notranslate nohighlight">\(1-\epsilon\)</span> and it is of type <span class="math notranslate nohighlight">\(S_{i+1}\)</span> with probability <span class="math notranslate nohighlight">\(\epsilon\)</span>.  The PGF for the type of a stem cell daughter of an <span class="math notranslate nohighlight">\(S_i\)</span> cell is <span class="math notranslate nohighlight">\(\mu_i(\vec{x})=(1-\epsilon)x_i + \epsilon x_{i+1}\)</span></p>
+<p>The offspring distribution of a cell of type <span class="math notranslate nohighlight">\(S_i\)</span> for <span class="math notranslate nohighlight">\(i&lt;N\)</span> has PGF</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\xi_i(\vec{x}) &amp;= p_{ss} \mu_i(\vec{x})^2 + p_{se} \mu_i(\vec{x}) + p_{ee}\\
+&amp;= p_{ss}{\Large(}(1-\epsilon)x_i + \epsilon x_{i+1} {\large)}^2 + p_{se} {\Large(}(1-\epsilon)x_i + \epsilon x_{i+1} {\large)} + p_{ee}
+\end{align*}\]</div>
+<p>We are confining our attention to stem-cell offspring.  If we were to count the end cell offspring as well, using <span class="math notranslate nohighlight">\(y\)</span> as the corresponding variable, the <span class="math notranslate nohighlight">\(p_{se}\)</span> term would be multiplied by <span class="math notranslate nohighlight">\(y\)</span> and the <span class="math notranslate nohighlight">\(p_{ee}\)</span> term would be multiplied by <span class="math notranslate nohighlight">\(y^2\)</span> (see self-test exercises).</p>
+<p>As we are just concerned with whether there is at least one <span class="math notranslate nohighlight">\(S_n\)</span> cell, it will suffice for us to simply assume that a cancer cell simply remains a cancer cell at each generation.  In this case <span class="math notranslate nohighlight">\(\xi_N(\vec{x}) = x_N\)</span>.</p>
+<p>We define <span class="math notranslate nohighlight">\(\Phi_i(\vec{x},t)\)</span> to be the PGF for the possible distribution of stem cells based on the assumption that at time <span class="math notranslate nohighlight">\(0\)</span> there is a single stem cell of type <span class="math notranslate nohighlight">\(S_i\)</span>.  We will use a Backwards-Kolmogorov-like approach to derive the equation for <span class="math notranslate nohighlight">\(\Phi_i(\vec{x},t)\)</span>, starting with <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},t)\)</span>.</p>
+<p>So at time <span class="math notranslate nohighlight">\(0\)</span> there is a single stem cell of type <span class="math notranslate nohighlight">\(S_0\)</span>.  At time <span class="math notranslate nohighlight">\(\Delta t \ll 1/r\)</span>, the probability of no division of the cell is <span class="math notranslate nohighlight">\(1- r\Delta t\)</span>.  The probability it has divided is <span class="math notranslate nohighlight">\(r\Delta t\)</span>, and the resulting PGF is <span class="math notranslate nohighlight">\(\xi_0(\vec{x})\)</span>.  So the PGF for time <span class="math notranslate nohighlight">\(\Delta t\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_0(\vec{x}, \Delta t) &amp;= (1-r\Delta t) x_0 + r\Delta t \xi_0(\vec{x})\\
+&amp;= (1-r\Delta t) x_0 + r\Delta t \left(p_{ss}{\Large(}(1-\epsilon)x_0 + \epsilon x_{1} {\large)}^2 + p_{se} {\Large(}(1-\epsilon)x_0 + \epsilon x_{1} {\large)} + p_{ee}\right)
+\end{align*}\]</div>
+<p>For each type <span class="math notranslate nohighlight">\(S_0\)</span> individual at time <span class="math notranslate nohighlight">\(\Delta t\)</span>, the PGF for the descendents at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is the same as for the descendents at time <span class="math notranslate nohighlight">\(t\)</span> of an <span class="math notranslate nohighlight">\(S_0\)</span> individual at time <span class="math notranslate nohighlight">\(0\)</span>.  That is, it is <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},t)\)</span>.  Similarly for each <span class="math notranslate nohighlight">\(S_1\)</span> individual the PGF of the descendents at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is <span class="math notranslate nohighlight">\(\Phi_1(\vec{x},t)\)</span>.</p>
+<p>By <a class="reference internal" href="MultiTypePGFs.html#thm-jointPGFComposition">Theorem 5.2</a>, the PGF for the system at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> can be found by taking PGF for time <span class="math notranslate nohighlight">\(\Delta t\)</span> and substituting in the PGFs for the descendents of the <span class="math notranslate nohighlight">\(S_0\)</span> and <span class="math notranslate nohighlight">\(S_1\)</span> individuals for <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_1\)</span>.  More generally, if there were <span class="math notranslate nohighlight">\(S_2\)</span>, <span class="math notranslate nohighlight">\(S_3\)</span>, etc, we would substitute <span class="math notranslate nohighlight">\(\vec{Phi}(\vec{x},t)\)</span> in for <span class="math notranslate nohighlight">\(\vec{x}\)</span>.  That is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_0(\vec{x},t+\Delta t) &amp;= \Phi_0(\vec{x},\Delta t)\big|_{\vec{x} = \vec{\Phi}(\vec{x},t)}\\
+&amp;= (1-r\Delta t) \Phi_0(\vec{x},t) + r\Delta t\xi_0(\vec{\Phi}(\vec{x},t))\\
+&amp;= \Phi_0(\vec{x},t) + r \Delta t \left(\xi_0(\vec{\Phi}(\vec{x},t)) - \Phi_0(\vec{x},t)\right)
+\end{align*}\]</div>
+<p>Reviewing this derivation, a similar derivation for other <span class="math notranslate nohighlight">\(i\)</span> yields</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_i(\vec{x},t+\Delta t) = \Phi_i(\vec{x},t) + r \Delta t \left(\xi_i(\vec{\Phi}(\vec{x},t)) - \Phi_i(\vec{x},t)\right)
+\]</div>
+<p>Note that for <span class="math notranslate nohighlight">\(i=N\)</span>, <span class="math notranslate nohighlight">\(\xi_N(\vec{\Phi}(\vec{x},t)) = \Phi_N(\vec{x},t)\)</span>, so the term multiplied by <span class="math notranslate nohighlight">\(r\Delta t\)</span> becomes <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>We now look for the time derivative of <span class="math notranslate nohighlight">\(\vec{\Phi}(\vec{x},t)\)</span>.  We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial t} \vec{\Phi}(\vec{x},t) &amp;= \lim_{\Delta t \to 0} \frac{\vec{\Phi}(\vec{x},t+\Delta t) - \vec{\Phi}(\vec{x},t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0}\frac{\vec{\Phi}(\vec{x},t) + r \Delta t\left(\vec{\xi}(\vec{\Phi}(\vec{x,t}))- \vec{\Phi}(\vec{x},t)\right) - \vec{\Phi}(\vec{x},t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0}\frac{r \Delta t\left(\vec{\xi}(\vec{\Phi}(\vec{x,t}))- \vec{\Phi}(\vec{x},t)\right)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0} r \left(\vec{\xi}(\vec{\Phi}(\vec{x},t))- \vec{\Phi}(\vec{x},t)\right)\\
+&amp;= r \left(\vec{\xi}(\vec{\Phi}(\vec{x},t))- \vec{\Phi}(\vec{x},t)\right)
+\end{align*}\]</div>
+<p>where again for <span class="math notranslate nohighlight">\(i&lt;N\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\xi_i(\vec{\Phi})= p_{ss}{\Large(}(1-\epsilon)\Phi_i + \epsilon \Phi_{i+1} {\large)}^2 + p_{se} {\Large(}(1-\epsilon)\Phi_i + \epsilon \Phi_{i+1} {\large)} + p_{ee}
+\]</div>
+<p>and for <span class="math notranslate nohighlight">\(i=N\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\xi_N(\vec{\Phi}) = \Phi_N
+\]</div>
+</section>
+<section id="simulation-results">
+<h2><span class="section-number">5.5.3. </span>Simulation results<a class="headerlink" href="#simulation-results" title="Link to this heading">#</a></h2>
+<p>We run simulation to calculate the probability of no cancer assuming that there are <code class="docutils literal notranslate"><span class="pre">NumCells</span></code> stem cells of type <span class="math notranslate nohighlight">\(S_0\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>.  This is given by <span class="math notranslate nohighlight">\(\Phi_0(1,1,1,\ldots, 1, 0, t)^{\texttt{NumCells}}\)</span>.  We initially take <code class="docutils literal notranslate"><span class="pre">NumCells</span></code><span class="math notranslate nohighlight">\(=1000\)</span>, but we’ll find out that this is too small given the other parameters.</p>
+<p>Let’s look at the output and we’ll see something weird.  Then we’ll see why that happens.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">):</span>
+    <span class="c1">#p_ee=p_ss</span>
+    <span class="n">p_se</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">p_ss</span>
+
+    <span class="c1"># phi shape (N+1,)</span>
+    <span class="c1"># First we handle i=0..,N-1</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">eps</span><span class="p">)</span> <span class="o">*</span> <span class="n">phi</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>          <span class="c1"># i=0..N-1</span>
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">xi</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_ss</span> <span class="o">*</span> <span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="p">)</span> <span class="o">+</span> <span class="n">p_se</span> <span class="o">*</span> <span class="n">mu</span>  <span class="o">+</span><span class="n">p_ss</span>               <span class="c1"># p_ee=p_ss</span>
+
+    <span class="c1"># Now we handle i=N</span>
+    <span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>                                   <span class="c1"># xi_N(phi)=phi_N</span>
+    <span class="k">return</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">xi</span> <span class="o">-</span> <span class="n">phi</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_for_cancer_prob</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">):</span>
+    <span class="n">p_se</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_ss</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>                     <span class="c1"># (1,...,1,0)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span><span class="n">p_ss</span><span class="o">=</span><span class="n">p_ss</span><span class="p">),</span> 
+                    <span class="n">t_span</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span>
+                    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sol</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sol</span>
+
+<span class="c1"># ---- run a range of p_ss ----</span>
+<span class="n">NumCells</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">r</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="mi">2001</span><span class="p">)</span>
+
+<span class="n">p_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>   <span class="c1"># adjust</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p_ss</span> <span class="ow">in</span> <span class="n">p_list</span><span class="p">:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_for_cancer_prob</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">)</span>     <span class="c1"># or pass p_se=...</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">NumCells</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$p_</span><span class="se">{{</span><span class="s2">ss</span><span class="se">}}</span><span class="s2">=</span><span class="si">{</span><span class="n">p_ss</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">mathbb</span><span class="si">{P}</span><span class="s2">[$no cancer$]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/c864562d6efa800d96bb8aa91e673f992e169bf716a201ac127aa7212315f777.png" src="../../_images/c864562d6efa800d96bb8aa91e673f992e169bf716a201ac127aa7212315f777.png" />
+</div>
+</div>
+<p>It seems odd that these all seem to reach some equilibrium.  We expect that mutations continue to happen.  So surely eventually these should accumulate.</p>
+<div class="proof remark admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 5.1 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Before reading on, can you identify what is happening that causes the probaiblity of no cancer to stop decreasing?```</p>
+<p>The problem is that by random chance, there is a non-zero probability of extinction of stem cells.  So in those cases where the stem cells go extinct, it’s actually worse than cancer.  Let’s plot the extinction probabilities along with the no cancer probabilities:</p>
+</section>
+</div><div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_for_ext_prob</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">):</span>
+    <span class="n">p_se</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_ss</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>                    <span class="c1"># (0,...,0)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span><span class="n">p_ss</span><span class="o">=</span><span class="n">p_ss</span><span class="p">),</span> 
+                    <span class="n">t_span</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">,</span>
+                    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sol</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sol</span>
+
+<span class="c1"># ---- run a range of p_ss ----</span>
+<span class="n">NumCells</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">r</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="mi">2001</span><span class="p">)</span>
+
+<span class="n">p_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>   <span class="c1"># adjust</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p_ss</span> <span class="ow">in</span> <span class="n">p_list</span><span class="p">:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_for_cancer_prob</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">)</span>     <span class="c1"># or pass p_se=...</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">NumCells</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$p_</span><span class="se">{{</span><span class="s2">ss</span><span class="se">}}</span><span class="s2">=</span><span class="si">{</span><span class="n">p_ss</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p_ss</span> <span class="ow">in</span> <span class="n">p_list</span><span class="p">:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_for_ext_prob</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">)</span>     <span class="c1"># or pass p_se=...</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="n">NumCells</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\Phi_0((1,1,1,1,1,...,0),t)^{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">NumCells</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/89919f75b8ce56a7af8385fb60d500cbff2c4f1df1bfa9c60c503f395a9b4fb5.png" src="../../_images/89919f75b8ce56a7af8385fb60d500cbff2c4f1df1bfa9c60c503f395a9b4fb5.png" />
+</div>
+</div>
+<p>So we’ve discovered a big problem…  Despite starting with <span class="math notranslate nohighlight">\(1000\)</span> cells, we see extinction of stem cells has occurred, and it has occured with higher probability in those cases with higher <span class="math notranslate nohighlight">\(p_{ss}\)</span>.</p>
+<p>We’ve avoided cancer, but we no longer have useful end cells being produced.  This is generally fatal.</p>
+<p>Let’s explore what happens with more initial stem cells.  Increasing to <span class="math notranslate nohighlight">\(10000\)</span> means that cancer is the first concern, not extinction of stem cells.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- run a range of p_ss ----</span>
+<span class="n">NumCells</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">r</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="mi">2001</span><span class="p">)</span>
+
+<span class="n">p_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>   <span class="c1"># adjust</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">p_ss</span> <span class="ow">in</span> <span class="n">p_list</span><span class="p">:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_for_cancer_prob</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">)</span>     <span class="c1"># or pass p_se=...</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">NumCells</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$p_</span><span class="se">{{</span><span class="s2">ss</span><span class="se">}}</span><span class="s2">=</span><span class="si">{</span><span class="n">p_ss</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p_ss</span> <span class="ow">in</span> <span class="n">p_list</span><span class="p">:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_for_ext_prob</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">p_ss</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">t_eval</span><span class="p">)</span>     <span class="c1"># or pass p_se=...</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="n">NumCells</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\Phi_0((1,1,1,1,1,...,0),t)^{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">NumCells</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/42db064ac08e01bd469406af55f46ba4fa73669fa75dc0d921ad7e8af61bb5db.png" src="../../_images/42db064ac08e01bd469406af55f46ba4fa73669fa75dc0d921ad7e8af61bb5db.png" />
+</div>
+</div>
+</section>
+<section id="discussion">
+<h2><span class="section-number">5.5.4. </span>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
+<p>If we look back at the earlier calculations of expected counts (in earlier sections), we see that the expected values do not need of the number of cells of different types follow from just knowing the expected number of offspring of different types rather than the full distribution.  Since all of the scenarios above have the same expected value for the number of offspring, it might seem surprising that we see cancer delayed the most by setting <span class="math notranslate nohighlight">\(p_{ss} = p_{ee} = 0.5\)</span>.</p>
+<p>What’s happening here is that by changing the value of <span class="math notranslate nohighlight">\(p_{ss}\)</span>, we are altering how the mutated cells are distributed.  Let’s assume we get the opporunity to set <span class="math notranslate nohighlight">\(p_{ss}\)</span> for an entire population.</p>
+<p>Imagine that a large number of individuals that each have a single cell of type <span class="math notranslate nohighlight">\(S_{N-1}\)</span>.  In the case of <span class="math notranslate nohighlight">\(p_{ss}=0.5\)</span>, about half of them eliminate the <span class="math notranslate nohighlight">\(S_{N-1}\)</span> cells at the next division, while about half end up with <span class="math notranslate nohighlight">\(2\)</span> each.  Further division can eliminate <span class="math notranslate nohighlight">\(S_{N-1}\)</span> cells in some of these, but there are just as many who are unlucky and increase their count.  Over time, a proportion end up with many <span class="math notranslate nohighlight">\(S_{N-1}\)</span> cells while others end up with none.</p>
+<p>In contrast if <span class="math notranslate nohighlight">\(p_{ss}=p_{ee}=0\)</span>, then each division maintains a stem cell.  If an individual has an <span class="math notranslate nohighlight">\(S_{N-1}\)</span> cell, that remains in place.  The total number remains the same as in the previous case, but the distribution is homogeneous.</p>
+<p>The fundamental issue is that putting the same number of <span class="math notranslate nohighlight">\(S_{N-1}\)</span> stem cells into a smaller proportion of the population means that the the risk of cancer is concentrated in a smaller number of individuals.  The expected number of cells that reach the cancerous stage will be the same in both scenarios, but when they are concentrated in a smaller proportion they are repeatedly affecting the same person.  In practice, having 2 cancerous cells (or nearly-cancerous cells) is less than twice as bad as having a single cancerous cell (or nearly-cancerous cell).  So increasing the probability of a very skewed distribution of the nearly-cancerous cells minimizes the probability of getting a tumour.</p>
+<p>So if you were to choose your own <span class="math notranslate nohighlight">\(p_{ss}\)</span> in a case where you have no control over the expected number of cancerous cells you get, you would want to choose the case that increases the heterogeneity of the outcome.</p>
+<p>(Jensen’s inequality is a useful inequality if you want to do a deeper study of this)</p>
+</section>
+<section id="self-test">
+<h2><span class="section-number">5.5.5. </span>Self-test<a class="headerlink" href="#self-test" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>The derivation of <span class="math notranslate nohighlight">\(\xi_i(\vec{x})\)</span> used some tools of PGFs to accelerate the derivation.</p>
+<p><strong>(a)</strong> Rederive <span class="math notranslate nohighlight">\(\xi_i(\vec{x})\)</span> without referring to <span class="math notranslate nohighlight">\(\mu_i(\vec{x})\)</span>.  Instead, work out the PGF resulting from each of the offspring possibilities.</p>
+<p><strong>(b)</strong> Update <span class="math notranslate nohighlight">\(\mu_i(\vec{x})\)</span> to a function <span class="math notranslate nohighlight">\(\mu_i(\vec{x},y)\)</span> which will allow us to count the number of end cells produced.</p>
+<p><strong>(c)</strong> Use (b) to derive <span class="math notranslate nohighlight">\(\xi_i(\vec{x},y)\)</span>.</p>
+</li>
+<li><p>It is natural to wonder why we need <span class="math notranslate nohighlight">\(\Phi_i(\vec{x},t)\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> given that we are only interested in an initial condition of an <span class="math notranslate nohighlight">\(S_0\)</span> stem cell.</p>
+<p><strong>(a)</strong> Review the derivation of <span class="math notranslate nohighlight">\(\partial \Phi_0/\partial t\)</span>.  Explain why calculating <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},t_0)\)</span> at some time <span class="math notranslate nohighlight">\(t_0\)</span> requires knowledge of <span class="math notranslate nohighlight">\(\Phi_1(\vec{x},t)\)</span> for <span class="math notranslate nohighlight">\(0&lt; t&lt; t_0\)</span>.</p>
+<p><strong>(b)</strong> By analogy, explain why <span class="math notranslate nohighlight">\(\Phi_i(\vec{x},t)\)</span> is needed for all <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p><strong>(c)</strong> Assume instead that we had a generation-based approach finding <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},g)\)</span> where <span class="math notranslate nohighlight">\(g\)</span> is the generation, starting with an <span class="math notranslate nohighlight">\(S_0\)</span> stem cell at <span class="math notranslate nohighlight">\(g=0\)</span>.  By looking at how fast “information spreads”, explain why we do not need <span class="math notranslate nohighlight">\(\Phi_i(\vec{x},0)\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> in order to find <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},g)\)</span> for a specific <span class="math notranslate nohighlight">\(g\)</span>.</p>
+</li>
+<li><p>Why is the probability of no cancer given by taking <span class="math notranslate nohighlight">\(x_i = 1\)</span> for <span class="math notranslate nohighlight">\(i&lt;N\)</span> and <span class="math notranslate nohighlight">\(x_N=0\)</span>?</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Joel-Miller-Lab/AMSI2026_PGF",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks\MultiType"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="StemCells.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.4. </span>Stem Cells</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Simulation/SimulationIntro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Computer Simulation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-assumptions">5.5.1. Modeling assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-equations">5.5.2. Model equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-results">5.5.3. Simulation results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">5.5.4. Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-test">5.5.5. Self-test</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Joel C. Miller
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
