@@ -687,10 +687,10 @@ We assume:</p>
 <div class="proof remark admonition" id="remark-0">
 <p class="admonition-title"><span class="caption-number">Remark 5.1 </span></p>
 <section class="remark-content" id="proof-content">
-<p>Before reading on, can you identify what is happening that causes the probaiblity of no cancer to stop decreasing?```</p>
-<p>The problem is that by random chance, there is a non-zero probability of extinction of stem cells.  So in those cases where the stem cells go extinct, it’s actually worse than cancer.  Let’s plot the extinction probabilities along with the no cancer probabilities:</p>
+<p>Before reading on, can you identify what is happening that causes the probaiblity of no cancer to stop decreasing?</p>
 </section>
-</div><div class="cell tag_hide-input docutils container">
+</div><p>The problem is that by random chance, there is a non-zero probability of extinction of stem cells.  So in those cases where the stem cells go extinct, it’s actually worse than cancer.  Let’s plot the extinction probabilities along with the no cancer probabilities:</p>
+<div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
 <p class="collapsed admonition-title">Show code cell source</p>
@@ -736,10 +736,15 @@ We assume:</p>
 <img alt="../../_images/89919f75b8ce56a7af8385fb60d500cbff2c4f1df1bfa9c60c503f395a9b4fb5.png" src="../../_images/89919f75b8ce56a7af8385fb60d500cbff2c4f1df1bfa9c60c503f395a9b4fb5.png" />
 </div>
 </div>
-<p>So we’ve discovered a big problem…  Despite starting with <span class="math notranslate nohighlight">\(1000\)</span> cells, we see extinction of stem cells has occurred, and it has occured with higher probability in those cases with higher <span class="math notranslate nohighlight">\(p_{ss}\)</span>.</p>
-<p>We’ve avoided cancer, but we no longer have useful end cells being produced.  This is generally fatal.</p>
-<p>Let’s explore what happens with more initial stem cells.  Increasing to <span class="math notranslate nohighlight">\(10000\)</span> means that cancer is the first concern, not extinction of stem cells.</p>
-<div class="cell docutils container">
+<p>So we’ve discovered a big problem…  Despite starting with <span class="math notranslate nohighlight">\(1000\)</span> cells, we see extinction of stem cells has occurred, and it has occured with higher probability in those cases with higher <span class="math notranslate nohighlight">\(p_{ss}\)</span>.  This extinction of stem cells fully explains the different large <span class="math notranslate nohighlight">\(t\)</span> cancer probability.</p>
+<p>We’ve avoided cancer, but we no longer have useful end cells being produced.  This is generally pretty fatal.</p>
+<p>Let’s explore what happens with more initial stem cells, which will significantly reduce the risk of extinction.  Increasing to <span class="math notranslate nohighlight">\(10000\)</span> initial cells means that cancer is the first concern, not extinction of stem cells.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---- run a range of p_ss ----</span>
 <span class="n">NumCells</span> <span class="o">=</span> <span class="mi">10000</span>
@@ -765,10 +770,13 @@ We assume:</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../../_images/42db064ac08e01bd469406af55f46ba4fa73669fa75dc0d921ad7e8af61bb5db.png" src="../../_images/42db064ac08e01bd469406af55f46ba4fa73669fa75dc0d921ad7e8af61bb5db.png" />
 </div>
 </div>
+<p>So if there are enough stem cells to begin with, then cancer can be delayed and extinction of stem cells avoided.  Additionally, if there are more stem cells, then <span class="math notranslate nohighlight">\(r\)</span> can be reduced while maintaining the same rate of production of end cells.</p>
+<p>It would seem that the obvious solution is to load up on lots of stem cells to begin with.  However, this comes with a related problem as during the doubling phase needed to get the initial stem cell load, mutations can still occur.  Additionally maintaining many stem cells would require resources.</p>
 </section>
 <section id="discussion">
 <h2><span class="section-number">5.5.4. </span>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
@@ -793,7 +801,7 @@ We assume:</p>
 <p><strong>(b)</strong> By analogy, explain why <span class="math notranslate nohighlight">\(\Phi_i(\vec{x},t)\)</span> is needed for all <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p><strong>(c)</strong> Assume instead that we had a generation-based approach finding <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},g)\)</span> where <span class="math notranslate nohighlight">\(g\)</span> is the generation, starting with an <span class="math notranslate nohighlight">\(S_0\)</span> stem cell at <span class="math notranslate nohighlight">\(g=0\)</span>.  By looking at how fast “information spreads”, explain why we do not need <span class="math notranslate nohighlight">\(\Phi_i(\vec{x},0)\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> in order to find <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},g)\)</span> for a specific <span class="math notranslate nohighlight">\(g\)</span>.</p>
 </li>
-<li><p>Why is the probability of no cancer given by taking <span class="math notranslate nohighlight">\(x_i = 1\)</span> for <span class="math notranslate nohighlight">\(i&lt;N\)</span> and <span class="math notranslate nohighlight">\(x_N=0\)</span>?</p></li>
+<li><p>Why is the probability of no cancer given by taking <span class="math notranslate nohighlight">\(\Phi_0(\vec{x},t)\)</span> where <span class="math notranslate nohighlight">\(\vec{x} = (0,0,\ldots,0,1)\)</span>?</p></li>
 </ol>
 </section>
 </section>
