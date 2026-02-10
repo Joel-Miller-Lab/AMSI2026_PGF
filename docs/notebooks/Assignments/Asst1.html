@@ -582,11 +582,28 @@ document.write(`
 <li><p>Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable with distribution</p>
 <div class="math notranslate nohighlight">
 \[
-   P(X=0) = 0.2, \quad P(X=1) = 0.5, \quad P(X=2) = 0.3.
+   \mathbb{P}[X=0] = 0.2, \quad \mathbb{P}[X=1] = 0.5, \quad \mathbb{P}[X=2] = 0.3.
    \]</div>
 <p><strong>(a)</strong> Find the probability generating function <span class="math notranslate nohighlight">\(\psi(x)\)</span> of this distribution.</p>
-<p><strong>(b)</strong> Use the probability generating function to compute the expected value <span class="math notranslate nohighlight">\(\mathbb{E}[X]\)</span>.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\psi(x) &amp;= \sum_k \mathbb{P}[X=k] x^k\\
+        &amp;= 0.2 + 0.5x + 0.3x^2
+\end{align*}\]</div>
+</div>
+</details><p><strong>(b)</strong> Use the probability generating function to compute the expected value <span class="math notranslate nohighlight">\(\mathbb{E}[X]\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[x] = \psi'(1) = 0.5 + 0.6\cdot 1 = 1.1
+\]</div>
+</div>
+</details></li>
 <li><p>Suppose a generating function is defined as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -598,33 +615,294 @@ document.write(`
    f(x) = e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}.
    \]</div>
 <p><strong>(a)</strong> According to the generating-function paradigm, what sequence <span class="math notranslate nohighlight">\((c_n)\)</span> does the function <span class="math notranslate nohighlight">\(f(x)\)</span> represent?</p>
-<p><strong>(b)</strong> Explain how the generating-function paradigm interprets <span class="math notranslate nohighlight">\(f(x)\)</span> as a compact way of encoding this sequence. In your explanation, describe how the coefficients <span class="math notranslate nohighlight">\(c_n\)</span> can be recovered from the function using derivatives evaluated at <span class="math notranslate nohighlight">\(x = 0\)</span>.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[
+f(x) = \sum c_n x^n
+\]</div>
+<p class="sd-card-text">So</p>
+<div class="math notranslate nohighlight">
+\[
+c_n = \frac{1}{n!}
+\]</div>
+</div>
+</details><p><strong>(b)</strong> Explain how the generating-function paradigm interprets <span class="math notranslate nohighlight">\(f(x)\)</span> as a compact way of encoding this sequence. In your explanation, describe how the coefficients <span class="math notranslate nohighlight">\(c_n\)</span> can be recovered from the function using derivatives evaluated at <span class="math notranslate nohighlight">\(x = 0\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The function <span class="math notranslate nohighlight">\(f(x)\)</span> encodes the sequence because we an recover the coefficients <span class="math notranslate nohighlight">\(c_n\)</span> through repeated derivatives: <span class="math notranslate nohighlight">\(c_n = \left. \frac{1}{n!} \frac{d^n}{dx^n} e^x \right|_{x=0}\)</span>.</p>
+</div>
+</details></li>
 <li><p>Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable with values <span class="math notranslate nohighlight">\(\{0,1,2,\ldots\}\)</span> and</p>
 <div class="math notranslate nohighlight">
 \[
-   P(X = k) = C \left(\frac{1}{2}\right)^k \quad \text{for } k = 0,1,2,\ldots
+   \mathbb{P}[X = k] = C \left(\frac{1}{2}\right)^k \quad \text{for } k = 0,1,2,\ldots
    \]</div>
 <p>where <span class="math notranslate nohighlight">\(C\)</span> is a normalizing constant.</p>
 <p><strong>(a)</strong> Determine the value of <span class="math notranslate nohighlight">\(C\)</span>.</p>
-<p><strong>(b)</strong> Find the probability generating function <span class="math notranslate nohighlight">\(\mu(x)\)</span> in closed form.</p>
-<p><strong>(c)</strong> Use <span class="math notranslate nohighlight">\(\mu(x)\)</span> and <span class="math notranslate nohighlight">\(x \partial_x\)</span> to find <span class="math notranslate nohighlight">\(\sum_k k^2/2^k\)</span>.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We need the sum of the probabilities to be <span class="math notranslate nohighlight">\(1\)</span>, so</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+C &amp;= \left( \sum_k \left(\frac{1}{2}\right)^k)^{-1}\\
+  &amp;= \left( \frac{1}{1-1/2}\right)^{-1}\\
+  &amp;= 2^{-1}\\
+  &amp;= 1/2
+\end{align*}\]</div>
+</div>
+</details><p><strong>(b)</strong> Find the probability generating function <span class="math notranslate nohighlight">\(\mu(x)\)</span> in closed form.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu(x) &amp;= \sum_k \mathbb{P}[X=k]x^k\\
+       &amp;= \sum_k \frac{1}{2} \left(\frac{1}{2}\right)^kx^k\\
+       &amp;= \frac{1}{2}\frac{1}{1-x/2}\\
+       &amp;= \frac{1}{2-x}
+\end{align*}\]</div>
+</div>
+</details><p><strong>(c)</strong> Use <span class="math notranslate nohighlight">\(\mu(x)\)</span> and <span class="math notranslate nohighlight">\(x \partial_x\)</span> to find <span class="math notranslate nohighlight">\(\sum_k k^2/2^k\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Applying <span class="math notranslate nohighlight">\(x \partial_x\)</span> to a generating function <span class="math notranslate nohighlight">\(\sum_k c_kx^k\)</span> yields <span class="math notranslate nohighlight">\(\sum_k k c_k x^k\)</span>.  Applying it twice yields <span class="math notranslate nohighlight">\(\sum_k k^2 c_k x^k\)</span>.  So:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_k C\frac{k^2}{2^k} x^k&amp;=(x\partial_x)^2 \mu(x)\\
+ &amp;= x\partial_x \left(x \partial_x (2-x)^{-1}\right) \\
+ &amp;= x \partial_x \left(x (-1)(2-x)^{-2}(-1)\right)
+ &amp;= x \partial_x x(2-x)^{-2}\\
+ &amp;= x\left( (2-x)^{-2} + x(-2)(2-x)^{-3}(-1)\right)\\
+ &amp;= \frac{x}{(2-x)^2} + \frac{2x^2}{(2-x)^3}
+ \end{align*}\]</div>
+<p class="sd-card-text">So evaluating at <span class="math notranslate nohighlight">\(x=1\)</span> gives <span class="math notranslate nohighlight">\(C\sum k^2/2^k = 1/1^2 + 2/1^3 = 3\)</span>.  Since <span class="math notranslate nohighlight">\(C=1/2\)</span>, we conclude that</p>
+<div class="math notranslate nohighlight">
+\[
+ \sum_k k^2/2^k = 6
+ \]</div>
+</div>
+</details></li>
 <li><p>In high school I came across a method that seemed to find all of the numbers that are both triangular numbers <span class="math notranslate nohighlight">\((m)(m+1)/2\)</span> and square numbers <span class="math notranslate nohighlight">\(n^2\)</span> (I couldn’t prove it at the time).</p>
 <p>Consider the sequence <span class="math notranslate nohighlight">\(a_n\)</span> defined by <span class="math notranslate nohighlight">\(a_0=1\)</span>, <span class="math notranslate nohighlight">\(a_1=2\)</span> and <span class="math notranslate nohighlight">\(a_{n+2} = a_n + 2a_{n+1}\)</span> and the sequence <span class="math notranslate nohighlight">\(b_n\)</span> defined by <span class="math notranslate nohighlight">\(b_0=1\)</span>, <span class="math notranslate nohighlight">\(b_1 = 3\)</span> and <span class="math notranslate nohighlight">\(b_{n+2} = b_n + 2b_{n+1}\)</span>.  Then <span class="math notranslate nohighlight">\((a_nb_n)^2\)</span> is both triangular and square.</p>
 <p>I’ve since learned that this property of the sequence is known, but it’s still an interesting result.  We can use OGFs to prove that these are both triangular and square (though it doesn’t prove that every triangular and square number is in the sequence).  Some of these steps follow our derivation of the formula for the Fibonacci numbers.</p>
 <p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> <strong>(only these three values)</strong> use direct calculate to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p>
-<p><strong>(b)</strong> Derive the OGFs <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> for both <span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span>.  <strong>Please disregard my prior advice about what this function should look like.  I misplaced my calculations when I wrote the question.  Ultimately, you should end up with something that gets a simple expression for <span class="math notranslate nohighlight">\(a_n\)</span> in (d) that somewhat resembles the expression stated for <span class="math notranslate nohighlight">\(b_n\)</span>.</strong></p>
-<p><strong>(c)</strong> Let <span class="math notranslate nohighlight">\(Q= 1+\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(R = 1-\sqrt{2}\)</span>.  Your denominators for the OGFs should equal <span class="math notranslate nohighlight">\((1-Qx)(1-Rx)\)</span>.  Write <span class="math notranslate nohighlight">\(f(x) = A/(1-Qx) + B/(1-Rx)\)</span>.  <strong>Find <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>.</strong></p>
-<p><strong>(d)</strong> Use this to write <span class="math notranslate nohighlight">\(a_n\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>. Similar steps show that <span class="math notranslate nohighlight">\(b_n = (Q^{n+1} + R^{n+1})/2\)</span>.</p>
-<p><strong>(e)</strong> Write <span class="math notranslate nohighlight">\(b_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, simplifying any <span class="math notranslate nohighlight">\(QR\)</span> term using <span class="math notranslate nohighlight">\(QR=-1\)</span>.</p>
-<p><strong>(f)</strong> Similarly simplify <span class="math notranslate nohighlight">\(2a_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, and show that <span class="math notranslate nohighlight">\(2a_n^2  = b_n^2 + (-1)^n\)</span>.</p>
-<p><strong>(g)</strong> Thus explain why <span class="math notranslate nohighlight">\(b_n^2 a_n^2\)</span> is a triangular number (it is clearly square).</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(n=0\)</span>:</p>
+<p class="sd-card-text">We have <span class="math notranslate nohighlight">\(a_0=1\)</span> and <span class="math notranslate nohighlight">\(b_0=1\)</span>.  For the LHS</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+b_0^2 +(-1)^0 &amp;= 1+1\\
+     &amp;=2
+\end{align*}\]</div>
+<p class="sd-card-text">and for the RHS:</p>
+<div class="math notranslate nohighlight">
+\[
+    2a_0^2 = 2
+   \]</div>
+<p class="sd-card-text">So these are equal.</p>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(N=1\)</span>:</p>
+<p class="sd-card-text">We have <span class="math notranslate nohighlight">\(a_1=2\)</span> and <span class="math notranslate nohighlight">\(b_1=3\)</span>.  For the LHS</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+b_0^2 +(-1)^1 &amp;= 9-1\\
+     &amp;=8
+\end{align*}\]</div>
+<p class="sd-card-text">and for the RHS:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ 2a_1^2 &amp;= 2\cdot 4\\
+        &amp;= 8
+\end{align*}\]</div>
+<p class="sd-card-text">So these are equal.</p>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(N=2\)</span>:</p>
+<p class="sd-card-text">We have <span class="math notranslate nohighlight">\(a_1=5\)</span> and <span class="math notranslate nohighlight">\(b_1=7\)</span>.  For the LHS</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+b_0^2 +(-1)^2 &amp;= 49+1\\
+     &amp;=50
+\end{align*}\]</div>
+<p class="sd-card-text">and for the RHS:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+ 2a_1^2 &amp;= 2\cdot 25\\
+  &amp;= 50
+\end{align*}\]</div>
+<p class="sd-card-text">So these are equal.</p>
+</div>
+</details><p><strong>(b)</strong> Derive the OGFs <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> for both <span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span>.  <strong>Please disregard my prior advice about what this function should look like.  I misplaced my calculations when I wrote the question.  Ultimately, you should end up with something that gets a simple expression for <span class="math notranslate nohighlight">\(a_n\)</span> in (d) that somewhat resembles the expression stated for <span class="math notranslate nohighlight">\(b_n\)</span>.</strong></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Both have the same recurrence relationship, but with a different value of the second term. We will start with <span class="math notranslate nohighlight">\(f(x)\)</span>, but in full generality, not using the values of <span class="math notranslate nohighlight">\(a_n\)</span>.  Thus the result will apply to <span class="math notranslate nohighlight">\(g(x)\)</span> as well.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(x) &amp;= a_0 + a_1 x + \sum_{n=2}^\infty a_n x^n\\
+     &amp;= a_0 + a_1 x + \sum_{n=2}^\infty (a_{n-2} + 2a_{n-1})x^n\\
+     &amp;= a_0 + a_1 x + \sum_{n=2}^\infty a_{n-2}x^n + \sum_{n=2}^\infty + 2a_{n-1}x^n\\
+     &amp;= a_0 + a_1 x + \sum_{m=0}^\infty a_{m}x^{m+2} + \sum_{m=1}^\infty + 2a_{m}x^{m+1}
+ \end{align*}\]</div>
+<p class="sd-card-text">where we are reindexing by setting <span class="math notranslate nohighlight">\(m=n-2\)</span> and then <span class="math notranslate nohighlight">\(m=n-1\)</span> in the two sums.  Continuing:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(x) &amp;= a_0 + a_1 x + x^2 \sum_{m=0}^\infty a_mx^m + 2x \sum_{m=1}^\infty a_mx^m\\
+     &amp;= a_0 + a_1 x + x^2 f(x) + 2x \left( -a_0 + a_0  \sum_{m=1}^\infty a_mx^m\right)\\
+     &amp;= a_0 + a_1 x + x^2 f(x) + 2x \left( -a_0 \sum_{m=0}^\infty a_mx^m\right)\\
+     &amp;= a_0 + a_1 x + x^2 f(x) + 2x\left( f(x) - a_0\right)\\
+     &amp;= a_0 + a_1 x + x^2 f(x) + 2xf(x) - 2xa_0\\
+\Rightarrow (1-x^2-2x)f(x) &amp;= a_0 + x(a_1 - 2a_0)\\
+\Rightarrow f(x) &amp;= \frac{a_0 + x(a_1-2a_0)}{1-2x-x^2}
+\end{align*}\]</div>
+<p class="sd-card-text">Applying this to <span class="math notranslate nohighlight">\(f(x)\)</span> with <span class="math notranslate nohighlight">\(a_0=1\)</span> and <span class="math notranslate nohighlight">\(a_1=2\)</span> yields</p>
+<div class="math notranslate nohighlight">
+\[
+ f(x) = \frac{1}{1-2x-x^2}
+ \]</div>
+<p class="sd-card-text">and applying it to <span class="math notranslate nohighlight">\(g(x)\)</span> with <span class="math notranslate nohighlight">\(b_0=1\)</span> and <span class="math notranslate nohighlight">\(b_1=3\)</span> yields</p>
+<div class="math notranslate nohighlight">
+\[
+ g(x) = \frac{1 + x}{1-2x-x^2}
+ \]</div>
+</div>
+</details><p><strong>(c)</strong> Let <span class="math notranslate nohighlight">\(Q= 1+\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(R = 1-\sqrt{2}\)</span>.  Your denominators for the OGFs should equal <span class="math notranslate nohighlight">\((1-Qx)(1-Rx)\)</span>.  Write <span class="math notranslate nohighlight">\(f(x) = A/(1-Qx) + B/(1-Rx)\)</span>.  <strong>Find <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>.</strong></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Using <span class="math notranslate nohighlight">\(Q=1+\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(R=1-\sqrt{2}\)</span> the denominator factors as <span class="math notranslate nohighlight">\((1-Qx)(1-Rx)\)</span>.  For <span class="math notranslate nohighlight">\(f(x)\)</span>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{1}{1-2x-x^2} &amp;= \frac{A}{1-Qx} + \frac{B}{1-Rx}\\
+\Rightarrow 1 &amp;= A(1-Rx) + B(1-Qx)
+\end{align*}\]</div>
+<p class="sd-card-text">There are multiple options from here.  The simplest is to set <span class="math notranslate nohighlight">\(x=1/R\)</span> and <span class="math notranslate nohighlight">\(x=1/Q\)</span>:</p>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(x=1/R\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1 &amp;= A(0) + B(1-Q/R)\\
+   &amp;= B\frac{R-Q}{R}\\
+\Rightarrow B &amp;= \frac{R}{R-Q}
+\end{align*}\]</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(x=1/Q\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+1 &amp;= A(1-R/Q) + B(0)\\
+&amp;= A\frac{Q-R}{Q}\\
+\Rightarrow A &amp;= \frac{Q}{Q-R}\\
+   &amp;= - \frac{Q}{R-Q}
+\end{align*}\]</div>
+<p class="sd-card-text">The last step isn’t needed, but it makes the denominators the same, so it’s likely to simplify algebra later.</p>
+</div>
+</details><p><strong>(d)</strong> Use this to write <span class="math notranslate nohighlight">\(a_n\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>. Similar steps show that <span class="math notranslate nohighlight">\(b_n = (Q^{n+1} + R^{n+1})/2\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(x) &amp;= \frac{A}{1-Qx} + \frac{B}{1-Rx}\\
+      &amp;= \frac{1}{R-Q} \left (\frac{-Q}{1-Qx} + \frac{R}{1-Rx}\right)\\
+      &amp;= \frac{1}{R-Q} \left ( -Q \sum_{n=0}^\infty Q^nx^n +R \sum_{n=0}^\infty R^nx^n\right)\\
+      &amp;= \frac{1}{R-Q} \sum (R^{n+1}-Q^{n+1})x^n
+\end{align*}\]</div>
+<p class="sd-card-text">So the coefficient of <span class="math notranslate nohighlight">\(x^n\)</span> is <span class="math notranslate nohighlight">\(a_n=\frac{R^{n+1}-Q^{n+1}}{R-Q}\)</span></p>
+</div>
+</details><p><strong>(e)</strong> Write <span class="math notranslate nohighlight">\(b_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, simplifying any <span class="math notranslate nohighlight">\(QR\)</span> term using <span class="math notranslate nohighlight">\(QR=-1\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (e)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We are given that <span class="math notranslate nohighlight">\(b_n= (Q^{n+1}+R^{n+1})/2\)</span>.  So <span class="math notranslate nohighlight">\(b_n^2 = (Q^{2n+2} + 2(QR)^{n+1} + R^{2n+2})/4\)</span>.  Since <span class="math notranslate nohighlight">\(QR=-1\)</span> we can simplify the middle term so</p>
+<div class="math notranslate nohighlight">
+\[
+b_n^2 = \frac{Q^{2n+2} + R^{2n+2} + 2(-1)^{n+1}}{4} = \frac{Q^{2n+2}+R^{2n+2}}{4} + \frac{(-1)^{n+1}}{2}
+\]</div>
+</div>
+</details><p><strong>(f)</strong> Similarly simplify <span class="math notranslate nohighlight">\(2a_n^2\)</span> in terms of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, and show that <span class="math notranslate nohighlight">\(2a_n^2  = b_n^2 + (-1)^n\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (f)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+2 a_n^2 &amp;= 2\left(\frac{R^{n+1}-Q^{n+1}}{R-Q}\right)^2\\
+     &amp;= 2 \frac{2}{(R-Q)^2} \left( R^{2n+2} - 2(QR)^{n+1} + Q^{2n+2}\right)\\
+     &amp;= \frac{2}{(-2\sqrt{2})^2} \left(Q^{2n+2} -2(-1)^{n+1} + R^{2n+2}\right)\\
+     &amp;= \frac{Q^{2n+2}+R^{2n+2}}{4}  - \frac{(-1)^{n+1}}{2}
+ \end{align*}\]</div>
+<p class="sd-card-text">Now adding zero in a disguised form:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+2a_n^2 &amp;= \frac{Q^{2n+2}+R^{2n+2}}{4} + \left(\frac{(-1)^{n+1}}{2}-\frac{(-1)^{n+1}}{2}\right) - \frac{(-1)^{n+1}}{2}\\
+    &amp;= b_n^2 - (-1)^{n+1}\\
+    &amp;= b_n^2 + (-1)^n
+\end{align*}\]</div>
+</div>
+</details><p><strong>(g)</strong> Thus explain why <span class="math notranslate nohighlight">\(b_n^2 a_n^2\)</span> is a triangular number (it is clearly square).</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (g)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(a_n^2 = \frac{b_n^2+(-1)^n}\)</span>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
+            &amp;= \begin{cases}
+               \frac{b_n^2(b_n^2+ 1)}{2} &amp; n\text{ even}\\
+               \frac{(b_n^2 - 1)b_n^2}{2} &amp; n\text{ odd}
+               \end{cases} 
+\end{align*}\]</div>
+<p class="sd-card-text">So this is either the <span class="math notranslate nohighlight">\(b_n^2\)</span>-th or <span class="math notranslate nohighlight">\(b_n^2-1\)</span>-th triangular number.</p>
+</div>
+</details></li>
 <li><p><strong>(a)</strong> Show how the variance of a distribution can be written using derivatives of a PGF evaluated at <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p><strong>(b)</strong> Show that the variance equals the mean, iff <span class="math notranslate nohighlight">\(\mu''(1)/\mu'(1) = \mu'(1)\)</span>.</p>
-<p><strong>(c)</strong> Use PGFs to show that the variance of the Poisson distribution equals its mean.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The variance is <span class="math notranslate nohighlight">\(\mathbb{E}[X^2] - \mathbb{E}[X]^2\)</span>.  For the PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu'(1) &amp;= \sum_k k p_k 1^{k-1}\\
+    &amp;= \mathbb{E}[X]
+\end{align*}\]</div>
+<p class="sd-card-text">and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu''(1) &amp;= \sum_k k(k-1) p_k 1^{k-2}\\
+    &amp;= \sum_k k^2 p_k - \sum_k k p_k
+    &amp;= \mathbb{E}[X^2]-\mathbb{E}[X]
+\end{align*}\]</div>
+<p class="sd-card-text">So <span class="math notranslate nohighlight">\(\mu''(1) + \mu'(1) - \mu'(1)^2 = \mathbb{E}[X^2] - \mathbb{E}[X]^2\)</span>, which is the variance.</p>
+</div>
+</details><p><strong>(b)</strong> Show that the variance equals the mean, iff <span class="math notranslate nohighlight">\(\mu''(1)/\mu'(1) = \mu'(1)\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If variance equals the mean then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu''(1) + \mu'(1) - \mu'(1)^2 &amp;= \mu'(1)\\
+\Rightarrow \mu''(1) -\mu'(1)^2&amp;=0\\
+\Rightarrow \mu''(1) &amp;= \mu'(1)^2\\
+\Rightarrow \frac{\mu''(1)}{\mu'(1)} &amp;= \mu'(1)
+\end{align*}\]</div>
+<p class="sd-card-text">In the other direction, if <span class="math notranslate nohighlight">\(\mu''(1)/\mu'(1) = \mu'(1)\)</span>, then we simply note that each step in the sequence of equations above is reversible.  So the opposite direction follows as well.</p>
+</div>
+</details><p><strong>(c)</strong> Use PGFs to show that the variance of the Poisson distribution equals its mean.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The Poisson distribution with mean <span class="math notranslate nohighlight">\(\lambda\)</span> has PGF</p>
+<div class="math notranslate nohighlight">
+\[
+\mu(x) = e^{\lambda(x-1)}
+\]</div>
+<p class="sd-card-text">Taking <span class="math notranslate nohighlight">\(\mu''(1)/\mu'(1)\)</span> we have <span class="math notranslate nohighlight">\(\lambda^2/\lambda = \lambda\)</span></p>
+</div>
+</details></li>
 <li><p>Suppose</p>
 <div class="math notranslate nohighlight">
 \[
@@ -634,48 +912,279 @@ document.write(`
    \]</div>
 <p>are ordinary generating functions for sequences <span class="math notranslate nohighlight">\((f_n)\)</span> and <span class="math notranslate nohighlight">\((g_n)\)</span>.</p>
 <p><strong>(a)</strong> If <span class="math notranslate nohighlight">\(\alpha,\beta\in\mathbb{R}\)</span>, write down the generating function corresponding to the sequence <span class="math notranslate nohighlight">\((\alpha f_n+\beta g_n)_{n\ge 0}\)</span>.</p>
-<p><strong>(b)</strong> Explain why this shows that the set of all generating functions is closed under linear combinations.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_n (\alpha f_n + \beta g_n) x^n &amp;= \alpha \sum_n f_nx^n + \beta \sum_n g_n x^n\\
+&amp;= \alpha f(x) + \beta g(x)
+\end{align*}\]</div>
+</div>
+</details><p><strong>(b)</strong> Explain why this shows that the set of all generating functions is closed under linear combinations.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have seen that the arbitrary linear combination <span class="math notranslate nohighlight">\(\alpha f(x) + \beta g(x)\)</span> is also a generating function.</p>
+</div>
+</details></li>
 <li><p>Consider a pair of standard tetrahedral (4-sided) dice numbered <span class="math notranslate nohighlight">\(1, 2, 3, 4\)</span>.</p>
 <p><strong>(a)</strong> Find the PGF of the sum found by rolling both.</p>
-<p><strong>(b)</strong> Find another pair of 4-sided dice that have positive integer values and give the same sums with the same probabilities.</p>
-<p><strong>(c)</strong> Show that the only possible pairs are the standard dice and the pair you have just found.</p>
-</li>
-<li><p>A researcher is looking for patients with a particular rare disease.  Based on careful experiments and knowledge of exposure risk in the populations, she expects the PGF for the number of patients in several similarly sized populations should be <span class="math notranslate nohighlight">\(\mu(x) = e^{5(x-1)}\)</span>.  However, when she looks at medical records, she sees that the number seems to have PGF <span class="math notranslate nohighlight">\(e^{1.5(x-1)}\)</span>.  Using the fact that <span class="math notranslate nohighlight">\(\mu(0.7+0.3x) = e^{1.5(x-1)}\)</span> and many individuals in the population have limited access to medical care, explain what may have happened [hint, what does the PGF <span class="math notranslate nohighlight">\(0.7+0.3x\)</span> represent?]</p></li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The PGF for one die is <span class="math notranslate nohighlight">\(\psi(x)=(x+x^2+x^3+x^4)/4\)</span>.  The PGF for the sum of two dice is found by multiplying the PGFs together:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\psi(x)^2 &amp;= \frac{(x+x^2+x^3+x^4)^2}{16}\\
+ &amp;= \frac{x^2 + 2x^3 + 3x^4 + 4x^5 + 3x^6+2x^7+x^8}{16}
+\end{align*}\]</div>
+</div>
+</details><p><strong>(b)</strong> Find another pair of 4-sided dice that have positive integer values and give the same sums with the same probabilities.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We can factor</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\psi(x) &amp;= \frac{x+x^2+x^3+x^4}{4}\\
+        &amp;= \frac{x(1+x+x^2+x^3)}{4}\\
+        &amp;= \frac{x(1+x)(1+x^2)}{4}
+\end{align*}\]</div>
+<p class="sd-card-text">So <span class="math notranslate nohighlight">\(\psi(x)^2 = x^2(1+x)^2(1+x^2)^2/16\)</span>.</p>
+<p class="sd-card-text">Looking for <span class="math notranslate nohighlight">\(\mu_1(x) = \frac{x^{a_1}+ x^{a_2}+x^{a_3}+x^{a_4}}{4}\)</span> and <span class="math notranslate nohighlight">\(\mu_2(x)=\frac{x^{b_1}+ x^{b_2}+x^{b_3}+x^{b_4}}{4}\)</span> so that their product is <span class="math notranslate nohighlight">\(\psi(x)^2\)</span> and all <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(b_i\)</span> are positive integers.</p>
+<p class="sd-card-text">We must have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu_1(x) &amp;= \frac{x^{q_1}(1+x)^{q_2}(1+x^2)^{q_3}}{4}\\
+\mu_2(x) &amp;= \frac{x^{1-q_1}(1+x)^{1-q_2}(1+x^2)^{1-q_3}}{4}
+\end{align*}\]</div>
+<p class="sd-card-text">where each <span class="math notranslate nohighlight">\(q_i\)</span> is <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(1\)</span>, or <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p class="sd-card-text">We have some constraints that we can use to idenitfy <span class="math notranslate nohighlight">\(q_i\)</span>.</p>
+<ul class="simple">
+<li><p class="sd-card-text">As the exponents are positive integers, we must have <span class="math notranslate nohighlight">\(\mu_1(0)=\mu_2(0)=0\)</span>.  So <span class="math notranslate nohighlight">\(q_1=1\)</span>.</p></li>
+<li><p class="sd-card-text">At <span class="math notranslate nohighlight">\(x=1\)</span>, both must be <span class="math notranslate nohighlight">\(1\)</span>.  So <span class="math notranslate nohighlight">\(q_2+q_3=2\)</span>.</p></li>
+</ul>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(q_2=q_3=1\)</span>, then we recover the original pair.  Otherwise we can assume <span class="math notranslate nohighlight">\(q_2=2\)</span> and <span class="math notranslate nohighlight">\(q_3=0\)</span> (alternately <span class="math notranslate nohighlight">\(q_2=0\)</span> and <span class="math notranslate nohighlight">\(q_3=2\)</span> simply interchanges <span class="math notranslate nohighlight">\(\mu_1\)</span> and <span class="math notranslate nohighlight">\(\mu_2\)</span>).  So</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mu_1(x) &amp;= \frac{x(1+x)^2}{4}\\
+         &amp;= \frac{x+2x^2+x^3}{4}\\
+\mu_2(x) &amp;= \frac{x(1+x^2)^2}{4}\\
+         &amp;= \frac{x+2x^3+x^5}{4}
+\end{align*}\]</div>
+<p class="sd-card-text">So the dice are numbered <span class="math notranslate nohighlight">\(1,2,2,3\)</span> and <span class="math notranslate nohighlight">\(1,3,3,5\)</span>.</p>
+</div>
+</details><p><strong>(c)</strong> Show that the only possible pairs are the standard dice and the pair you have just found.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">According to our constraints found in the previous solution, there is no other way to create the pair, and thus this is unique.  (as a more subtle point, this relies on the fact that factorization of polynomials with real coefficients is unique).</p>
+</div>
+</details></li>
+<li><p>A researcher is looking for patients with a particular rare disease.  Based on careful experiments and knowledge of exposure risk in the populations, she expects the PGF for the number of patients in several similarly sized populations should be <span class="math notranslate nohighlight">\(\mu(x) = e^{5(x-1)}\)</span>.  However, when she looks at medical records, she sees that the number seems to have PGF <span class="math notranslate nohighlight">\(e^{1.5(x-1)}\)</span>.  Using the fact that <span class="math notranslate nohighlight">\(\mu(0.7+0.3x) = e^{1.5(x-1)}\)</span> and many individuals in the population have limited access to medical care, explain what may have happened [hint, what does the PGF <span class="math notranslate nohighlight">\(0.7+0.3x\)</span> represent?]</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">One explanation is that some individuals are not receiving proper care.  The PGF <span class="math notranslate nohighlight">\(0.7+0.3x\)</span> could represent the PGF for whether an individual who comes down with the illness seeks care or not.</p>
+<p class="sd-card-text">Additionally, if the disease is potentially fatal to those with reduced access to care, this PGF could represent the PGF for whether an individual who should have still been alive is in fact still alive.</p>
+<p class="sd-card-text">In either of these cases, $\mu(0.7+0.3x) would represent the PGF associated with the observed individuals.</p>
+</div>
+</details></li>
 <li><p>Consider a Galton–Watson process with <span class="math notranslate nohighlight">\(X_0=1\)</span> and offspring distribution given by <span class="math notranslate nohighlight">\(\Pr(k=3)=1\)</span> (every individual has exactly 3 offspring).</p>
 <p><strong>(a)</strong> Draw the Galton–Watson tree up to (and including) generation <span class="math notranslate nohighlight">\(2\)</span>.</p>
-<p><strong>(b)</strong> What are the values of <span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(X_1\)</span>, and <span class="math notranslate nohighlight">\(X_2\)</span>?</p>
-<p><strong>(c)</strong> Give a formula for <span class="math notranslate nohighlight">\(X_g\)</span> for general <span class="math notranslate nohighlight">\(g \geq 0\)</span>.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Not drawn yet.  one node, with 3 offspring, each of whom has 3 offspring.</p>
+</div>
+</details><p><strong>(b)</strong> What are the values of <span class="math notranslate nohighlight">\(X_0\)</span>, <span class="math notranslate nohighlight">\(X_1\)</span>, and <span class="math notranslate nohighlight">\(X_2\)</span>?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(X_0=1\)</span>, <span class="math notranslate nohighlight">\(X_1=3\)</span>, and <span class="math notranslate nohighlight">\(X_2=9\)</span>.</p>
+</div>
+</details><p><strong>(c)</strong> Give a formula for <span class="math notranslate nohighlight">\(X_g\)</span> for general <span class="math notranslate nohighlight">\(g \geq 0\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(X_g=3^g\)</span>.</p>
+</div>
+</details></li>
 <li><p>Consider a Galton-Watson process with offspring distribution having PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.</p>
 <p><strong>(a)</strong> Explain why the extinction probability <span class="math notranslate nohighlight">\(\alpha\)</span> of a Galton-Watson process must equal <span class="math notranslate nohighlight">\(\mu(\alpha)\)</span>.</p>
-<p><strong>(b)</strong> We always have <span class="math notranslate nohighlight">\(1 = \mu(1)\)</span>.  Why does this not guarantee us that all Galton-Watson processes go extinct?</p>
-<p><strong>(c)</strong> Assume that <span class="math notranslate nohighlight">\(3\)</span> individuals of a  plant species are introduced in Victoria <strong>in separate locations (1 into each - my initial wording was vague, so I will also accept 3 into each)</strong>.  Find the extinction probability in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> calculated for a single introduction.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The process goes extinct if there are no direct offspring of the original individual or if the descendents of each of the <span class="math notranslate nohighlight">\(k\)</span> offspring go extinct.</p>
+<p class="sd-card-text">Each offspring’s descendents are independent of each other and form their own Galton-Watson process.  So for each offspring, the probaiblity of extinction must also be <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p class="sd-card-text">So the extinction probability is</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_k p_k \alpha^k = \mu(\alpha)
+\]</div>
+<p class="sd-card-text">However, by definition this is <span class="math notranslate nohighlight">\(\alpha\)</span>, so we have <span class="math notranslate nohighlight">\(\alpha=\mu(\alpha)\)</span>.</p>
+</div>
+</details><p><strong>(b)</strong> We always have <span class="math notranslate nohighlight">\(1 = \mu(1)\)</span>.  Why does this not guarantee us that all Galton-Watson processes go extinct?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Our derivation above shows that the extinction probability must solve <span class="math notranslate nohighlight">\(\alpha = \mu(\alpha)\)</span>.  It does not show that every solution to this equation is the extinction probability.  In other words, this equation is a constraint on <span class="math notranslate nohighlight">\(\alpha\)</span> or a necessary condition.  It is not sufficient.</p>
+</div>
+</details><p><strong>(c)</strong> Assume that <span class="math notranslate nohighlight">\(3\)</span> individuals of a  plant species are introduced in Victoria <strong>in separate locations (1 into each - my initial wording was vague, so I will also accept 3 into each)</strong>.  Find the extinction probability in terms of <span class="math notranslate nohighlight">\(\alpha\)</span> calculated for a single introduction.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The probability is <span class="math notranslate nohighlight">\(\alpha^3\)</span>.</p>
+</div>
+</details></li>
 <li><p>Consider a Galton-Watson process with offspring distibution having PGF <span class="math notranslate nohighlight">\(\mu_r(x) = (r + (2-r)x^2)/2\)</span> for <span class="math notranslate nohighlight">\(r=1\)</span>, <span class="math notranslate nohighlight">\(r=5/4\)</span>, and <span class="math notranslate nohighlight">\(r=3/2\)</span>.</p>
 <p><strong>(a)</strong> Show that for all of these values it goes extinct with probability <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p><strong>(b)</strong> Plot <span class="math notranslate nohighlight">\(1-\alpha_g\)</span> for <span class="math notranslate nohighlight">\(g = 1, \ldots, 100\)</span> for these values of <span class="math notranslate nohighlight">\(r\)</span> with a logarithmic vertical scale.  What unusual behavior do you see (if any)?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We solve <span class="math notranslate nohighlight">\(\mu_r(\alpha)=\alpha\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{r + (2-r)\alpha^2}{2} &amp;= \alpha\\
+\frac{r -2\alpha + (2-r)\alpha^2}{2} &amp;= 0\\
+\frac{(1-\alpha)(r-(2-r)\alpha)}{2} &amp;=0
+\end{align*}\]</div>
+<p class="sd-card-text">So <span class="math notranslate nohighlight">\(1=\alpha\)</span> or <span class="math notranslate nohighlight">\(\alpha = r/(2-r)\)</span>.  For all of these values <span class="math notranslate nohighlight">\(r/(2-r)\geq 1\)</span>.  So the only plausible probability is <span class="math notranslate nohighlight">\(\alpha=1\)</span>.</p>
+</div>
+</details><p><strong>(b)</strong> Plot <span class="math notranslate nohighlight">\(1-\alpha_g\)</span> for <span class="math notranslate nohighlight">\(g = 1, \ldots, 100\)</span> for these values of <span class="math notranslate nohighlight">\(r\)</span> with a logarithmic vertical scale.  What unusual behavior do you see (if any)?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">See below.  The unusual behavior I anticipated isn’t obvious in these plots.</p>
+</div>
+</details></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">r</span><span class="p">):</span> 
+    <span class="k">return</span> <span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">]:</span>
+    <span class="n">alpha_g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">):</span>
+        <span class="n">alpha_g</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mu</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">r</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\alpha_g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x202afd38a50&gt;
+</pre></div>
+</div>
+<img alt="../../_images/5fecd4d59b7188cec7d42e802c0cc62fc29b0b9d80c5ff422b1ca4691b3ba650.png" src="../../_images/5fecd4d59b7188cec7d42e802c0cc62fc29b0b9d80c5ff422b1ca4691b3ba650.png" />
+</div>
+</div>
 <p><strong>(c)</strong> Plot the expected size at generation <span class="math notranslate nohighlight">\(g\)</span> for these same values.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">See below</p>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">muPrime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">]:</span>
+    <span class="n">expected_size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">):</span>
+        <span class="n">expected_size</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">muPrime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">expected_size</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8b7c6797bf6cda4c64a74e4ba06d5d58caf764d9cab7e49eeda3236c147f53a9.png" src="../../_images/8b7c6797bf6cda4c64a74e4ba06d5d58caf764d9cab7e49eeda3236c147f53a9.png" />
+</div>
+</div>
 <p><strong>(d)</strong> Plot the expected size conditional on not being extinct.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">See below</p>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">]:</span>
+    <span class="n">expected_size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">alpha_g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">):</span>
+        <span class="n">alpha_g</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mu</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">r</span><span class="p">))</span>
+        <span class="n">expected_size</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">muPrime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">expected_size</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">)),</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\JCMiller\AppData\Local\Temp\ipykernel_31124\4101447777.py:7: RuntimeWarning: divide by zero encountered in divide
+  plt.plot(np.array(expected_size)/(1-np.array(alpha_g)), label=rf&quot;$r={r:.2f}$&quot;)
+</pre></div>
+</div>
+<img alt="../../_images/6d2530a4e31ac778df1013abd2c0b84e2c11d6e9932096bdc5f0a3922f24a719.png" src="../../_images/6d2530a4e31ac778df1013abd2c0b84e2c11d6e9932096bdc5f0a3922f24a719.png" />
+</div>
+</div>
+<ol class="arabic" start="12">
 <li><p>[Optional] Consider a Galton-Watson process with an offspring PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>, with <span class="math notranslate nohighlight">\(\Phi_g(x)\)</span> representing the PGF for <span class="math notranslate nohighlight">\(X_g(t)\)</span>.</p>
 <p><strong>(a)</strong> Define</p>
 <div class="math notranslate nohighlight">
 \[
     \Psi_g(x) = \Phi_g(x) \frac{1}{1-x}
     \]</div>
-<p>Explain why <span class="math notranslate nohighlight">\([x^k]\psi_g(x)\)</span> gives the probability that <span class="math notranslate nohighlight">\(X_g \leq k\)</span>.</p>
-<p><strong>(b)</strong> If we try to use</p>
+<p>Explain why <span class="math notranslate nohighlight">\([x^k]\Psi_g(x)\)</span> gives the probability that <span class="math notranslate nohighlight">\(X_g \leq k\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">As noted in the text, after multiplying by <span class="math notranslate nohighlight">\(1/(1-x)\)</span>, the coefficient of <span class="math notranslate nohighlight">\(x^k\)</span> is equal to the sum of the coefficients <span class="math notranslate nohighlight">\(a_0 + a_1 +\cdots + a_k\)</span>.  So this is <span class="math notranslate nohighlight">\(\sum_{j=0}^k p_j(g)\)</span>.</p>
+</div>
+</details><p><strong>(b)</strong> If we try to use</p>
 <div class="math notranslate nohighlight">
 \[
-    [x^k]\psi_g(x) = \frac{1}{2\pi i} \oint_{|z|=1} \frac{\psi_g(x)}{z^{k+1}} \, dz
+    [x^k]\Psi_g(x) = \frac{1}{2\pi i} \oint_{|z|=1} \frac{\Psi_g(z)}{z^{k+1}} \, dz
     \]</div>
 <p>why will there be issues around <span class="math notranslate nohighlight">\(z=1\)</span>?  <strong>Note - the initial version had a typo with the <span class="math notranslate nohighlight">\(i\)</span> missing from the denominator, and the wrong exponent on <span class="math notranslate nohighlight">\(z\)</span>.</strong></p>
-<p><strong>(c)</strong> Instead we will use the circle <span class="math notranslate nohighlight">\(|z|=1/2\)</span>.  Set <span class="math notranslate nohighlight">\(z = e^{i\theta}/2\)</span> for <span class="math notranslate nohighlight">\(0 \leq \theta \leq 2\pi\)</span>.  Rewrite the integral in terms of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
-<p><strong>(d)</strong> Adapt the method <code class="docutils literal notranslate"><span class="pre">Phi_coefficients_real</span></code> at https://github.com/Joel-Miller-Lab/AMSI2026_PGF/blob/main/AMSI_2026_PGF_tools/Galton_Watson.py
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Near <span class="math notranslate nohighlight">\(z=1\)</span>, there is a singularity in <span class="math notranslate nohighlight">\(\Psi_g(z)\)</span>.</p>
+</div>
+</details><p><strong>(c)</strong> Instead we will use the circle <span class="math notranslate nohighlight">\(|z|=1/2\)</span>.  Set <span class="math notranslate nohighlight">\(z = e^{i\theta}/2\)</span> for <span class="math notranslate nohighlight">\(0 \leq \theta \leq 2\pi\)</span>.  Rewrite the integral in terms of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We follow the text.  Note that <span class="math notranslate nohighlight">\(1 = i (e^{i\theta}/2) d\theta/dz\)</span> so $dz = i (e^{i\theta}/2)d\theta</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{1}{2\pi i} \oint_{|z|=1/2} \frac{\Psi_g(z)}{z^{k+1}} \, dz &amp;=  \frac{1}{2\pi i} \int_0^{2\pi} \frac{\Psi_g(e^{i\theta}/2)}{e^{i(k+1)\theta}/2^{k+1}} \, \frac{ie^{i\theta}}{2} \, d\theta\\
+&amp;= \frac{2^{k-1}}{\pi} \int_0^{2\pi} \Psi_g(e^{i\theta}/2) e^{-ik\theta} \, d\theta
+\end{align*}\]</div>
+</div>
+</details><p><strong>(d)</strong> Adapt the method <code class="docutils literal notranslate"><span class="pre">Phi_coefficients_real</span></code> at https://github.com/Joel-Miller-Lab/AMSI2026_PGF/blob/main/AMSI_2026_PGF_tools/Galton_Watson.py
 and the methods it relies on to perform the integral above.  Note that the code in place uses the Fast Fourier Transform by default, but I do not believe this will work for a radius of <span class="math notranslate nohighlight">\(1/2\)</span>.  So instead you will need to set it up to perform the integral.  Ideally use Python or R.</p>
-<p><strong>(e)</strong> Choose a few simple offspring distributions and test the results.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Time permitting I will add this solution later.</p>
+</div>
+</details><p><strong>(e)</strong> Choose a few simple offspring distributions and test the results.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution ()</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details></li>
 </ol>
 </section>
 </section>
