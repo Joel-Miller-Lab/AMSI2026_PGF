@@ -648,7 +648,7 @@ c_n = \frac{1}{n!}
 <p class="sd-card-text">We need the sum of the probabilities to be <span class="math notranslate nohighlight">\(1\)</span>, so</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-C &amp;= \left( \sum_k \left(\frac{1}{2}\right)^k)^{-1}\\
+C &amp;= \left( \sum_k \left(\frac{1}{2}\right)^k\right)^{-1}\\
   &amp;= \left( \frac{1}{1-1/2}\right)^{-1}\\
   &amp;= 2^{-1}\\
   &amp;= 1/2
@@ -675,8 +675,8 @@ C &amp;= \left( \sum_k \left(\frac{1}{2}\right)^k)^{-1}\\
 \[\begin{align*}
 \sum_k C\frac{k^2}{2^k} x^k&amp;=(x\partial_x)^2 \mu(x)\\
  &amp;= x\partial_x \left(x \partial_x (2-x)^{-1}\right) \\
- &amp;= x \partial_x \left(x (-1)(2-x)^{-2}(-1)\right)
- &amp;= x \partial_x x(2-x)^{-2}\\
+ &amp;= x \partial_x \left(x (-1)(2-x)^{-2}(-1)\right)\\
+ &amp;= x \partial_x\left( x(2-x)^{-2}\right)\\
  &amp;= x\left( (2-x)^{-2} + x(-2)(2-x)^{-3}(-1)\right)\\
  &amp;= \frac{x}{(2-x)^2} + \frac{2x^2}{(2-x)^3}
  \end{align*}\]</div>
@@ -691,6 +691,7 @@ C &amp;= \left( \sum_k \left(\frac{1}{2}\right)^k)^{-1}\\
 <p>Consider the sequence <span class="math notranslate nohighlight">\(a_n\)</span> defined by <span class="math notranslate nohighlight">\(a_0=1\)</span>, <span class="math notranslate nohighlight">\(a_1=2\)</span> and <span class="math notranslate nohighlight">\(a_{n+2} = a_n + 2a_{n+1}\)</span> and the sequence <span class="math notranslate nohighlight">\(b_n\)</span> defined by <span class="math notranslate nohighlight">\(b_0=1\)</span>, <span class="math notranslate nohighlight">\(b_1 = 3\)</span> and <span class="math notranslate nohighlight">\(b_{n+2} = b_n + 2b_{n+1}\)</span>.  Then <span class="math notranslate nohighlight">\((a_nb_n)^2\)</span> is both triangular and square.</p>
 <p>I’ve since learned that this property of the sequence is known, but it’s still an interesting result.  We can use OGFs to prove that these are both triangular and square (though it doesn’t prove that every triangular and square number is in the sequence).  Some of these steps follow our derivation of the formula for the Fibonacci numbers.</p>
 <p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> <strong>(only these three values)</strong> use direct calculate to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p>
+<p><strong>note to self — to update this question, ask them to verify that <span class="math notranslate nohighlight">\((a_nb_n)^2\)</span> is a triangular number by finding <span class="math notranslate nohighlight">\(m(m+1)/2 = a_n^2b_n^2\)</span></strong></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
@@ -735,12 +736,15 @@ b_0^2 +(-1)^2 &amp;= 49+1\\
   &amp;= 50
 \end{align*}\]</div>
 <p class="sd-card-text">So these are equal.</p>
+<p class="sd-card-text">The numbers <span class="math notranslate nohighlight">\(b_n^2a_n^2\)</span> are <span class="math notranslate nohighlight">\(1=1^2=1(2)/2\)</span>, <span class="math notranslate nohighlight">\(36=6^2=8(9)/2\)</span>, and <span class="math notranslate nohighlight">\(1225 = 35^2=49(50)/2\)</span>.</p>
 </div>
-</details><p><strong>(b)</strong> Derive the OGFs <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> for both <span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span>.  <strong>Please disregard my prior advice about what this function should look like.  I misplaced my calculations when I wrote the question.  Ultimately, you should end up with something that gets a simple expression for <span class="math notranslate nohighlight">\(a_n\)</span> in (d) that somewhat resembles the expression stated for <span class="math notranslate nohighlight">\(b_n\)</span>.</strong></p>
+</details><p>As an interesting aside, the best rational approximations to <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> are:
+<span class="math notranslate nohighlight">\(1/1, 3/2, 7/5, 17/12, 41/29, \ldots, b_n/a_n, \ldots\)</span>. In this context what it means to say <span class="math notranslate nohighlight">\(b_n/a_n\)</span> is the “best” is that any rational approximation to <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> that is closer than <span class="math notranslate nohighlight">\(b_n/a_n\)</span> must have a denominator that is larger than <span class="math notranslate nohighlight">\(a_n\)</span>.  So for example <span class="math notranslate nohighlight">\(7/5\)</span> is closer to <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> than any other rational number with a denominator less than <span class="math notranslate nohighlight">\(11\)</span> and <span class="math notranslate nohighlight">\(17/12\)</span> is closer to <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> than any rational number with a denominator less than <span class="math notranslate nohighlight">\(29\)</span>.</p>
+<p><strong>(b)</strong> Derive the OGFs <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> for both <span class="math notranslate nohighlight">\(a_n\)</span> and <span class="math notranslate nohighlight">\(b_n\)</span>.  <strong>Please disregard my prior advice about what this function should look like.  I misplaced my calculations when I wrote the question.  Ultimately, you should end up with something that gets a simple expression for <span class="math notranslate nohighlight">\(a_n\)</span> in (d) that somewhat resembles the expression stated for <span class="math notranslate nohighlight">\(b_n\)</span>.</strong></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Both have the same recurrence relationship, but with a different value of the second term. We will start with <span class="math notranslate nohighlight">\(f(x)\)</span>, but in full generality, not using the values of <span class="math notranslate nohighlight">\(a_n\)</span>.  Thus the result will apply to <span class="math notranslate nohighlight">\(g(x)\)</span> as well.</p>
+<p class="sd-card-text">Both have the same recurrence relationship, but with a different value of the second term. We will start with <span class="math notranslate nohighlight">\(f(x)\)</span>, but in full generality, not using the values of <span class="math notranslate nohighlight">\(a_0\)</span> or <span class="math notranslate nohighlight">\(a_1\)</span>.  Thus the result will apply to <span class="math notranslate nohighlight">\(g(x)\)</span> as well.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 f(x) &amp;= a_0 + a_1 x + \sum_{n=2}^\infty a_n x^n\\
@@ -752,8 +756,8 @@ f(x) &amp;= a_0 + a_1 x + \sum_{n=2}^\infty a_n x^n\\
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 f(x) &amp;= a_0 + a_1 x + x^2 \sum_{m=0}^\infty a_mx^m + 2x \sum_{m=1}^\infty a_mx^m\\
-     &amp;= a_0 + a_1 x + x^2 f(x) + 2x \left( -a_0 + a_0  \sum_{m=1}^\infty a_mx^m\right)\\
-     &amp;= a_0 + a_1 x + x^2 f(x) + 2x \left( -a_0 \sum_{m=0}^\infty a_mx^m\right)\\
+     &amp;= a_0 + a_1 x + x^2 f(x) + 2x \left( -a_0 + a_0 + \sum_{m=1}^\infty a_mx^m\right)\\
+     &amp;= a_0 + a_1 x + x^2 f(x) + 2x \left( -a_0 +\sum_{m=0}^\infty a_mx^m\right)\\
      &amp;= a_0 + a_1 x + x^2 f(x) + 2x\left( f(x) - a_0\right)\\
      &amp;= a_0 + a_1 x + x^2 f(x) + 2xf(x) - 2xa_0\\
 \Rightarrow (1-x^2-2x)f(x) &amp;= a_0 + x(a_1 - 2a_0)\\
@@ -830,14 +834,16 @@ b_n^2 = \frac{Q^{2n+2} + R^{2n+2} + 2(-1)^{n+1}}{4} = \frac{Q^{2n+2}+R^{2n+2}}{4
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 2 a_n^2 &amp;= 2\left(\frac{R^{n+1}-Q^{n+1}}{R-Q}\right)^2\\
-     &amp;= 2 \frac{2}{(R-Q)^2} \left( R^{2n+2} - 2(QR)^{n+1} + Q^{2n+2}\right)\\
+     &amp;= 2\frac{ R^{2n+2} - 2(QR)^{n+1} + Q^{2n+2}}{(R-Q)^2} \\
      &amp;= \frac{2}{(-2\sqrt{2})^2} \left(Q^{2n+2} -2(-1)^{n+1} + R^{2n+2}\right)\\
      &amp;= \frac{Q^{2n+2}+R^{2n+2}}{4}  - \frac{(-1)^{n+1}}{2}
  \end{align*}\]</div>
-<p class="sd-card-text">Now adding zero in a disguised form:</p>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(R-Q = -2\sqrt{2}\)</span> was used in the third line.
+Now adding zero in a disguised form:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 2a_n^2 &amp;= \frac{Q^{2n+2}+R^{2n+2}}{4} + \left(\frac{(-1)^{n+1}}{2}-\frac{(-1)^{n+1}}{2}\right) - \frac{(-1)^{n+1}}{2}\\
+    &amp;= \left(\frac{Q^{2n+2}+R^{2n+2}}{4} + \frac{(-1)^{n+1}}{2}\right)+ \left(-\frac{(-1)^{n+1}}{2} - \frac{(-1)^{n+1}}{2}\right)\\
     &amp;= b_n^2 - (-1)^{n+1}\\
     &amp;= b_n^2 + (-1)^n
 \end{align*}\]</div>
@@ -846,7 +852,7 @@ b_n^2 = \frac{Q^{2n+2} + R^{2n+2} + 2(-1)^{n+1}}{4} = \frac{Q^{2n+2}+R^{2n+2}}{4
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text">Solution (g)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(a_n^2 = \frac{b_n^2+(-1)^n}\)</span>, we have</p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(a_n^2 = \frac{b_n^2+(-1)^n}{2}\)</span>, we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
@@ -872,7 +878,7 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \mu''(1) &amp;= \sum_k k(k-1) p_k 1^{k-2}\\
-    &amp;= \sum_k k^2 p_k - \sum_k k p_k
+    &amp;= \sum_k k^2 p_k - \sum_k k p_k\\
     &amp;= \mathbb{E}[X^2]-\mathbb{E}[X]
 \end{align*}\]</div>
 <p class="sd-card-text">So <span class="math notranslate nohighlight">\(\mu''(1) + \mu'(1) - \mu'(1)^2 = \mathbb{E}[X^2] - \mathbb{E}[X]^2\)</span>, which is the variance.</p>
@@ -958,7 +964,7 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \mu_1(x) &amp;= \frac{x^{q_1}(1+x)^{q_2}(1+x^2)^{q_3}}{4}\\
-\mu_2(x) &amp;= \frac{x^{1-q_1}(1+x)^{1-q_2}(1+x^2)^{1-q_3}}{4}
+\mu_2(x) &amp;= \frac{x^{2-q_1}(1+x)^{2-q_2}(1+x^2)^{2-q_3}}{4}
 \end{align*}\]</div>
 <p class="sd-card-text">where each <span class="math notranslate nohighlight">\(q_i\)</span> is <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(1\)</span>, or <span class="math notranslate nohighlight">\(2\)</span>.</p>
 <p class="sd-card-text">We have some constraints that we can use to idenitfy <span class="math notranslate nohighlight">\(q_i\)</span>.</p>
@@ -989,7 +995,7 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
 <span class="sd-summary-text">Solution</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">One explanation is that some individuals are not receiving proper care.  The PGF <span class="math notranslate nohighlight">\(0.7+0.3x\)</span> could represent the PGF for whether an individual who comes down with the illness seeks care or not.</p>
 <p class="sd-card-text">Additionally, if the disease is potentially fatal to those with reduced access to care, this PGF could represent the PGF for whether an individual who should have still been alive is in fact still alive.</p>
-<p class="sd-card-text">In either of these cases, $\mu(0.7+0.3x) would represent the PGF associated with the observed individuals.</p>
+<p class="sd-card-text">In either of these cases, <span class="math notranslate nohighlight">\(\mu(0.7+0.3x)\)</span> would represent the combined PGF associated with the observed individuals, rather than just the individuals that should have the condition.</p>
 </div>
 </details></li>
 <li><p>Consider a Galton–Watson process with <span class="math notranslate nohighlight">\(X_0=1\)</span> and offspring distribution given by <span class="math notranslate nohighlight">\(\Pr(k=3)=1\)</span> (every individual has exactly 3 offspring).</p>
@@ -1078,6 +1084,7 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\alpha_g$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1104,11 +1111,15 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
     <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">):</span>
         <span class="n">expected_size</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">muPrime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="n">g</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">expected_size</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\mathbb</span><span class="si">{E}</span><span class="s2">[Z_g]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8b7c6797bf6cda4c64a74e4ba06d5d58caf764d9cab7e49eeda3236c147f53a9.png" src="../../_images/8b7c6797bf6cda4c64a74e4ba06d5d58caf764d9cab7e49eeda3236c147f53a9.png" />
+<img alt="../../_images/2006f2a868b85966458d33d6d8e450935bc1fa4735975af44afc69ad69b48931.png" src="../../_images/2006f2a868b85966458d33d6d8e450935bc1fa4735975af44afc69ad69b48931.png" />
 </div>
 </div>
 <p><strong>(d)</strong> Plot the expected size conditional on not being extinct.</p>
@@ -1126,6 +1137,10 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
         <span class="n">alpha_g</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mu</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">r</span><span class="p">))</span>
         <span class="n">expected_size</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">muPrime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="n">g</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">expected_size</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">)),</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\mathbb</span><span class="si">{E}</span><span class="s2">[Z_g]/(1-\alpha_g)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

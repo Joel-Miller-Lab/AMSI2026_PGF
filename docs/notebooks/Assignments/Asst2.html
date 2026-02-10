@@ -696,17 +696,17 @@ document.write(`
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \frac{\partial}{\partial t} \mathbb{E}[X(t)|X(0)=2] &amp;= \frac{\partial}{\partial t}\frac{\partial}{\partial x} \Phi(1,t)\\
-&amp;= \left . \frac{\partial}{\partial x} \left( \frac{\partial}{\partial t} \Phi(x,t)\right) \right|_{x=1}
+&amp;= \left . \frac{\partial}{\partial x} \left( \frac{\partial}{\partial t} \Phi(x,t)\right) \right|_{x=1}\\
 &amp;= \left . \frac{\partial}{\partial x} \left( r (\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)\right)\right|_{x=1}\\
-&amp;= \left. r (\hat{\mu}'(x)-1) \frac{\partial}{\partial x} \Phi(x,t)\right|_{x=1} + r (\hat{\mu}(x)-x) \frac{\partial^2}{\partial x^2} \Phi(x,t) \right|_{x=1}\\
-&amp;= r (\hat{\mu}'(1)-1)\mathbb{E}[X(t)|X(0)=2] + r(\hat{\mu}(1)-1) \left \frac{\partial^2}{\partial x^2} \Phi(x,t) \right|_{x=1}\\
+&amp;= \left. r (\hat{\mu}'(x)-1) \frac{\partial}{\partial x} \Phi(x,t)\right|_{x=1} + \left. r (\hat{\mu}(x)-x) \frac{\partial^2}{\partial x^2} \Phi(x,t) \right|_{x=1}\\
+&amp;= r (\hat{\mu}'(1)-1)\mathbb{E}[X(t)|X(0)=2] + r(\hat{\mu}(1)-1) \left. \frac{\partial^2}{\partial x^2} \Phi(x,t) \right|_{x=1}\\
 &amp;= r (\hat{\mu}'(1)-1)\mathbb{E}[X(t)|X(0)=2]
 \end{align*}\]</div>
-<p class="sd-card-text">This is the same equation we derived in the notes, except in the notes it was for <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=1]\)</span>.</p>
+<p class="sd-card-text">This is the same equation we derived in the notes, except in the notes it was for <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=1]\)</span>.  So the only change is the initial condition.</p>
 <p class="sd-card-text">Solving the equation we have <span class="math notranslate nohighlight">\( \mathbb{E}[X(t)|X(0)=2] = \mathbb{E}[X(0)|X(0)=2]e^{r(\hat{\mu}'(1)-1)} = 2e^{r(\hat{\mu}'(1)-1)}\)</span>.  We find the same formula assuming a single initial individual, except that the coefficient will be <span class="math notranslate nohighlight">\(1\)</span> not <span class="math notranslate nohighlight">\(2\)</span>.  So</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbb{E}[X(t)|X(0)=2] = 2 mathbb{E}[X(t)|X(0)=1]
+\mathbb{E}[X(t)|X(0)=2] = 2 \mathbb{E}[X(t)|X(0)=1]
 \]</div>
 </div>
 </details><p><strong>(b)</strong> Give an alternative derivation of <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=2] = 2 \mathbb{E}[X(t)|X(0)=1]\)</span>  based on the assumption that each of the initial individuals (<strong>and its set of descendents</strong>) is independent <strong>of the other</strong>.</p>
@@ -714,11 +714,12 @@ document.write(`
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X_1(t)\)</span> be the number of descendents of the first individual and <span class="math notranslate nohighlight">\(X_2(t)\)</span> the number of descendents of the second at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p class="sd-card-text">We have
-$<span class="math notranslate nohighlight">\(
+<p class="sd-card-text">We have</p>
+<div class="math notranslate nohighlight">
+\[
 \mathbb{E}[X(t)|X(0)=2] = \mathbb{E}[X_1(t)+X_2(t)] = \mathbb{E}[X_1(t)] + \mathbb{E}[X_2(t)]
-\)</span><span class="math notranslate nohighlight">\(
-Because of independence, the descendents of each individual follows the same distribution as the descendents if the process began with a single individual.  Thus \)</span>\mathbb{E}[X_1(t)]=\mathbb{E}[X_2(t)] = \mathbb{E}[X(t)|X(0)=1]$.  So</p>
+\]</div>
+<p class="sd-card-text">Because of independence, the descendents of each individual follows the same distribution as the descendents if the process began with a single individual.  Thus <span class="math notranslate nohighlight">\(\mathbb{E}[X_1(t)]=\mathbb{E}[X_2(t)] = \mathbb{E}[X(t)|X(0)=1]\)</span>.  So</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb{E}[X(t)|X(0)=2] = 2 \mathbb{E}[X(t)|X(0)=1]
@@ -817,7 +818,8 @@ Because of independence, the descendents of each individual follows the same dis
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text">Solution (e)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">This basically reproduces the steps in <span class="xref std std-ref">sec:ExpectedSize</span> <code class="xref std std-numref docutils literal notranslate"><span class="pre">sec:ExpectedSize</span></code></p>
+<p class="sd-card-text">This basically reproduces the steps in</p>
+<p class="sd-card-text"><a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html#sec-expectedsize"><span class="std std-ref">Expected Population size</span></a> <a class="reference internal" href="../CtsTime/CtsTimeForwKolm.html#sec-expectedsize"><span class="std std-numref">Section 3.3.2</span></a></p>
 </div>
 </details></li>
 <li><p>Consider <strong>one of</strong> the algorithm<strong>s</strong> <strong>(your choice)</strong> in the notes for constructing a tree based on a sequence <span class="math notranslate nohighlight">\(S\)</span>, and <s>the figure which illustrates the algorithm with</s> the sequence <span class="math notranslate nohighlight">\(S=(2,2,0,0,0,1,0,3,0)\)</span>, for which <span class="math notranslate nohighlight">\(j=9\)</span> is the length of the sequence and <span class="math notranslate nohighlight">\(j-1=8\)</span> is the sum of the sequence.  <strong>this sequence was used in the example showing the first algorithm</strong></p>

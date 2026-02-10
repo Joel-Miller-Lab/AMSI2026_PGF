@@ -634,7 +634,7 @@ We will derive a partial differential equation for <span class="math notranslate
 \[
 \frac{\partial}{\partial t} \Phi(x,t) = r (x^2-x) \frac{\partial}{\partial x} \Phi(x,t)
 \]</div>
-<p>It can be shown that the solution to this eqution is</p>
+<p>It can be shown that the solution to this equation is</p>
 <div class="math notranslate nohighlight">
 \[
 \Phi(x,t) = \frac{x e^{-rt}}{1-(1-e^{-rt})x}
@@ -651,14 +651,14 @@ We will derive a partial differential equation for <span class="math notranslate
 </div></section>
 </section>
 <section id="expected-population-size">
-<h2><span class="section-number">3.3.2. </span>Expected Population size<a class="headerlink" href="#expected-population-size" title="Link to this heading">#</a></h2>
+<span id="sec-expectedsize"></span><h2><span class="section-number">3.3.2. </span>Expected Population size<a class="headerlink" href="#expected-population-size" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(L(t)\)</span> denote the expected size of the population at time <span class="math notranslate nohighlight">\(t\)</span>.  Then <span class="math notranslate nohighlight">\(L(t) = \left[ \frac{\partial}{\partial x} \Phi(x,t) \right]_{x=1}\)</span> and</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
 \frac{d}{dt}L(t) &amp;= \frac{\partial}{\partial t} \left[\frac{\partial}{\partial x} \Phi(x,t) \right]_{x=1}\\
 &amp;= \left[\frac{\partial}{\partial x} \frac{\partial}{\partial t} \Phi(x,t) \right]_{x=1}\\
 &amp;= \left[\frac{\partial}{\partial x} \left(r(\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)\right)\right]_{x=1}\\
-&amp;= r (\hat{\mu}'(1)-1) L(t) + r(\hat{\mu}(1)-1)\frac{\partial^2}{\partial x^2} \Phi(1,t)\\
+%&amp;= r (\hat{\mu}'(1)-1) L(t) + r(\hat{\mu}(1)-1)\frac{\partial^2}{\partial x^2} \Phi(1,t)\\
 &amp;= r (\mu'(1)-1)L(t) + r (1-1) \frac{\partial^2}{\partial x^2} \Phi(1,t)\\
 &amp;= r (\mu'(1)-1)L(t)
 \end{align*}\]</div>
