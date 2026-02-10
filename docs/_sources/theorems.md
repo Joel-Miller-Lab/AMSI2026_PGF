@@ -211,9 +211,9 @@ $$
 
 Given a PGF $\mu(x,y)$ for the joint distribution of a pair of non-negative integers $(X,Y)$.  
 
-The PGF of the joint distribution of their sums $\sum_{i=1}^\ell (X_i, Y_i)$ is $\xi(x,y)^k$.  
+The PGF of the joint distribution of their sums $\sum_{i=1}^\ell (X_i, Y_i)$ is $\xi(x,y)^\ell$.  
 
-If $k$ itself is a random variable with PGF $\psi(x)$, then the PGF for the joint distribution of the sums is $\psi(\xi(x,y))$.
+If $\ell$ itself is a random variable with PGF $\psi(x)$, then the PGF for the joint distribution of the sums is $\psi(\xi(x,y))$.
 :::
 
 ## {prf:ref}`thm-jointPGFComposition` — Composition of PGFs and sums of randomly-stopped sums
@@ -223,7 +223,7 @@ If $k$ itself is a random variable with PGF $\psi(x)$, then the PGF for the join
 
 Given two joint distributions of non-negative integers $p_{j,k}$ and $q_{j,k}$ with PGFs $\xi_1(x,y)$, $\xi_2(x,y)$.  
 
-If we take $\ell$ pairs $(X_i,Y_i)$, $i=1,\ldots, \ell$ and another $m$ pairs $(X_{i}, Y_{i})$, $i=\ell+1,\ldots, \ell+m$ then the PGF of the sum $\sum_{i=1}^{\ell+m} (X_i,Y_i)$ of all of these pairs is $\xi_1(x,y)^\ell \xi_2(x,y)^m$.  
+We take $\ell$ pairs $(X_i,Y_i)$, $i=1,\ldots, \ell$ from the first distribution and another $m$ pairs $(X_{i}, Y_{i})$, $i=\ell+1,\ldots, \ell+m$ from the second distribution.  The PGF of the sum $\sum_{i=1}^{\ell+m} (X_i,Y_i)$ of all of these pairs is $\xi_1(x,y)^\ell \xi_2(x,y)^m$.  
 
 If in turn $\ell$ and $m$ are random variables whose joint distribution has PGF $\psi(x,y)$, then the PGF for the randomly-stopped sum is $\psi(\xi_1(x,y),\xi_2(x,y))$.
 :::
@@ -275,6 +275,8 @@ $$
 \vec{\alpha}(g)= \left(\xi_1(\vec{\alpha}(g-1)), \quad\xi_2(\vec{\alpha}(g-1))\right)
 $$
 with $\vec{\alpha}(0) = (0,0)$.
+
+The long-time extinction probability from each state solve $\vec{\alpha} = (\xi_1(\vec{\alpha}), \vec{\xi}_2(\vec{\alpha}))$.
 :::
 
 ## {prf:ref}`thm-TwoTypeHalfExtinct` — Probability of extinction of one type in a two-type Galton-Watson Process
