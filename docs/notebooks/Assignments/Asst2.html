@@ -581,35 +581,198 @@ document.write(`
 <ol class="arabic">
 <li><p>Let us assume we are waiting for some event (<em>e.g.</em>, death of a single bacterium or a red light turning green).  We make the assumption that if the event hasn’t happened prior to time <span class="math notranslate nohighlight">\(t\)</span>, then for any fixed <span class="math notranslate nohighlight">\(\Delta t\)</span>, the probability that it occurs between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is the same for any <span class="math notranslate nohighlight">\(t\)</span>.  This means that we assume that the knowledge of how long it has “survived” so far does not give us any extra information.  In other words, we are making the assumption that the distribution is <em>memoryless</em></p>
 <p><strong>(a)</strong>  Let <span class="math notranslate nohighlight">\(s(t)\)</span> denote the probability that it has survived to time <span class="math notranslate nohighlight">\(t\)</span>, with <span class="math notranslate nohighlight">\(s(0)=1\)</span>.  Show that <span class="math notranslate nohighlight">\(s(t_0+t_1) = s(t_0)s(t_1)\)</span> for any positive <span class="math notranslate nohighlight">\(t_0\)</span> and <span class="math notranslate nohighlight">\(t_1\)</span>.</p>
-<p><strong>(b)</strong> Explain why for small <span class="math notranslate nohighlight">\(\Delta t\)</span>, we can approximate <span class="math notranslate nohighlight">\(s(\Delta t) = 1 - r \Delta t + \mathcal{o}(\Delta t)\)</span>.</p>
-<p><strong>(c)</strong> Use the definition of a derivative to derive an equation for <span class="math notranslate nohighlight">\(ds/dt\)</span>.</p>
-<p><strong>(d)</strong> Find the solution for <span class="math notranslate nohighlight">\(s(t)\)</span>.</p>
-<p><strong>(e)</strong> What can we conclude about <span class="math notranslate nohighlight">\(s(t)\)</span> if the distribution is memoryless?</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">There are multiple ways to do this.  Let’s find a <span class="math notranslate nohighlight">\(\Delta t\)</span> which is very small such that <span class="math notranslate nohighlight">\(t_0 = N \Delta t\)</span> and <span class="math notranslate nohighlight">\(t_1 = M \Delta t\)</span>  Implicitly, I’m assuming that <span class="math notranslate nohighlight">\(t_0/t_1\)</span> is rational — this can be patched up by taking an arbitrariliy good approximation to <span class="math notranslate nohighlight">\(t_0\)</span> such that the ratio is rational.  (As an aside, this is why the Pythagorean theorem caused Greeks such trouble — they had assumed that this could be done with any pair of lengths, so they could prove things about similar triangles by using this assumption.  They knew that <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> wasn’t rational, but they could simply assume that there was no such length.  Suddenly the Pythagorean theorem gave them a way to create that length, and so their old proofs were flawed.)</p>
+<p class="sd-card-text">Then if <span class="math notranslate nohighlight">\(p\)</span> is the probability it would occur in a given interval of length <span class="math notranslate nohighlight">\(\Delta t\)</span> the probability of no event in the entire interval is <span class="math notranslate nohighlight">\(s(t_0+t_1)=(1-p)^{(N+M)} = (1-p)^N (1-p)^M = s(t_0)s(t_1)\)</span>.</p>
+</div>
+</details><p><strong>(b)</strong> Explain why for small <span class="math notranslate nohighlight">\(\Delta t\)</span>, we can approximate <span class="math notranslate nohighlight">\(s(\Delta t) = 1 - r \Delta t + \mathcal{o}(\Delta t)\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">There are multiple options for how to do this.</p>
+<p class="sd-card-text">We simply observe that <span class="math notranslate nohighlight">\(s(0)\)</span> must equal <span class="math notranslate nohighlight">\(1\)</span> and then write out the Taylor Series expansion which states that <span class="math notranslate nohighlight">\(s(\Delta t) = 1 - r\Delta t + \mathcal{o}(\Delta t)\)</span>.</p>
+</div>
+</details><p><strong>(c)</strong> Use the definition of a derivative to derive an equation for <span class="math notranslate nohighlight">\(ds/dt\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d}{dt} s(t) &amp;= \lim_{\Delta t \to 0} \frac{s(t+\Delta t)-s(t)}{\Delta t}\\
+                  &amp;= \lim_{\Delta t \to 0} \frac{s(t)s(\Delta t) - s(t)}{\Delta t} \\
+                  &amp;= \lim_{\Delta t \to 0} \frac{s(t)(1 + r\Delta t + \mathcal{o}(\Delta t)) - s(t)}{\Delta t}\\
+                  &amp;= \lim_{\Delta t \to 0}  \frac{ -s(t) r\Delta t + s(t) \mathcal{o}(\Delta t)}{\Delta t}\\
+                  &amp;= -s(t) r
+ \end{align*}\]</div>
+</div>
+</details><p><strong>(d)</strong> Find the solution for <span class="math notranslate nohighlight">\(s(t)\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">if <span class="math notranslate nohighlight">\(ds/dt = -rs\)</span>, then <span class="math notranslate nohighlight">\(s = s(0) e^{-rt}\)</span>.  In this case <span class="math notranslate nohighlight">\(s(0)=1\)</span>, so <span class="math notranslate nohighlight">\(s(t) = e^{-rt}\)</span>.</p>
+</div>
+</details><p><strong>(e)</strong> What can we conclude about <span class="math notranslate nohighlight">\(s(t)\)</span> if the distribution is memoryless?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (e)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If the distribution is memoryless, then <span class="math notranslate nohighlight">\(s(t)\)</span> must be <span class="math notranslate nohighlight">\(e^{-rt}\)</span> for some (non-negative) constant <span class="math notranslate nohighlight">\(r\)</span>.</p>
+</div>
+</details></li>
 <li><p>Consider a continuous-time Galton-Watson process in which individuals are removed with rate <span class="math notranslate nohighlight">\(r\)</span> and when they are removed they are replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals with probability <span class="math notranslate nohighlight">\(p_k\)</span>.  Define <span class="math notranslate nohighlight">\(r_k = r p_k\)</span> for <span class="math notranslate nohighlight">\(k = 0, 1, \ldots\)</span> (we could assume <span class="math notranslate nohighlight">\(r_1=p_1=0\)</span>, but this is not necessary here)</p>
 <p><strong>(a)</strong> Use the principle of superposition of Poisson processes to explain why this is equivalent to saying that for <span class="math notranslate nohighlight">\(k = 0, 1, \ldots\)</span> an individual is removed at rate <span class="math notranslate nohighlight">\(r_k\)</span> and replaced with <span class="math notranslate nohighlight">\(k\)</span> individuals.</p>
-<p><strong>(b)</strong> In terms of the rates <span class="math notranslate nohighlight">\(r_k\)</span>, write down the probability of a specific individual being replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals in a short time interval of length <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p>
-<p><strong>(c)</strong> If there are <span class="math notranslate nohighlight">\(X(t)\)</span> individuals, write down the probability that one of them is replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals in a short time interval of length <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If we consider that for <span class="math notranslate nohighlight">\(k=0, 1, \ldots\)</span> an individual is removed at rate <span class="math notranslate nohighlight">\(r_k\)</span> and replaced with <span class="math notranslate nohighlight">\(k\)</span> individuals, then by superposition,  the Poisson process having rate <span class="math notranslate nohighlight">\(r = \sum_k r_k\)</span> and then selecting <span class="math notranslate nohighlight">\(k\)</span> with probability <span class="math notranslate nohighlight">\(r_k/r\)</span> must be equivalent.</p>
+<p class="sd-card-text">But that is exactly the process we are considering.  So effectively we have simply shown that what we are studying is equivalent to superposition of the different <span class="math notranslate nohighlight">\(k\)</span>-processes.</p>
+</div>
+</details><p><strong>(b)</strong> In terms of the rates <span class="math notranslate nohighlight">\(r_k\)</span>, write down the probability of a specific individual being replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals in a short time interval of length <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(r_k \Delta t\)</span>.</p>
+</div>
+</details><p><strong>(c)</strong> If there are <span class="math notranslate nohighlight">\(X(t)\)</span> individuals, write down the probability that one of them is replaced by <span class="math notranslate nohighlight">\(k\)</span> individuals in a short time interval of length <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(X(t) r_k \Delta t\)</span></p>
+</div>
+</details></li>
 <li><p>Consider the continuous-time Galton-Watson process with offspring distribution <span class="math notranslate nohighlight">\(\hat{\mu}(x)\)</span> and associated rate <span class="math notranslate nohighlight">\(r\)</span> per individual.</p>
 <p><strong>(a)</strong> Find the initial condition for <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> if <span class="math notranslate nohighlight">\(X(0)=2\)</span> with probability <span class="math notranslate nohighlight">\(1\)</span>.</p>
-<p><strong>(b)</strong> Find the Forward Kolmogorov Equations if <span class="math notranslate nohighlight">\(X(0)=2\)</span>.</p>
-<p><strong>(c)</strong> <s>Find the Backward Kolmogorov Equations.</s>  <strong>Explain why finding the Backward Kolmogorov equations using the technique we used in the case <span class="math notranslate nohighlight">\(X(0)=1\)</span> does not work</strong> if <span class="math notranslate nohighlight">\(X(0)=2\)</span></p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[
+\Phi(x,0) = \sum_k \mathbb{P}[X=k]x^k = x^2
+\]</div>
+</div>
+</details><p><strong>(b)</strong> Find the Forward Kolmogorov Equations if <span class="math notranslate nohighlight">\(X(0)=2\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> is the PGF for time <span class="math notranslate nohighlight">\(t\)</span>.  Let <span class="math notranslate nohighlight">\(X(t)\)</span> be the random number present at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p class="sd-card-text">The random number present at time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is most easily found by noting that the PGF for the number of descendents of a single individual after waiting a time <span class="math notranslate nohighlight">\(\Delta t\)</span> is a random number (say, <span class="math notranslate nohighlight">\(M\)</span>) whose PGF is <span class="math notranslate nohighlight">\((1-r\Delta t)x + r\Delta t \hat{\mu}(x) = x + r\Delta t(\hat{\mu}(x)-x)\)</span>.</p>
+<p class="sd-card-text">We need to add up <span class="math notranslate nohighlight">\(M_i\)</span> for each of the <span class="math notranslate nohighlight">\(i=1,2,\ldots, X(t)\)</span> individuals at time <span class="math notranslate nohighlight">\(t\)</span>.  This is a randomly stopped sum.  By <a class="reference internal" href="../BasicGenFxn/GenFxnsComp.html#theorem-PGFComp">Theorem 1.5</a> the PGF for the sum is <span class="math notranslate nohighlight">\(\Phi(x + r\Delta t(\hat{\mu}(x)-x), t)\)</span>, but by definition it is also <span class="math notranslate nohighlight">\(\Phi(x,t+\Delta t)\)</span>.  Expanding this around <span class="math notranslate nohighlight">\(x\)</span>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi(x, t+\Delta t) &amp;= \Phi(x + r\Delta t(\hat{\mu}(x)-x), t)\\
+    &amp;= \Phi(x, t) + r \Delta t (\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
+\end{align*}\]</div>
+<p class="sd-card-text">Now finding the time derivative:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial t} \Phi(x,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi(x,t+\Delta t) - \Phi(x,t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0} \frac{\Phi(x, t) + r \Delta t (\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t) - \Phi(x,t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0} \frac{ r \Delta t (\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)}{\Delta t}\\
+&amp;= r (\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)
+\end{align*}\]</div>
+<p class="sd-card-text">This is the usual Forward Kolmogorov Equation, but with a different initial condition.</p>
+</div>
+</details><p><strong>(c)</strong> <s>Find the Backward Kolmogorov Equations.</s>  <strong>Explain why finding the Backward Kolmogorov equations using the technique we used in the case <span class="math notranslate nohighlight">\(X(0)=1\)</span> does not work</strong> if <span class="math notranslate nohighlight">\(X(0)=2\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If we try the approach to getting a Backward Kolmogorov Equation, then we first find <span class="math notranslate nohighlight">\(\Phi(x,\Delta t)\)</span>.  We can do this from the initial condition at <span class="math notranslate nohighlight">\(0\)</span> in much the same way we jumped from <span class="math notranslate nohighlight">\(t\)</span> to <span class="math notranslate nohighlight">\(t+\Delta t\)</span> in the previous solution.</p>
+<p class="sd-card-text">However, to then jump from <span class="math notranslate nohighlight">\(\Delta t\)</span> to <span class="math notranslate nohighlight">\(t + \Delta t\)</span> requires a large jump.  We want to use a randomly stopped sum where the number of terms is given by the number present at time <span class="math notranslate nohighlight">\(\Delta t\)</span> and the value of each term is the number of descendents of a single individual after waiting time <span class="math notranslate nohighlight">\(\Delta t\)</span>.  Unfortunately, this quantity is not the <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> that corresponds to an initial condition of <span class="math notranslate nohighlight">\(x^2\)</span>.  It is the <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> that corresponds to an initial condition of <span class="math notranslate nohighlight">\(x\)</span>.  So we wouldn’t end up with a closed system.</p>
+<p class="sd-card-text">If we use <span class="math notranslate nohighlight">\(\Phi(x,t|k)\)</span> to denote the solution with an initial condition of <span class="math notranslate nohighlight">\(k\)</span>, then it turns out we would get <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} \Phi(x,t|k)\)</span> in terms of <span class="math notranslate nohighlight">\(\Phi(x,t|1)\)</span>.  We could solve the equation for <span class="math notranslate nohighlight">\(\Phi(x,t|1)\)</span> and then the equation for each <span class="math notranslate nohighlight">\(k\)</span>, but ultimately we would find that the solution is <span class="math notranslate nohighlight">\(\Phi(x,t|k) = \Phi(x,t|1)^k\)</span>.</p>
+</div>
+</details></li>
 <li><p><strong>this question is removed</strong> <s>Using Question 3:</s></p>
 <p><s><strong>(a)</strong> Find a differential equation for <span class="math notranslate nohighlight">\(\alpha(t|X(0)=2)\)</span>, the probability of extinction at time <span class="math notranslate nohighlight">\(t\)</span> given that <span class="math notranslate nohighlight">\(X(0)=2\)</span>.  Use this differential equation and the differential equation we have previously found for <span class="math notranslate nohighlight">\(\alpha(t|X(0)=1)\)</span> to show that <span class="math notranslate nohighlight">\(\alpha(t|X(0)=2) = \alpha(t|X(0)=1)^2\)</span>.</s></p>
 <p><s><strong>(b)</strong> Give an alternative derivation of <span class="math notranslate nohighlight">\(\alpha(t|X(0)=2) = \alpha(t|X(0)=1)^2\)</span> based on the assumption that each of the initial individuals is independent.</s></p>
 </li>
 <li><p>Using Question 3:  <strong>note - I changed notation from a more common Physics notation <span class="math notranslate nohighlight">\(\langle X \rangle\)</span> to <span class="math notranslate nohighlight">\(\mathbb{E}[X]\)</span> to make this easier for mathematicians to read</strong></p>
 <p><strong>(a)</strong> Find a differential equation for <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)| X(0)=2]\)</span>, the explected size given that <span class="math notranslate nohighlight">\(X(0)=2\)</span>.  Use this to show that <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=2] = 2 \mathbb{E}[X(t)|X(0)=1]\)</span>.</p>
-<p><strong>(b)</strong> Give an alternative derivation of <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=2] = 2 \mathbb{E}[X(t)|X(0)=1]\)</span>  based on the assumption that each of the initial individuals (<strong>and its set of descendents</strong>) is independent <strong>of the other</strong>.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Using <span class="math notranslate nohighlight">\(\Phi(x,t)\)</span> as defined in question 3, we have <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=2] = \frac{\partial}{\partial x} \Phi(1,t)\)</span>.</p>
+<p class="sd-card-text">So</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial t} \mathbb{E}[X(t)|X(0)=2] &amp;= \frac{\partial}{\partial t}\frac{\partial}{\partial x} \Phi(1,t)\\
+&amp;= \left . \frac{\partial}{\partial x} \left( \frac{\partial}{\partial t} \Phi(x,t)\right) \right|_{x=1}
+&amp;= \left . \frac{\partial}{\partial x} \left( r (\hat{\mu}(x)-x) \frac{\partial}{\partial x} \Phi(x,t)\right)\right|_{x=1}\\
+&amp;= \left. r (\hat{\mu}'(x)-1) \frac{\partial}{\partial x} \Phi(x,t)\right|_{x=1} + r (\hat{\mu}(x)-x) \frac{\partial^2}{\partial x^2} \Phi(x,t) \right|_{x=1}\\
+&amp;= r (\hat{\mu}'(1)-1)\mathbb{E}[X(t)|X(0)=2] + r(\hat{\mu}(1)-1) \left \frac{\partial^2}{\partial x^2} \Phi(x,t) \right|_{x=1}\\
+&amp;= r (\hat{\mu}'(1)-1)\mathbb{E}[X(t)|X(0)=2]
+\end{align*}\]</div>
+<p class="sd-card-text">This is the same equation we derived in the notes, except in the notes it was for <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=1]\)</span>.</p>
+<p class="sd-card-text">Solving the equation we have <span class="math notranslate nohighlight">\( \mathbb{E}[X(t)|X(0)=2] = \mathbb{E}[X(0)|X(0)=2]e^{r(\hat{\mu}'(1)-1)} = 2e^{r(\hat{\mu}'(1)-1)}\)</span>.  We find the same formula assuming a single initial individual, except that the coefficient will be <span class="math notranslate nohighlight">\(1\)</span> not <span class="math notranslate nohighlight">\(2\)</span>.  So</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[X(t)|X(0)=2] = 2 mathbb{E}[X(t)|X(0)=1]
+\]</div>
+</div>
+</details><p><strong>(b)</strong> Give an alternative derivation of <span class="math notranslate nohighlight">\(\mathbb{E}[X(t)|X(0)=2] = 2 \mathbb{E}[X(t)|X(0)=1]\)</span>  based on the assumption that each of the initial individuals (<strong>and its set of descendents</strong>) is independent <strong>of the other</strong>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(X_1(t)\)</span> be the number of descendents of the first individual and <span class="math notranslate nohighlight">\(X_2(t)\)</span> the number of descendents of the second at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p class="sd-card-text">We have
+$<span class="math notranslate nohighlight">\(
+\mathbb{E}[X(t)|X(0)=2] = \mathbb{E}[X_1(t)+X_2(t)] = \mathbb{E}[X_1(t)] + \mathbb{E}[X_2(t)]
+\)</span><span class="math notranslate nohighlight">\(
+Because of independence, the descendents of each individual follows the same distribution as the descendents if the process began with a single individual.  Thus \)</span>\mathbb{E}[X_1(t)]=\mathbb{E}[X_2(t)] = \mathbb{E}[X(t)|X(0)=1]$.  So</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[X(t)|X(0)=2] = 2 \mathbb{E}[X(t)|X(0)=1]
+\]</div>
+</div>
+</details></li>
 <li><p>Consider the continuous-time SIS or SIR epidemic with transmission rate <span class="math notranslate nohighlight">\(\beta\)</span> and recovery rate <span class="math notranslate nohighlight">\(\gamma\)</span>.  Let <span class="math notranslate nohighlight">\(\Omega(x,t)\)</span> be the PGF for the number of recoveries that have occured by time <span class="math notranslate nohighlight">\(t\)</span>, under the assumption that <span class="math notranslate nohighlight">\(I(0)=1\)</span> and the population is infinite.  You can assume <span class="math notranslate nohighlight">\(S/N=1\)</span>.</p>
 <p><strong>(a)</strong> Find the initial condition for <span class="math notranslate nohighlight">\(\Omega(x,t)\)</span> that is find <span class="math notranslate nohighlight">\(\Omega(x,t)\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
-<p><strong>(b)</strong> Find the possible system states and their probabilities a short time <span class="math notranslate nohighlight">\(\Delta t\)</span> after <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
-<p><strong>(c)</strong> Find <span class="math notranslate nohighlight">\(\Omega(x,t+\Delta t)\)</span> based on (b) and the assumption that <span class="math notranslate nohighlight">\(\Omega(x,t)\)</span> is known.  Your derivation should resemble the derivation of the Backwards Kolmogorov Equations.</p>
-<p><strong>(d)</strong> What is <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} \Omega(x,t)\)</span>?</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">At time <span class="math notranslate nohighlight">\(0\)</span> no recoveries have occurred, so <span class="math notranslate nohighlight">\(\Omega(x,0)=1x^0=1\)</span>.</p>
+</div>
+</details><p><strong>(b)</strong> Find the possible system states and their probabilities a short time <span class="math notranslate nohighlight">\(\Delta t\)</span> after <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">After time <span class="math notranslate nohighlight">\(\Delta t\)</span> we might have:</p>
+<ul class="simple">
+<li><p class="sd-card-text">1 infected individual and no recovered individuals  with probability <span class="math notranslate nohighlight">\(1-(\beta+\gamma)\Delta t\)</span>.</p></li>
+<li><p class="sd-card-text">2 infected individuals and no recovered individuals with probability <span class="math notranslate nohighlight">\(\beta \Delta t\)</span>.</p></li>
+<li><p class="sd-card-text">0 infected and 1 recovered individual with probaiblity <span class="math notranslate nohighlight">\(\gamma \Delta t\)</span>.</p></li>
+</ul>
+</div>
+</details><p><strong>(c)</strong> Find <span class="math notranslate nohighlight">\(\Omega(x,t+\Delta t)\)</span> based on (b) and the assumption that <span class="math notranslate nohighlight">\(\Omega(x,t)\)</span> is known.  Your derivation should resemble the derivation of the Backwards Kolmogorov Equations.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">At time <span class="math notranslate nohighlight">\(t + \Delta t\)</span>, in each of the cases above, the PGF for the number recovered is</p>
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\Omega(x,t)\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\Omega(x,t)^2\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(x\)</span></p></li>
+</ul>
+<p class="sd-card-text">So <span class="math notranslate nohighlight">\(\Omega(x,t+\Delta t) = (1-(\beta+\gamma)\Delta t) \Omega(x,t) + \beta \Delta t \Omega(x,t)^2 + \gamma (\Delta t) x\)</span>.  Writing this more cleanly:</p>
+<div class="math notranslate nohighlight">
+\[
+\Omega(x,t+\Delta t) = \Omega(x,t) + (\Delta t) \left(\beta(\Omega(x,t)^2) + \gamma x - (\beta+\gamma)\Omega(x,t)\right)
+\]</div>
+</div>
+</details><p><strong>(d)</strong> What is <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} \Omega(x,t)\)</span>?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We take</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial t} \Omega(x,t) &amp;= \lim_{\Delta t \to 0} \frac{\Omega(x,t+\Delta t)- \Omega(x,t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0} \frac{\Omega(x,t) + (\Delta t) \left(\beta(\Omega(x,t)^2) + \gamma x - (\beta+\gamma)\Omega(x,t)\right)-\Omega(x,t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0} \frac{(\Delta t) \left(\beta(\Omega(x,t)^2) + \gamma x - (\beta+\gamma)\Omega(x,t)\right)}{\Delta t}\\
+&amp;= (\beta+\gamma)\left(\frac{\beta}{\beta+\gamma}(\Omega(x,t)^2) + \frac{\gamma}{\beta+\gamma} x - \Omega(x,t)\right)
+\end{align*}\]</div>
+</div>
+</details></li>
 <li><p>[optional extension of previous problem - shows some interesting functional analysis properties of <span class="math notranslate nohighlight">\(\Omega(x,t)\)</span>]  We write <span class="math notranslate nohighlight">\(\Omega(x,t) = \sum_{k=0}^\infty \omega_k(t) x^k\)</span> where <span class="math notranslate nohighlight">\(\omega_k(t)\geq 0\)</span> is the probability of an outbreak of size <span class="math notranslate nohighlight">\(k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> in the infinite population.  Assume that epidemics are possible and that they grow exponentially in time.</p>
 <p><strong>(a)</strong> Show that <span class="math notranslate nohighlight">\(\Omega(1,t)=1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\omega_k(t) = \omega_k(\infty) + \xi_k(t)\)</span> where <span class="math notranslate nohighlight">\(\omega_k(\infty) = \lim_{t \to \infty} \omega_k(t)\)</span> is the probability that an outbreak ends with exactly <span class="math notranslate nohighlight">\(k\)</span> individuals infected.</p>
@@ -627,18 +790,60 @@ document.write(`
 <li><p>recovers at rate <span class="math notranslate nohighlight">\(\gamma\)</span>.</p></li>
 </ul>
 <p><strong>(a)</strong> Explain what these rates mean in terms of the <em>waiting times</em> until a transmission or recovery event occurs.</p>
-<p><strong>(b)</strong> Explain how the probability that the <em>next</em> event experienced by an infected individual is a transmission (rather than a recovery) depends on <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
-<p><strong>(c)</strong> Explain why the probability that this transmission attempt results in a new infection depends on the fraction of the population that is susceptible.</p>
-<p><strong>(d)</strong> In the early stages of an outbreak in a very large population, a simplifying assumption is often made about the fraction of susceptible individuals. State this assumption and explain why it is reasonable.</p>
-<p><strong>(e)</strong> The expected size of a Galton-Watson process is given by <span class="math notranslate nohighlight">\(\frac{\partial}{\partial x} \Phi(1,t)\)</span>.  Use this and (one of) the Kolmogorov equations to derive the expected size of the number infected as a function of time (you do not need to derive the Kolmogorov equations).</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This means that the waiting time until the first event involving an infected individual is exponentially distributed with rate <span class="math notranslate nohighlight">\(\beta+\gamma\)</span>.  The time until the next transmission is exponentially distributed with rate <span class="math notranslate nohighlight">\(\beta\)</span> and the time until recover is exponentially distributed with rate <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+</div>
+</details><p><strong>(b)</strong> Explain how the probability that the <em>next</em> event experienced by an infected individual is a transmission (rather than a recovery) depends on <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The probability that the next event is a transmission is <span class="math notranslate nohighlight">\(\frac{\beta}{\beta+\gamma}\)</span>.</p>
+</div>
+</details><p><strong>(c)</strong> Explain why the probability that this transmission attempt results in a new infection depends on the fraction of the population that is susceptible.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The transmission goes to a random individual, and it is successful if that individual is susceptible.  The probability that a random individual is susceptible will equal the fraction that is susceptible.</p>
+</div>
+</details><p><strong>(d)</strong> In the early stages of an outbreak in a very large population, a simplifying assumption is often made about the fraction of susceptible individuals. State this assumption and explain why it is reasonable.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The assumption is that <span class="math notranslate nohighlight">\(S/N\approx 1\)</span>.  This is reasonable in a large population as long as the number that have been infected is small compared to the full population size.s</p>
+</div>
+</details><p><strong>(e)</strong> The expected size of a Galton-Watson process is given by <span class="math notranslate nohighlight">\(\frac{\partial}{\partial x} \Phi(1,t)\)</span>.  Use this and (one of) the Kolmogorov equations to derive the expected size of the number infected as a function of time (you do not need to derive the Kolmogorov equations).</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (e)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This basically reproduces the steps in <span class="xref std std-ref">sec:ExpectedSize</span> <code class="xref std std-numref docutils literal notranslate"><span class="pre">sec:ExpectedSize</span></code></p>
+</div>
+</details></li>
 <li><p>Consider <strong>one of</strong> the algorithm<strong>s</strong> <strong>(your choice)</strong> in the notes for constructing a tree based on a sequence <span class="math notranslate nohighlight">\(S\)</span>, and <s>the figure which illustrates the algorithm with</s> the sequence <span class="math notranslate nohighlight">\(S=(2,2,0,0,0,1,0,3,0)\)</span>, for which <span class="math notranslate nohighlight">\(j=9\)</span> is the length of the sequence and <span class="math notranslate nohighlight">\(j-1=8\)</span> is the sum of the sequence.  <strong>this sequence was used in the example showing the first algorithm</strong></p>
 <p><strong>(a)</strong> <strong>If you choose the first algorithm</strong> Show the steps of the algorithm, but choosing a different order of pairs from the example, to illustrate that the final outcome is the same.  <strong>if you choose the second algorithm show the steps of the algorithm to this sequence.</strong></p>
-<p><strong>(b)</strong> Take <s>another</s> <strong>a</strong> cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.  Perform <s>the</s> <strong>your chosen</strong> algorithm on this cyclic permutation showing that it simply rotates the root of the final tree.</p>
-<p><strong>(c)</strong> Assume that <span class="math notranslate nohighlight">\(S\)</span> was created by choosing <span class="math notranslate nohighlight">\(j\)</span> values independently from a distribution of non-negative integers.  Show that each cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span> has the same probability.</p>
-<p><strong>(d)</strong> Assume that <span class="math notranslate nohighlight">\(S\)</span> is created by choosing <span class="math notranslate nohighlight">\(j\)</span> values independently from a distribution of non-negative integers with PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  Show that the probability that the values sum to <span class="math notranslate nohighlight">\(j-1\)</span> is <span class="math notranslate nohighlight">\([x^{j-1}]\left(\mu(x)^j\right)\)</span>.  <strong>you do not have to do a detailed proof, you can simply refer to a theorem</strong></p>
-</li>
-<li><p>In this equation, use your equation from Question 6 for <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} \Omega(x,t)\)</span> and the initial condition for <span class="math notranslate nohighlight">\(\Omega(x,0)\)</span>.  Assuming that</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution ()</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Due to the need for pictures for this solution, I have not included it.</p>
+</div>
+</details><p><strong>(b)</strong> Take <s>another</s> <strong>a</strong> cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span>.  Perform <s>the</s> <strong>your chosen</strong> algorithm on this cyclic permutation showing that it simply rotates the root of the final tree.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution ()</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p><strong>(c)</strong> Assume that <span class="math notranslate nohighlight">\(S\)</span> was created by choosing <span class="math notranslate nohighlight">\(j\)</span> values independently from a distribution of non-negative integers.  Show that each cyclic permutation of <span class="math notranslate nohighlight">\(S\)</span> has the same probability.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution ()</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p><strong>(d)</strong> Assume that <span class="math notranslate nohighlight">\(S\)</span> is created by choosing <span class="math notranslate nohighlight">\(j\)</span> values independently from a distribution of non-negative integers with PGF <span class="math notranslate nohighlight">\(\mu(x)\)</span>.  Show that the probability that the values sum to <span class="math notranslate nohighlight">\(j-1\)</span> is <span class="math notranslate nohighlight">\([x^{j-1}]\left(\mu(x)^j\right)\)</span>.  <strong>you do not have to do a detailed proof, you can simply refer to a theorem</strong></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution ()</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details></li>
+<li><p>In this <s>equation</s> <strong>question</strong>, use your equation from Question 6 for <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} \Omega(x,t)\)</span> and the initial condition for <span class="math notranslate nohighlight">\(\Omega(x,0)\)</span>.  Assuming that</p>
 <ul class="simple">
 <li><p>Transmission occurs with rate <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
 <li><p>Recovery with rate <span class="math notranslate nohighlight">\(\gamma\)</span></p></li>
@@ -646,8 +851,44 @@ document.write(`
 </ul>
 <p><strong>(a)</strong> Rewrite the differential equation for <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} \Omega(x,t)\)</span> using <span class="math notranslate nohighlight">\(z\)</span> instead of <span class="math notranslate nohighlight">\(x\)</span> (this should be simple - just replace <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(z\)</span> everywhere).  Find the part of the code below that has instructions to enter the equation there.</p>
 <p>Assume <span class="math notranslate nohighlight">\(\beta = 2\)</span>, <span class="math notranslate nohighlight">\(\gamma =1\)</span>. Once you have entered the equation for <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} \Omega(z,t)\)</span> below, the code will solve that equation at each point <span class="math notranslate nohighlight">\(z_m=e^{2 i m\pi/M}\)</span> for <span class="math notranslate nohighlight">\(m = 0, 1, 2, \ldots, M-1\)</span> using an integration method from scipy.  Then it performs the equivalent of the Cauchy integral described in <a class="reference internal" href="../BasicGenFxn/GenFxnsCoefficientCalc.html#sec-genfxncoeffcalc"><span class="std std-numref">Section 1.10</span></a> (it actually uses the Fast Fourier Transform) to find the time-dependent coefficients of <span class="math notranslate nohighlight">\(z^\ell\)</span> in the expansion of <span class="math notranslate nohighlight">\(\Omega(z,t)\)</span>.  You should be able to edit this and run the code in your browser using the “binder” or “live code” links in the ‘rocket’ logo at the top of this page.</p>
-<p><strong>(b)</strong> Under the assumptions we have made, it can be shown (not here) that the probability an epidemic dies out after exactly <span class="math notranslate nohighlight">\(\ell\)</span> infections is <span class="math notranslate nohighlight">\(\frac{1}{\ell} \frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}\)</span> where <span class="math notranslate nohighlight">\(\mathcal{R}_0 = \beta/\gamma\)</span>.  Calculate these for <span class="math notranslate nohighlight">\(\ell = 0, 1, 2, 3\)</span> for <span class="math notranslate nohighlight">\(\beta=2\)</span>, <span class="math notranslate nohighlight">\(\gamma=1\)</span> and explain the plots created by the code below in terms of these probabilities.  Why do some of the probabilities rise and then fall?</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial t} \Omega(z,t) = (\beta+\gamma)\left(\frac{\beta}{\beta+\gamma}(\Omega(z,t)^2) + \frac{\gamma}{\beta+\gamma} z - \Omega(z,t)\right)
+\]</div>
+</div>
+</details><p><strong>(b)</strong> Under the assumptions we have made, it can be shown (not here) that the probability an <s>epidemic</s> <strong>outbreak</strong> dies out after exactly <span class="math notranslate nohighlight">\(\ell\)</span> infections is <span class="math notranslate nohighlight">\(\frac{1}{\ell} \frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}\)</span> where <span class="math notranslate nohighlight">\(\mathcal{R}_0 = \beta/\gamma\)</span>.  Calculate these for <span class="math notranslate nohighlight">\(\ell = \)</span><s>0,</s> <span class="math notranslate nohighlight">\(1, 2, 3\)</span> for <span class="math notranslate nohighlight">\(\beta=2\)</span>, <span class="math notranslate nohighlight">\(\gamma=1\)</span> and explain the plots created by the code below in terms of these probabilities.  Why do some of the probabilities rise and then fall?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We find <span class="math notranslate nohighlight">\(\mathcal{R}_0 = 2\)</span>.  So the formula is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}[\ell \text{ infections}] =  \frac{1}{\ell} \frac{2^{\ell-1}}{3^{2\ell-1}} \binom{2\ell-2}{\ell-1}
+\]</div>
+<p class="sd-card-text">We find:</p>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(\ell=0\)</span>:</p>
+<p class="sd-card-text">The probability must be zero because it is assumed it starts with one infection.</p>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(\ell=1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   1 \frac{2^0}{3} \binom{0}{0} = 2/3
+   \]</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(\ell=2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{1}{2} \frac{2}{3^3} \binom{2}{1} = \frac{2}{9}
+   \]</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(\ell=3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \frac{1}{3} \frac{2}{3^5} \binom{4}{2} = \frac{2^2}{3^5}
+   \]</div>
+<p class="sd-card-text">The asymptotes at large <span class="math notranslate nohighlight">\(t\)</span> correspond to these values.  At early times, there are more states with a given number recovered, but then more recoveries occur.</p>
+</div>
+</details></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
