@@ -690,7 +690,7 @@ C &amp;= \left( \sum_k \left(\frac{1}{2}\right)^k\right)^{-1}\\
 <li><p>In high school I came across a method that seemed to find all of the numbers that are both triangular numbers <span class="math notranslate nohighlight">\((m)(m+1)/2\)</span> and square numbers <span class="math notranslate nohighlight">\(n^2\)</span> (I couldn’t prove it at the time).</p>
 <p>Consider the sequence <span class="math notranslate nohighlight">\(a_n\)</span> defined by <span class="math notranslate nohighlight">\(a_0=1\)</span>, <span class="math notranslate nohighlight">\(a_1=2\)</span> and <span class="math notranslate nohighlight">\(a_{n+2} = a_n + 2a_{n+1}\)</span> and the sequence <span class="math notranslate nohighlight">\(b_n\)</span> defined by <span class="math notranslate nohighlight">\(b_0=1\)</span>, <span class="math notranslate nohighlight">\(b_1 = 3\)</span> and <span class="math notranslate nohighlight">\(b_{n+2} = b_n + 2b_{n+1}\)</span>.  Then <span class="math notranslate nohighlight">\((a_nb_n)^2\)</span> is both triangular and square.</p>
 <p>I’ve since learned that this property of the sequence is known, but it’s still an interesting result.  We can use OGFs to prove that these are both triangular and square (though it doesn’t prove that every triangular and square number is in the sequence).  Some of these steps follow our derivation of the formula for the Fibonacci numbers.</p>
-<p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> <strong>(only these three values)</strong> use direct calculate to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p>
+<p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(n=0, 1, 2\)</span> <strong>(only these three values)</strong> use direct calculation to verify <span class="math notranslate nohighlight">\(b_n^2 + (-1)^n = 2a_n^2\)</span>.  Thus it follows that <span class="math notranslate nohighlight">\((a_nb_n)^2 = b_n^2(b_n^2\pm 1)/2\)</span> is both square and triangular.  Now we want to show this for the general case, and be able to quickly find the <span class="math notranslate nohighlight">\(n\)</span>-th such number.</p>
 <p><strong>note to self — to update this question, ask them to verify that <span class="math notranslate nohighlight">\((a_nb_n)^2\)</span> is a triangular number by finding <span class="math notranslate nohighlight">\(m(m+1)/2 = a_n^2b_n^2\)</span></strong></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -1063,7 +1063,7 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">See below.  The unusual behavior I anticipated isn’t obvious in these plots.</p>
+<p class="sd-card-text">See below.  I should have given clearer guidance about the unusual behavior I was looking for.  Interestingly the cases where <span class="math notranslate nohighlight">\(\mu'(1)&lt;1\)</span> have a linear decay in this logarithmic scale while the case with <span class="math notranslate nohighlight">\(\mu'(1)=1\)</span> does not.</p>
 </div>
 </details></li>
 </ol>
@@ -1078,10 +1078,10 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
     <span class="n">alpha_g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">):</span>
         <span class="n">alpha_g</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mu</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">r</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">alpha_g</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$r=</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$g$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\alpha_g$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$1-\alpha_g$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1089,10 +1089,7 @@ a_n^2 b_n^2 &amp;= \frac{(b_n^2)(b_n^2 + (-1)^n)}{2}\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x202afd38a50&gt;
-</pre></div>
-</div>
-<img alt="../../_images/5fecd4d59b7188cec7d42e802c0cc62fc29b0b9d80c5ff422b1ca4691b3ba650.png" src="../../_images/5fecd4d59b7188cec7d42e802c0cc62fc29b0b9d80c5ff422b1ca4691b3ba650.png" />
+<img alt="../../_images/5d9103ee7de1402e23350f389c41f8e0c09806f87882daf17cf0663f9459aabc.png" src="../../_images/5d9103ee7de1402e23350f389c41f8e0c09806f87882daf17cf0663f9459aabc.png" />
 </div>
 </div>
 <p><strong>(c)</strong> Plot the expected size at generation <span class="math notranslate nohighlight">\(g\)</span> for these same values.</p>
