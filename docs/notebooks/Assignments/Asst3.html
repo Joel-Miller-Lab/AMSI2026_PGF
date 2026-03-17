@@ -527,25 +527,96 @@ document.write(`
 <ol class="arabic">
 <li><p>Consider an infectious disease which has recently been introduced into a very large population from wildlife.  It is believed that the offspring distribution can be well-approximated by a Negative-Binomial distribution of unknown parameters.  There have been five known independent introductions into the population.  So far all outbreaks have died out, but there is concern that the reproduction number (the mean of the offspring distribution) may be larger than <span class="math notranslate nohighlight">\(1\)</span>.  We will use the parametrization of the Negative Binomial distribution from <a class="reference internal" href="../BasicGenFxn/GenFxnsExamples.html#example-NegBinPGF">Example 1.11</a>.</p>
 <p><strong>(a)</strong> Find the probability of an outbreak of size <span class="math notranslate nohighlight">\(L\)</span> for a given <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (<span class="math notranslate nohighlight">\(r\)</span> may not be an integer).  Your expression should be given in terms of the Gamma function <span class="math notranslate nohighlight">\(\Gamma(x)\)</span> — replace all factorials <span class="math notranslate nohighlight">\(M!\)</span> with <span class="math notranslate nohighlight">\(\Gamma(M+1)\)</span>.  It will be helpful to observe that if <span class="math notranslate nohighlight">\(\mu_{r,p}(x)\)</span> is the PGF of the distribution, then <span class="math notranslate nohighlight">\(\mu_{r,p}(x)^N\)</span> is the PGF for another Negative Binomial distribution.</p>
-<p><strong>(b)</strong> Find a reasonably simplified formula for the probability that <span class="math notranslate nohighlight">\(M\)</span> outbreaks have sizes <span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(L_M\)</span> for given parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (expressed in terms of Gamma functions)</p>
-<p>The probability of observing data for a given set of parameters is called the <em>likelihood</em> of the parameters.  The <em>log-likelihood</em> is the logarithm of the likelihood.  The parameters that maximize the likelihood will also maximize the log-likelihood, but maximization is often easier with log-likelihood, and also much easier to use computationally.  In Python, we can calculate <span class="math notranslate nohighlight">\(\ln \Gamma(x)\)</span> using</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In this model, each node in the Galton-Watson tree represents a distinct individual.  So the number of infections is equal to the number of nodes in the tree.  Following <a class="reference internal" href="../InfDis/InfDisGenBased.html#sec-genbasedsize"><span class="std std-ref">Size distribution of small outbreaks</span></a> <a class="reference internal" href="../InfDis/InfDisGenBased.html#sec-genbasedsize"><span class="std std-numref">Section 4.5.1</span></a>, the size of the outbreak is <span class="math notranslate nohighlight">\(L\)</span> with probability</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[\text{outbreak of size $L$}] &amp;= \frac{1}{L} [x^{L-1}] \mu_{r,p}(x)^L\\
+&amp;= \frac{1}{L} [x^{L-1}] \left(\left(\frac{p}{1-(1-p)x}\right)^r\right)^L\\
+&amp;= \frac{1}{L}[x^{L-1}] \mu_{rL,p}(x)\\
+&amp;= \frac{1}{L}[x^{L-1}] \frac{\Gamma(N+rL)}{N! \,\Gamma(rL)}p^{rL} (1-p)^N x^N\\
+&amp;= \frac{1}{L} \frac{\Gamma(L-1+rL)}{(L-1)! \,\Gamma(rL)}p^{rL}(1-p)^{L-1}
+\end{align*}\]</div>
+</div>
+</details><p><strong>(b)</strong> Find a reasonably simplified formula for the probability that <span class="math notranslate nohighlight">\(M\)</span> outbreaks have sizes <span class="math notranslate nohighlight">\(L_1\)</span>, <span class="math notranslate nohighlight">\(L_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(L_M\)</span> for given parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (expressed in terms of Gamma functions)</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">As these are independent, it is just the product:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[L_1,L_2,\ldots, L_m] &amp;= \prod_{i=1}^M \frac{1}{L_i} \frac{\Gamma(L_i-1+rL_i)}{(L_i-1)! \,\Gamma(rL_i)}p^{rL_i}(1-p)^{L_i-1}\\
+&amp;= 
+\frac{1}{\prod_{i=1}^M L_i} \left(\prod_{i=1}^M \frac{\Gamma(L_i-1+rL_i)}{(L_i-1)! \, \Gamma(rL_i)}\right) p^{r\sum L_i}(1-p)^{-M + \sum L_i}
+\end{align*}\]</div>
+</div>
+</details><p>The probability of observing data for a given set of parameters is called the <em>likelihood</em> of the parameters.  The <em>log-likelihood</em> is the logarithm of the likelihood.  The parameters that maximize the likelihood will also maximize the log-likelihood, but maximization is often easier with log-likelihood, and also much easier to use computationally.  In Python, we can calculate <span class="math notranslate nohighlight">\(\ln \Gamma(x)\)</span> using</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">gammaln</span>  <span class="c1">#put this at the top</span>
 
 <span class="n">gammaln</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>(c)</strong> Find the log-likelihood of <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> given <span class="math notranslate nohighlight">\(L_1, \ldots, L_M\)</span>.</p>
-<p><strong>(d)</strong> Using <span class="math notranslate nohighlight">\(A = \sum L_i\)</span>, find a function <span class="math notranslate nohighlight">\(\hat{p}(r)\)</span> that maximizes the likelihood given <span class="math notranslate nohighlight">\(r\)</span>.</p>
-<p><strong>(e)</strong> Write down a function in terms of only <span class="math notranslate nohighlight">\(r\)</span> to maximize to find <span class="math notranslate nohighlight">\((p^*,r^*)\)</span> that maximizes the likelihood.  Remove any terms that do not depend on <span class="math notranslate nohighlight">\(r\)</span>.</p>
-<p><strong>(f)</strong> One way to estimate paramters is “Maximum Likelihood Estimation” (MLE).  We simply find the parameters that have the highest likelihood.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We just take logarithms, recalling that the logarithm of a product is the sum of the logarithms.</p>
+<p class="sd-card-text">We use <span class="math notranslate nohighlight">\(\log\Gamma(x)\)</span> for <span class="math notranslate nohighlight">\(\ln(\Gamma(x))\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\text{Log-likelihood}(r,p) &amp;=   + r \ln(p) \sum L_i + \ln(1-p)\left(-M+ \sum L_i\right)\\
+&amp;\quad + \sum_{i=1}^M {\Large(}-\ln L_i + \log\Gamma (L_i-1 + r L_i) - \ln ((L_i-1)!)  - \log\Gamma(rL_i){\Large)}
+\end{align*}\]</div>
+</div>
+</details><p><strong>(d)</strong> Using <span class="math notranslate nohighlight">\(A = \sum L_i\)</span>, find a function <span class="math notranslate nohighlight">\(\hat{p}(r)\)</span> that maximizes the likelihood given <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Holding <span class="math notranslate nohighlight">\(r\)</span> fixed, we differentiate with respect to <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial p} \text{Log-likelihood}(r,p) &amp;= Ar \frac{1}{p} - \frac{A-M}{1-p}\\
+\Rightarrow 0 &amp;=Ar \frac{1}{\hat{p}} - \frac{A-M}{1-\hat{p}}\\
+&amp;= (1-\hat{p})Ar - (A-M)\hat{p}\\
+\Rightarrow \hat{p} &amp;= \frac{Ar}{A(r+1)-M} 
+\end{align*}\]</div>
+<p class="sd-card-text">Note - for any <span class="math notranslate nohighlight">\(r\)</span> this is a maximum.</p>
+</div>
+</details><p><strong>(e)</strong> Write down a function in terms of only <span class="math notranslate nohighlight">\(r\)</span> to maximize to find <span class="math notranslate nohighlight">\((p^*,r^*)\)</span> that maximizes the likelihood.  Remove any terms that do not depend on <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (e)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We substitute this in for <span class="math notranslate nohighlight">\(p\)</span> in the log-likelihood and then differentiate with respect to <span class="math notranslate nohighlight">\(r\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\text{Log-likelihood}(r,\hat{p}(r)) &amp;=   + Ar \ln\left(\frac{Ar}{A(r+1)-M}\right) + (A-M)\ln\left(1-\frac{Ar}{A(r+1)-M}\right)\\
+&amp;\quad + \sum_{i=1}^M {\Large(}-\ln L_i + \log\Gamma (L_i-1 + r L_i) - \ln ((L_i-1)!)  - \log\Gamma(rL_i){\Large)}
+\end{align*}\]</div>
+<p class="sd-card-text">So to maximize this, we can maximize the function</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f(r) &amp;= Ar \ln\left(\frac{Ar}{A(r+1)-M}\right) + (A-M)\ln\left(1-\frac{Ar}{A(r+1)-M}\right)\\
+&amp;\quad + \sum_{i=1}^M {\Large(}\log\Gamma (L_i-1 + r L_i)- \log\Gamma(rL_i){\Large)}
+\end{align*}\]</div>
+</div>
+</details><p><strong>(f)</strong> One way to estimate parameters is “Maximum Likelihood Estimation” (MLE).  We simply find the parameters that have the highest likelihood.</p>
 <p>The following code simulates <code class="docutils literal notranslate"><span class="pre">numsims</span></code><span class="math notranslate nohighlight">\(=5\)</span> outbreaks with a negative binomial offspring distribution having <span class="math notranslate nohighlight">\(r=1\)</span>, <span class="math notranslate nohighlight">\(p=0.6\)</span>.  Then it uses maximum likelihood estimation to estimate <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <ul class="simple">
 <li><p>Using your answers above, modify <code class="docutils literal notranslate"><span class="pre">Function_to_maximize</span></code> so that it performs the correct calculation.  Also modify the expression for <code class="docutils literal notranslate"><span class="pre">p_est</span></code>.  Run the code.</p></li>
-<li><p>Play around with <code class="docutils literal notranslate"><span class="pre">numsims</span></code> to get an idea of how many simulations are needed for this to perform well at estimating the parameters.  Also play around with <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (the code will insist that the simulations be guaraneed to finish, so it will refuse to run if <span class="math notranslate nohighlight">\(\mathcal{R}_0=\mu'(1)=(1-p)r/p&gt;1\)</span>.).</p></li>
+<li><p>Play around with <code class="docutils literal notranslate"><span class="pre">numsims</span></code> to get an idea of how many simulations are needed for this to perform well at estimating the parameters.  Also play around with <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> (the code will insist that the simulations be guaranteed to finish, so it will refuse to run if <span class="math notranslate nohighlight">\(\mathcal{R}_0=\mu'(1)=(1-p)r/p&gt;1\)</span>.).</p></li>
 <li><p>Looking at the plot of <span class="math notranslate nohighlight">\(p_k\)</span>, the offspring distribution, comment on whether <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> need to be known exactly to make good predictions.</p></li>
+<li><p>Reflect on your observations.  What happens if <code class="docutils literal notranslate"><span class="pre">numsims</span></code> is small?  What if <span class="math notranslate nohighlight">\(\mathcal{R}_0\)</span> is close to 1?</p></li>
 </ul>
-<p>Reflect on your observations.  What happens if <code class="docutils literal notranslate"><span class="pre">numsims</span></code> is small?  What if <span class="math notranslate nohighlight">\(\mathcal{R}_0\)</span> is close to 1?</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (f)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">See code below.</p>
+<p class="sd-card-text">We need a large number of simulations to have good estimates for <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span>.  However, well before <span class="math notranslate nohighlight">\(p^*\)</span> and <span class="math notranslate nohighlight">\(r^*\)</span> are a very close match the offspring distribution fits well.  Thus the outcomes will be accurately predicted event if <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> are not well-identified.</p>
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(\mathcal{R}_0\)</span> is close to <span class="math notranslate nohighlight">\(1\)</span>, we need higher certainty about its value to make good predictions for the future (the policy implications of being unsure if <span class="math notranslate nohighlight">\(\mathcal{R}_0 =0.5\)</span> or <span class="math notranslate nohighlight">\(0.95\)</span> are small compared to the implications of uncertainty about whether <span class="math notranslate nohighlight">\(\mathcal{R}_0 = 0.95\)</span> or <span class="math notranslate nohighlight">\(1.05\)</span>).</p>
+</div>
+</details></li>
 </ol>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -559,9 +630,9 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize_scalar</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mf">0.6</span>
-<span class="n">numsims</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.45</span>
+<span class="n">numsims</span> <span class="o">=</span> <span class="mi">5000</span>
 
 <span class="k">if</span>    <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Warning: mean must be less than 1 for extinction to be certain&quot;</span><span class="p">)</span>
@@ -587,13 +658,12 @@ document.write(`
 
 
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;student-created function is needed here, using default&quot;</span><span class="p">)</span>
+<span class="c1">#print(&quot;student-created function is needed here, using default&quot;)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">F_to_maximize</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">2</span><span class="o">-</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="c1">#You need to fill in the correct expression here.</span>
-
-
-
-
+    <span class="n">f</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">numsims</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">numsims</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">A</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">numsims</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">Li</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="n">gammaln</span><span class="p">(</span><span class="n">Li</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="o">*</span><span class="n">Li</span><span class="p">)</span> <span class="o">-</span> <span class="n">gammaln</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">Li</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">F_to_minimize</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">F_to_maximize</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
@@ -602,8 +672,8 @@ document.write(`
 
 <span class="n">r_est</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;student-created function is needed here, using default&quot;</span><span class="p">)</span>
-<span class="n">p_est</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#fill in correct expression here</span>
+<span class="c1">#print(&quot;student-created function is needed here, using default&quot;)</span>
+<span class="n">p_est</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">r_est</span><span class="o">/</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="p">(</span><span class="n">r_est</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">numsims</span><span class="p">)</span><span class="c1">#\frac{Ar}{A(r+1)-M}</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated r:&quot;</span><span class="p">,</span> <span class="n">r_est</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated p:&quot;</span><span class="p">,</span> <span class="n">p_est</span><span class="p">)</span>
@@ -622,14 +692,12 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 1, 6, 2, 1]
-student created function is needed here, using default
-student created function is needed here, using default
-Estimated r: 5.064601742789742e-06
-Estimated p: 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>observed sizes:  [3, 4, 1, 1, 1, 1, 1, 2, 9, 1, 1, 1, 1, 1, 2, 3, 1, 1152, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 16, 1, 6, 2, 257, 70, 1, 14, 1, 11, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 17, 2, 40, 1, 1, 1, 2, 1, 5172, 4, 1, 1, 2, 2, 4, 1, 1, 5, 1, 1, 1, 7, 176, 1, 1, 4, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 4, 1, 5, 2, 1, 1, 1, 1, 26, 3, 1, 1, 2, 1, 2, 24, 1, 312, 25, 3, 1, 1, 1, 6, 2, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 2, 23, 4, 1, 1, 8, 8, 1, 1, 2, 1, 11, 1, 3, 1, 12, 1, 3, 37, 10, 124, 1, 2, 2, 16, 1, 2, 1, 1, 1, 6, 1, 53, 146, 1, 10, 64, 1, 1, 1, 1, 1, 1, 1, 1, 38, 1, 1, 1, 1, 34, 4, 15, 25, 2, 5, 1, 108, 2, 1, 5, 2, 174, 6, 54, 9, 1, 1, 1, 1, 1, 35, 1, 1, 1, 1, 368, 1, 1, 2, 1, 1, 1, 3, 8, 1, 603, 1, 3, 1, 1, 3, 1, 5, 19, 1, 1, 3, 4, 1, 1, 3, 32, 2, 1, 1, 1, 2, 12, 1, 39, 41, 1, 1, 16, 3, 1, 8, 2, 1, 10, 1, 1, 58, 9, 14, 1, 2, 1, 9, 1, 62, 13, 1, 7, 2, 4, 5, 1, 1, 4, 1, 1, 4, 1, 285, 10, 10, 6, 5, 4, 1, 1, 1, 2, 1, 1, 2, 1, 14, 21, 2, 2, 1, 3, 2, 1, 5, 2, 1, 1, 2, 1, 1, 1, 1, 558, 1, 1, 1, 1, 62, 1, 1, 6, 32, 11, 34, 2, 9, 1, 1, 1, 1, 2, 1, 1, 12, 1, 74, 1, 2, 1, 3, 10, 1, 1, 1, 1, 1, 19, 1, 1, 1, 1, 2, 2, 1, 2, 10, 1, 184, 1, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 48, 19, 2, 3, 1, 1, 5, 1, 1, 10, 1, 1, 1, 4, 3, 3, 8, 1, 1, 2, 3, 13, 1, 18, 1, 46, 6, 2, 1, 242, 3, 2, 1, 3, 1, 18, 1, 1, 2, 1, 1, 37, 3, 1, 3, 1, 1, 2, 1, 2, 442, 1, 30, 17, 3, 1, 7, 2, 1, 1, 1, 1, 23, 1, 1, 4, 5, 1, 1, 1, 1, 1, 1, 5, 2, 134, 2, 1, 1, 1, 2, 2, 1, 2, 2, 1, 31, 1, 4, 51, 2, 1, 1, 2, 1, 1, 1, 2, 1, 4192, 1, 5, 1, 4, 1, 1, 1, 49, 1, 5, 3, 406, 3, 1, 1, 4, 1, 1, 2, 8, 1864, 1, 1, 1, 1, 4, 1, 1, 13, 1, 17, 1, 2, 1, 1, 345, 1, 1, 2, 1, 5, 59, 22, 1, 3, 2, 1, 1, 2, 3, 1, 1, 2, 6, 1, 1, 1, 87, 9, 1, 1, 1, 12, 24, 1, 89, 1, 2, 1, 2, 15, 1, 16, 1, 1, 3, 2, 25, 23, 1, 1, 2, 3, 2, 2, 13, 1, 1, 2, 5, 1, 1, 16, 2, 2, 1, 4, 32, 1, 2, 18, 2, 29, 1, 1, 1, 79, 2, 1, 2, 7, 7, 1, 1, 111, 1, 1, 5, 1, 1, 51, 1, 2, 18, 3, 1, 2, 1, 2, 4, 171, 32, 1, 1, 3, 3, 1, 1, 1, 1, 29, 2, 6, 4, 1, 1, 8, 3, 1, 1, 1, 36, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 4, 1, 5, 1, 4, 1348, 1, 1, 1, 1, 1, 1, 1, 4, 2, 71, 167, 4, 1, 1, 3, 13, 1, 1, 39, 1, 1, 4, 5, 1, 53, 1, 10, 1, 1, 1, 1, 1, 4, 1, 2, 1, 1, 1, 1, 2, 40, 2, 1, 1, 2, 4, 1, 12, 1, 3, 1, 3, 4, 4, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 13, 1, 2, 1, 6, 2, 6, 1, 29, 1, 1, 16, 6, 1, 53, 3, 1, 1, 26, 2, 20, 67, 40, 1, 1, 5, 2, 2, 1, 3, 1, 5, 23, 9, 1, 2, 15, 1, 309, 3, 302, 1, 1, 1, 2, 1, 2, 2, 3, 33, 20, 6, 1, 1, 8, 8, 1, 1, 17, 1, 2, 1, 13, 1, 40, 6, 1, 1, 1, 9, 1, 1, 3, 1, 1, 1, 1, 50, 3, 1, 1, 1, 6, 2, 4, 1, 2, 17, 26, 2, 9, 1, 55, 1, 2, 1, 1, 2, 4, 20, 1, 8, 3, 1, 2, 1, 847, 1, 8, 1, 14, 1, 103, 1, 1, 2, 1, 1, 130, 5, 1, 1, 10, 2, 8, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1129, 1, 1, 1, 1, 2, 3, 1, 1, 43, 1, 3, 1, 1, 1, 121, 37, 2370, 2, 1, 1, 3, 1, 1, 32, 13, 1, 97, 1, 2, 1, 3, 1, 1, 1, 1, 2, 1, 1, 4, 1, 5, 3, 1, 1, 1, 1, 1, 1, 177, 1, 1, 1, 43, 5, 2, 2, 2, 1, 1, 1, 1, 3, 1, 1, 2, 5, 2, 1, 1, 2, 21, 1, 109, 5, 2, 1, 3, 2, 13, 5, 1, 6, 2, 2, 1, 4, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 6, 1, 1, 1, 5, 1, 1, 23, 863, 1, 2, 4, 1, 7, 1, 1, 1, 3, 1, 1, 20, 10, 1, 5, 4, 2, 1, 1, 1, 1, 4, 1, 1, 3, 1, 1, 3, 2, 1, 32, 1, 1, 1, 24, 1, 1, 1, 4, 16, 242, 2, 23, 1, 1, 1, 1, 271, 1, 2, 1, 1, 1, 1, 1, 2, 8, 1, 1, 1, 1, 1, 1, 1, 6, 2, 1, 1, 2, 1, 1, 3, 1, 118, 3, 1, 1021, 2, 22, 1, 2, 4, 1, 3, 1, 1, 14, 1, 1, 1, 2, 2, 1, 12, 4, 1, 1, 1627, 10, 10, 1, 1, 15973, 1, 9, 2, 1, 1, 1, 1, 10, 2, 1, 1, 1, 29, 8, 3, 2, 19, 1, 1, 3, 5, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 2, 1, 1, 10, 1, 1, 1, 3, 1, 1, 9, 1, 1, 1, 1, 2, 2, 1, 1, 12, 1, 1, 1, 236, 2863, 2, 4, 2, 3, 11, 1, 4, 3, 23, 6, 1, 1, 1, 10, 1, 3, 1, 2, 2, 4, 5, 1, 8, 1711, 1, 1, 42, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1287, 3, 1, 1, 89, 1, 1, 1, 1, 1, 148, 1, 2, 553, 8, 10, 164, 2, 1, 1, 1, 1, 19, 1, 1, 1, 1, 3, 14, 1, 5, 1, 19, 1, 14, 1, 1, 149, 2, 1, 8, 3, 1, 1, 1, 521, 4, 1, 4, 1, 1, 2, 6, 3, 2, 22, 1, 1, 2, 9, 1, 247, 2, 1, 1, 2, 1, 5, 1, 1, 1, 45, 1, 119, 10, 4, 1, 3, 1, 22, 2, 40, 2, 1, 1, 1, 1, 373, 1, 2, 1, 1, 1, 1, 4, 1, 1, 1, 1, 4, 6, 3, 2, 5, 2, 6, 1, 2, 1, 4, 15, 2, 22, 1, 1, 1, 3, 1, 1, 1, 1, 1, 7, 2, 1, 1, 1, 1, 5, 1, 1, 443, 1, 1, 60, 45, 1, 1, 1, 1, 52, 1, 2, 1, 3, 1, 1, 1, 2, 1, 1, 1, 1, 2, 19, 3, 1, 1, 1, 2, 4, 1, 1, 9, 8, 1, 1, 1, 2, 14, 4, 7, 9, 6, 1, 1, 1, 1, 12, 3, 1, 34, 1, 2, 1, 1, 72, 1, 2, 326, 1, 2, 82, 1, 1, 1, 1, 1, 2, 1, 15, 8, 16, 1, 9, 2, 1, 141, 1, 2, 7, 4, 2, 3, 1, 2, 1, 13, 2, 1, 293, 6, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 275, 1, 1, 1, 1, 1, 3, 16, 1, 1, 1, 3, 1, 1, 2, 3478, 38, 1, 1, 1, 16, 1, 1, 7, 1, 1, 27, 1, 1, 1, 1, 35, 2, 1, 1, 2, 1, 65, 12, 1, 1, 2, 4, 4, 1, 1, 3, 2, 3, 2, 1, 2, 2, 120, 1, 3, 61, 1, 8, 1, 1, 16, 28, 1, 2, 10, 64, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 6, 1, 1, 1, 6, 42, 1, 4, 1, 1, 2, 1, 1, 60, 4, 1, 1, 2, 16, 167, 2, 3, 42, 8, 1, 1, 6, 2, 1, 1, 2, 1, 4, 7, 2, 2, 43, 1, 1, 1, 2, 1, 4, 8, 5, 1, 1, 1, 1, 14, 5, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 4, 41, 2, 1, 1, 2, 2, 1, 3, 6, 53, 1, 1, 268, 9, 13, 1, 1, 2, 49, 7, 1, 4, 1, 1, 7, 1, 2, 22, 1, 17, 7, 1, 1, 639, 68, 2, 1, 5, 1, 54, 1, 2, 52, 2, 1, 700, 3, 12, 1, 1, 1, 1, 1961, 1, 1, 3, 60, 2, 155, 1, 1, 1, 1, 3, 1, 1, 1, 113, 116, 218, 4, 5, 377, 1, 1, 3, 3, 1, 2, 1, 5, 1, 1, 2, 2, 1, 1, 2, 2, 17, 2, 2, 1, 1, 1, 38, 3, 15, 1, 3, 1, 1, 8, 13, 3, 1, 1, 1, 59, 1, 1, 4, 4, 1, 1, 1, 1, 6, 1, 42, 7, 1, 11, 4, 1, 2, 2, 1, 1, 16, 11, 1, 1, 2, 1, 1, 1, 4, 1, 14, 2, 9, 105, 1, 57, 29, 4, 3, 29, 1, 1, 1, 5, 1, 5, 11, 2, 1, 1, 2, 70, 3, 1, 4, 2, 1, 1, 1, 1, 9, 513, 1, 2, 27, 2, 2, 1, 1, 1, 44, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 7, 2, 53, 25, 1, 1, 2, 1, 363, 4, 26, 8, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 1, 83, 1, 1, 1, 4, 1, 67, 1, 1, 1, 1, 1, 6, 5, 174, 1, 3, 72, 2, 213, 4, 1, 4, 18, 1, 1, 2, 1, 1, 17, 1, 1, 11, 21, 1, 1, 1, 35, 12, 3325, 4, 2, 1, 1, 3, 1, 5, 2, 2, 1, 1, 8, 6, 1, 1, 1, 1, 3, 1, 1, 1, 1, 14, 22, 1, 1, 3, 2, 4, 1, 2, 4, 2, 1, 2, 257, 1, 1, 2, 1, 1, 36, 1, 1, 4, 1, 1753, 7, 12, 1, 2, 2, 1, 1, 1, 13, 2, 3, 119, 1, 7, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 5109, 1, 1174, 1, 3, 1, 9, 7, 1, 1, 2, 1, 1, 1, 5, 1, 1, 1, 1, 2, 1, 1, 1, 1, 14, 1, 1, 2, 1, 1, 3, 6, 3, 1, 1, 5, 1, 3, 1, 1, 22, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 4, 5, 1, 2, 1, 1, 1, 3, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 45, 5, 1842, 1, 4, 12, 11, 15, 1, 43, 1, 1, 1, 1, 4, 1, 1, 1, 9, 7, 1, 1, 2, 3, 3, 5, 15, 1, 1, 1, 5, 1, 5, 1, 4, 6, 5, 1, 2247, 1, 1, 3, 3, 21, 18, 2, 1, 1, 1, 1, 66, 1, 15, 4, 1, 56, 4, 1, 1, 1, 2, 12, 1, 11, 1, 1, 3, 3, 5, 8, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 40, 1, 230, 1, 1, 1, 1, 5, 1610, 89, 1, 8, 1, 3, 1, 1, 134, 1, 1, 3, 1, 5, 2, 1, 2, 1, 1, 1, 21, 1, 14, 2, 41, 1, 1, 1, 3, 1, 6, 1, 5, 5, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 3, 42, 4, 1, 2, 3, 1, 2, 2, 1, 1, 18, 10, 1, 1, 1, 1, 6, 2, 3, 1, 9, 1, 1, 2, 154, 1, 1, 1, 1, 1, 1, 5, 628, 37, 2, 3, 25, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 3, 1, 3, 1, 1, 474, 1, 5, 10, 3, 2, 6, 1, 1, 123, 4, 1, 1, 1, 5, 3, 3, 7, 2, 1, 1, 7, 1, 6, 4, 1, 22, 7, 1, 1, 1, 29, 5, 49, 1, 5, 1, 1, 1, 41, 103, 7, 1, 75, 1, 3, 1, 1, 1, 1, 1, 2, 77, 2, 1, 13, 3, 1, 4, 5, 1, 1, 1, 3, 1, 1, 2, 1, 1, 1, 4, 19, 2, 1, 10, 1, 6, 2, 3, 7, 1, 6, 2, 3, 1, 2, 1, 2, 2, 12, 4, 3, 1, 1, 38, 2, 1, 1, 1, 1, 22, 6, 2, 12, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 79, 1, 1, 3, 2, 1, 1, 1, 1, 1, 2, 37, 185, 1, 1, 1, 20, 1, 1, 52, 1, 2, 1, 1, 4, 2, 2, 6, 7, 309, 1, 103, 1, 2, 7, 8, 1, 1, 1, 1, 1, 1, 24, 3, 17, 92, 6, 6, 1, 1, 5, 78, 1, 1, 1, 1, 1, 20, 12, 6, 56, 2, 2, 3, 1, 4, 1, 24, 6, 2, 1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 9987, 1, 23, 2, 1, 9, 1, 1, 3, 2, 1471, 2, 1, 1, 12, 1, 1, 2, 110, 1, 1, 10, 1, 4, 2, 1, 3, 4, 915, 1, 1, 5, 1, 6, 1, 6, 1, 105, 1, 13, 7394, 1, 22, 8, 1, 16, 31, 4, 6, 1034, 2, 1, 1, 4137, 1, 1, 5, 2, 549, 1, 2, 3, 1, 10, 1, 1, 456, 1, 1, 5, 1, 8, 9, 17, 2, 1, 3, 4, 3, 1, 1, 2, 1, 2, 2, 1, 278, 1, 2, 2, 1, 1, 56, 16, 5, 1, 1, 63, 6, 1, 1, 1, 1, 2, 79, 1, 1, 1, 2, 1, 24, 1, 3, 1, 2, 10, 2, 1, 3, 1, 1, 1, 14, 1, 1, 1, 36, 6, 1, 35, 1, 1, 21, 1, 2, 41, 6, 16, 1, 3, 1, 5, 63, 1, 1, 1, 1, 1, 1, 1, 2, 1, 26, 21, 1, 24, 1, 7, 1, 1, 35, 1, 10, 3, 1, 1, 1, 5, 1, 1, 3, 106, 3, 1, 2, 1, 5, 2, 37, 1, 1, 1, 1, 6, 4, 1, 3, 1, 1, 34, 5, 1, 3, 1, 1, 6, 1, 1, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1417, 1, 1, 1, 3, 4, 1, 25, 1, 17, 1, 2, 5, 2, 2, 1, 1, 2, 1, 110, 1, 3, 2, 2, 1, 7, 1, 8, 1, 2, 1, 1, 7, 44, 1, 5, 29, 1, 6, 2, 35, 1, 1, 1, 5, 3, 2, 2, 1, 2, 1, 1, 1, 21, 13, 3, 30, 1, 1, 1, 1, 1, 13, 5, 1, 129, 3, 1, 1, 3, 1, 1, 1, 3, 1, 1, 3, 1, 2, 1, 1, 3, 1, 1541, 3, 1, 1, 1, 1, 1, 1, 10, 1, 30, 8, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 145, 229, 1, 3, 1, 2, 74, 1, 4, 1, 22, 1, 1, 19, 1, 1, 29, 156, 520, 22, 2, 15, 1, 9, 2, 692, 4, 7, 4, 16, 9, 1, 1, 3, 1, 2, 1, 1, 1, 6, 1, 1, 1, 1, 1, 1, 4886, 1, 1, 82, 1, 94, 4, 4, 1, 1, 11, 1, 1, 21, 1, 1, 1, 9, 1, 7, 12, 1, 2, 1, 137, 3, 2, 15, 1, 1, 2, 1, 8, 1, 3, 1, 7, 1, 2, 1, 20, 1, 1, 2, 1, 51, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 13, 4, 1, 2, 1, 1, 1, 1, 1, 13, 1, 1, 2, 67, 50, 9, 1, 5, 1, 5, 1, 76, 1, 69, 27, 1, 2, 36, 1, 1, 1, 1, 4, 3, 1, 1, 1, 1, 4, 1, 2, 1, 1, 5, 1, 4, 1, 1, 1, 47, 1, 3, 1, 6, 1, 1, 1, 52, 1, 2, 1, 2, 32, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 131, 1, 17, 3, 9, 1, 1, 5, 4, 1, 2, 2, 1, 1, 1119, 7, 3, 1, 3, 1, 2, 1, 1, 1, 6, 62, 1, 2, 2, 8, 1, 3, 1, 10, 159, 1, 1, 4, 6, 1, 2, 1, 333, 1, 1, 4, 1, 2, 71, 1, 1, 5, 1, 1, 1, 155, 1, 9, 1, 21, 1, 3, 6, 39, 1, 2, 2, 1, 14, 1, 1, 1, 8, 5, 1, 3, 37, 1, 1, 1, 1, 1, 2, 1, 1, 6, 2, 33, 2, 2, 2, 5, 1, 1, 1, 1, 57, 7, 1, 53, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 7, 170, 12, 91, 4, 10, 1, 1, 1, 1, 7, 8, 1, 14, 1, 2, 31, 1, 3, 7, 10, 1, 1, 3, 24, 1, 31, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 4, 9, 2, 1, 1, 19, 1, 1, 2, 1, 3, 1, 1, 17, 2, 1, 1, 1, 1, 3, 5, 1, 1, 1, 1, 39, 1, 1, 1, 8, 3, 1, 16, 19, 6, 1, 1, 1, 2, 2, 1, 1, 1, 56, 1, 6, 1, 7, 7, 1, 2, 1, 1, 4, 2, 1, 1, 2, 4, 2, 1, 44, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 46, 4, 7, 1, 2, 2, 1, 3, 12, 3, 3, 2, 1, 1, 2, 1, 3, 2, 1, 1, 1, 3, 1, 5, 1, 1, 1, 2, 1, 3, 35, 1, 6, 77, 3, 2, 1, 2, 1, 1, 3, 2, 1, 262, 1, 8, 1, 16, 5, 10, 1, 21, 2, 26, 2, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1, 2, 28, 3, 11, 1, 2, 5, 3, 1, 1, 13, 1, 1, 1, 1, 7, 1, 5, 35, 2, 1, 2, 1, 4, 3, 1, 1, 2, 1, 4, 1, 8, 1, 1, 127, 1, 4, 1, 96, 81, 1, 6, 2, 1, 1, 1, 5, 3, 1, 13, 28, 1, 1, 1, 1, 1, 3, 1, 1, 5, 1, 1, 1, 4, 1, 1, 3, 2, 2, 1, 1, 2, 1, 10, 1, 102, 1, 2, 2, 1, 1, 2, 9, 142, 604, 1, 4, 1, 1, 28, 1, 6, 1, 1, 24, 2, 1, 4, 2, 1, 1, 2, 7, 3, 1, 15, 1, 159, 1, 9, 2, 3, 1, 3, 9, 1, 1, 1, 8, 3, 7, 1, 6, 1, 1, 1, 11, 46, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 4, 48, 1, 1, 766, 106, 1, 5, 1, 1, 16, 2, 1, 1, 16, 1, 1, 3, 5, 6, 2, 1, 6, 1, 1, 1046, 1, 1, 3, 1, 1, 33, 110, 1, 2, 2, 1, 9, 1, 3, 72, 11, 3, 1, 7, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 9, 1, 9, 1047, 2, 2, 2, 2, 1, 24, 4, 1, 1, 2, 5, 1, 270, 1, 1, 1, 1, 2, 11, 85, 1, 3, 1, 93, 1, 1, 6, 1, 1, 1, 2, 2, 2, 77, 1, 1, 3, 5, 3, 1, 1, 2, 3, 2, 6, 121, 59, 6, 45, 3, 1, 40, 1, 1, 4, 1, 1, 46, 2, 3, 1, 1, 3, 3, 1, 2, 3, 2, 1, 1, 1, 1, 1, 1, 3, 1, 3, 10, 4, 383, 1, 151, 1, 1, 1, 2, 1, 1, 1, 1, 3, 11, 11, 1, 2, 1, 1, 3, 5, 9, 2, 8, 191, 4, 1, 7, 33, 1, 1, 102, 1, 4, 1158, 89, 1, 5, 3, 1, 1, 73, 4, 1, 1, 1, 1, 1, 1, 2, 3, 62, 5, 1, 2, 1, 1, 1, 3, 5, 1, 1, 2, 1, 128, 1, 1, 1, 3, 1, 2, 1, 2, 6, 19, 3, 9, 1, 1, 1, 15, 1, 1, 1, 1, 1, 1, 4, 7, 59, 1, 2, 1, 1, 103, 1, 1, 7, 1, 745, 23, 5, 4, 1, 2, 1, 2, 1, 1, 4, 3, 2, 4, 79, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 3, 1, 1, 12, 1, 17, 1, 19, 1, 1, 1, 1, 2, 1, 1, 7, 6, 1, 1, 1, 1, 15, 1, 1, 1, 1, 1, 1, 102, 1, 93, 11, 1, 1, 32, 1, 1, 1, 5, 10, 1, 1, 77, 1, 3, 2, 92, 1, 1, 1, 2, 192, 1, 1, 10, 196, 4, 17, 141, 1, 19, 1, 1, 30, 1, 1, 1, 1, 3, 1, 10, 1, 3, 2718, 3, 12, 63, 5, 2, 1, 13, 1, 66, 1, 1, 1, 1, 1, 2, 20, 1, 2, 5, 3, 1, 1, 1, 2, 1, 1, 3, 1, 4, 1, 2, 2, 5, 8, 1, 10, 1, 6, 2, 1, 1, 3, 1, 11, 3, 1, 1184, 63, 1, 1, 1, 1, 1, 1, 5, 15, 1, 2, 1, 1, 34, 1, 1, 4, 1, 1, 1, 14, 1, 1, 1, 1, 1, 1, 1, 3, 1, 40, 3, 1, 1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 3, 26, 1, 1, 5, 2, 24, 2, 1, 1, 4, 1, 6, 12, 3, 2, 1, 2, 1, 2, 70, 1, 1, 2, 3, 1, 2, 1, 1, 3, 5, 6, 1, 2, 1, 2, 8, 1, 21, 1, 2, 1, 1, 1, 1, 284, 1, 1, 1, 19, 6, 1, 122, 1, 24, 9, 3, 7, 1, 1, 1, 1, 5, 3, 5, 2, 4, 2, 30, 75, 2, 2, 5, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 19, 2, 5, 1, 3, 4, 3, 5, 1, 1, 1, 1, 1, 6, 1, 4, 7, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 9, 1, 19, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 57, 19, 5, 1, 10, 1, 1, 220, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 10, 89, 52, 1, 91, 1, 2, 6, 1, 67, 1, 2, 2, 1, 2, 3, 3, 1, 1, 1, 6, 1, 1, 1, 5, 1, 1, 5, 2, 56, 6, 1, 1, 9, 1, 7, 1, 5, 2, 14, 2190, 1, 1, 1, 36, 1, 1, 1, 4, 8, 1, 1, 7, 1, 1, 1, 1, 6, 1, 1, 1, 14, 1, 2, 1, 2, 1, 1, 2, 1, 3, 4, 1, 1, 1, 1, 12, 4, 11, 2, 7, 1, 28, 2, 1, 1, 1338, 1, 1, 116, 1, 2, 1, 2, 259, 2, 198, 1, 1, 5, 7, 8, 18, 3, 1, 1, 16, 1, 1, 1, 1, 1, 3, 1, 1, 517, 102, 5, 190, 10, 1, 2, 1, 1, 2, 5, 8, 1, 17, 13, 96, 1, 1, 1, 1, 4, 1, 1, 2, 1, 2, 11, 78, 1, 1, 1, 1, 26, 2, 2, 1, 1, 1, 7, 44, 1, 160, 1, 1, 1, 1, 3, 1, 2, 1, 1, 1, 1, 1, 2, 12, 39, 3, 10, 36, 1, 9, 1, 1, 1, 40, 1, 1, 1, 138, 1, 1, 5, 81, 3, 3, 2, 1, 1, 8, 7, 7, 1, 1, 1, 3, 27, 657, 1, 1, 7, 1, 1, 1, 17, 1, 1, 13, 1, 16, 3, 1, 1, 3, 2, 21, 8, 1, 1, 2, 1, 2, 2, 1, 40, 1, 2, 124, 1, 3, 1, 1, 1, 4, 1, 1, 2, 30, 1, 1, 4, 4, 1, 1, 2, 1, 1, 4, 1, 43, 1, 1, 4, 1, 14, 1, 1, 4, 1, 2, 2, 8, 1, 7, 1, 1, 2829, 1, 3, 1, 10, 4, 1, 2, 1, 1, 3, 1, 1, 31, 2, 10, 1, 1, 1, 1, 1, 1, 1, 7, 247, 1, 2, 147, 1, 1, 10, 1, 1, 1, 2, 1, 2, 74, 1, 1, 48, 3, 19, 1, 2754, 11, 3, 1, 1, 2, 1, 6, 20, 63, 1, 1, 1, 1, 1, 3, 3, 16, 2578, 1, 1, 1, 32, 12, 1, 6, 11, 1, 182, 1, 4, 7, 1, 1, 1, 1, 4, 1, 97, 17, 1, 2, 1, 1, 1, 1, 6, 3, 5, 1, 1, 1, 1, 16, 93, 51, 1, 1, 1, 6, 2, 1, 1, 1, 78, 1, 2, 1, 3, 1, 2, 2366, 1, 18, 1, 1, 1, 1, 3, 2, 45, 8, 1, 2, 1, 16, 6, 1, 1, 140, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 3, 1, 3, 1, 1, 2, 1, 6, 1, 1, 118, 1, 1, 4, 1, 1, 5, 1, 39, 4, 1, 1, 1, 1, 1, 1, 1, 1, 15, 1, 5, 1, 14, 1, 2, 8, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 3, 1, 3, 77, 1, 858, 34, 2, 848, 169, 1, 1, 2, 8, 1, 10, 44, 1, 2, 1, 1, 1, 2, 2, 201, 10, 4, 1, 10, 1, 1, 1, 1, 1, 1, 1, 541, 3, 1, 5, 9, 1, 1, 1, 14, 2, 1, 1, 1, 1, 1, 601, 1, 7, 145, 3, 1, 1, 25, 5, 5, 3, 6, 1, 1, 27, 1, 1, 23, 1, 34, 3, 76, 1, 2, 1, 6, 10, 3, 1, 1, 2, 1, 3, 38, 3, 1, 13, 1, 85, 1, 1, 24, 4, 18, 1193, 1, 1, 1, 1, 2, 1, 2, 12, 3, 1, 1, 3, 2, 3, 3, 8, 18, 1, 4, 1, 16, 1, 7, 1, 1, 2, 1, 2, 1, 8, 1, 1, 1, 1, 1, 1, 1, 7, 4, 37, 4, 1, 1, 2, 1, 1, 1, 1, 195, 2, 1, 1, 3, 1, 1, 2, 2, 4, 2, 9, 6, 1, 1, 1, 1, 4, 1, 13, 5, 2, 1, 2, 1, 6, 2, 11, 3, 334, 639, 1, 2, 1, 1, 3, 1, 2, 1, 3, 27, 9, 1, 4, 1, 2, 11, 14, 2, 10, 1, 195, 1, 2, 1, 2, 37, 1, 2, 1, 1, 1, 1, 1, 4, 1, 5, 1, 2, 143, 6, 1, 2, 1, 1, 7, 1, 1, 1, 1, 22, 1, 1, 1, 2, 1, 1, 1, 1, 1, 9, 90, 1, 3, 1, 1, 1, 1, 2, 106, 2, 3, 2, 1, 1, 1, 7, 1, 5, 8, 1, 1, 67, 12, 1, 1, 2, 1, 3, 1, 295, 1, 1, 1, 2, 984, 1, 1, 1, 1, 2, 1, 218, 1, 1, 3, 5, 2, 3, 2, 1, 1, 1, 2, 1, 6, 1, 1, 4, 1, 1, 1, 4, 1, 1, 26, 1, 1, 7, 1, 7, 3, 1, 8, 2, 2, 1, 1, 1, 1, 1, 8, 1, 1, 1, 10, 1, 24, 14, 1, 6, 4, 1, 1, 1, 107, 1, 1, 2, 1, 3, 1, 1, 6, 6, 5, 1, 1, 3, 1, 4, 8, 1, 1, 1, 2, 1, 1, 1, 28, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 15, 1, 64, 2, 30, 2, 1, 1, 163, 1, 1, 1, 2, 1, 1, 40, 1, 1, 5, 510, 1, 2, 1, 1, 1, 9, 1, 4, 3, 1, 1, 2, 1, 309, 1, 5, 21, 1, 1, 1, 1, 1, 4, 1, 1, 35, 1, 1, 24, 1, 7, 2, 1, 1, 2, 2, 1, 1, 16, 35, 1, 1, 3, 20, 1, 2, 5, 1, 9, 1, 1, 362, 9, 7, 1, 42, 1, 2, 1, 1, 1, 2, 1, 2, 1, 5, 5, 1, 3, 1, 1, 1, 2, 1, 1, 1, 5, 2646, 221, 1, 27, 9, 2, 1, 1, 3, 1, 13, 1, 26, 1, 1, 1, 26, 7, 1, 1, 13, 1, 1, 1, 1, 1, 2, 8, 1, 2, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 22, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1, 1, 10579, 1, 2, 48, 135, 1, 1, 1, 2, 1, 1, 4, 1, 1, 1, 1744, 6, 1, 2, 129, 1, 21, 1, 8, 4, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 383, 1, 6, 1, 1, 1, 1, 1, 1, 1, 2, 1, 28, 66, 9, 29, 15, 2, 2, 16, 1, 1, 202, 6, 2, 2, 1, 1, 1, 1, 1, 1, 27, 1, 1, 1, 1, 1, 1, 3, 4, 1, 126, 1, 1, 24, 1, 1, 1, 3, 1, 1, 1, 8, 2, 3, 1, 1, 1, 9, 1, 1, 2, 1, 1, 3, 1, 4, 1, 1, 1, 1, 2, 1, 21, 447, 1, 11, 1, 1, 14, 16, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 4, 1, 2, 1, 1, 2, 52, 1, 1, 2, 1, 2, 4, 1, 1, 1, 3426, 1, 1, 6, 1, 1, 1, 2, 2, 4, 1, 6, 48, 1, 2, 1, 1, 4, 3, 1, 1, 2, 1, 3, 10, 1, 1, 37, 2, 364, 5, 1, 1, 1, 1, 2, 1, 1, 1, 9, 1, 2, 2, 1, 13, 3, 1, 39, 1, 1, 1, 4, 7, 3, 1, 1, 1, 16, 8, 2, 1, 40, 1, 1, 535, 1, 1, 1, 1, 1, 1, 1, 4, 1, 2, 3, 1]
+Estimated r: 0.7761158801426653
+Estimated p: 0.4429037981403129
 </pre></div>
 </div>
-<img alt="../../_images/8a1621fad7455fce3be1b84e5a97f8ec4d886e20b503005b40e43afc30e883f3.png" src="../../_images/8a1621fad7455fce3be1b84e5a97f8ec4d886e20b503005b40e43afc30e883f3.png" />
+<img alt="../../_images/da0ab5c767fe7cc98af63bc3831e4c3c607fcb8c30284fb529a5c783b0578168.png" src="../../_images/da0ab5c767fe7cc98af63bc3831e4c3c607fcb8c30284fb529a5c783b0578168.png" />
 </div>
 </div>
 <ol class="arabic" start="2">
@@ -640,9 +708,29 @@ Estimated p: 2
    1 = \sum_{\ell=1}^M c_{M,\ell} q_\ell
    \]</div>
 <p>For this offspring distribution, write down what <span class="math notranslate nohighlight">\(c_{M,\ell}\)</span> is.</p>
-<p><strong>(b)</strong> The example in the text used a relatively sophisticated method to calculate <span class="math notranslate nohighlight">\(q_\ell\)</span> because of error accumulation for very small values of <span class="math notranslate nohighlight">\(q_\ell\)</span>.  However, this smaller population does not have such issues.  A simpler matrix solver is used here.  Enter your expression into the code below into <code class="docutils literal notranslate"><span class="pre">c_formula</span></code>, which will be used to create the matrix.  Then it uses the <code class="docutils literal notranslate"><span class="pre">linalg</span></code> basic solve to solve the matrix equation <span class="math notranslate nohighlight">\(C \vec{q} = \vec{1}\)</span>.  Confirm that the solution matches the simulations.</p>
-<p><strong>(c)</strong> Briefly discuss how one could use this approach and Maximum Likelihood Estimation to infer <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> given some observed outbreaks in several small closed populations.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C_{M,\ell} = \begin{cases} \mu\left(\frac{M-1}{N-1}\right)^{-\ell}\prod_{j=1}^\ell \frac{M-j}{N-j} &amp; \ell\leq M\\
+                         0 &amp; \ell&gt;M
+                         \end{cases}
+\end{split}\]</div>
+</div>
+</details><p><strong>(b)</strong> The example in the text used a relatively sophisticated method to calculate <span class="math notranslate nohighlight">\(q_\ell\)</span> because of error accumulation for very small values of <span class="math notranslate nohighlight">\(q_\ell\)</span>.  However, this smaller population does not have such issues.  A simpler matrix solver is used here.  Enter your expression into the code below into <code class="docutils literal notranslate"><span class="pre">c_formula</span></code>, which will be used to create the matrix.  Then it uses the <code class="docutils literal notranslate"><span class="pre">linalg</span></code> basic solve to solve the matrix equation <span class="math notranslate nohighlight">\(C \vec{q} = \vec{1}\)</span>.  Confirm that the solution matches the simulations.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">See code and plot below.</p>
+</div>
+</details><p><strong>(c)</strong> Briefly discuss how one could use this approach and Maximum Likelihood Estimation to infer <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(r\)</span> given some observed outbreaks in several small closed populations.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Following the previous question, given some observed outbreaks and an assumed form of <span class="math notranslate nohighlight">\(\mu(x)\)</span> with some unknown parameters, this gives us a way to calculate the probability of the observations for each set of parameters.  That is, this will let us calculate the likelihood of those parameters.  Then we just find the parameters that maximize the likelihood.</p>
+</div>
+</details></li>
 </ol>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
@@ -690,16 +778,24 @@ Estimated p: 2
 
 
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;student created function is needed here, using default&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="n">r</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">c_formula</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">ell</span><span class="p">,):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Student-defined formula for c_{M, ell}.</span>
 <span class="sd">    Replace this with the desired expression.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ell</span> <span class="o">&lt;=</span> <span class="n">M</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ell</span><span class="p">):</span>
+            <span class="n">prod</span> <span class="o">*=</span> <span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prod</span><span class="o">/</span><span class="n">mu</span><span class="p">((</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">ell</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> 
         <span class="k">return</span> <span class="mi">0</span>
+
 
 
 <span class="c1"># Build lower-triangular matrix</span>
@@ -728,45 +824,200 @@ Estimated p: 2
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>student created function is needed here, using default
-</pre></div>
-</div>
-<img alt="../../_images/d5ba9c2fc3ab77855e5ccd42238310faf0cf8335e17b5171d87be899ff02c663.png" src="../../_images/d5ba9c2fc3ab77855e5ccd42238310faf0cf8335e17b5171d87be899ff02c663.png" />
-<img alt="../../_images/2e0476ee1288390304473622d05f2f33e6dc516af8a819e2b55c3ca78f0d2ac7.png" src="../../_images/2e0476ee1288390304473622d05f2f33e6dc516af8a819e2b55c3ca78f0d2ac7.png" />
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">Kernel</span> <span class="n">crashed</span> <span class="k">while</span> <span class="n">executing</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">current</span> <span class="n">cell</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">previous</span> <span class="n">cell</span><span class="o">.</span> 
-
-<span class="n">Please</span> <span class="n">review</span> <span class="n">the</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">cell</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">identify</span> <span class="n">a</span> <span class="n">possible</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">failure</span><span class="o">.</span> 
-
-<span class="n">Click</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;https://aka.ms/vscodeJupyterKernelCrash&#39;</span><span class="o">&gt;</span><span class="n">here</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">info</span><span class="o">.</span> 
-
-<span class="n">View</span> <span class="n">Jupyter</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;command:jupyter.viewOutput&#39;</span><span class="o">&gt;</span><span class="n">log</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">further</span> <span class="n">details</span><span class="o">.</span>
-</pre></div>
-</div>
+<img alt="../../_images/9cb369562d35b23c4857eeaf874c712b394ded449163a1e58ee63d305e41000e.png" src="../../_images/9cb369562d35b23c4857eeaf874c712b394ded449163a1e58ee63d305e41000e.png" />
+<img alt="../../_images/17eb3db4a9a048f4e4b29b3e12e90eb5ab02f017e19b191e8dbd00acae6fb11c.png" src="../../_images/17eb3db4a9a048f4e4b29b3e12e90eb5ab02f017e19b191e8dbd00acae6fb11c.png" />
 </div>
 </div>
 <ol class="arabic" start="3">
 <li><p>Consider the Till model of stem cells with some <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2=1-p_0\)</span>.</p>
 <p><strong>(a)</strong> Compare this to the infectious-disease model in continuous-time.  Explain why this is analagous and use the results we have about the continuous-time infectious disease model to calculate the probability that the Till model comes to completion with exactly <span class="math notranslate nohighlight">\(\ell\)</span> differentiated cells (and zero stem cells) in terms of <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span>.  It will help if you make the offspring distribution PGFs identical and use this to determine <span class="math notranslate nohighlight">\(\mathcal{R}_0=\beta/\gamma\)</span> and <span class="math notranslate nohighlight">\(1+\mathcal{R}_0\)</span> in terms of <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span>.</p>
-<p><em>Now we will explore an alternate way to derive the final size that does not depend on the Cycle Lemma proof.</em></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the Till model, a stem cell either converts to an end cell or it duplicates itself.  Converting to an end cell is mathematically equivalent to recovering, while duplicating is mathematically equivalent to causing an infection in the disease models.</p>
+<p class="sd-card-text">Then <span class="math notranslate nohighlight">\(p_0\)</span> corresponds to <span class="math notranslate nohighlight">\(\gamma/(\beta+\gamma)\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> corresponds to <span class="math notranslate nohighlight">\(\beta/(\beta+\gamma)\)</span>.  So <span class="math notranslate nohighlight">\(\mathcal{R}_0 = \beta/\gamma\)</span> corresponds to <span class="math notranslate nohighlight">\(p_2/p_0\)</span> and <span class="math notranslate nohighlight">\(1+\mathcal{R}_0\)</span> corresponds to <span class="math notranslate nohighlight">\(1 + (p_2/p_0) = (p_0+p_2)/p_0 = 1/p_0\)</span>.</p>
+<p class="sd-card-text">Using the formula for the extinction probability with exactly <span class="math notranslate nohighlight">\(\ell\)</span> infections from <a class="reference internal" href="../InfDis/InfDisCtsTimeSizeDistAnal.html#theorem-ctsTimeSIS_SIR_SizeDist">Theorem 4.2</a>, we find that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[\text{extinction with $\ell$ end cells}] &amp;= \frac{1}{\ell}\frac{\mathcal{R}_0^{\ell-1}}{(\mathcal{R}_0+1)^{2\ell-1}} \binom{2\ell-2}{\ell-1}\\
+&amp;= \frac{1}{\ell}\frac{(p_2/p_0)^{\ell-1}}{(1/p_0)^{2\ell-1}} \binom{2\ell-2}{\ell-1} \\
+&amp;= \frac{1}{\ell}p_2^{\ell-1} p_0^\ell \binom{2\ell-2}{\ell-1}
+\end{align*}\]</div>
+</div>
+</details><p><em>Now we will explore an alternate way to derive the final size that does not depend on the Cycle Lemma proof.</em></p>
 <p><em>Let <span class="math notranslate nohighlight">\(\Phi_g(x,y)\)</span> be the PGF for the number of stem cells and differentiated cells at generation <span class="math notranslate nohighlight">\(g\)</span>.  Assume that differentiated cells persist for each generation (or equivalently, that at each generation they are replaced by an identical differentiated cell).</em></p>
 <p><strong>(b)</strong> Find the PGF of the offspring distribution for both stem cells and differentiated cells.</p>
-<p><strong>(c)</strong> Using the backward Kolmogorov approach, derive a recursive formula for <span class="math notranslate nohighlight">\(\Phi_g(x,y)\)</span>.</p>
-<p><strong>(d)</strong> What information is contained in the coefficients of the function <span class="math notranslate nohighlight">\(\omega_g(y) = \Phi_g(0,y)\)</span>?</p>
-<p><strong>(e)</strong> What recursive relation does <span class="math notranslate nohighlight">\(\omega_g(y)\)</span> solve?  Assume <span class="math notranslate nohighlight">\(\omega_g(y) \to \omega(y)\)</span> converges as <span class="math notranslate nohighlight">\(g \to \infty\)</span>.  What quadratic (in <span class="math notranslate nohighlight">\(\omega\)</span>) equation does the recursive relation become in this limit?</p>
-<p><strong>(f)</strong> Solve the quadratic equation for <span class="math notranslate nohighlight">\(\omega(y)\)</span>.  There should be two options.  Based on our knowledge of the system, what is <span class="math notranslate nohighlight">\(\omega(0)\)</span>?  Use this to choose the correct result.  Your result should have a <span class="math notranslate nohighlight">\(\sqrt{1-4p_0p_2y}\)</span> in it,</p>
-<p><strong>(g)</strong> Write out the first 4 terms of <span class="math notranslate nohighlight">\((1-4p_0p_2y)^{1/2}\)</span> using the binomial theorem (for non-integer exponents):</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[
+\mu(x,y) = p_0 y + p_2 x^2
+\]</div>
+</div>
+</details><p><strong>(c)</strong> Using the backward Kolmogorov approach, derive a recursive formula for <span class="math notranslate nohighlight">\(\Phi_g(x,y)\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We first find <span class="math notranslate nohighlight">\(\Phi_1(x,y)=\mu(x,y)\)</span>.  We can define <span class="math notranslate nohighlight">\(\Phi_g(x,y|(1,0)) = \Phi_g(x,y)\)</span> to be the PGF if the first cell is a stem cell and <span class="math notranslate nohighlight">\(\Phi_g(x,y|(0,1)) = y\)</span> to be the PGF if the first cell is an end cell.  Then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_{g+1}(x,y) &amp;= \mu(\Phi_g(x,y|(1,0)), \Phi_g(x,y|(0,1)))\\
+&amp;= \mu(\Phi_g(x,y), y)\\
+&amp;= p_0y + p_2 \Phi_g(x,y)^2
+\end{align*}\]</div>
+</div>
+</details><p><strong>(d)</strong> What information is contained in the coefficients of the function <span class="math notranslate nohighlight">\(\omega_g(y) = \Phi_g(0,y)\)</span>?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (d)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The coefficient of <span class="math notranslate nohighlight">\(y^n\)</span> is the probability of <span class="math notranslate nohighlight">\(n\)</span> end cells and <span class="math notranslate nohighlight">\(0\)</span> stem cells.</p>
+</div>
+</details><p><strong>(e)</strong> What recursive relation does <span class="math notranslate nohighlight">\(\omega_g(y)\)</span> solve?  Assume <span class="math notranslate nohighlight">\(\omega_g(y) \to \omega(y)\)</span> converges as <span class="math notranslate nohighlight">\(g \to \infty\)</span>.  What quadratic (in <span class="math notranslate nohighlight">\(\omega\)</span>) equation does the recursive relation become in this limit?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (e)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\omega_{g+1}(y) &amp;= \Phi_{g+1}(0,y)\\
+&amp;= p_0 y + p_2 \Phi_{g}(0,y)^2\\
+&amp;= p_0 y + p_2 \omega_g(y)^2
+\end{align*}\]</div>
+<p class="sd-card-text">As <span class="math notranslate nohighlight">\(g \to \infty\)</span>, we conclude <span class="math notranslate nohighlight">\(\omega(y) = p_0y + p_2 \omega(y)^2\)</span></p>
+</div>
+</details><p><strong>(f)</strong> Solve the quadratic equation for <span class="math notranslate nohighlight">\(\omega(y)\)</span>.  There should be two options.  Based on our knowledge of the system, what is <span class="math notranslate nohighlight">\(\omega(0)\)</span>?  Use this to choose the correct result.  Your result should have a <span class="math notranslate nohighlight">\(\sqrt{1-4p_0p_2y}\)</span> in it,</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (f)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have</p>
+<div class="math notranslate nohighlight">
+\[
+0 = p_2\omega(y)^2 +(-1) \omega(y) + p_0y
+\]</div>
+<p class="sd-card-text">Using the quadratic formula for <span class="math notranslate nohighlight">\(\omega(y)\)</span> we find</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\omega(y) &amp;= \frac{- (-1) \pm \sqrt{(-1)^2- 4 p_2 p_0y}}{2p_2}\\
+          &amp;= \frac{1 \pm \sqrt{1-4p_0p_2y}}{2p_2}
+\end{align*}\]</div>
+<p class="sd-card-text">So</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\omega(0) &amp;= \frac{1\pm\sqrt{1}}{2p_2}\\
+&amp;= 0 \text{ or } 1/p_2
+\end{align*}\]</div>
+<p class="sd-card-text">But a positive value of <span class="math notranslate nohighlight">\(\omega(0)\)</span> corresponds to a scenario with no cells at all.  This is not possible, so we must have <span class="math notranslate nohighlight">\(\omega(0)=0\)</span>.  Thus we conclude</p>
+<div class="math notranslate nohighlight">
+\[
+\omega(y) =  \frac{1 - \sqrt{1-4p_0p_2y}}{2p_2}
+\]</div>
+</div>
+</details><p><strong>(g)</strong> Write out the first 4 terms of <span class="math notranslate nohighlight">\((1-4p_0p_2y)^{1/2}\)</span> using the binomial theorem (for non-integer exponents):</p>
 <div class="math notranslate nohighlight">
 \[
    (a+b)^r = a^r + ra^{r-1}b + \frac{r(r-1)}{2!} a^{r-2}b^2  + \frac{r(r-1)(r-2)}{3!} a^{r-3}b^3 + \cdots
    \]</div>
 <p>I don’t see a quick way for me to guide you to the form of the general coefficient, but if you can find it, that would be useful.</p>
-<p><strong>(h)</strong> Use this to write out the first 3 terms of the expansion for <span class="math notranslate nohighlight">\(\omega(y)\)</span>.  Verify that they agree with the result calculated in <strong>(a)</strong>.</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (g)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\left(1 - 4 p_0p_2\right)^{1/2} &amp;= 1^{1/2} + \frac{1}{2} 1^{-1/2} (-4p_0p_2y) + \frac{(1/2)(-1/2)}{2} 1^{-3/2} (-4p_0p_2y)^2 + \frac{(1/2)(-1/2)(-3/2)}{6} 1^{-5/2} (-4p_0p_2y)^3 + \cdots\\
+&amp;= 1 - 2 p_0p_2y - 2p_0^2p_2^2y^2 - 4 p_0^3p_2^3y^3 + \cdots  
+\end{align*}\]</div>
+</div>
+</details><p><strong>(h)</strong> Use this to write out the first 3 terms of the expansion for <span class="math notranslate nohighlight">\(\omega(y)\)</span>.  Verify that they agree with the result calculated in <strong>(a)</strong>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (h)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\omega(y) &amp;=  \frac{1 - \sqrt{1-4p_0p_2y}}{2p_2}\\
+   &amp;= \frac{1 - (1 - 2 p_0p_2y - 2p_0^2p_2^2y^2 - 4 p_0^3p_2^3y^3 + \cdots )}{2p_2}\\
+   &amp;= \frac{+ 2p_0p_2y + 2p_0^2p_2^2y^2 + 4 p_0^3p_2^3y^3 + \cdots}{2p_2}\\
+   &amp;= p_0y + p_0^2p_2y^2 + 2 p_0^3p_2^2 y^3 + \cdots
+\end{align*}\]</div>
+<p class="sd-card-text">Previously we calculated that the probability is <span class="math notranslate nohighlight">\(\frac{1}{\ell}p_2^{\ell-1} p_0^\ell \binom{2\ell-2}{\ell-1}\)</span>.  Setting <span class="math notranslate nohighlight">\(\ell =1,2,3\)</span> we find  <span class="math notranslate nohighlight">\(1p_0 \binom{0}{0} = p_0\)</span>,  <span class="math notranslate nohighlight">\(p_2p_0^2\binom{2}{1}/2 = p_2p_0^2\)</span>, and <span class="math notranslate nohighlight">\(p_2^2p_0^3\binom{4}{2}/3= 2 p_2^2p_0^3\)</span>.  These correspond to the coefficients we just found using the binomial expansion.</p>
+</div>
+</details></li>
 <li><p>Consider a continuous-time version of the Macken-Perelson model.  Assume stem cells divide with rate <span class="math notranslate nohighlight">\(r_s\)</span> and the mast cells divide with rate <span class="math notranslate nohighlight">\(r_m\)</span>.  Assume the system begins with a single stem cell.  Let <span class="math notranslate nohighlight">\(\Phi(x,y,z,t)\)</span> be the PGF for the number of each type at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p><strong>(a)</strong> Derive a backward Kolmogorov equation for <span class="math notranslate nohighlight">\(\Phi(x,y,z,t)\)</span></p>
-<p><strong>(b)</strong> Derive a forward Kolmogorov equation for <span class="math notranslate nohighlight">\(\Phi(x,y,z,t)\)</span>.</p>
-<p><strong>(c)</strong> How can we interpret <span class="math notranslate nohighlight">\(\Phi(0,0,1,t)\)</span>?  Use one of the Kolmogorov equations to write down an ordinary differential equation (that is, just <span class="math notranslate nohighlight">\(t\)</span> derivatives) that we can use to solve for this.  What is the appropriate initial condition?</p>
-</li>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (a)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We introduce <span class="math notranslate nohighlight">\(\Phi_s(x,y,z,t)\)</span>, <span class="math notranslate nohighlight">\(\Phi_m(x,y,z,t)\)</span>, and <span class="math notranslate nohighlight">\(\Phi_e(x,y,z,t)\)</span> to be the PGFs assuming an initial stem, mast or end cell.</p>
+<p class="sd-card-text">We can quickly see <span class="math notranslate nohighlight">\(\Phi_e(x,y,z,t) = z\)</span>.</p>
+<p class="sd-card-text">The offspring distribution of a stem cell is given by <span class="math notranslate nohighlight">\(\xi_s(x,y,z) = (p_sx + (1-p_s) y)^2\)</span> and the offspring distribution of a mast cell is given by <span class="math notranslate nohighlight">\(\xi_m(x,y,z) = (p_my+(1-p_m)z)^2\)</span>.</p>
+<p class="sd-card-text">At time <span class="math notranslate nohighlight">\(\Delta t\)</span>, we can conclude</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_s(x,y,z,\Delta t) &amp;= (1-r_s\Delta t) x + r_s\Delta t \xi_s(x,y,z)\\
+\Phi_m(x,y,z,\Delta t) &amp;= (1-r_m\Delta t) y + r_m \Delta t \xi_m(x,y,z)\\
+\Phi_e(x,y,z,\Delta t) &amp;= z
+\end{align*}\]</div>
+<p class="sd-card-text">Following our standard argument, it follows that</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_s(x,y,z,t+\Delta t) &amp;= (1-r_s\Delta t) \Phi_s(x,y,z,t) + r_s\Delta t \xi_s(\Phi_s(x,y,z,t),\Phi_m(x,y,z,t),\Phi_e(x,y,z,t))\\
+\Phi_m(x,y,z,t+\Delta t) &amp;= (1-r_m\Delta t) \Phi_m(x,y,z,t) + r_m \Delta t \xi_m(\Phi_s(x,y,z,t),\Phi_m(x,y,z,t),\Phi_e(x,y,z,t))\\
+\Phi_e(x,y,z,t+\Delta t) &amp;= \Phi_e(x,y,z,t)
+\end{align*}\]</div>
+<p class="sd-card-text">So</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial t}\Phi_s(x,y,z,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi_s(x,y,z,t+\Delta t)-\Phi_s(x,y,z,t)}{\Delta t}\\
+ &amp;= \lim_{\Delta t \to 0} \frac{(-r_s\Delta t) \Phi_s(x,y,z,t) + r_s\Delta t \xi_s(\Phi_s(x,y,z,t),\Phi_m(x,y,z,t),\Phi_e(x,y,z,t))}{\Delta t}\\
+ &amp;= r_s\xi_s(\Phi_s(x,y,z,t),\Phi_m(x,y,z,t),\Phi_e(x,y,z,t)) - r_s \Phi_s(x,y,z,t)\\
+\frac{\partial}{\partial t} \Phi_n(x,y,z,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi_m(x,y,z,t+\Delta t)-\Phi_m(x,y,z,t)}{\Delta t}\\
+ &amp;= \lim_{\Delta t \to 0} \frac{(-r_m\Delta t) \Phi_m(x,y,z,t) + r_m \Delta t \xi_m(\Phi_s(x,y,z,t),\Phi_m(x,y,z,t),\Phi_e(x,y,z,t))}{\Delta t}\\
+ &amp;= r_m\xi_m(\Phi_s(x,y,z,t),\Phi_m(x,y,z,t),\Phi_e(x,y,z,t)) - r_m \Phi_m(x,y,z,t)\\
+\frac{\partial}{\partial t} \Phi_e(x,y,z,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi_e(x,y,z,t+\Delta t)-\Phi_e(x,y,z,t)}{\Delta t}\\
+ &amp;= 0
+\end{align*}\]</div>
+</div>
+</details><p><strong>(b)</strong> Derive a forward Kolmogorov equation for <span class="math notranslate nohighlight">\(\Phi(x,y,z,t)\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (b)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We have <span class="math notranslate nohighlight">\(\Phi_s(x,y,z,t)\)</span>, <span class="math notranslate nohighlight">\(\Phi_m(x,y,z,t)\)</span> and <span class="math notranslate nohighlight">\(\Phi_e(x,y,z,t)\)</span>.  To find them at a time <span class="math notranslate nohighlight">\(\Delta t\)</span> later, we substitute <span class="math notranslate nohighlight">\((1-r_s\Delta t)x + r_s\Delta t \xi_s(x,y,z)\)</span> for <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\((1-r_m\Delta t)y + r_m\Delta t \xi_s(x,y,z)\)</span> for <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> for <span class="math notranslate nohighlight">\(z\)</span>.  We have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Phi_s(x,y,z,t+\Delta t) &amp;= \Phi_s((1-r_s\Delta t)x + r_s\Delta t \xi_s(x,y,z),(1-r_m\Delta t)y + r_m\Delta t \xi_s(x,y,z),z,t, z)\\
+&amp;= \Phi_s(x,y,z,t) + (r_s \Delta t)(\xi_s(x,y,z)-x)\frac{\partial}{\partial x} \Phi_s(x,y,z,t) + (r_m \Delta t)(\xi_m(x,y,z)-y)\frac{\partial}{\partial y} \Phi_s(x,y,z,t)\\
+\Phi_m(x,y,z,t+\Delta t) &amp;= \Phi_e((1-r_s\Delta t)x + r_s\Delta t \xi_s(x,y,z),(1-r_m\Delta t)y + r_m\Delta t \xi_s(x,y,z),z,t, z)\\
+&amp;= \Phi_m(x,y,z,t) + (r_s \Delta t)(\xi_s(x,y,z)-x)\frac{\partial}{\partial x} \Phi_m(x,y,z,t) + (r_m \Delta t)(\xi_m(x,y,z)-y)\frac{\partial}{\partial y} \Phi_m(x,y,z,t)\\
+\Phi_e(x,y,z,t+\Delta t)&amp;= z
+\end{align*}\]</div>
+<p class="sd-card-text">So</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial t}\Phi_s(x,y,z,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi_s(x,y,z,t+\Delta t)-\Phi_s(x,y,z,t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0} \frac{(r_s \Delta t)(\xi_s(x,y,z)-x)\frac{\partial}{\partial x} \Phi_s(x,y,z,t) + (r_m \Delta t)(\xi_m(x,y,z)-y)\frac{\partial}{\partial y} \Phi_s(x,y,z,t)}{\Delta t}\\
+&amp;= r_s(\xi_s(x,y,z)-x)\frac{\partial}{\partial x} \Phi_s(x,y,z,t) + r_m(\xi_m(x,y,z)-y)\frac{\partial}{\partial y} \Phi_s(x,y,z,t)\\
+\frac{\partial}{\partial t} \Phi_m(x,y,z,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi_m(x,y,z,t+\Delta t)-\Phi_m(x,y,z,t)}{\Delta t}\\
+&amp;= \lim_{\Delta t \to 0} \frac{(r_s \Delta t)(\xi_s(x,y,z)-x)\frac{\partial}{\partial x} \Phi_m(x,y,z,t) + (r_m \Delta t)(\xi_m(x,y,z)-y)\frac{\partial}{\partial y} \Phi_m(x,y,z,t)}{\Delta t}\\
+&amp;= r_s(\xi_s(x,y,z)-x)\frac{\partial}{\partial x} \Phi_m(x,y,z,t) + r_m(\xi_m(x,y,z)-y)\frac{\partial}{\partial y} \Phi_m(x,y,z,t)\\
+\frac{\partial}{\partial t} \Phi_e(x,y,z,t) &amp;= \lim_{\Delta t \to 0} \frac{\Phi_e(x,y,z,t+\Delta t)-\Phi_e(x,y,z,t)}{\Delta t}\\
+&amp;= 0
+\end{align*}\]</div>
+</div>
+</details><p><strong>(c)</strong> How can we interpret <span class="math notranslate nohighlight">\(\Phi(0,0,1,t)\)</span>?  Use one of the Kolmogorov equations to write down an ordinary differential equation (that is, just <span class="math notranslate nohighlight">\(t\)</span> derivatives) that we can use to solve for this.  What is the appropriate initial condition?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solution (c)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This is the probability that at time <span class="math notranslate nohighlight">\(t\)</span> the only cells are end cells.</p>
+<p class="sd-card-text">Since we only allow <span class="math notranslate nohighlight">\(t\)</span> derivatives, this needs to use the Backward Kolmogorov Equations:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial}{\partial t} \Phi_s&amp;= r_s(\xi_s(\Phi_s,\Phi_m,\Phi_e) - \Phi_s)\\
+\frac{\partial}{\partial t} \Phi_m&amp;= r_m(\xi_m(\Phi_s,\Phi_m,\Phi_e) - \Phi_m)\\
+\frac{\partial}{\partial t} \Phi_e&amp;= 0
+\end{align*}\]</div>
+<p class="sd-card-text">The appropriate initial condition is <span class="math notranslate nohighlight">\(\Phi_s=0\)</span>, <span class="math notranslate nohighlight">\(\Phi_m=0\)</span>, and <span class="math notranslate nohighlight">\(\Phi_e=1\)</span>.</p>
+</div>
+</details></li>
 <li><p>Write a 1+ page summary of one of the following papers.</p></li>
 </ol>
 <ul class="simple">

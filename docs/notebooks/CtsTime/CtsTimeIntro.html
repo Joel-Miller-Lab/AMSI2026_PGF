@@ -553,15 +553,22 @@ document.write(`
 <p>We continue to assume that individuals act independently of one another.  To keep things simple, we will assume that events happen with rates.  Individuals have a death rate <span class="math notranslate nohighlight">\(\gamma\)</span> and create offspring at some rate <span class="math notranslate nohighlight">\(\beta\)</span>.  In general, when they create offspring they may create many offspring, or perhaps just one.  So the deaths occuring with rate <span class="math notranslate nohighlight">\(\gamma\)</span> each reduce the population by <span class="math notranslate nohighlight">\(1\)</span>, while the births occuring with rate <span class="math notranslate nohighlight">\(\beta\)</span> increase the population by some integer value.  New individuals or individuals who just gave birth can immediately give birth or die with rates <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
 <section id="poisson-processes">
 <h2><span class="section-number">3.1. </span>Poisson Processes<a class="headerlink" href="#poisson-processes" title="Link to this heading">#</a></h2>
-<p>Our assumption that events occur with rates means we are thinking of Poisson processes.  Here we give a brief discussion of the properties of Poisson processes that we will need.</p>
+<p>Our assumption that events occur with rates means we are thinking of Poisson processes.  Here we give a brief discussion of the properties of Poisson processes that we will need.  We’ll give a somewhat</p>
 <div class="proof definition admonition" id="def-PoissonProcess">
 <p class="admonition-title"><span class="caption-number">Definition 3.1 </span> (Poisson Process, rate of a Poisson Process)</p>
 <section class="definition-content" id="proof-content">
-<p>A <strong>Poisson Process</strong> can be thought of as an event that occurs with some <strong>rate</strong> <span class="math notranslate nohighlight">\(r\)</span> such that the probability the event occurs in any time interval <span class="math notranslate nohighlight">\((t, t+\Delta t)\)</span> is <span class="math notranslate nohighlight">\(r \Delta t + \mathcal{o}(\Delta t)\)</span>, independently of all other (non-overlapping) time intervals.</p>
+<p>A <strong>Poisson Process</strong> can be thought of as a process that occurs with a <strong>rate</strong> <span class="math notranslate nohighlight">\(r\)</span> such that the probability the event occurs at least once in any time interval <span class="math notranslate nohighlight">\((t, t+\Delta t)\)</span> is <span class="math notranslate nohighlight">\(r \Delta t + \mathcal{o}(\Delta t)\)</span>, independently of all other non-overlapping time intervals.</p>
+<p>Further each occurence corresponds to a single event happening (it cannot happen twice at the same time).</p>
 </section>
-</div><p>The notation <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> refers to an error that shrinks much faster than <span class="math notranslate nohighlight">\(\Delta t\)</span>:  <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)/\Delta t \to 0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
+</div><p>The assumption that the number of occurences in non-overlapping time intervals are independent means that knowing that the event occurs at time <span class="math notranslate nohighlight">\(t_0\)</span> gives no information about other times that it might occur.</p>
+<p>The notation <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> refers to an error that shrinks much faster than <span class="math notranslate nohighlight">\(\Delta t\)</span>:  <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)/\Delta t \to 0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
 <p>In the definition above, you can reasonably think of <span class="math notranslate nohighlight">\(\mathcal{o}(\Delta t)\)</span> as being something quadratic in <span class="math notranslate nohighlight">\(\Delta t\)</span>.  So even though <span class="math notranslate nohighlight">\(r \Delta t \to 0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, the error term goes to <span class="math notranslate nohighlight">\(0\)</span> much faster.  So the probability that the event happens in a time interval, divided by the length of the time interval <span class="math notranslate nohighlight">\(\mathbb{P}[\text{event}]/\Delta t = [r \Delta t + \mathcal{o}(\Delta t))/\Delta t \to r\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.  So the error term is very small compared to the leading term (which itself is quite small).<a class="footnote-reference brackets" href="#infinitesimal" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-<div class="proof example admonition" id="example-PoissonDiscreteLimitRate1">
+<div class="proof remark admonition" id="remark-RateNeqProb">
+<p class="admonition-title"><span class="caption-number">Remark 3.1 </span> (Rates are not probabilities)</p>
+<section class="remark-content" id="proof-content">
+<p>A common misconception in terminology is to use the word “probability” when meaning “rate”.  They are closely related, but are not the same.  The probability shrinks as <span class="math notranslate nohighlight">\(\Delta t\)</span> shrinks, but the rate remains the same.  They are only (almost) the same if <span class="math notranslate nohighlight">\(\Delta t= 1\)</span> and the rate is very small.  We usually want to know what happens for <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
+</section>
+</div><div class="proof example admonition" id="example-PoissonDiscreteLimitRate1">
 <p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Poisson Process as limit of discrete random die rolls)</p>
 <section class="example-content" id="proof-content">
 <p>Assume that we have an <span class="math notranslate nohighlight">\(N\)</span>-sided die, where <span class="math notranslate nohighlight">\(N\)</span> is large.  We paint one side red.  Assume we perform <span class="math notranslate nohighlight">\(TN\)</span> rolls at times <span class="math notranslate nohighlight">\(t_0\)</span>, <span class="math notranslate nohighlight">\(t_0+1/N\)</span>, <span class="math notranslate nohighlight">\(t_0 + 2/N\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(t_0 + (TN-1)/N\)</span>, tracking the number of times it comes up red.  (implicitly we assume <span class="math notranslate nohighlight">\(TN\)</span> is an integer for simplicity, but we can take <span class="math notranslate nohighlight">\(\lfloor TN \rfloor\)</span> if it is not.)</p>
@@ -587,39 +594,79 @@ document.write(`
 </ul>
 <p>The <span class="math notranslate nohighlight">\(N \to \infty\)</span> limit of these two mental images are both Poisson processes with rate <span class="math notranslate nohighlight">\(r\)</span>.</p>
 </section>
-</div><div class="proof example admonition" id="example-3">
+</div><div class="proof example admonition" id="example-4">
 <p class="admonition-title"><span class="caption-number">Example 3.3 </span> (Sample Applications of Poisson Processes)</p>
 <section class="example-content" id="proof-content">
 <p>Poisson processes are often used as a first step towards modelling events that we can approximate as independent.  For example:</p>
 <ul class="simple">
 <li><p>Cars arriving at an intersection (in light traffic).</p></li>
-<li><p>Individuals arriving at a bus stop (assuming they don’t know the timetable).</p></li>
+<li><p>Individuals arriving at a bus stop (assuming they don’t know the timetable and they are coming from independent places).</p></li>
 <li><p>Radio-active atoms decaying.</p></li>
 </ul>
 <p>In the case of a single radio-active atom, once it decays the associated Poisson process stops.</p>
 </section>
 </div><p>If we account for the fact that cars tend to drive in clumps or that individuals tend to aim to arrive at a bus stop close to the scheduled departure times, then these are not Poisson processes.</p>
-<div class="proof remark admonition" id="remark-RateNeqProb">
-<p class="admonition-title"><span class="caption-number">Remark 3.1 </span> (Rates are not probabilities)</p>
-<section class="remark-content" id="proof-content">
-<p>A common misconception in terminology is to use the word “probability” when meaning “rate”.  They are closely related, but are not the same.  The probability shrinks as <span class="math notranslate nohighlight">\(\Delta t\)</span> shrinks, but the rate remains the same.  They are only (almost) the same if <span class="math notranslate nohighlight">\(\Delta t= 1\)</span> and the rate is very small.  We usually want to know what happens for <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
+<div class="proof theorem admonition" id="theorem-5">
+<p class="admonition-title"><span class="caption-number">Theorem 3.1 </span> (The number of events in a Poisson process)</p>
+<section class="theorem-content" id="proof-content">
+<p>Consider an interval <span class="math notranslate nohighlight">\(J=[t_0, t_1)\)</span> of duration <span class="math notranslate nohighlight">\(t_1-t_0\)</span> and a Poisson process of rate <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<p>The expected number of events to occur in the time interval is <span class="math notranslate nohighlight">\(r(t_1-t_0)\)</span>.</p>
+<p>The number of events to occur within interval <span class="math notranslate nohighlight">\(J\)</span> is Poisson-distributed with mean <span class="math notranslate nohighlight">\(r(t_1-t_0)\)</span>.</p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-5">
-<p class="admonition-title"><span class="caption-number">Theorem 3.1 </span> (Combining Poisson Processes)</p>
+</div><div class="proof admonition" id="proof">
+<p>Proof. This proof is slightly heuristic.</p>
+<p>We divide the time interval into <span class="math notranslate nohighlight">\(N\)</span> equal time intervals of duration <span class="math notranslate nohighlight">\((t_1-t_0)/N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+[t_0, t_0+\Delta t), [t_0+\Delta t, t_0+2 \Delta t), \ldots, [t_0+(N-1)\Delta t, t_1)
+\]</div>
+<p>We will assume that <span class="math notranslate nohighlight">\(\Delta t\)</span> is small enough that we can ignore the possibility that the event happens twice in any single interval (this assumption is the heuristic bit).</p>
+<p>The probability that the event occurs (exactly once) in a given time interval is <span class="math notranslate nohighlight">\(r\Delta t + \mathcal{o}(\Delta t)\)</span>.  Since each sub-interval has either <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> event, the expected number of events to occur is the sum of the probabilities:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[\text{number of events}] = \sum_{i=0}^{N-1} (r\Delta t + \mathcal{o}(\Delta t)) = Nr \Delta t + N \mathcal{o}(\Delta t)
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(N = (t_1-t_0)/\Delta t\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[\text{number of events}] = r(t_1-t_0) + (t_1-t_0)\mathcal{o}(\Delta t)/\Delta t
+\]</div>
+<p>Now taking <span class="math notranslate nohighlight">\(N\to \infty\)</span> causes <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
+<p>The distribution of the number of events is binomially distributed with <span class="math notranslate nohighlight">\(N\)</span> opportunities, each with probability <span class="math notranslate nohighlight">\(r\Delta t + \mathcal{o}(\Delta t)\)</span> where <span class="math notranslate nohighlight">\(\Delta t = (t_1-t_0)/N\)</span>.  Taking <span class="math notranslate nohighlight">\(N \to \infty\)</span> results in a Poisson distribution of mean <span class="math notranslate nohighlight">\(r(t_1-t_0)\)</span>.</p>
+</div>
+<p>To make the proof fully rigorous, we would show that the probability the event occurs twice within at least one time interval goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.  This can be seen from the fact that once the times of the events are chosen, if <span class="math notranslate nohighlight">\(\Delta t\)</span> is less than the distance between the closest pair, then no intervals have more than one event.</p>
+<div class="proof theorem admonition" id="theorem-6">
+<p class="admonition-title"><span class="caption-number">Theorem 3.2 </span> (Combining Poisson Processes)</p>
 <section class="theorem-content" id="proof-content">
 <p>Consider two Poisson Process, with rates <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span> each.  Then the next event occurs with combined rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.  It is event <span class="math notranslate nohighlight">\(1\)</span> with probability <span class="math notranslate nohighlight">\(r_1/(r_1+r_2)\)</span> and event <span class="math notranslate nohighlight">\(2\)</span> with probability <span class="math notranslate nohighlight">\(r_2/(r_1+r_2)\)</span>.  The two events cannot both occur at the same time.</p>
 <p>In general, if there are <span class="math notranslate nohighlight">\(N\)</span> processes, then the combined rate is <span class="math notranslate nohighlight">\(\sum_{i=1}^n r_i\)</span> and the probability of event <span class="math notranslate nohighlight">\(i\)</span> is <span class="math notranslate nohighlight">\(r_i/\sum_{j=1}^N r_j\)</span>.</p>
 </section>
-</div><p>To build intuition, consider a single labelled molecule in an 1L aquarium.  Two drains are open, one with flow at rate <span class="math notranslate nohighlight">\(r_1\)</span> (in <span class="math notranslate nohighlight">\(\mathrm{L}/\mathrm{min}\)</span>) and the other with flow at rate <span class="math notranslate nohighlight">\(r_2\)</span> (also <span class="math notranslate nohighlight">\(\mathrm{L}/\mathrm{min}\)</span>), with fresh water added at a constant rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span> to keep the aquarium at <span class="math notranslate nohighlight">\(1L\)</span>.  The combined rate at which the molecule goes through one of the two drains is <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.   Which of the two drains it passes through should be proportional to the amount flowing through them, that is their rates, and the probabilities need to sum to <span class="math notranslate nohighlight">\(1\)</span>, so it must be <span class="math notranslate nohighlight">\(r_1/(r_1+r_2)\)</span> and <span class="math notranslate nohighlight">\(r_2/(r_1+r_2)\)</span>.  A more rigorous argument is below.</p>
-<p>Most of the effort to prove this theorem focuses on handling the possibility that both events occur in a short time interval.  In reality if we divide time finely enough, they will not happen at the same time.  The way the proof works is to divide time into small intervals, look at the first interval where something happens and then determine the probability of each event and show that the probability of both is negligibly small.</p>
-<div class="proof admonition" id="proof">
-<p>Proof. To prove this rigorously, we divide time into intervals <span class="math notranslate nohighlight">\([t_0,t_1)\)</span>, <span class="math notranslate nohighlight">\([t_1,t_2)\)</span>, <span class="math notranslate nohighlight">\([t_2, t_3)\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span> where <span class="math notranslate nohighlight">\(t_{i+1}-t_i=\Delta t\)</span>, and take <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.  Let <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span> be the rates and <span class="math notranslate nohighlight">\(q_1 = r_1\Delta t + \mathcal{o}(\Delta t)\)</span> and <span class="math notranslate nohighlight">\(q_2 = r_2\Delta t + \mathcal{o}(\Delta t)\)</span> be the probabilities for each event to occur in a time interval.</p>
-<p>The probability that only <span class="math notranslate nohighlight">\(1\)</span> happens in a given time interval is <span class="math notranslate nohighlight">\(q_1(1-q_2)\)</span>.  The probability of only <span class="math notranslate nohighlight">\(q_2\)</span> is <span class="math notranslate nohighlight">\(q_2(1-q_1)\)</span>.  The probability of both is <span class="math notranslate nohighlight">\(q_1q_2\)</span>.  The probability of at least one is <span class="math notranslate nohighlight">\(1-(1-q_1)(1-q_2)= q_1 + q_2 - q_1q_2\)</span>.</p>
-<p>Substituting for <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span>, we see that the probability of at least one event in a specific time interval is <span class="math notranslate nohighlight">\((r_1+r_2)\Delta t + \mathcal{o}(\Delta t) -r_1r_2\Delta t^2 = (r_1+r_2)\Delta t + \mathcal{o}(\Delta t)\)</span>.  This is the definition of an event having rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.  So the two processes combine into a single process with combined rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span> (followed by another step to determine which event occurs).</p>
-<p>Now consider the first time interval in which something happens.  Conditional on an event happening, the probability of only event <span class="math notranslate nohighlight">\(1\)</span> is <span class="math notranslate nohighlight">\(q_1/(q_1+q_2-q_1q_2)\)</span>.  Substituting in terms of <span class="math notranslate nohighlight">\(r_1\)</span> and taking <span class="math notranslate nohighlight">\(\Delta t\)</span> to be small:</p>
+</div><p>To build intuition, consider a single labelled molecule in an 1L aquarium.  Two drains are open, one with flow out at rate <span class="math notranslate nohighlight">\(r_1\)</span> (in <span class="math notranslate nohighlight">\(\mathrm{L}/\mathrm{min}\)</span>) and the other with flow out at rate <span class="math notranslate nohighlight">\(r_2\)</span> (also <span class="math notranslate nohighlight">\(\mathrm{L}/\mathrm{min}\)</span>).  The water that pours out (including the labelled molecule if it exits) is magically returned immediately to the aquarium.</p>
+<p>If <span class="math notranslate nohighlight">\(\Delta t\)</span> is very small then the probability it leaves through the first drain before time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> is approximately <span class="math notranslate nohighlight">\(r_1 \Delta t\)</span>.  The probability it leaves through the second drain before time <span class="math notranslate nohighlight">\(t+\Delta t \)</span> is approximately <span class="math notranslate nohighlight">\(r_2\Delta t\)</span>.  The probability that it leaves at all in that time interval is approximately <span class="math notranslate nohighlight">\((r_1+r_2)\Delta t\)</span>.  So the act of leaving the aquarium is itself a Poisson proces whose rate is <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.</p>
+<p>Which of the two drains it passes through next should be proportional to the amount flowing through them, that is it is proportional to their rates. Additionally the probabilities must sum to <span class="math notranslate nohighlight">\(1\)</span>, so we have</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-\mathbb{P}[\text{only event 1}] &amp;= \frac{r_1\Delta t + \mathcal{o}(\Delta t)}{ r_1\Delta t + \mathcal{o}(\Delta t) +  r_2\Delta t + \mathcal{o}(\Delta t) - r_1r_2 \Delta t^2 + \Delta t \mathcal{o}(\Delta t)}\\
+\mathbb{P}[\text{exit through first drain next}] &amp; \propto r_1\\
+\mathbb{P}[\text{exit through second drain next}] &amp; \propto r_2\\
+\mathbb{P}[\text{exit through first drain next}] + \mathbb{P}[exit through second drain next}] &amp;= 1
+\end{align*}\]</div>
+<p>which means</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[\text{exit through first drain next}] &amp;= \frac{r_1}{r_1+r_2}\\
+\mathbb{P}[\text{exit through second drain next}] &amp; \frac{r_2}{r_1+r_2}
+\end{align*}\]</div>
+<p>A more rigorous argument that this is a Poisson process is below.</p>
+<p>Most of the effort to prove the theorem focuses on proving the claim that they do not both happen at the same time.  The way the proof works is to divide time into small intervals, look at the first interval where something happens and then determine the probability of each event and show that the probability that both happen in this interval goes to zero as <span class="math notranslate nohighlight">\(\Delta t\)</span> shrinks.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. To prove this rigorously, we divide time into intervals <span class="math notranslate nohighlight">\([t_0,t_1)\)</span>, <span class="math notranslate nohighlight">\([t_1,t_2)\)</span>, <span class="math notranslate nohighlight">\([t_2, t_3)\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span> where <span class="math notranslate nohighlight">\(t_{i+1}-t_i=\Delta t\)</span>, and take <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.  Let <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span> be the rates and <span class="math notranslate nohighlight">\(q_1 = r_1\Delta t + \mathcal{o}(\Delta t)\)</span> and <span class="math notranslate nohighlight">\(q_2 = r_2\Delta t + \mathcal{o}(\Delta t)\)</span> be the probabilities for each event to occur in a time interval.</p>
+<p>The probability that only event <span class="math notranslate nohighlight">\(1\)</span> happens in a given time interval is <span class="math notranslate nohighlight">\(q_1(1-q_2)\)</span>.  The probability of only event <span class="math notranslate nohighlight">\(2\)</span> is <span class="math notranslate nohighlight">\(q_2(1-q_1)\)</span>.  The probability of both is <span class="math notranslate nohighlight">\(q_1q_2\)</span>.  The probability of at least one is <span class="math notranslate nohighlight">\(1-(1-q_1)(1-q_2)= q_1 + q_2 - q_1q_2\)</span>.</p>
+<p>Substituting for <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span>, we see that the probability of at least one event in a specific time interval is <span class="math notranslate nohighlight">\((r_1+r_2)\Delta t + \mathcal{o}(\Delta t) -r_1r_2\Delta t^2 = (r_1+r_2)\Delta t + \mathcal{o}(\Delta t)\)</span>.  This is the definition of an event having rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span>.  So the two Poisson processes combine into a single Poisson process with combined rate <span class="math notranslate nohighlight">\(r_1+r_2\)</span> (followed by another step to determine which event occurs).</p>
+<p>Now consider the first time interval in which something happens.  Conditional on an event happening, the probability of only event <span class="math notranslate nohighlight">\(1\)</span> is <span class="math notranslate nohighlight">\(q_1(1-q_2)/(q_1+q_2-q_1q_2)\)</span>.  Substituting in terms of <span class="math notranslate nohighlight">\(r_1\)</span> and taking <span class="math notranslate nohighlight">\(\Delta t\)</span> to be small:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{P}[\text{only event 1}] &amp;= \frac{r_1\Delta t + \mathcal{o}(\Delta t)(1-r_2\Delta t + \mathcal{o}(\Delta t))}{ r_1\Delta t + \mathcal{o}(\Delta t) +  r_2\Delta t + \mathcal{o}(\Delta t) - r_1r_2 \Delta t^2 + \Delta t \mathcal{o}(\Delta t)}\\
+&amp;= \frac{r_1\Delta t + \mathcal{o}(\Delta t)}{ r_1\Delta t + \mathcal{o}(\Delta t) +  r_2\Delta t + \mathcal{o}(\Delta t) - r_1r_2 \Delta t^2 + \Delta t \mathcal{o}(\Delta t)}\\
 &amp;= \frac{r_1 + \mathcal{o}(\Delta t)/\Delta t}{ r_1 + \mathcal{o}(\Delta t)/\Delta t +  r_2 + \mathcal{o}(\Delta t)/\Delta t - r_1r_2 \Delta t + \mathcal{o}(\Delta t)}\\
 &amp; \to \frac{r_1}{r_1+r_2}  \qquad \text{as } \Delta t \to 0
 \end{align*}\]</div>
@@ -698,15 +745,16 @@ document.write(`
 </div>
 </div>
 <p>In fact, this will hold true for an arbitrary number of events.</p>
-<p>This means that rather than thinking about competing Poisson Processes each having its own rate, we can think about a single combined Poisson Process with the combined rates. When an event occurs, which event occurs is random, with probabilities equal to the individual rates divided by the combined rate.  This motivates the definition of superposition of Poisson processes (<strong>It’s very embarrasing, but I mixed terminology when I wrote these notes — what I called a <em>compound Poisson process</em> is actually a <em>superposition of Poisson processes</em>.</strong>).</p>
-<div class="proof definition admonition" id="definition-6">
+<p>This means that rather than thinking about competing Poisson Processes each having its own rate, we can think about a single combined Poisson Process with the combined rates. When an event occurs, which event occurs is random, with probabilities equal to the individual rates divided by the combined rate.  This motivates the definition of superposition of Poisson processes.</p>
+<div class="proof definition admonition" id="definition-7">
 <p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Superposition of Poisson Processes)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a set of Poisson processes with rates <span class="math notranslate nohighlight">\(r_1, r_2, \ldots\)</span> happening at the same time, the <strong>Superposition of the Poisson Processes</strong>, is itself a Poisson process with rate <span class="math notranslate nohighlight">\(r = \sum r_i\)</span>.  When an event occurs with the superposition process, the probability it is event <span class="math notranslate nohighlight">\(i\)</span> is <span class="math notranslate nohighlight">\(r_i/r\)</span>.</p>
 </section>
-</div><p>An interesting and important question is how long does it take until an event happens?  For this it is sufficient to consider a single Poisson process.</p>
+</div><p>The resulting Poisson process which involves this second calculation of which event occurs is called a Compound Poisson Process.</p>
+<p>An interesting and important question is how long does it take until an event happens?  For this it is sufficient to consider a single Poisson process.</p>
 <div class="proof theorem admonition" id="theorem-Survival">
-<p class="admonition-title"><span class="caption-number">Theorem 3.2 </span> (Survival Probability)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 3.3 </span> (Survival Probability)</p>
 <section class="theorem-content" id="proof-content">
 <p>If an event occurs with rate <span class="math notranslate nohighlight">\(r\)</span>, the probability it has not happened after waiting a time <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(e^{-rt}\)</span>.</p>
 </section>

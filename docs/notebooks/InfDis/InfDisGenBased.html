@@ -536,13 +536,14 @@ document.write(`
 <p>When we switch to a generation-based framework, we allow a wider range of offspring distributions.  Now each infected individual transmits to <span class="math notranslate nohighlight">\(k\)</span> others, where <span class="math notranslate nohighlight">\(k\)</span> is a random variable and the recipients are chosen randomly from the population.  If the recipient is susceptible, he becomes infected.  Otherwise, it has no effect.</p>
 <p>As before, while <span class="math notranslate nohighlight">\(S/N\)</span> is approximately <span class="math notranslate nohighlight">\(1\)</span>, we can treat this as if it is a generation-based Galton-Watson process.  Thus all of our results for Galton-Watson processes apply to <span class="math notranslate nohighlight">\(I(g)\)</span>.</p>
 <section id="size-distribution-of-small-outbreaks">
-<h2><span class="section-number">4.5.1. </span>Size distribution of small outbreaks<a class="headerlink" href="#size-distribution-of-small-outbreaks" title="Link to this heading">#</a></h2>
+<span id="sec-genbasedsize"></span><h2><span class="section-number">4.5.1. </span>Size distribution of small outbreaks<a class="headerlink" href="#size-distribution-of-small-outbreaks" title="Link to this heading">#</a></h2>
 <p>The derivation we did showing that the probability a tree has <span class="math notranslate nohighlight">\(j\)</span> nodes is</p>
 <div class="math notranslate nohighlight">
 \[ 
 \mathbb{P}[\text{tree has $j$ nodes}] = \frac{1}{j} \left[x^{j-1}\right] \left(\mu(x)^j\right)
 \]</div>
 <p>applies immediately here.  The only difference is that for this model, each node represents a distinct infected individual.  Thus <span class="math notranslate nohighlight">\(j\)</span> is the size of the small outbreak.</p>
+<p><strong>Note to self - make the result above a theorem</strong></p>
 <div class="proof example admonition" id="example-0">
 <p class="admonition-title"><span class="caption-number">Example 4.3 </span> (Continuous-time case from a generation-based perspective)</p>
 <section class="example-content" id="proof-content">
